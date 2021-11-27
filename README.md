@@ -1,5 +1,5 @@
 # Hotspot Maker
-Hotspot Maker v1.6 <stable>
+Hotspot Maker v1.7 <stable>
 
 READ ME:
 
@@ -39,4 +39,4 @@ Files must in folder:-
 :: https://sites.google.com/sites/naveenb2004
 :: <Coded with Sublime Text>
 :: <EXE pack with iexpress.exe>
-:: 21.10.2021 @ 04:34 PM
+:: 31.10.2021 @ 11:26 AM
