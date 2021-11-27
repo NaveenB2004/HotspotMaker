@@ -1,6 +1,6 @@
 @Echo off
 set scriptpath=%~dp0
-SET version=1.5
+SET version=1.6
 title Hotspot Maker (v%version%)
 
 if EXIST "C:\ProgramData\HotspotMakerData\colorcode.ini" goto WIZARDSTART
@@ -13,7 +13,7 @@ echo %version% >"C:\ProgramData\HotspotMakerData\hmversion.ini"
 goto WIZARDSTART
 
 :WIZARDSTART
-if NOT EXIST "C:\ProgramData\HotspotMakerData\hmversion.ini" echo %version% >"C:\ProgramData\HotspotMakerData\hmversion.ini"
+if NOT EXIST "C:\ProgramData\HotspotMakerData\hmversion.ini" echo %version%>"C:\ProgramData\HotspotMakerData\hmversion.ini"
 set/p defCOLORCODEnum=<"C:\ProgramData\HotspotMakerData\colorcode.ini"
 color %defCOLORCODEnum%
 SET CREDIT0=                 --------------------------------------------------------------
@@ -60,6 +60,9 @@ echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo 
 echo [ Set Default SSID and Password ]
 echo.
 echo You can save hotspot SSID(name) and password for easily start Hotspot with given data.
+echo # You should input data for use this option. If you not input data, default ssid and password will not work.
+echo.
+echo Enter Network SSID (Name) for use as default:
 set/p "defname=>"
 echo %defname%>"C:\ProgramData\HotspotMakerData\defaultssid.ini"
 echo.
@@ -139,8 +142,8 @@ echo.
 set/p "sccho=>"
 if %sccho%==A goto HOME
 if %sccho%==a goto HOME
-if %sccho%==B goto IP
-if %sccho%==b goto IP
+if %sccho%==B goto NETCONFIG
+if %sccho%==b goto NETCONFIG
 if %sccho%==C goto STOP
 if %sccho%==c goto STOP
 if %sccho%==D goto DETAILS
@@ -320,7 +323,7 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo ..................(20.10.2021 @ 05:33 AM).................
+echo ..................(21.10.2021 @ 04:34 PM).................
 echo.
 echo Created by: Naveen Balasooriya
 echo Contact me: naveennbalasooriya2004@gmail.com      (Email)
@@ -344,6 +347,8 @@ echo.
 echo # v1.4 - Bugs fixed (Programme Data, Color Settings). Add the 'advanced solves' button for some network start problems (online videos). Short color editing codes. Add default SSID and Password adding option for easy hosted-network starting. Fix menu items. Add pinging option (in Network Configuration Tab). Fix tab name mistakes. Fix some spellings mistakes. Add update setup wizard (beta).
 echo.
 echo # v1.5 - Bugs fixed (main wizard version read, updater wizard). Remove size formattings. Change directry variables for advanced accessing.
+echo.
+echo # v1.6 - Bugs Fixed (NETCONFIG error with network start, updater wizard, variables writting). Add interface line for setting default SSID. Add instructions for SAVECREDITS tab while not input data. Made a new wizard for online install (latest versions).
 echo ..........................................................
 echo.
 echo Have you a problem when starting the hostspot?
@@ -392,38 +397,38 @@ echo.
 echo A - Black&echo B - Blue&echo C - Green&echo D - Aqua&echo E - Red&echo F - Purple&echo G - Yellow&echo H - White&echo I - Gray&echo J - Light Blue&echo K - Light Green&echo L - Light Aqua&echo M - Light Red&echo N - Light Purple&echo O - Light Yellow&echo P - Bright White&echo.&echo Q - Go Back&echo R - Exit
 echo.
 set/p "colorcho=>"
-if %colorcho%==A echo 0 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==a echo 0 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==B echo 1 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==b echo 1 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==c echo 2 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==C echo 2 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==D echo 3 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==d echo 3 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==E echo 4 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==e echo 4 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==F echo 5 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==f echo 5 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==G echo 6 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==g echo 6 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==H echo 7 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==h echo 7 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==I echo 8 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==i echo 8 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==J echo 9 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==j echo 9 >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==K echo A >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==k echo A >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==L echo B >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==l echo B >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==M echo C >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==m echo C >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==N echo D >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==n echo D >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==O echo E >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==o echo E >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==P echo F >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==p echo F >"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==A echo 0>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==a echo 0>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==B echo 1>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==b echo 1>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==c echo 2>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==C echo 2>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==D echo 3>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==d echo 3>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==E echo 4>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==e echo 4>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==F echo 5>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==f echo 5>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==G echo 6>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==g echo 6>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==H echo 7>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==h echo 7>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==I echo 8>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==i echo 8>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==J echo 9>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==j echo 9>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==K echo A>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==k echo A>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==L echo B>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==l echo B>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==M echo C>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==m echo C>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==N echo D>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==n echo D>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==O echo E>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==o echo E>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==P echo F>"C:\ProgramData\HotspotMakerData\colorcode.ini"
+if %colorcho%==p echo F>"C:\ProgramData\HotspotMakerData\colorcode.ini"
 if %colorcho%==Q goto DETAILS
 if %colorcho%==q goto DETAILS
 if %colorcho%==R goto EXIT

@@ -1,5 +1,5 @@
 # Hotspot Maker
-Hotspot Maker v1.5 <stable>
+Hotspot Maker v1.6 <stable>
 
 READ ME:
 
@@ -21,6 +21,12 @@ Files must in folder:-
 0) Have hotspot starting problem?
         link: https://drive.google.com/drive/folders/1gKPlth-Tm-pMlt-h3ACXEsS5cx0ZoS2E?usp=sharing
 
+0) Programmer Documents:
+        link: https://drive.google.com/drive/folders/1YlMHxjkxDnRL_gv0qGIEuC414ZbK84FC?usp=sharing
+
+0) Full Project directory:
+        link: https://drive.google.com/drive/folders/1OmlB3fGA5nINPF0Se8TwTjELzBoX2-fB?usp=sharing
+
 0) When you have any questions...
         contact me on:
             E-Mail:     naveennbalasooriya2004@gmail.com
@@ -33,4 +39,4 @@ Files must in folder:-
 :: https://sites.google.com/sites/naveenb2004
 :: <Coded with Sublime Text>
 :: <EXE pack with iexpress.exe>
-:: 20.10.2021 @ 05:33 AM
+:: 21.10.2021 @ 04:34 PM
