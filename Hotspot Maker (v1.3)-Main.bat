@@ -1,6 +1,6 @@
 @Echo off
 :: version info <start>
-SET version=1.2
+SET version=1.3
 :: version info <end>
 title Hotspot Maker (v%version%)
 
@@ -34,7 +34,7 @@ SET CREDIT0=          ----------------------------------------------------------
 SET CREDIT1=          **************************************************************
 SET CREDIT2=          ***                                                        ***
 SET CREDIT3=          ***                   (:  -WELCOME-  :)                    ***
-SET CREDIT4=          ***   : Hotspot Creating Wizard for Windows 8/8.1(v%version%) :  ***
+SET CREDIT4=          ***   : Hotspot Creating Wizard for Windows 8/10(v%version%)  :  ***
 SET CREDIT5=          ***              Created by:Naveen Balasooriya             ***
 SET CREDIT6=          ***                                                        ***
 SET CREDIT7=          **************************************************************
@@ -55,8 +55,8 @@ if %homecho%==A goto START
 if %homecho%==a goto START
 if %homecho%==B goto STOP
 if %homecho%==b goto STOP
-if %homecho%==C goto IP
-if %homecho%==c goto IP
+if %homecho%==C goto NETCONFIG
+if %homecho%==c goto NETCONFIG
 if %homecho%==D goto EXIT
 if %homecho%==d goto EXIT
 if %homecho%==E goto DETAILS
@@ -98,8 +98,10 @@ echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo 
 echo.
 echo Starting hotspot as SSID (name)- %hotspotname% Password- %hotspotpassword%
 echo .........................................................
-netsh wlan set hostednetwork mode=allow ssid=%hotspotname% key=%hotspotpassword%
+netsh wlan set hostednetwork mode=allow ssid="%hotspotname%" key="%hotspotpassword%"
 netsh wlan start hostednetwork
+echo.
+echo # Go to Details when wizard shows network starting problems #
 echo.
 echo A - Home&echo B - Network Configuration&echo C - Stop Hotspot&echo D - Exit&echo E - Details
 echo.
@@ -159,24 +161,62 @@ echo invalid choice... Try again...
 timeout 6
 goto HOME
 
-:IP
+:NETCONFIG
 cls
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 echo.
-echo Loading Windows IP Configuration...
+echo Welcome to Network Configuration...
 echo.
-ipconfig /all
+echo A - Home&echo B - IP Configuration&echo C - Hotspot Status&echo D - Exit
 echo.
-echo A - Home&echo B - Exit
-echo.
-set/p "ipcho=>"
-if %ipcho%==A goto HOME
-if %ipcho%==a goto HOME
-if %ipcho%==B goto EXIT
-if %ipcho%==b goto EXIT
+set/p "netconfigcho=>"
+if %netconfigcho%==A goto HOME
+if %netconfigcho%==a goto HOME
+if %netconfigcho%==B goto IPCONFIGURATION
+if %netconfigcho%==b goto IPCONFIGURATION
+if %netconfigcho%==C goto NETSTATUS
+if %netconfigcho%==c goto NETSTATUS
+if %netconfigcho%==D goto EXIT
+if %netconfigcho%==d goto EXIT
 echo invalid choice... Try again...
 timeout 6
-goto IP
+goto NETCONFIG
+
+:IPCONFIGURATION
+cls
+echo Starting IP Configuration...
+ipconfig /all
+echo Compleated.
+echo.
+echo A - Home&echo B - Back to Network Configuration&echo C - Exit
+set/p "ipconfigcho=>"
+if %ipconfigcho%==A goto HOME
+if %ipconfigcho%==a goto HOME
+if %ipconfigcho%==B goto NETCONFIG
+if %ipconfigcho%==b goto NETCONFIG
+if %ipconfigcho%==C goto EXIT
+if %ipconfigcho%==c goto EXIT
+echo invalid choice... Try again...
+timeout 6
+goto IPCONFIGURATION
+
+:NETSTATUS
+cls
+echo Starting network status...
+netsh wlan show hostednetwork
+echo Compleated.
+echo.
+echo A - Home&echo B - Back to Network Configuration&echo C - Exit
+set/p "netstatuscho=>"
+if %netstatuscho%==A goto HOME
+if %netstatuscho%==a goto HOME
+if %netstatuscho%==B goto NETCONFIG
+if %netstatuscho%==b goto NETCONFIG
+if %netstatuscho%==C goto EXIT
+if %netstatuscho%==c goto EXIT
+echo invalid choice... Try again...
+timeout 6
+goto NETSTATUS
 
 :EXIT
 cls
@@ -207,12 +247,12 @@ echo ----------------------Stable Edition----------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo ..................(17.06.2021 @ 07:08 PM).................
+echo ..................(21.08.2021 @ 03:43 PM).................
 echo.
 echo Created by: Naveen Balasooriya
-echo Contact me: naveennbalasooriya2004@gmail.com (Email)
-echo             t.me/NaveenB_2004 (Telegram)
-echo             https://wa.me/message/KP75DUMMIKMTC1 (Whatsapp)
+echo Contact me: naveennbalasooriya2004@gmail.com      (Email)
+echo             https://t.me/NaveenB2004              (Telegram)
+echo             https://wa.me/message/KP75DUMMIKMTC1  (Whatsapp)
 echo Visit my website: https://sites.google.com/sites/naveenb2004
 echo ..........................................................
 echo.
@@ -224,9 +264,15 @@ echo # v1.1 - Add Windows IP Configuration option into main interface(Add IP cod
 echo.
 echo # v1.2 - Remove access password. Setup user friendly start for hotspot(START tab). Short some codes. Remove code breaks. Mannage menu items as cascade. Add font color easy adding option.
 echo.
+echo # v1.2 - Change Network Configuration to 2 options(ipconfiguration and netstatus). Fix hotspot name and password enter problem. Add network problems offline FAQ.
+echo.
+echo # v1.3 - Make changes for run with Windows 10. Make installabe file for easy install.
 echo ..........................................................
 echo.
-echo A - Home&echo B - Check Updates&echo C - Change Font Color&echo D - Exit
+echo Have you a problem when starting the hostspot?
+echo Choose "Hotspot Problems" option to get help.
+echo.
+echo A - Home&echo B - Check Updates&echo C - Change Font Color&echo D - Hotspot Problems&echo E - Exit
 echo.
 set/p "dcho=>"
 if %dcho%==A goto HOME
@@ -235,8 +281,10 @@ if %dcho%==B goto UPDATECHECK
 if %dcho%==b goto UPDATECHECK
 if %dcho%==C goto COLORCODES
 if %dcho%==c goto COLORCODES
-if %dcho%==D goto EXIT
-if %dcho%==d goto EXIT
+if %dcho%==D goto HOTSPOTPROBLEMS
+if %dcho%==d goto HOTSPOTPROBLEMS
+if %dcho%==E goto EXIT
+if %dcho%==e goto EXIT
 echo invalid choice... Try again...
 timeout 6
 goto DETAILS
@@ -350,6 +398,55 @@ color %defCOLORCODEnum%
 echo.
 timeout 6
 goto DETAILS
+
+:HOTSPOTPROBLEMS
+cls
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+echo.
+echo --------------------------------------------------------------------------------
+echo.
+netsh wlan show drive
+echo.
+echo ## Check "Hosted network supported"
+echo       - When "Hosted network supported : Yes" try next answer
+echo       - When "Hosted network supported : No" you can't start the Hotspot :(
+echo You can use a RJ-45 (Network cable) for make network (wired method).
+echo.
+echo --------------------------------------------------------------------------------
+echo.
+echo ## Make sure the Wi-Fi turned on...
+echo       - When the Wi-Fi turned on try next answer
+echo       - When the Wi-Fi turned off, turn it on and try again to start Hotspot
+echo.
+echo --------------------------------------------------------------------------------
+echo.
+echo ## Make sure you run this wizard using "Hotspot Maker (v1.3)-Admin.vbs"
+echo      or "Hotspot Maker (v1.3)-Main.bat" as an Administrator.
+echo       - When you ran this wizard as an Administartor 
+echo              (or using "Hotspot Maker (v1.3)-Admin.vbs") try next answer
+echo       - When you not ran this wizard as an Administrator 
+echo             (or using "Hotspot Maker (v1.3)-Admin.vbs")start wizard as
+echo      an Administartor (or using "Hotspot Maker (v1.3)-Admin.vbs") and try again
+echo.
+echo --------------------------------------------------------------------------------
+echo.
+echo Finaly...
+echo Contact me, when you can't solve the problem...
+echo (You can get contact details from Wizard Details)
+echo.
+echo --------------------------------------------------------------------------------
+echo.
+echo A - Home&echo B - Details&echo C - Exit
+set/p "hpcho=>"
+if %hpcho%==A goto HOME
+if %hpcho%==a goto HOME
+if %hpcho%==B goto DETAILS
+if %hpcho%==b goto DETAILS
+if %hpcho%==C goto EXIT
+if %hpcho%==c goto EXIT
+echo invalid choice... Try again...
+timeout 6
+goto HOTSPOTPROBLEMS
 
 :END
 exit
