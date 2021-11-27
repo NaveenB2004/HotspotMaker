@@ -1,10 +1,10 @@
 # Hotspot Maker
-Hotspot Maker v1.4 <stable>
+Hotspot Maker v1.5 <stable>
 
 READ ME:
 
 Files must in folder:-
-    C:\Hotspot Maker
+    Hotspot Maker <folder>
         -Hotspot Maker-Admin        <.vbs file>
         -Hotspot Maker-Main         <.bat file>
         -Hotspot Maker-Updater      <.bat file>
@@ -27,10 +27,10 @@ Files must in folder:-
             Telegram:   t.me/NaveenB_2004
             Whatspp:    https://wa.me/message/KP75DUMMIKMTC1
 
-// Project Hotspot
-// <Open Source Project>
-// Coded By: Naveen Balasooriya
-// https://sites.google.com/sites/naveenb2004
-// <Coded with Sublime Text>
-// <EXE pack with iexpress.exe>
-// 11.10.2021 @ 12:20 AM
+:: Project Hotspot
+:: <Open Source Project>
+:: Coded By: Naveen Balasooriya
+:: https://sites.google.com/sites/naveenb2004
+:: <Coded with Sublime Text>
+:: <EXE pack with iexpress.exe>
+:: 20.10.2021 @ 05:33 AM

@@ -1,6 +1,6 @@
 @Echo off
-mode 100
-SET version=1.4
+set scriptpath=%~dp0
+SET version=1.5
 title Hotspot Maker (v%version%)
 
 if EXIST "C:\ProgramData\HotspotMakerData\colorcode.ini" goto WIZARDSTART
@@ -13,6 +13,7 @@ echo %version% >"C:\ProgramData\HotspotMakerData\hmversion.ini"
 goto WIZARDSTART
 
 :WIZARDSTART
+if NOT EXIST "C:\ProgramData\HotspotMakerData\hmversion.ini" echo %version% >"C:\ProgramData\HotspotMakerData\hmversion.ini"
 set/p defCOLORCODEnum=<"C:\ProgramData\HotspotMakerData\colorcode.ini"
 color %defCOLORCODEnum%
 SET CREDIT0=                 --------------------------------------------------------------
@@ -59,7 +60,6 @@ echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo 
 echo [ Set Default SSID and Password ]
 echo.
 echo You can save hotspot SSID(name) and password for easily start Hotspot with given data.
-echo.
 set/p "defname=>"
 echo %defname%>"C:\ProgramData\HotspotMakerData\defaultssid.ini"
 echo.
@@ -320,7 +320,7 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo ..................(11.10.2021 @ 12:20 AM).................
+echo ..................(20.10.2021 @ 05:33 AM).................
 echo.
 echo Created by: Naveen Balasooriya
 echo Contact me: naveennbalasooriya2004@gmail.com      (Email)
@@ -342,6 +342,8 @@ echo.
 echo # v1.3 - Make changes for run with Windows 10. Make an installable file for an easy install.
 echo.
 echo # v1.4 - Bugs fixed (Programme Data, Color Settings). Add the 'advanced solves' button for some network start problems (online videos). Short color editing codes. Add default SSID and Password adding option for easy hosted-network starting. Fix menu items. Add pinging option (in Network Configuration Tab). Fix tab name mistakes. Fix some spellings mistakes. Add update setup wizard (beta).
+echo.
+echo # v1.5 - Bugs fixed (main wizard version read, updater wizard). Remove size formattings. Change directry variables for advanced accessing.
 echo ..........................................................
 echo.
 echo Have you a problem when starting the hostspot?
@@ -373,24 +375,9 @@ ver
 echo Checking Updates...
 echo (You are running on v%version%)
 echo Please wait a moment...
-start "Hotspot Maker-Updater.bat"
 echo (If there a problem with start the Update request, manually open
-echo    the Hotspot Maker (v%version%)-Update.bat from directry.)
-echo.
-timeout 10
-echo.
-echo A - Home&echo B - Details&echo C - Exit
-echo.
-set/p "uccho=>"
-if %uccho%==A goto HOME
-if %uccho%==a goto HOME
-if %uccho%==B goto DETAILS
-if %uccho%==b goto DETAILS
-if %uccho%==C goto EXIT
-if %uccho%==c goto EXIT
-echo invalid choice... Try again...
-timeout 6
-goto DETAILS
+echo    the Hotspot Maker-Updater.bat from directry.)
+call "%scriptpath%\Hotspot Maker-Updater.bat"
 
 :COLORCODES
 cls
@@ -473,13 +460,13 @@ echo       - When the Wi-Fi turned off, turn it on and try again to start Hotspo
 echo.
 echo --------------------------------------------------------------------------------
 echo.
-echo ## Make sure you run this wizard using "Hotspot Maker (v1.3)-Admin.vbs"
-echo      or "Hotspot Maker (v1.3)-Main.bat" as an Administrator.
+echo ## Make sure you run this wizard using "Hotspot Maker-Admin.vbs"
+echo      or "Hotspot Maker-Main.bat" as an Administrator.
 echo       - When you ran this wizard as an Administartor 
-echo              (or using "Hotspot Maker (v1.3)-Admin.vbs") try next answer
+echo              (or using "Hotspot Maker-Admin.vbs") try next answer
 echo       - When you not ran this wizard as an Administrator 
-echo             (or using "Hotspot Maker (v1.3)-Admin.vbs")start wizard as
-echo      an Administartor (or using "Hotspot Maker (v1.3)-Admin.vbs") and try again
+echo             (or using "Hotspot Maker-Admin.vbs")start wizard as
+echo      an Administartor (or using "Hotspot Maker-Admin.vbs") and try again
 echo.
 echo --------------------------------------------------------------------------------
 echo.

@@ -1,12 +1,13 @@
 @Echo off
-mode 100
+set scriptpath=%~dp0
 title Hotspot Maker - Updater
-goto HOME
 set/p version=<"C:\ProgramData\HotspotMakerData\hmversion.ini"
+goto HOME
 
 :HOME
+echo.
 echo Make sure you have speed network connection...
-echo If there show any error, Please re invoke the update request...
+echo If there show any error, Please reinvoke the update request...
 timeout 6
 goto DOWNLOADVER
 
@@ -19,8 +20,8 @@ if NOT EXIST "C:\ProgramData\HotspotMakerData\TempVersion.ini" goto DOWNLOADVER
 
 :CHECKVER
 set/p newversion=<"C:\ProgramData\HotspotMakerData\TempVersion.ini"
-if %newversion%==%version% goto LASTVERTHIS
-if NOT %newversion%==%version% goto NEWVERAVAIL
+if "%newversion%"=="%version%" goto LASTVERTHIS
+if NOT "%newversion%"=="%version%" goto NEWVERAVAIL
 
 :LASTVERTHIS
 echo Congratultions...!
@@ -28,8 +29,10 @@ echo You have the latest version of Hotspot Maker.
 echo You are running on v%version%
 echo.
 pause
+goto END
 
 :NEWVERAVAIL
+echo.
 echo There is a new version of Hotspot Maker available...
 echo Would you like to download and install it...?
 echo.
@@ -62,25 +65,37 @@ if NOT EXIST "C:\ProgramData\HotspotMakerData\ReadMeTemp.txt" goto CONTINUEINSTA
 echo.
 echo Installing Updates...
 echo Please wait a moment...
-del "C:\Hotspot Maker\Hotspot Maker-Main.bat"
-copy "C:\ProgramData\HotspotMakerData\HotspotMakerLast.bat" "C:\Hotspot Maker\"
+echo Installing files...
+del "%scriptpath%\Hotspot Maker-Main.bat"
+copy "C:\ProgramData\HotspotMakerData\HotspotMakerLast.bat" "%scriptpath%\"
 del "C:\ProgramData\HotspotMakerData\HotspotMakerLast.bat"
-ren "C:\Hotspot Maker\HotspotMakerLast.bat" "C:\Hotspot Maker\Hotspot Maker-Main.bat"
-del "C:\Hotspot Maker\Read Me.txt"
-copy "C:\ProgramData\HotspotMakerData\ReadMeTemp.txt" "C:\Hotspot Maker\"
+ren "%scriptpath%\HotspotMakerLast.bat" "%scriptpath%\Hotspot Maker-Main.bat"
+del "%scriptpath%\Read Me.txt"
+copy "C:\ProgramData\HotspotMakerData\ReadMeTemp.txt" "%scriptpath%\"
 del "C:\ProgramData\HotspotMakerData\ReadMeTemp.txt"
-ren "C:\Hotspot Maker\ReadMeTemp.txt" "C:\Hotspot Maker\Read Me.txt"
-echo %newversion% >"C:\ProgramData\HotspotMakerData\hmversion.ini"
+ren "%scriptpath%\ReadMeTemp.txt" "%scriptpath%\Read Me.txt"
+echo "%newversion%" >"C:\ProgramData\HotspotMakerData\hmversion.ini"
 echo.
 echo Installation Compleated...!
 echo Uptodate version is v%newversion%
-echo Please close the opend Hotspot Maker Wizard and reopen it...
 echo.
 timeout 20
 goto END
 
 :END
 cls
+set/p version=<"C:\ProgramData\HotspotMakerData\hmversion.ini"
+del "C:\ProgramData\HotspotMakerData\TempVersion.ini"
+echo                 --------------------------------------------------------------
+echo                 **************************************************************
+echo                 ***                                                        ***
+echo                 ***                   (:  -WELCOME-  :)                    ***
+echo                 ***   : Hotspot Creating Wizard for Windows 8/10(v%version%)  :  ***
+echo                 ***                 - Open Source Project -                ***
+echo                 ***                                                        ***
+echo                 **************************************************************
+echo                 --------------------------------------------------------------
+echo.
 echo Thank you for choosing us!
-pause
-exit
+timeout 6
+call "%scriptpath%\Hotspot Maker-Main.bat"
