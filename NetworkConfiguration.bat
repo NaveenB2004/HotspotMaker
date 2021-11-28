@@ -105,8 +105,10 @@ echo This tab made for show your public IP address.
 echo (You need to connect to the internet to get a public IP)
 echo.
 echo Please wait for check the internet connection...
-powershell -Command "Invoke-WebRequest https://drive.google.com/uc?id=13UVCvO6IZDrXD4d_zs-b7sCFOOaqX4VJ -Outfile C:\ProgramData\HotspotMakerData\IntCheck.ini"
-if EXIST "C:\ProgramData\HotspotMakerData\IntCheck.ini" goto PUBIPSTART
+For /f %%A in (
+  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/HTntMNLp").content"'
+) Do Set checkpass=%%A
+if checkpass==internetok goto PUBIPSTART
 echo.
 echo Error white connect to the internet. Please check your internet connection and try again.
 echo.
