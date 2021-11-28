@@ -1,6 +1,6 @@
 @Echo off
 set nowpath=%~dp0
-set/p version=<"%nowpath%\Main\05.Version.ini"
+set/p version=<"%nowpath%\Version.ini"
 title Hotspot Maker (v%version%)
 
 if EXIST "C:\ProgramData\HotspotMakerData\colorcode.ini" goto WIZARDSTART
