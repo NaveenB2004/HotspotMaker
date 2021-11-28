@@ -131,7 +131,7 @@ echo.
 For /f %%A in (
   'powershell -command "(Invoke-Webrequest "http://api.ipify.org").content"'
 ) Do Set ExtIP=%%A
-Echo Your Public IP is : %ExtIP%
+echo Your Public IP is : %ExtIP%
 echo.
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
 echo.
