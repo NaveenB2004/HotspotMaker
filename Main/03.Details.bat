@@ -9,7 +9,7 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo ..................(28.11.2021 @ 09:01 PM).................
+echo ..................(28.11.2021 @ 09:24 PM).................
 echo.
 echo Created by: Naveen Balasooriya
 echo Contact me: naveennbalasooriya2004@gmail.com      (Email)
@@ -35,7 +35,7 @@ echo # v1.6 - Bugs Fixed (NETCONFIG error with network start, updater wizard, va
 echo.
 echo # v1.7 - Bugs fixed (Color settings). Renew updater codes and online installer codes(this wizards will not update after this version). Solve version notes mistakes. Add hotspot security details to Hotspot Status tab. New option added to Hotspot Status tab for get Public/External IP.
 echo.
-echo # v1.8 - Break tabs to it's own files. Use pastebin for get updates and web requestes (UnRAR and New Version updates are currently via google drive).
+echo # v1.8 - Break tabs to it's own files. Use pastebin for get updates and web requestes (UnRAR and New Version updates are currently via google drive). Remove 'Hotspot Maker-Admin.vbs'.
 echo.
 echo ..........................................................
 echo.
