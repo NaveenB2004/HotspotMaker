@@ -108,7 +108,7 @@ echo Please wait for check the internet connection...
 For /f %%A in (
   'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/HTntMNLp").content"'
 ) Do Set checkpass=%%A
-if checkpass==internetok goto PUBIPSTART
+if %checkpass%==internetok goto PUBIPSTART
 echo.
 echo Error white connect to the internet. Please check your internet connection and try again.
 echo.
