@@ -35,13 +35,9 @@ echo # v1.6 - Bugs Fixed (NETCONFIG error with network start, updater wizard, va
 echo.
 echo # v1.7 - Bugs fixed (Color settings). Renew updater codes and online installer codes(this wizards will not update after this version). Solve version notes mistakes. Add hotspot security details to Hotspot Status tab. New option added to Hotspot Status tab for get Public/External IP.
 echo.
-<<<<<<< HEAD
 echo # v1.8 - Bug fixed (error while network checking on getting public IP). Break tabs to it's own files. Use pastebin for get updates and web requestes (UnRAR and New Version updates are currently via google drive). Remove 'Hotspot Maker-Admin.vbs'.
 echo.
 echo # v1.9 - Bug fixed (error while network checking on getting public IP).
-=======
-echo # v1.8 - Bug fixed (error while network checking on getting public IP). Break tabs to it's own files. Use pastebin for get updates and web requestes. Remove 'Hotspot Maker-Admin.vbs'.
->>>>>>> 4e7c8c9747aa7bdb7251abc00493deee726d2a66
 echo.
 echo ..........................................................
 echo.
