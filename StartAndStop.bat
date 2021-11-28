@@ -1,5 +1,4 @@
-:CHOICEsTARTaNDsTOP
-if %homecho%==A goto START
+A goto START
 if %homecho%==a goto START
 if %homecho%==B goto STOP
 if %homecho%==b goto STOP
@@ -30,12 +29,12 @@ echo.
 set/p "startcho=>"
 if %startcho%==A goto STARTCONTINUE
 if %startcho%==a goto STARTCONTINUE
-if %startcho%==B call "%nowpath%\Main\00.Home.bat"
-if %startcho%==b call "%nowpath%\Main\00.Home.bat"
-if %startcho%==C call "%nowpath%\Main\03.Details.bat"
-if %startcho%==c call "%nowpath%\Main\03.Details.bat"
-if %startcho%==D call "%nowpath%\Main\04.Exit.bat"
-if %startcho%==d call "%nowpath%\Main\04.Exit.bat"
+if %startcho%==B call "%nowpath%\Home.bat"
+if %startcho%==b call "%nowpath%\Home.bat"
+if %startcho%==C call "%nowpath%\Details.bat"
+if %startcho%==c call "%nowpath%\Details.bat"
+if %startcho%==D call "%nowpath%\Exit.bat"
+if %startcho%==d call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto START
@@ -58,16 +57,16 @@ echo.
 echo A - Home&echo B - Network Configuration&echo C - Stop Hotspot&echo D - Details&echo E - Exit
 echo.
 set/p "sccho=>"
-if %sccho%==A call "%nowpath%\Main\00.Home.bat"
-if %sccho%==a call "%nowpath%\Main\00.Home.bat"
-if %sccho%==B call "%nowpath%\Other\01.NetworkConfiguration.bat"
-if %sccho%==b call "%nowpath%\Other\01.NetworkConfiguration.bat"
+if %sccho%==A call "%nowpath%\Home.bat"
+if %sccho%==a call "%nowpath%\Home.bat"
+if %sccho%==B call "%nowpath%\NetworkConfiguration.bat"
+if %sccho%==b call "%nowpath%\NetworkConfiguration.bat"
 if %sccho%==C goto STOP
 if %sccho%==c goto STOP
-if %sccho%==D call "%nowpath%\Main\03.Details.bat"
-if %sccho%==d call "%nowpath%\Main\03.Details.bat"
-if %sccho%==E call "%nowpath%\Main\04.Exit.bat"
-if %sccho%==e call "%nowpath%\Main\04.Exit.bat"
+if %sccho%==D call "%nowpath%\Details.bat"
+if %sccho%==d call "%nowpath%\Details.bat"
+if %sccho%==E call "%nowpath%\Exit.bat"
+if %sccho%==e call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto START
@@ -84,12 +83,12 @@ echo.
 set/p "stopcho=>"
 if %stopcho%==A goto STOPCONTINUE
 if %stopcho%==a goto STOPCONTINUE
-if %stopcho%==B call "%nowpath%\Main\00.Home.bat"
-if %stopcho%==b call "%nowpath%\Main\00.Home.bat"
-if %stopcho%==C call "%nowpath%\Main\03.Details.bat"
-if %stopcho%==c call "%nowpath%\Main\03.Details.bat"
-if %stopcho%==D call "%nowpath%\Main\04.Exit.bat"
-if %stopcho%==d call "%nowpath%\Main\04.Exit.bat"
+if %stopcho%==B call "%nowpath%\Home.bat"
+if %stopcho%==b call "%nowpath%\Home.bat"
+if %stopcho%==C call "%nowpath%\Details.bat"
+if %stopcho%==c call "%nowpath%\Details.bat"
+if %stopcho%==D call "%nowpath%\Exit.bat"
+if %stopcho%==d call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto STOP
@@ -105,12 +104,12 @@ echo.
 echo A - Home&echo B - Details&echo C - Exit
 echo.
 set/p "stccho=>"
-if %stccho%==A call "%nowpath%\Main\00.Home.bat"
-if %stccho%==a call "%nowpath%\Main\00.Home.bat"
-if %stccho%==B call "%nowpath%\Main\03.Details.bat"
-if %stccho%==b call "%nowpath%\Main\03.Details.bat"
-if %stccho%==C call "%nowpath%\Main\04.Exit.bat"
-if %stccho%==c call "%nowpath%\Main\04.Exit.bat"
+if %stccho%==A call "%nowpath%\Home.bat"
+if %stccho%==a call "%nowpath%\Home.bat"
+if %stccho%==B call "%nowpath%\Details.bat"
+if %stccho%==b call "%nowpath%\Details.bat"
+if %stccho%==C call "%nowpath%\Exit.bat"
+if %stccho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
-call "%nowpath%\Main\00.Home.bat"
+call "%nowpath%\Home.bat"

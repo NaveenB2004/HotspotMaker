@@ -10,10 +10,10 @@ echo.
 set/p "exitcho=>"
 if %exitcho%==A goto END
 if %exitcho%==a goto END
-if %exitcho%==B call "%nowpath%\Main\00.Home.bat"
-if %exitcho%==b call "%nowpath%\Main\00.Home.bat"
-if %exitcho%==C call "%nowpath%\Main\03.Details.bat"
-if %exitcho%==c call "%nowpath%\Main\03.Details.bat"
+if %exitcho%==B call "%nowpath%\Home.bat"
+if %exitcho%==b call "%nowpath%\Home.bat"
+if %exitcho%==C call "%nowpath%\Details.bat"
+if %exitcho%==c call "%nowpath%\Details.bat"
 echo invalid choice... Try again...
 timeout 6
 goto EXIT

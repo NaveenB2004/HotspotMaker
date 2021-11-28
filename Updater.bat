@@ -29,8 +29,8 @@ echo.
 set/p "netcheckfailcho=>"
 if %netcheckfailcho%==A goto UPHOME
 if %netcheckfailcho%==a goto UPHOME
-if %netcheckfailcho%==B call "%nowpath%\Main\00.Home.bat"
-if %netcheckfailcho%==b call "%nowpath%\Main\00.Home.bat"
+if %netcheckfailcho%==B call "%nowpath%\Home.bat"
+if %netcheckfailcho%==b call "%nowpath%\Home.bat"
 echo invalid choice... Try again...
 timeout 6
 goto NETCHECKFAIL
@@ -60,8 +60,8 @@ echo.
 echo A - Back to Hotspot Maker&echo B - Exit
 echo.
 set/p "thisislastcho=>"
-if %thisislastcho%==A call "%nowpath%\Main\00.Home.bat"
-if %thisislastcho%==a call "%nowpath%\Main\00.Home.bat"
+if %thisislastcho%==A call "%nowpath%\Home.bat"
+if %thisislastcho%==a call "%nowpath%\Home.bat"
 if %thisislastcho%==B goto END
 if %thisislastcho%==b goto END
 echo invalid choice... Try again...
@@ -84,8 +84,8 @@ echo.
 set/p "newversioncho=>"
 if %newversioncho%==A goto INSTALLATION
 if %newversioncho%==a goto INSTALLATION
-if %newversioncho%==B call "%nowpath%\Main\00.Home.bat"
-if %newversioncho%==b call "%nowpath%\Main\00.Home.bat"
+if %newversioncho%==B call "%nowpath%\Home.bat"
+if %newversioncho%==b call "%nowpath%\Home.bat"
 if %newversioncho%==C goto END
 if %newversioncho%==c goto END
 echo invalid choice... Try again...

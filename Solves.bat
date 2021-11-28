@@ -41,14 +41,14 @@ echo.
 echo A - Home&echo B - Advanced Sloves&echo C - Details&echo D - Exit
 echo.
 set/p "hpcho=>"
-if %hpcho%==A call "%nowpath%\Main\00.Home.bat"
-if %hpcho%==a call "%nowpath%\Main\00.Home.bat"
+if %hpcho%==A call "%nowpath%\Home.bat"
+if %hpcho%==a call "%nowpath%\Home.bat"
 if %hpcho%==B goto ADVANCEDSOLVES
 if %hpcho%==b goto ADVANCEDSOLVES
-if %hpcho%==C call "%nowpath%\Main\03.Details.bat"
-if %hpcho%==c call "%nowpath%\Main\03.Details.bat"
-if %hpcho%==D call "%nowpath%\Main\04.Exit.bat"
-if %hpcho%==d call "%nowpath%\Main\04.Exit.bat"
+if %hpcho%==C call "%nowpath%\Details.bat"
+if %hpcho%==c call "%nowpath%\Details.bat"
+if %hpcho%==D call "%nowpath%\Exit.bat"
+if %hpcho%==d call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto HOTSPOTPROBLEMS
@@ -64,12 +64,12 @@ echo.
 echo A - Home&echo B - Details&echo C - Exit
 echo.
 set/p "hpcho=>"
-if %hpcho%==A call "%nowpath%\Main\00.Home.bat"
-if %hpcho%==a call "%nowpath%\Main\00.Home.bat"
-if %hpcho%==B call "%nowpath%\Main\03.Details.bat"
-if %hpcho%==b call "%nowpath%\Main\03.Details.bat"
-if %hpcho%==C call "%nowpath%\Main\04.Exit.bat"
-if %hpcho%==c call "%nowpath%\Main\04.Exit.bat"
+if %hpcho%==A call "%nowpath%\Home.bat"
+if %hpcho%==a call "%nowpath%\Home.bat"
+if %hpcho%==B call "%nowpath%\Details.bat"
+if %hpcho%==b call "%nowpath%\Details.bat"
+if %hpcho%==C call "%nowpath%\Exit.bat"
+if %hpcho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto HOTSPOTPROBLEMS

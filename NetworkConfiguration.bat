@@ -8,8 +8,8 @@ echo.
 echo A - Home&echo B - IP Configuration&echo C - Hotspot Status&echo D - Ping (IP/Domain)&echo E - View Public IP (External IP)&echo F - Exit
 echo.
 set/p "netconfigcho=>"
-if %netconfigcho%==A call "%nowpath%\Main\00.Home.bat"
-if %netconfigcho%==a call "%nowpath%\Main\00.Home.bat"
+if %netconfigcho%==A call "%nowpath%\Home.bat"
+if %netconfigcho%==a call "%nowpath%\Home.bat"
 if %netconfigcho%==B goto IPCONFIGURATION
 if %netconfigcho%==b goto IPCONFIGURATION
 if %netconfigcho%==C goto NETSTATUS
@@ -18,8 +18,8 @@ if %netconfigcho%==D goto PINGTEST
 if %netconfigcho%==d goto PINGTEST
 if %netconfigcho%==E goto PUBIP
 if %netconfigcho%==e goto PUBIP
-if %netconfigcho%==F call "%nowpath%\Main\04.Exit.bat"
-if %netconfigcho%==f call "%nowpath%\Main\04.Exit.bat"
+if %netconfigcho%==F call "%nowpath%\Exit.bat"
+if %netconfigcho%==f call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto NETCONFIG
@@ -41,12 +41,12 @@ echo.
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
 echo.
 set/p "ipconfigcho=>"
-if %ipconfigcho%==A call "%nowpath%\Main\00.Home.bat"
-if %ipconfigcho%==a call "%nowpath%\Main\00.Home.bat"
+if %ipconfigcho%==A call "%nowpath%\Home.bat"
+if %ipconfigcho%==a call "%nowpath%\Home.bat"
 if %ipconfigcho%==B goto NETCONFIG
 if %ipconfigcho%==b goto NETCONFIG
-if %ipconfigcho%==C call "%nowpath%\Main\04.Exit.bat"
-if %ipconfigcho%==c call "%nowpath%\Main\04.Exit.bat"
+if %ipconfigcho%==C call "%nowpath%\Exit.bat"
+if %ipconfigcho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto PINGTEST
@@ -63,12 +63,12 @@ echo.
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
 echo.
 set/p "ipconfigcho=>"
-if %ipconfigcho%==A call "%nowpath%\Main\00.Home.bat"
-if %ipconfigcho%==a call "%nowpath%\Main\00.Home.bat"
+if %ipconfigcho%==A call "%nowpath%\Home.bat"
+if %ipconfigcho%==a call "%nowpath%\Home.bat"
 if %ipconfigcho%==B goto NETCONFIG
 if %ipconfigcho%==b goto NETCONFIG
-if %ipconfigcho%==C call "%nowpath%\Main\04.Exit.bat"
-if %ipconfigcho%==c call "%nowpath%\Main\04.Exit.bat"
+if %ipconfigcho%==C call "%nowpath%\Exit.bat"
+if %ipconfigcho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto IPCONFIGURATION
@@ -86,12 +86,12 @@ echo.
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
 echo.
 set/p "netstatuscho=>"
-if %netstatuscho%==A call "%nowpath%\Main\00.Home.bat"
-if %netstatuscho%==a call "%nowpath%\Main\00.Home.bat"
+if %netstatuscho%==A call "%nowpath%\Home.bat"
+if %netstatuscho%==a call "%nowpath%\Home.bat"
 if %netstatuscho%==B goto NETCONFIG
 if %netstatuscho%==b goto NETCONFIG
-if %netstatuscho%==C call "%nowpath%\Main\04.Exit.bat"
-if %netstatuscho%==c call "%nowpath%\Main\04.Exit.bat"
+if %netstatuscho%==C call "%nowpath%\Exit.bat"
+if %netstatuscho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto NETSTATUS
@@ -113,12 +113,12 @@ echo.
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
 echo.
 set/p "netstatuscho=>"
-if %netstatuscho%==A call "%nowpath%\Main\00.Home.bat"
-if %netstatuscho%==a call "%nowpath%\Main\00.Home.bat"
+if %netstatuscho%==A call "%nowpath%\Home.bat"
+if %netstatuscho%==a call "%nowpath%\Home.bat"
 if %netstatuscho%==B goto NETCONFIG
 if %netstatuscho%==b goto NETCONFIG
-if %netstatuscho%==C call "%nowpath%\Main\04.Exit.bat"
-if %netstatuscho%==c call "%nowpath%\Main\04.Exit.bat"
+if %netstatuscho%==C call "%nowpath%\Exit.bat"
+if %netstatuscho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto PUBIP
@@ -136,12 +136,12 @@ echo.
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
 echo.
 set/p "netstatuscho=>"
-if %netstatuscho%==A call "%nowpath%\Main\00.Home.bat"
-if %netstatuscho%==a call "%nowpath%\Main\00.Home.bat"
+if %netstatuscho%==A call "%nowpath%\Home.bat"
+if %netstatuscho%==a call "%nowpath%\Home.bat"
 if %netstatuscho%==B goto NETCONFIG
 if %netstatuscho%==b goto NETCONFIG
-if %netstatuscho%==C call "%nowpath%\Main\04.Exit.bat"
-if %netstatuscho%==c call "%nowpath%\Main\04.Exit.bat"
+if %netstatuscho%==C call "%nowpath%\Exit.bat"
+if %netstatuscho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto PUBIP

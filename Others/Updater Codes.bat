@@ -61,4 +61,4 @@ echo Installed version is v%tempversion%
 echo Redirecting...
 echo.
 timeout 20
-call "%nowpath%\Main\00.Home.bat"
+call "%nowpath%\Home.bat"

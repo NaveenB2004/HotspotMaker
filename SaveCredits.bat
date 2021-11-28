@@ -20,12 +20,12 @@ echo.
 echo A - Home&echo B - Details&echo C - Exit
 echo.
 set/p "svcredit=>"
-if %svcredit%==A call "%nowpath%\Main\00.Home.bat"
-if %svcredit%==a call "%nowpath%\Main\00.Home.bat"
-if %svcredit%==B call "%nowpath%\Main\03.Details.bat"
-if %svcredit%==b call "%nowpath%\Main\03.Details.bat"
-if %svcredit%==C call "%nowpath%\Main\04.Exit.bat"
-if %svcredit%==c call "%nowpath%\Main\04.Exit.bat"
+if %svcredit%==A call "%nowpath%\Home.bat"
+if %svcredit%==a call "%nowpath%\Home.bat"
+if %svcredit%==B call "%nowpath%\Details.bat"
+if %svcredit%==b call "%nowpath%\Details.bat"
+if %svcredit%==C call "%nowpath%\Exit.bat"
+if %svcredit%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
-call "%nowpath%\Main\00.Home.bat"
+call "%nowpath%\Home.bat"

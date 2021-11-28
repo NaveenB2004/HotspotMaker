@@ -43,14 +43,14 @@ if %colorcho%==O echo E >"C:\ProgramData\HotspotMakerData\colorcode.ini"
 if %colorcho%==o echo E >"C:\ProgramData\HotspotMakerData\colorcode.ini"
 if %colorcho%==P echo F >"C:\ProgramData\HotspotMakerData\colorcode.ini"
 if %colorcho%==p echo F >"C:\ProgramData\HotspotMakerData\colorcode.ini"
-if %colorcho%==Q call "%nowpath%\Main\03.Details.bat"
-if %colorcho%==q call "%nowpath%\Main\03.Details.bat"
-if %colorcho%==R call "%nowpath%\Main\04.Exit.bat"
-if %colorcho%==r call "%nowpath%\Main\04.Exit.bat"
+if %colorcho%==Q call "%nowpath%\Details.bat"
+if %colorcho%==q call "%nowpath%\Details.bat"
+if %colorcho%==R call "%nowpath%\Exit.bat"
+if %colorcho%==r call "%nowpath%\Exit.bat"
 echo.
 echo Color Set Successed...
 set/p defCOLORCODEnum=<"C:\ProgramData\HotspotMakerData\colorcode.ini"
 color %defCOLORCODEnum%
 echo.
 timeout 6
-call "%nowpath%\Main\03.Details.bat"
+call "%nowpath%\Details.bat"

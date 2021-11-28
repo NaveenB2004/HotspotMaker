@@ -45,16 +45,16 @@ echo.
 echo A - Home&echo B - Check Updates&echo C - Change Font Color&echo D - Hotspot Problems&echo E - Exit
 echo.
 set/p "dcho=>"
-if %dcho%==A call "%nowpath%\Main\00.Home.bat"
-if %dcho%==a call "%nowpath%\Main\00.Home.bat"
-if %dcho%==B call "%nowpath%\Other\04.Update.bat"
-if %dcho%==b call "%nowpath%\Other\04.Update.bat"
-if %dcho%==C call "%nowpath%\Other\02.Colors.bat"
-if %dcho%==c call "%nowpath%\Other\02.Colors.bat"
-if %dcho%==D call "%nowpath%\Other\03.Solves.bat"
-if %dcho%==d call "%nowpath%\Other\03.Solves.bat"
-if %dcho%==E call "%nowpath%\Main\04.Exit.bat"
-if %dcho%==e call "%nowpath%\Main\04.Exit.bat"
+if %dcho%==A call "%nowpath%\Home.bat"
+if %dcho%==a call "%nowpath%\Home.bat"
+if %dcho%==B call "%nowpath%\Update.bat"
+if %dcho%==b call "%nowpath%\Update.bat"
+if %dcho%==C call "%nowpath%\Colors.bat"
+if %dcho%==c call "%nowpath%\Colors.bat"
+if %dcho%==D call "%nowpath%\Solves.bat"
+if %dcho%==d call "%nowpath%\Solves.bat"
+if %dcho%==E call "%nowpath%\Exit.bat"
+if %dcho%==e call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto DETAILS
