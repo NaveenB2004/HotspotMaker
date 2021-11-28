@@ -9,7 +9,7 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo ..................(31.10.2021 @ 11:26 AM).................
+echo ..................(28.11.2021 @ 09:01 PM).................
 echo.
 echo Created by: Naveen Balasooriya
 echo Contact me: naveennbalasooriya2004@gmail.com      (Email)
