@@ -1,6 +1,3 @@
-@Echo off
-goto UPHOME
-
 :UPHOME
 if exist "C:\ProgramData\HotspotMakerData\NewVersion.rar" del "C:\ProgramData\HotspotMakerData\UnRAR.exe"
 if exist "C:\ProgramData\HotspotMakerData\UnRAR.exe" del "C:\ProgramData\HotspotMakerData\NewVersion.rar"
@@ -46,8 +43,9 @@ echo Installing files...
 echo (This may take five seconds)
 copy "C:\ProgramData\HotspotMakerData\NewVersion.rar" "%nowpath%"
 copy "C:\ProgramData\HotspotMakerData\UnRAR.exe" "%nowpath%"
-del "C:\ProgramData\HotspotMakerData\NewUpdate.rar"
+del "C:\ProgramData\HotspotMakerData\NewVersion.rar"
 del "C:\ProgramData\HotspotMakerData\UnRAR.exe"
+cd "%nowpath%"
 UnRAR.exe x NewVersion.rar
 del "%nowpath%\NewVersion.rar"
 del "UnRAR.exe"
