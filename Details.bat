@@ -9,7 +9,7 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo ..................(28.11.2021 @ 10:33 PM).................
+echo ..................(29.11.2021 @ 07:28 PM).................
 echo.
 echo Created by: Naveen Balasooriya
 echo Contact me: naveennbalasooriya2004@gmail.com      (Email)
@@ -37,7 +37,7 @@ echo # v1.7 - Bugs fixed (Color settings). Renew updater codes and online instal
 echo.
 echo # v1.8 - Break tabs to it's own files. Use pastebin for get updates and web requestes (UnRAR and New Version updates are currently via google drive). Remove 'Hotspot Maker-Admin.vbs'.
 echo.
-echo # v1.9 - Bugs fixed (Showing 'Launcher' as a virus, Updater Errors, Other minor bugs), Break Launcher to Launcher.exe and Variables.bat.
+echo # v1.9 - Bugs fixed (Showing 'Launcher' as a virus, Updater Errors, Other minor bugs), Break Launcher to Launcher.exe and Variables.bat. Use Pastebin for get fast webrequests. Use google drive for store updater files.
 echo ..........................................................
 echo.
 echo Have you a problem when starting the hostspot?
