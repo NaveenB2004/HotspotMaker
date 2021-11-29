@@ -12,7 +12,7 @@ I hope you will try this out!
 - Coded By: Naveen Balasooriya
 - Website: https://sites.google.com/view/naveenb2004
 - Latest Released Version: v1.9
-- Text Editor: Sublime Text (https://www.sublimetext.com/)
+- Text Editor: Sublime Text (https://www.sublimetext.com)
 - Cloud Web Request Store: Pastebin (https://pastebin.com/u/naveenb2004)
 - Cloud Updates Store: Googlr Drive (https://shorturl.at/mxHZ9)
 - Launcher EXE Converter: Bat2EXE Converter (https://www.battoexeconverter.com)
