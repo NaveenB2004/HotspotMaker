@@ -1,4 +1,9 @@
 @Echo off
+goto UPHOME
+
+:UPHOME
+if exist "C:\ProgramData\HotspotMakerData\NewVersion.rar" del "C:\ProgramData\HotspotMakerData\UnRAR.exe"
+if exist "C:\ProgramData\HotspotMakerData\UnRAR.exe" del "C:\ProgramData\HotspotMakerData\NewVersion.rar"
 cls
 echo                 --------------------------------------------------------------
 echo                 **************************************************************
@@ -16,34 +21,38 @@ echo Downloading required files...
 echo (This may take five seconds)
 cd "C:\ProgramData\HotspotMakerData"
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/Hgbf9SdC").content"'
-) Do Set downloadfrom=%%A
-powershell -Command "Invoke-WebRequest %downloadfrom% -Outfile NewUpdate.rar"
+  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/Asau8iwy").content"'
+) Do Set NewVersionLink=%%A
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/AGtXA9Fe").content"'
-) Do Set downloadunrar=%%A
-powershell -Command "Invoke-WebRequest %downloadunrar% -Outfile UnRAR.exe"
+  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/rTVNmgSR").content"'
+) Do Set UnRARLink=%%A
+powershell -Command "Invoke-WebRequest %NewVersionLink% -Outfile NewVersion.rar"
+powershell -Command "Invoke-WebRequest %UnRARLink% -Outfile UnRAR.exe"
+if not exist "C:\ProgramData\HotspotMakerData\NewVersion.rar" goto UPHOME
+if not exist "C:\ProgramData\HotspotMakerData\UnRAR.exe" goto UPHOME
 echo Download compleated!
 echo.
 echo [Step 2 of 3]
 echo Removing previous installations...
 echo (This may take five seconds)
-echo Press [Y] and [ENTER] to continue...
 set/p nowpath=<"C:\ProgramData\HotspotMakerData\nowpath.ini"
-del "%nowpath%"
+copy "%nowpath%\Launcher.exe" "C:\ProgramData\HotspotMakerData"
+del /s /q "%nowpath%"
 del "C:\ProgramData\HotspotMakerData\nowpath.ini"
 echo Remove compleated!
 echo.
 echo [Step 3 of 3]
 echo Installing files...
 echo (This may take five seconds)
-copy "C:\ProgramData\HotspotMakerData\NewUpdate.rar" "%nowpath%"
+copy "C:\ProgramData\HotspotMakerData\NewVersion.rar" "%nowpath%"
 copy "C:\ProgramData\HotspotMakerData\UnRAR.exe" "%nowpath%"
 del "C:\ProgramData\HotspotMakerData\NewUpdate.rar"
 del "C:\ProgramData\HotspotMakerData\UnRAR.exe"
-UnRAR.exe x NewUpdate.rar
-del "%nowpath%\NewUpdate.rar"
+UnRAR.exe x NewVersion.rar
+del "%nowpath%\NewVersion.rar"
 del "UnRAR.exe"
+copy "C:\ProgramData\HotspotMakerData\Launcher.exe" "%nowpath%"
+del "C:\ProgramData\HotspotMakerData\Launcher.exe"
 echo Installation Compleated!
 echo.
 echo (Redirecting to next step...)
@@ -61,4 +70,4 @@ echo Installed version is v%tempversion%
 echo Redirecting...
 echo.
 timeout 20
-call "%nowpath%\Home.bat"
+call "%nowpath%\Variables.bat"

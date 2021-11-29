@@ -11,7 +11,7 @@ set count=0
 set/a count=%count%+1
 if %count%==4 goto NETCHECKFAIL
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/DLZuNDbJ").content"'
+  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/RmwHLAQ6").content"'
 ) Do Set tempversion=%%A
 if %tempversion%==okeWebRequestCommand goto NETCHECKFAIL
 if not %tempversion%==okeWebRequestCommand goto NETCHECKPASS
@@ -24,7 +24,7 @@ echo.
 echo We can not reach the internet :(
 echo Please check your internet connection and try again.
 echo.
-echo A - Retrry&echo B - Exit to Hotspot Maker
+echo A - Retry&echo B - Exit to Hotspot Maker
 echo.
 set/p "netcheckfailcho=>"
 if %netcheckfailcho%==A goto UPHOME
@@ -101,7 +101,10 @@ echo Downloading script files...
 echo (This may take five seconds)
 echo %nowpath%>"C:\ProgramData\HotspotMakerData\nowpath.ini"
 cd "C:\ProgramData\HotspotMakerData"
-powershell -Command "Invoke-WebRequest https://pastebin.com/raw/NSHb9Mrv -Outfile updateinstaller.bat"
+For /f %%A in (
+  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/yfPgsENY").content"'
+) Do Set UpdaterDownLink=%%A
+powershell -Command "Invoke-WebRequest %UpdaterDownLink% -Outfile updateinstaller.bat"
 timeout 5 /nobreak
 call "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
 
