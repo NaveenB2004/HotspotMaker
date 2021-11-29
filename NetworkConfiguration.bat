@@ -126,7 +126,6 @@ timeout 6
 goto PUBIP
 
 :PUBIPSTART
-del "C:\ProgramData\HotspotMakerData\IntCheck.ini"
 echo Connected to the internet!
 echo Please wait for get your public IP...
 echo.
