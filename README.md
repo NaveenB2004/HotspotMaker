@@ -34,9 +34,9 @@ Files must in folder:-
             Whatspp:    https://wa.me/message/KP75DUMMIKMTC1
 
 - :: Project Hotspot
-- :: <Open Source Project>
+- :: Open Source Project
 - :: Coded By: Naveen Balasooriya
 - :: https://sites.google.com/sites/naveenb2004
-- :: <Coded with Sublime Text>
-- :: <EXE pack with iexpress.exe>
+- :: Coded with Sublime Text
+- :: EXE pack with iexpress.exe
 - :: 31.10.2021 @ 11:26 AM
