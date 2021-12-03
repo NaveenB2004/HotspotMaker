@@ -34,6 +34,7 @@ echo Removing previous installations...
 echo (This may take five seconds)
 set/p nowpath=<"C:\ProgramData\HotspotMakerData\nowpath.ini"
 copy "%nowpath%\Hotspot Maker.exe" "C:\ProgramData\HotspotMakerData"
+copy "%nowpath%\unins000.exe" "C:\ProgramData\HotspotMakerData"
 del /s /q "%nowpath%"
 del "C:\ProgramData\HotspotMakerData\nowpath.ini"
 echo Remove compleated!
@@ -51,6 +52,8 @@ del "%nowpath%\NewVersion.rar"
 del "UnRAR.exe"
 copy "C:\ProgramData\HotspotMakerData\Hotspot Maker.exe" "%nowpath%"
 del "C:\ProgramData\HotspotMakerData\Hotspot Maker.exe"
+copy "C:\ProgramData\HotspotMakerData\unins000.exe" "%nowpath%"
+del "C:\ProgramData\HotspotMakerData\unins000.exe"
 echo Installation Compleated!
 echo.
 echo (Redirecting to next step...)
