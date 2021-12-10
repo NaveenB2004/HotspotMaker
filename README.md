@@ -14,7 +14,7 @@ I hope you will try this out!
 - Latest Released Version: v1.9
 - Text Editor: Sublime Text (https://www.sublimetext.com)
 - Cloud Web Request Store: Pastebin (https://pastebin.com/u/naveenb2004)
-- Cloud Updates Store: Googlr Drive (https://shorturl.at/mxHZ9)
+- Cloud Updates Store: Google Drive (https://shorturl.at/mxHZ9)
 - Launcher EXE Converter: Bat2EXE Converter (https://www.battoexeconverter.com)
 - Full Version EXE Packed: Inno Setup (https://jrsoftware.org/isinfo.php)
 
