@@ -39,7 +39,7 @@ echo # v1.8 - Break tabs to it's own files. Use pastebin for get updates and web
 echo.
 echo # v1.9 - Bugs fixed (Showing 'Launcher' as a virus, Updater Errors, Other minor bugs), Break Launcher to Launcher.exe and Variables.bat. Use Pastebin for get fast webrequests. Use google drive for store updater files.
 echo.
-echo # v2.0 - Bugs fixed (Pulic IP tab-remove pre existed code line, error while uninstall after a update).
+echo # v2.0 - Bugs fixed (Pulic IP tab-remove pre existed code line, error while uninstall after a update, other minor bugs).
 echo ..........................................................
 echo.
 echo Have you a problem when starting the hostspot?
