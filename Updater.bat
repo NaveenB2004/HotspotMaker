@@ -1,6 +1,6 @@
 :UPHOME
 cls
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 echo [ Updater Home ]
 echo.
 echo Make sure you connected to internet...
@@ -18,7 +18,7 @@ if not %tempversion%==okeWebRequestCommand goto NETCHECKPASS
 
 :NETCHECKFAIL
 cls
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 echo [ Internet Check Fail ]
 echo.
 echo We can not reach the internet :(
@@ -37,7 +37,7 @@ goto NETCHECKFAIL
 
 :NETCHECKPASS
 cls
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 echo [ Check Updates ]
 echo.
 echo Internet connection : OK!
@@ -50,7 +50,7 @@ if not %version%==%tempversion% goto NEWAVILABLE
 
 :THSISILAST
 cls
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 echo [ This is the Latest Version ]
 echo.
 echo Congratulations!
@@ -70,7 +70,7 @@ goto THSISILAST
 
 :NEWAVILABLE
 cls
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 echo [ New version Available ]
 echo.
 echo New version of Hotspot Maker available...
@@ -94,7 +94,7 @@ goto NEWAVILABLE
 
 :INSTALLATION
 cls
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 echo [ Installation ]
 echo.
 echo Downloading script files...

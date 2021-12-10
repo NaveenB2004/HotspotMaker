@@ -5,7 +5,6 @@ cls
 echo                 --------------------------------------------------------------
 echo                 **************************************************************
 echo                 ***                                                        ***
-echo                 ***                   (:  -WELCOME-  :)                    ***
 echo                 ***      : Hotspot Creating Wizard for Windows 8/10     :  ***
 echo                 ***                 - Open Source Project -                ***
 echo                 ***                                                        ***
@@ -63,7 +62,14 @@ goto FINALRESULT
 
 :FINALRESULT
 cls
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+echo                 --------------------------------------------------------------
+echo                 **************************************************************
+echo                 ***                                                        ***
+echo                 ***      : Hotspot Creating Wizard for Windows 8/10     :  ***
+echo                 ***                 - Open Source Project -                ***
+echo                 ***                                                        ***
+echo                 **************************************************************
+echo                 --------------------------------------------------------------
 echo [ Installation Compleated! ]
 echo.
 echo Installation successfully compleated!

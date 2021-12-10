@@ -2,7 +2,7 @@
 set nowpath=%~dp0
 set/p version=<"%nowpath%\Version.ini"
 title Hotspot Maker (v%version%)
-
+if EXIST "C:\ProgramData\HotspotMakerData\updateinstaller.bat" del "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
 if EXIST "C:\ProgramData\HotspotMakerData\colorcode.ini" goto WIZARDSTART
 if NOT EXIST "C:\ProgramData\HotspotMakerData\colorcode.ini" goto COLORMAKE
 
