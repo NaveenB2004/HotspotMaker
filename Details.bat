@@ -20,7 +20,6 @@ echo ..........................................................
 echo.
 echo Version Notes...
 echo.
-echo.
 echo # v1.1 - Add Windows IP Configuration option into main interface(Add IP codes). Remove EXITCONTINUE codes and modify FAIL codes. Change some codes for easy editing. Add Chech Updates option and UPDATECHECK codes (primary level code).
 echo.
 echo # v1.2 - Remove access password. Setup user-friendly start for hotspot(START tab). Short some codes. Remove code breaks. Manage menu items as a cascade. Add font color easy adding option.
@@ -40,6 +39,9 @@ echo.
 echo # v1.9 - Bugs fixed (Showing 'Launcher' as a virus, Updater Errors, Other minor bugs), Break Launcher to Launcher.exe and Variables.bat. Use Pastebin for get fast webrequests. Use google drive for store updater files.
 echo.
 echo # v2.0 - Bugs fixed (Pulic IP tab-remove pre existed code line, error while uninstall after a update, other minor bugs).
+echo.
+echo # v2.1 - 
+echo.
 echo ..........................................................
 echo.
 echo Have you a problem when starting the hostspot?
