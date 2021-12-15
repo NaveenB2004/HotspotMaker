@@ -11,7 +11,7 @@ I hope you will try this out!
 - Package Name: Hotspot Maker
 - Coded By: Naveen Balasooriya
 - Website: https://sites.google.com/view/naveenb2004
-- Latest Released Version: v1.9
+- Latest Released Version: v2.0
 - Text Editor: Sublime Text (https://www.sublimetext.com)
 - Cloud Web Request Store: Pastebin (https://pastebin.com/u/naveenb2004)
 - Cloud Updates Store: Google Drive (https://shorturl.at/mxHZ9)
