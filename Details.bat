@@ -26,7 +26,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add startup script. Add auto update checker on computer starts. Add code breaks (comments) for easy editings. Add operator for compare new versions when updating.
+echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add startup script. Add auto update checker on computer starts. Add code breaks (comments) for easy editings. Add operator for compare new versions when updating. Add new options to Network Configuration tab (Open network connection window, renew network IP addresses, view computer hostname).
 echo.
 echo ..........................................................
 echo.
