@@ -1,9 +1,11 @@
 @Echo off
+::Window title
+title Auto Update
+::working path
+set nowpath=%~dp0
 :UPHOME
 ::clear before outputs
 cls
-::credits
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ Updater Home ]
 echo.
@@ -26,8 +28,6 @@ if not %tempversion%==okeWebRequestCommand goto NETCHECKPASS
 :NETCHECKFAIL
 ::clear before outputs
 cls
-::credits
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ Internet Check Fail ]
 echo.
@@ -50,8 +50,6 @@ goto NETCHECKFAIL
 :NETCHECKPASS
 ::clear before outputs
 cls
-::credits
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ Check Updates ]
 echo.
@@ -61,6 +59,7 @@ echo.
 echo Checking new versions...
 echo.
 timeout 5
+set/p version=<"%nowpath%\Version.ini"
 ::new version check (compare)
 if %version% LSS %tempversion% goto THSISILAST
 if not %version% LSS %tempversion% goto NEWAVILABLE
@@ -68,8 +67,6 @@ if not %version% LSS %tempversion% goto NEWAVILABLE
 :THSISILAST
 ::clear before outputs
 cls
-::credits
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ This is the Latest Version ]
 echo.
@@ -84,8 +81,6 @@ goto END
 :NEWAVILABLE
 ::clear before outputs
 cls
-::credits
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ New version Available ]
 echo.
@@ -100,8 +95,6 @@ goto INSTALLATION
 :INSTALLATION
 ::clear before outputs
 cls
-::credits
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ Installation ]
 echo.
@@ -119,7 +112,7 @@ For /f %%A in (
 powershell -Command "Invoke-WebRequest %UpdaterDownLink% -Outfile updateinstaller.bat"
 timeout 5 /nobreak
 ::switch to 'updateinstaller.bat' (new downloaded)
-call "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
+call "%nowpath%\Variables.bat"
 ::when calling error, steps
 echo Error while starting the updater...
 echo Please download the standalone version and install it...
