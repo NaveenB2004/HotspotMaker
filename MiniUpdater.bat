@@ -1,13 +1,4 @@
 @Echo off
-:: --------------------------------------------------------------------
-:: --------------------------------------------------------------------
-:: ----------------THIS IS A FULL COPY OF 'Updater.bat'----------------
-:: ----THIS WIZARD USE FOR RUN THE SHEDULED TASK ON COMPUTER STARTS----
-:: --------------------------------------------------------------------
-:: --------------------------------------------------------------------
-:: Added '@Echo off' command :)
-
-
 :UPHOME
 ::clear before outputs
 cls
@@ -45,13 +36,13 @@ echo We can not reach the internet :(
 echo Please check your internet connection and try again.
 echo.
 ::user choicess
-echo A - Retry&echo B - Exit to Hotspot Maker
+echo A - Retry&echo B - Exit
 echo.
 set/p "netcheckfailcho=>"
 if %netcheckfailcho%==A goto UPHOME
 if %netcheckfailcho%==a goto UPHOME
-if %netcheckfailcho%==B call "%nowpath%\Home.bat"
-if %netcheckfailcho%==b call "%nowpath%\Home.bat"
+if %netcheckfailcho%==B goto END
+if %netcheckfailcho%==b goto END
 echo invalid choice... Try again...
 timeout 6
 goto NETCHECKFAIL
@@ -87,17 +78,8 @@ echo Congratulations!
 echo You are using the latest version of Hotspot Maker...
 echo This version is v%version%
 echo.
-::user choicess
-echo A - Back to Hotspot Maker&echo B - Exit
-echo.
-set/p "thisislastcho=>"
-if %thisislastcho%==A call "%nowpath%\Home.bat"
-if %thisislastcho%==a call "%nowpath%\Home.bat"
-if %thisislastcho%==B goto END
-if %thisislastcho%==b goto END
-echo invalid choice... Try again...
-timeout 6
-goto THSISILAST
+timeout 10
+goto END
 
 :NEWAVILABLE
 ::clear before outputs
@@ -112,21 +94,8 @@ echo New version of Hotspot Maker available...
 echo You are running on v%version%
 echo Available version is v%tempversion%
 echo.
-echo Do you wish to download and install the latest version?
-echo.
-::user choicess
-echo A - Install&echo B - Back to Hotspot Maker&echo C - Exit
-echo.
-set/p "newversioncho=>"
-if %newversioncho%==A goto INSTALLATION
-if %newversioncho%==a goto INSTALLATION
-if %newversioncho%==B call "%nowpath%\Home.bat"
-if %newversioncho%==b call "%nowpath%\Home.bat"
-if %newversioncho%==C goto END
-if %newversioncho%==c goto END
-echo invalid choice... Try again...
-timeout 6
-goto NEWAVILABLE
+timeout 10
+goto INSTALLATION
 
 :INSTALLATION
 ::clear before outputs
@@ -155,5 +124,8 @@ call "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
 echo Error while starting the updater...
 echo Please download the standalone version and install it...
 start https://github.com/naveenb2004/HotspotMaker/releases
-timeout 12
-call "%nowpath%\Home.bat"
+timeout 20
+goto END
+
+:END
+exit

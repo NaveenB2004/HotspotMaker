@@ -6,6 +6,10 @@ echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo 
 ::tab title
 echo [ Check Updates ]
 echo.
+echo --------------------------------------------
+echo  THIS WIZARD ONLY CONTAINS OFFICIAL UPDATES 
+echo --------------------------------------------
+echo.
 ::MS-DOS running version
 ver
 ::steps
