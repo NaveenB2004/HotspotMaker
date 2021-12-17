@@ -1,10 +1,3 @@
-::define automated or not
-::dcho, from 'Detals.bat'
-if %dcho%==C goto AUTOUPDATE
-if %dcho%==c goto AUTOUPDATE
-if not %dcho%==C goto CHECKNOW
-if not %dcho%==c goto CHECKNOW
-
 ::For more about task schedul
 ::visit--->
 ::https://www.windowscentral.com/how-create-task-using-task-scheduler-command-prompt
@@ -56,7 +49,7 @@ echo.
 echo Setting Auto Update for Hotspot Maker...
 echo (Please wait...)
 ::shedule task to run at computer startup
-SCHTASKS /CREATE /SC ONSTART /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\AutoUpdate.bat"
+SCHTASKS /CREATE /SC ONSTART /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat"
 ::generate true file for this oparation
 echo taskadded>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
 ::generate running path
@@ -128,9 +121,3 @@ if %ausetuptcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 call "%nowpath%\Home.bat"
-
-:CHECKNOW
-::import runnig path
-set/p nowpath=<"C:\ProgramData\HotspotMakerData\AutoUpdatePath.ini"
-::switch to 'Updater.bat' for sheduled task
-call "%nowpath%\Updater.bat"
