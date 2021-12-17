@@ -105,6 +105,7 @@ echo.
 echo Removing Auto Update for Hotspot Maker...
 echo (Please wait...)
 ::remove sheduled task
+echo Press [Y] and [ENTER] to continue...
 SCHTASKS /DELETE /TN "HotspotMaker\AutoUpdate"
 ::remove generated true file for true oparation
 del "C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
