@@ -10,7 +10,7 @@ echo.
 echo Welcome to Network Configuration...
 echo.
 ::user choicess
-echo A - Home&echo B - IP Configuration&echo C - Hotspot Status&echo D - Ping (IP/Domain)&echo E - View Public IP (External IP)&echo F - Exit
+echo A - Home&echo B - IP Configuration&echo C - Hotspot Status&echo D - Ping (IP/Domain)&echo E - View Public IP (External IP)&echo F - Open Network Connections Window&echo G - Renew/Refresh Network IP Addresses&echo H - View Computer Hotstname&echo I - Exit
 echo.
 set/p "netconfigcho=>"
 if %netconfigcho%==A call "%nowpath%\Home.bat"
@@ -23,8 +23,106 @@ if %netconfigcho%==D goto PINGTEST
 if %netconfigcho%==d goto PINGTEST
 if %netconfigcho%==E goto PUBIP
 if %netconfigcho%==e goto PUBIP
-if %netconfigcho%==F call "%nowpath%\Exit.bat"
-if %netconfigcho%==f call "%nowpath%\Exit.bat"
+if %netconfigcho%==F goto NCWINDOW
+if %netconfigcho%==f goto NCWINDOW
+if %netconfigcho%==G goto RNIA
+if %netconfigcho%==g goto RNIA
+if %netconfigcho%==H goto CHOSTNAME
+if %netconfigcho%==h goto CHOSTNAME
+if %netconfigcho%==I call "%nowpath%\Exit.bat"
+if %netconfigcho%==i call "%nowpath%\Exit.bat"
+echo invalid choice... Try again...
+timeout 6
+goto NETCONFIG
+
+:CHOSTNAME
+::clear before outputs
+cls
+::credits
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+::tab title
+echo [ Computer Hostname ]
+echo.
+::comment
+echo Working...
+echo.
+::command
+hostname>"C:\ProgramData\HotspotMakerData\chostname.ini"
+set/p hostname=<"C:\ProgramData\HotspotMakerData\chostname.ini"
+del "C:\ProgramData\HotspotMakerData\chostname.ini"
+echo Computer Hostname: %hostname%
+::comment
+echo.
+echo Compleated!
+echo.
+::user choicess
+echo A - Home&echo B - Back to Network Configuration&echo C - Exit
+echo.
+set/p "rniacho=>"
+if %rniacho%==A call "%nowpath%\Home.bat"
+if %rniacho%==a call "%nowpath%\Home.bat"
+if %rniacho%==B goto NETCONFIG
+if %rniacho%==b goto NETCONFIG
+if %rniacho%==C call "%nowpath%\Exit.bat"
+if %rniacho%==c call "%nowpath%\Exit.bat"
+echo invalid choice... Try again...
+timeout 6
+goto CHOSTNAME
+
+:RNIA
+::clear before outputs
+cls
+::credits
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+::tab title
+echo [ Renew Network IP ]
+echo.
+::comments
+echo Working...
+::release ip
+ipconfig /release
+::renew ip
+ipconfig /renew
+echo Compleated!
+echo.
+::user choicess
+echo A - Home&echo B - Back to Network Configuration&echo C - Exit
+echo.
+set/p "rniacho=>"
+if %rniacho%==A call "%nowpath%\Home.bat"
+if %rniacho%==a call "%nowpath%\Home.bat"
+if %rniacho%==B goto NETCONFIG
+if %rniacho%==b goto NETCONFIG
+if %rniacho%==C call "%nowpath%\Exit.bat"
+if %rniacho%==c call "%nowpath%\Exit.bat"
+echo invalid choice... Try again...
+timeout 6
+goto NETCONFIG
+
+:NCWINDOW
+::clear before outputs
+cls
+::credits
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+::tab title
+echo [ Network Connections ]
+echo.
+::comments
+echo Please wait for open the Network Connection window...
+::network connection windows command
+ncpa.cpl
+echo Compleated!
+echo.
+::user choicess
+echo A - Home&echo B - Back to Network Configuration&echo C - Exit
+echo.
+set/p "ncwindowcho=>"
+if %ncwindowcho%==A call "%nowpath%\Home.bat"
+if %ncwindowcho%==a call "%nowpath%\Home.bat"
+if %ncwindowcho%==B goto NETCONFIG
+if %ncwindowcho%==b goto NETCONFIG
+if %ncwindowcho%==C call "%nowpath%\Exit.bat"
+if %ncwindowcho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto NETCONFIG
