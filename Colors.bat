@@ -1,13 +1,22 @@
 :COLORCODES
+::clear before outputs
 cls
+
+::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+
+::tab title
 echo [ Change Font Color ]
 echo.
+
+::import color code
 set/p defcolorcode=<"C:\ProgramData\HotspotMakerData\colorcode.ini"
 echo Choose a color for use as the default font color in wizard...
 echo.
 echo The default color using at this time is - %defcolorcode%
 echo.
+
+::user input color
 echo A - Black&echo B - Blue&echo C - Green&echo D - Aqua&echo E - Red&echo F - Purple&echo G - Yellow&echo H - White&echo I - Gray&echo J - Light Blue&echo K - Light Green&echo L - Light Aqua&echo M - Light Red&echo N - Light Purple&echo O - Light Yellow&echo P - Bright White&echo.&echo Q - Back to Details&echo R - Exit
 echo.
 set/p "colorcho=>"
@@ -49,8 +58,12 @@ if %colorcho%==R call "%nowpath%\Exit.bat"
 if %colorcho%==r call "%nowpath%\Exit.bat"
 echo.
 echo Color Set Successed...
+
+::import and set new color
 set/p defCOLORCODEnum=<"C:\ProgramData\HotspotMakerData\colorcode.ini"
 color %defCOLORCODEnum%
 echo.
 timeout 6
+
+::switch to 'Details.bat'
 call "%nowpath%\Details.bat"

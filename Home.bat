@@ -1,11 +1,22 @@
 :HOME
+::check and remove update leftovers
 if EXIST "C:\ProgramData\HotspotMakerData\updateinstaller.bat" del "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
+
+::clear before outputs
 cls
+
+::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT3%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+
+::tab title
 echo [ Home ]
 echo.
+
+::little instructions
 echo #Go to Details for Check new versions and change the Font color of the Wizard#
 echo.
+
+::user choicess
 echo A - Start Hotspot&echo B - Stop Hotspot&echo C - Network Configuration&echo D - Set Default SSID and Password&echo E - Details&echo F - Exit
 echo.
 set/p "homecho=>"

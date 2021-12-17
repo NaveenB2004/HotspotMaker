@@ -1,19 +1,32 @@
 :VARIABLES
+::working path
 set nowpath=%~dp0
+
+::import version
 set/p version=<"%nowpath%\Version.ini"
+
+::window title
 title Hotspot Maker (v%version%)
+
+::check and remove update leftovers
 if EXIST "C:\ProgramData\HotspotMakerData\updateinstaller.bat" del "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
+
+::check and import color
 if EXIST "C:\ProgramData\HotspotMakerData\colorcode.ini" goto WIZARDSTART
 if NOT EXIST "C:\ProgramData\HotspotMakerData\colorcode.ini" goto COLORMAKE
 
 :COLORMAKE
+::make colors when it is not available
 md "C:\ProgramData\HotspotMakerData"
 echo A>"C:\ProgramData\HotspotMakerData\colorcode.ini"
 goto WIZARDSTART
 
 :WIZARDSTART
+::import and set color
 set/p defCOLORCODEnum=<"C:\ProgramData\HotspotMakerData\colorcode.ini"
 color %defCOLORCODEnum%
+
+::set credits
 SET CREDIT0=                 --------------------------------------------------------------
 SET CREDIT1=                 **************************************************************
 SET CREDIT2=                 ***                                                        ***
@@ -23,5 +36,7 @@ SET CREDIT5=                 ***                 - Open Source Project -        
 SET CREDIT6=                 ***                                                        ***
 SET CREDIT7=                 **************************************************************
 SET CREDIT8=                 --------------------------------------------------------------
+
+::check default username and password
 if EXIST "C:\ProgramData\HotspotMakerData\defuser.nnb" call "%nowpath%\Home.bat"
 if NOT EXIST "C:\ProgramData\HotspotMakerData\defuser.nnb" call "%nowpath%\SaveCredits.bat"

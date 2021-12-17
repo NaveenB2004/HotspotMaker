@@ -1,8 +1,15 @@
 :DETAILS
+::clear before outputs
 cls
+
+::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+
+::tab title
 echo [ Details ]
 echo.
+
+::version information
 echo Details about the wi-fi hotspot craeting wizard...
 echo ..........................................................
 echo ---------------------{Stable Edition}---------------------
@@ -11,6 +18,8 @@ echo --------------------------(v%version%)--------------------------
 echo.
 echo ........................(11.12.2021)......................
 echo.
+
+::contack information
 echo Created by: Naveen Balasooriya
 echo Contact me: naveennbalasooriya2004@gmail.com      (Email)
 echo             https://t.me/NaveenB2004              (Telegram)
@@ -18,6 +27,8 @@ echo             https://wa.me/message/KP75DUMMIKMTC1  (Whatsapp)
 echo Visit my website: https://sites.google.com/sites/naveenb2004
 echo ..........................................................
 echo.
+
+::version notes
 echo Version Notes...
 echo.
 echo # v1.1 - Add Windows IP Configuration option into main interface(Add IP codes). Remove EXITCONTINUE codes and modify FAIL codes. Change some codes for easy editing. Add Chech Updates option and UPDATECHECK codes (primary level code).
@@ -40,13 +51,17 @@ echo # v1.9 - Bugs fixed (Showing 'Launcher' as a virus, Updater Errors, Other m
 echo.
 echo # v2.0 - Bugs fixed (Pulic IP tab-remove pre existed code line, error while uninstall after a update, other minor bugs).
 echo.
-echo # v2.1 - Remove direct call for variables and set startup script with auto update checker. Add code breaks (comments) for easy editings.
+echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and set startup script with auto update checker. Add code breaks (comments) for easy editings.
 echo.
 echo ..........................................................
 echo.
+
+::little instructions
 echo Have you a problem when starting the hostspot?
 echo Choose "Hotspot Problems" option to get help.
 echo.
+
+::user choicess
 echo A - Home&echo B - Check Updates&echo C - Change Font Color&echo D - Hotspot Problems&echo E - Exit
 echo.
 set/p "dcho=>"

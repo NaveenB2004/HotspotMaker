@@ -1,8 +1,15 @@
 :EXIT
+::clear before outputs
 cls
+
+::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
+
+::tab title
 echo [ Exit ]
 echo.
+
+::user choicess
 echo You are going to exit from the wizard...
 echo.
 echo A - Continue&echo B - Home&echo C - Details
@@ -19,4 +26,5 @@ timeout 6
 goto EXIT
 
 :END
+::exit
 exit
