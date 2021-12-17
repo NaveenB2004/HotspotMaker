@@ -59,6 +59,8 @@ echo (Please wait...)
 SCHTASKS /CREATE /SC ONSTART /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\AutoUpdate.bat"
 ::generate true file for this oparation
 echo taskadded>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
+::generate running path
+echo %nowpath%>"C:\ProgramData\HotspotMakerData\AutoUpdatePath.ini"
 echo Compleated!
 echo.
 ::user choicess
@@ -128,5 +130,7 @@ timeout 6
 call "%nowpath%\Home.bat"
 
 :CHECKNOW
+::import runnig path
+set/p nowpath=<"C:\ProgramData\HotspotMakerData\AutoUpdatePath.ini"
 ::switch to 'Updater.bat' for sheduled task
 call "%nowpath%\Updater.bat"
