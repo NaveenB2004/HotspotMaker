@@ -5,6 +5,10 @@ if %dcho%==c goto AUTOUPDATE
 if not %dcho%==C goto CHECKNOW
 if not %dcho%==c goto CHECKNOW
 
+::For more about task schedul
+::visit--->
+::https://www.windowscentral.com/how-create-task-using-task-scheduler-command-prompt
+
 :AUTOUPDATE
 ::check autoupdate setup
 if EXIST "C:\ProgramData\HotspotMakerData\AutoUpdate.nnb" goto AUTOUPDATETRUE

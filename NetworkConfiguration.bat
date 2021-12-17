@@ -45,6 +45,7 @@ echo Enter count:
 echo # Value 0 to 4294967295 #
 set/p "pingcount=>"
 echo.
+::ping command
 ping %pingaddress% -n %pingcount%
 echo.
 ::user choicess
@@ -71,6 +72,7 @@ echo [ IP Configuration ]
 echo.
 ::steps
 echo Starting IP Configuration...
+::ipconfig command
 ipconfig /all
 echo Compleated.
 echo.
@@ -98,7 +100,9 @@ echo [ Hotspot Status ]
 echo.
 ::steps
 echo Starting network status...
+::hostednetwork details command
 netsh wlan show hostednetwork
+::hostednetwork details command (security)
 netsh wlan show hostednetwork setting=security
 echo Compleated.
 echo.
@@ -156,6 +160,7 @@ echo Connected to the internet!
 echo Please wait for get your public IP...
 echo.
 ::get public ip
+:: web - http://api.ipify.org
 For /f %%A in (
   'powershell -command "(Invoke-Webrequest "http://api.ipify.org").content"'
 ) Do Set ExtIP=%%A

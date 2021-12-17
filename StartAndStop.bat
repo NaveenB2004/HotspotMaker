@@ -62,7 +62,9 @@ echo.
 ::steps
 echo Starting hotspot as SSID (name)- %hotspotname% Password- %hotspotpassword%
 echo .........................................................
+::set ssid and password
 netsh wlan set hostednetwork mode=allow ssid="%hotspotname%" key="%hotspotpassword%"
+::start hotspot
 netsh wlan start hostednetwork
 echo.
 ::little instructions
@@ -123,6 +125,7 @@ echo [ Continue Hotspot Stop ]
 echo.
 ::steps
 echo Stopping the hotspot...
+::stop hotspot
 netsh wlan stop hostednetwork
 echo.
 ::user choicess
