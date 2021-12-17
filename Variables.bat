@@ -31,8 +31,6 @@ SET CREDIT5=                 ***                 - Open Source Project -        
 SET CREDIT6=                 ***                                                        ***
 SET CREDIT7=                 **************************************************************
 SET CREDIT8=                 --------------------------------------------------------------
-::for 'MiniUpdater.bat'
-if %miniupdatercode%==20211218 call "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
 ::check default username and password
 if EXIST "C:\ProgramData\HotspotMakerData\defuser.nnb" call "%nowpath%\Home.bat"
 if NOT EXIST "C:\ProgramData\HotspotMakerData\defuser.nnb" call "%nowpath%\SaveCredits.bat"

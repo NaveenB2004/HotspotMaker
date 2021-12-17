@@ -111,8 +111,18 @@ For /f %%A in (
 ::download script file
 powershell -Command "Invoke-WebRequest %UpdaterDownLink% -Outfile updateinstaller.bat"
 timeout 5 /nobreak
+::set credits
+SET CREDIT0=                 --------------------------------------------------------------
+SET CREDIT1=                 **************************************************************
+SET CREDIT2=                 ***                                                        ***
+SET CREDIT3=                 ***                   (:  -WELCOME-  :)                    ***
+SET CREDIT4=                 ***   : Hotspot Creating Wizard for Windows 8/10(v%version%)  :  ***
+SET CREDIT5=                 ***                 - Open Source Project -                ***
+SET CREDIT6=                 ***                                                        ***
+SET CREDIT7=                 **************************************************************
+SET CREDIT8=                 --------------------------------------------------------------
 ::switch to 'updateinstaller.bat' (new downloaded)
-call "%nowpath%\Variables.bat"
+call "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
 ::when calling error, steps
 echo Error while starting the updater...
 echo Please download the standalone version and install it...
