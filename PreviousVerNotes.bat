@@ -4,7 +4,7 @@ cls
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
-echo [ Previous Version Notes ]
+echo [ Full Version History ]
 echo.
 echo ..........................................................
 echo.
@@ -27,6 +27,8 @@ echo.
 echo # v1.9 - Bugs fixed (Showing 'Launcher' as a virus, Updater Errors, Other minor bugs), Break Launcher to Launcher.exe and Variables.bat. Use Pastebin for get fast webrequests. Use google drive for store updater files.
 echo.
 echo # v2.0 - Bugs fixed (Pulic IP tab-remove pre existed code line, error while uninstall after a update, other minor bugs).
+echo.
+echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add startup script. Add auto update checker on computer starts. Add code breaks (comments) for easy editings. Add operator for compare new versions when updating.
 echo.
 echo ..........................................................
 echo.

@@ -35,7 +35,7 @@ echo Have you a problem when starting the hostspot?
 echo Choose "Hotspot Problems" option to get help.
 echo.
 ::user choicess
-echo A - Home&echo B - Check Updates&echo C - Setup Auto Update&echo D - Change Font Color&echo E - Hotspot Problems&echo F - Previous Version Notes&echo G - Exit
+echo A - Home&echo B - Check Updates&echo C - Setup Auto Update&echo D - Change Font Color&echo E - Hotspot Problems&echo F - Full Version History&echo G - Exit
 echo.
 set/p "dcho=>"
 if %dcho%==A call "%nowpath%\Home.bat"
