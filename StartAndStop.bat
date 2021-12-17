@@ -7,18 +7,14 @@ if %homecho%==b goto STOP
 :START
 ::clear before outputs
 cls
-
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
-
 ::tab title
 echo [ Start Hotspot ]
 echo.
-
 ::import default username and password
 set/p hotspotname=<"C:\ProgramData\HotspotMakerData\defaultssid.ini"
 set/p hotspotpassword=<"C:\ProgramData\HotspotMakerData\defaultpass.ini"
-
 ::steps (for defalt ssid and password)
 echo Do you want to use default SSID and Password? (Y/N)
 echo SSID: %hotspotname%     Password: %hotspotpassword%
@@ -27,7 +23,6 @@ set/p "defcredittru=>"
 if %defcredittru%==Y goto DEFSTART
 if %defcredittru%==y goto DEFSTART
 echo.
-
 ::steps (for one time user input ssid and password)
 echo Enter a name use as the HOTSPOT SSID (name):
 set/p "hotspotname=>"
@@ -36,7 +31,6 @@ echo Enter a password use as the HOTSPOT PASSWORD:
 echo #(Password must be contain 8 to 64 charactors)#
 set/p "hotspotpassword=>"
 echo.
-
 ::user choicess
 echo A - Continue&echo B - Home&echo C - Details&echo D - Exit
 echo.
@@ -60,25 +54,20 @@ goto STARTCONTINUE
 :STARTCONTINUE
 ::clear before outputs
 cls
-
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
-
 ::tab title
 echo [ Continue Hotspot Start ]
 echo.
-
 ::steps
 echo Starting hotspot as SSID (name)- %hotspotname% Password- %hotspotpassword%
 echo .........................................................
 netsh wlan set hostednetwork mode=allow ssid="%hotspotname%" key="%hotspotpassword%"
 netsh wlan start hostednetwork
 echo.
-
 ::little instructions
 echo # Go to Details when wizard shows network starting problems #
 echo.
-
 ::user choicess
 echo A - Home&echo B - Network Configuration&echo C - Stop Hotspot&echo D - Details&echo E - Exit
 echo.
@@ -100,18 +89,14 @@ goto START
 :STOP
 ::clear before outputs
 cls
-
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
-
 ::tab titles
 echo [ Stop Hotspot ]
 echo.
-
 ::steps
 echo You are going to stop the hotspot...
 echo.
-
 ::user choices
 echo A - Continue&echo B - Home&echo C - Details&echo D - Exit
 echo.
@@ -131,19 +116,15 @@ goto STOP
 :STOPCONTINUE
 ::clear before outputs
 cls
-
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
-
 ::tab title
 echo [ Continue Hotspot Stop ]
 echo.
-
 ::steps
 echo Stopping the hotspot...
 netsh wlan stop hostednetwork
 echo.
-
 ::user choicess
 echo A - Home&echo B - Details&echo C - Exit
 echo.

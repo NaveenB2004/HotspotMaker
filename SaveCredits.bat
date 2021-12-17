@@ -1,19 +1,15 @@
 :SAVECREDITS
 ::clear before outputs
 cls
-
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
-
 ::tab title
 echo [ Set Default SSID and Password ]
 echo.
-
 ::little instructions
 echo You can save hotspot SSID(name) and password for easily start Hotspot with given data.
 echo # You should input data for use this option. If you not input data, default ssid and password will not work.
 echo.
-
 ::steps
 echo Enter Network SSID (Name) for use as default:
 set/p "defname=>"
@@ -24,11 +20,9 @@ set/p "defpass=>"
 echo %defpass%>"C:\ProgramData\HotspotMakerData\defaultpass.ini"
 echo.
 echo Success...!
-
 ::generate default username and password information
 echo defuser>"C:\ProgramData\HotspotMakerData\defuser.nnb"
 echo.
-
 ::user choicess
 echo A - Home&echo B - Details&echo C - Exit
 echo.

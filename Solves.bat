@@ -1,14 +1,12 @@
 :HOTSPOTPROBLEMS
 ::clear before outputs
 cls
-
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 
 ::tab title
 echo [ Hotspot Problems ]
 echo.
-
 ::instructions
 echo --------------------------------------------------------------------------------
 echo.
@@ -45,7 +43,6 @@ echo (You can get contact details from Wizard Details)
 echo.
 echo --------------------------------------------------------------------------------
 echo.
-
 ::user choicess
 echo A - Home&echo B - Advanced Sloves&echo C - Details&echo D - Exit
 echo.
@@ -65,22 +62,17 @@ goto HOTSPOTPROBLEMS
 :ADVANCEDSOLVES
 ::clear before outputs
 cls
-
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
-
 ::tab title
 echo [ Advanced Solves ]
-
 ::steps
 ::video saved url (google drive)
 start https://drive.google.com/drive/folders/1gKPlth-Tm-pMlt-h3ACXEsS5cx0ZoS2E?usp=sharing
 echo.
-
 ::little instructions
 echo Watch the videos for solve your problems... Good Luck...!
 echo.
-
 ::user choicess
 echo A - Home&echo B - Details&echo C - Exit
 echo.
