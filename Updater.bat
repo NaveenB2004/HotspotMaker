@@ -61,8 +61,8 @@ echo Checking new versions...
 echo.
 timeout 5
 ::new version check (compare)
-if %version%==%tempversion% goto THSISILAST
-if not %version%==%tempversion% goto NEWAVILABLE
+if %version% LSS %tempversion% goto THSISILAST
+if not %version% LSS %tempversion% goto NEWAVILABLE
 
 :THSISILAST
 ::clear before outputs

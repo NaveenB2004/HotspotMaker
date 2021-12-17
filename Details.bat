@@ -26,7 +26,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add startup script. Add auto update checker on computer starts. Add code breaks (comments) for easy editings.
+echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add startup script. Add auto update checker on computer starts. Add code breaks (comments) for easy editings. Add operator for compare new versions when updating.
 echo.
 echo ..........................................................
 echo.
