@@ -1,3 +1,6 @@
+:: Learn from--->
+:: https://www.tutorialspoint.com/batch_script/index.htm
+
 :HOME
 ::check and remove update leftovers
 if EXIST "C:\ProgramData\HotspotMakerData\updateinstaller.bat" del "C:\ProgramData\HotspotMakerData\updateinstaller.bat"

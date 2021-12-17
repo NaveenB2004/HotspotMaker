@@ -52,8 +52,6 @@ echo (Please wait...)
 SCHTASKS /CREATE /SC ONSTART /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat"
 ::generate true file for this oparation
 echo taskadded>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
-::generate running path
-echo %nowpath%>"C:\ProgramData\HotspotMakerData\AutoUpdatePath.ini"
 echo Compleated!
 echo.
 ::user choicess
