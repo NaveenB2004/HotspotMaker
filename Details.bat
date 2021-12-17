@@ -40,7 +40,7 @@ echo # v1.9 - Bugs fixed (Showing 'Launcher' as a virus, Updater Errors, Other m
 echo.
 echo # v2.0 - Bugs fixed (Pulic IP tab-remove pre existed code line, error while uninstall after a update, other minor bugs).
 echo.
-echo # v2.1 - 
+echo # v2.1 - Remove direct call for variables and set startup script with auto update checker. Add code breaks (comments) for easy editings.
 echo.
 echo ..........................................................
 echo.
