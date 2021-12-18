@@ -4,6 +4,8 @@ if exist "C:\ProgramData\HotspotMakerData\NewVersion.rar" del "C:\ProgramData\Ho
 if exist "C:\ProgramData\HotspotMakerData\UnRAR.exe" del "C:\ProgramData\HotspotMakerData\NewVersion.rar"
 ::clear before outputs
 cls
+::title
+title %title%
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
@@ -34,6 +36,8 @@ if not exist "C:\ProgramData\HotspotMakerData\NewVersion.rar" goto UPHOME
 if not exist "C:\ProgramData\HotspotMakerData\UnRAR.exe" goto UPHOME
 ::compleated
 echo Download compleated!
+::title
+title %title%
 echo.
 ::steps
 echo [Step 2 of 3]

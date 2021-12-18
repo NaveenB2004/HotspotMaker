@@ -4,7 +4,7 @@ set nowpath=%~dp0
 ::import version
 set/p version=<"%nowpath%\Version.ini"
 ::window title
-title Hotspot Maker (v%version%)
+set title=Hotspot Maker (v%version%)
 ::check and remove update leftovers
 if EXIST "C:\ProgramData\HotspotMakerData\updateinstaller.bat" del "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
 ::check and import color

@@ -1,6 +1,8 @@
 :HOTSPOTPROBLEMS
 ::clear before outputs
 cls
+::title
+title %title%
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 
