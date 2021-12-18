@@ -1,11 +1,23 @@
 @Echo off
 ::Window title
 title Auto Update
+::set credits
+SET CREDIT0=                 --------------------------------------------------------------
+SET CREDIT1=                 **************************************************************
+SET CREDIT2=                 ***                                                        ***
+SET CREDIT3=                 ***                   (:  -WELCOME-  :)                    ***
+SET CREDIT4=                 ***   : Hotspot Creating Wizard for Windows 8/10(v%version%)  :  ***
+SET CREDIT5=                 ***                 - Open Source Project -                ***
+SET CREDIT6=                 ***                                                        ***
+SET CREDIT7=                 **************************************************************
+SET CREDIT8=                 --------------------------------------------------------------
 ::working path
 set nowpath=%~dp0
 :UPHOME
 ::clear before outputs
 cls
+::credits
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ Updater Home ]
 echo.
@@ -28,6 +40,8 @@ if not %tempversion%==okeWebRequestCommand goto NETCHECKPASS
 :NETCHECKFAIL
 ::clear before outputs
 cls
+::credits
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ Internet Check Fail ]
 echo.
@@ -50,6 +64,8 @@ goto NETCHECKFAIL
 :NETCHECKPASS
 ::clear before outputs
 cls
+::credits
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ Check Updates ]
 echo.
@@ -61,12 +77,14 @@ echo.
 timeout 5
 set/p version=<"%nowpath%\Version.ini"
 ::new version check (compare)
-if %version% LEQ %tempversion% goto THSISILAST
-if not %version% LEQ %tempversion% goto NEWAVILABLE
+if %tempversion% LEQ %version% goto THSISILAST
+if not %tempversion% LEQ %version% goto NEWAVILABLE
 
 :THSISILAST
 ::clear before outputs
 cls
+::credits
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ This is the Latest Version ]
 echo.
@@ -81,6 +99,8 @@ goto END
 :NEWAVILABLE
 ::clear before outputs
 cls
+::credits
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ New version Available ]
 echo.
@@ -95,6 +115,8 @@ goto INSTALLATION
 :INSTALLATION
 ::clear before outputs
 cls
+::credits
+echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
 echo [ Installation ]
 echo.
@@ -111,16 +133,6 @@ For /f %%A in (
 ::download script file
 powershell -Command "Invoke-WebRequest %UpdaterDownLink% -Outfile updateinstaller.bat"
 timeout 5 /nobreak
-::set credits
-SET CREDIT0=                 --------------------------------------------------------------
-SET CREDIT1=                 **************************************************************
-SET CREDIT2=                 ***                                                        ***
-SET CREDIT3=                 ***                   (:  -WELCOME-  :)                    ***
-SET CREDIT4=                 ***   : Hotspot Creating Wizard for Windows 8/10(v%version%)  :  ***
-SET CREDIT5=                 ***                 - Open Source Project -                ***
-SET CREDIT6=                 ***                                                        ***
-SET CREDIT7=                 **************************************************************
-SET CREDIT8=                 --------------------------------------------------------------
 ::switch to 'updateinstaller.bat' (new downloaded)
 call "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
 ::when calling error, steps

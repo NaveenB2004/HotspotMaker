@@ -61,8 +61,8 @@ echo Checking new versions...
 echo.
 timeout 5
 ::new version check (compare)
-if %version% LEQ %tempversion% goto THSISILAST
-if not %version% LEQ %tempversion% goto NEWAVILABLE
+if %tempversion% LEQ %version% goto THSISILAST
+if not %tempversion% LEQ %version% goto NEWAVILABLE
 
 :THSISILAST
 ::clear before outputs
@@ -83,8 +83,8 @@ echo.
 set/p "thisislastcho=>"
 if %thisislastcho%==A call "%nowpath%\Home.bat"
 if %thisislastcho%==a call "%nowpath%\Home.bat"
-if %thisislastcho%==B goto END
-if %thisislastcho%==b goto END
+if %thisislastcho%==B call "%nowpath%\Exit.bat"
+if %thisislastcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto THSISILAST
@@ -112,8 +112,8 @@ if %newversioncho%==A goto INSTALLATION
 if %newversioncho%==a goto INSTALLATION
 if %newversioncho%==B call "%nowpath%\Home.bat"
 if %newversioncho%==b call "%nowpath%\Home.bat"
-if %newversioncho%==C goto END
-if %newversioncho%==c goto END
+if %newversioncho%==C call "%nowpath%\Exit.bat"
+if %newversioncho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 timeout 6
 goto NEWAVILABLE

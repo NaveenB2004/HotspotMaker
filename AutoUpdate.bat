@@ -19,7 +19,8 @@ echo.
 echo Hotspot Maker Auto Update...
 echo You can setup auto update option for Hotspot Maker.
 echo If you setup this option,
-echo    the Hotspot Maker will check and download updates the time you set.
+echo    the Hotspot Maker will check and download updates when you loged in.
+echo THE UPDATER WILL NOT WORK WHILE YOU ARE WORKING ON BATTERY POWER
 echo.
 echo Do you wish to continue...?
 echo.
