@@ -12,7 +12,7 @@ echo.
 echo Welcome to Network Configuration...
 echo.
 ::user choicess
-echo A - Home&echo B - IP Configuration&echo C - Hotspot Status&echo D - Ping (IP/Domain)&echo E - View Public IP (External IP)&echo F - Open Network Connections Window&echo G - Renew/Refresh Network IP Addresses&echo H - View Computer Hotstname&echo I - Exit
+echo A - Home&echo B - IP Configuration&echo C - Hotspot Status&echo D - Ping (IP/Domain)&echo E - View Public IP (External IP)&echo F - Network Connections Window&echo G - Renew/Refresh Network IP Addresses&echo H - View Computer Hotstname&echo I - Exit
 echo.
 set/p "netconfigcho=>"
 if %netconfigcho%==A call "%nowpath%\Home.bat"
