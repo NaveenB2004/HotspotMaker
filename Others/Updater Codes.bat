@@ -90,8 +90,7 @@ echo.
 ::comments
 echo Installation successfully compleated!
 echo Installed version is v%tempversion%
-echo Redirecting...
 echo.
-timeout 20
+pause
 ::switch to 'Startup.bat'
 call "%nowpath%\Startup.bat"

@@ -1,6 +1,6 @@
 ::For more about task schedul
 ::visit--->
-::https://www.windowscentral.com/how-create-task-using-task-scheduler-command-prompt
+::https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks
 
 :AUTOUPDATE
 ::check autoupdate setup
@@ -49,7 +49,7 @@ echo.
 echo Setting Auto Update for Hotspot Maker...
 echo (Please wait...)
 ::shedule task to run at computer startup
-SCHTASKS /CREATE /SC ONSTART /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat"
+SCHTASKS /CREATE /SC ONLOGON /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 echo taskadded>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
 echo Compleated!

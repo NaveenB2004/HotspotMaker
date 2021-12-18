@@ -61,8 +61,8 @@ echo.
 timeout 5
 set/p version=<"%nowpath%\Version.ini"
 ::new version check (compare)
-if %version% LSS %tempversion% goto THSISILAST
-if not %version% LSS %tempversion% goto NEWAVILABLE
+if %version% LEQ %tempversion% goto THSISILAST
+if not %version% LEQ %tempversion% goto NEWAVILABLE
 
 :THSISILAST
 ::clear before outputs
