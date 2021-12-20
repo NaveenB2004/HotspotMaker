@@ -13,53 +13,28 @@ SET CREDIT7=                 ***************************************************
 SET CREDIT8=                 --------------------------------------------------------------
 ::working path
 set nowpath=%~dp0
-:UPHOME
+set/p version=<"%nowpath%\Version.ini"
+goto NETCHECK
+
+:NETCHECK
 ::clear before outputs
 cls
 ::credits
 echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
 ::tab title
-echo [ Updater Home ]
+echo [ Connection Check ]
 echo.
-::little instructions
-echo Make sure you connected to internet...
-echo Please wait for check the internet connection...
-
-:NETCHECK
+echo Please wait for check your internet connection...
 ::network check fail counting
 set count=0
 set/a count=%count%+1
-if %count%==4 goto NETCHECKFAIL
+if %count%==4 (echo Connection Fail... &timeout 5 &goto END)
 ::network check and getting tempversion
 For /f %%A in (
   'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/RmwHLAQ6").content"'
 ) Do Set tempversion=%%A
-if %tempversion%==okeWebRequestCommand goto NETCHECKFAIL
+if %tempversion%==okeWebRequestCommand goto END
 if not %tempversion%==okeWebRequestCommand goto NETCHECKPASS
-
-:NETCHECKFAIL
-::clear before outputs
-cls
-::credits
-echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo %CREDIT6%&echo %CREDIT7%&echo %CREDIT8%
-::tab title
-echo [ Internet Check Fail ]
-echo.
-::steps
-echo We can not reach the internet :(
-echo Please check your internet connection and try again.
-echo.
-::user choicess
-echo A - Retry&echo B - Exit
-echo.
-set/p "netcheckfailcho=>"
-if %netcheckfailcho%==A goto UPHOME
-if %netcheckfailcho%==a goto UPHOME
-if %netcheckfailcho%==B goto END
-if %netcheckfailcho%==b goto END
-echo invalid choice... Try again...
-timeout 6
-goto NETCHECKFAIL
 
 :NETCHECKPASS
 ::clear before outputs
