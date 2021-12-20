@@ -11,6 +11,10 @@ echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo 
 ::tab title
 echo [ Updater ]
 echo.
+::licesnce
+echo UnRAR Licence
+echo https://pastebin.com/raw/9y3G331h
+timeout 6
 ::steps
 ::download files
 echo [Step 1 of 3]
