@@ -61,7 +61,7 @@ echo (Please wait...)
 ::shedule task to run at computer startup
 SCHTASKS /CREATE /SC ONLOGON /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
-echo ECS>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
+if %errorlevel% equ 0 echo ECS>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
 echo Compleated!
 echo.
 ::user choicess
@@ -100,7 +100,7 @@ echo (Please wait...)
 ::shedule task to run at computer startup
 SCHTASKS /CREATE /SC DAILY /ST %dailyuptime% /MO %dailyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
-echo DAILY>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
+if %errorlevel% equ 0 echo DAILY>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
 echo Compleated!
 echo.
 ::user choicess
@@ -140,7 +140,7 @@ echo (Please wait...)
 ::shedule task to run at computer startup
 SCHTASKS /CREATE /SC WEEKLY /D %weeklyupday% /MO %weeklyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
-echo WEEKLY>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
+if %errorlevel% equ 0 echo WEEKLY>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
 echo Compleated!
 echo.
 ::user choicess
@@ -179,7 +179,7 @@ echo (Please wait...)
 ::shedule task to run at computer startup
 SCHTASKS /CREATE /SC MONTHLY /D %monthlyupdate% /MO %monthupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
-echo MONTHLY>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
+if %errorlevel% equ 0 echo MONTHLY>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
 echo Compleated!
 echo.
 ::user choicess
