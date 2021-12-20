@@ -30,7 +30,7 @@ echo # v1.9 - Bugs fixed (Showing 'Launcher' as a virus, Updater Errors, Other m
 echo.
 echo # v2.0 - Bugs fixed (Pulic IP tab-remove pre existed code line, error while uninstall after a update, other minor bugs).
 echo.
-echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add startup script. Add auto update checker on computer starts. Add code breaks (comments) for easy editings. Add operator for compare new versions when updating. Add new options to Network Configuration tab (Open network connection window, renew network IP addresses, view computer hostname).
+echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add a startup script. Add auto-update checker on computer starts. Add code breaks (comments) for easy editings. Add operator for comparing new versions when updating. Add new options to the Network Configuration tab (Open network connection window, renew network IP addresses, view computer hostname).
 echo.
 echo ..........................................................
 echo.

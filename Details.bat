@@ -15,7 +15,7 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo ........................(11.12.2021)......................
+echo ........................(20.12.2021)......................
 echo.
 ::contack information
 echo Created by: Naveen Balasooriya
@@ -28,7 +28,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add startup script. Add auto update checker on computer starts. Add code breaks (comments) for easy editings. Add operator for compare new versions when updating. Add new options to Network Configuration tab (Open network connection window, renew network IP addresses, view computer hostname).
+echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add a startup script. Add auto-update checker on computer starts. Add code breaks (comments) for easy editings. Add operator for comparing new versions when updating. Add new options to the Network Configuration tab (Open network connection window, renew network IP addresses, view computer hostname).
 echo.
 echo ..........................................................
 echo.
