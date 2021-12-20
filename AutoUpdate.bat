@@ -126,8 +126,8 @@ echo Weekly Update Check
 echo.
 ::steps
 echo Enter day to start update check...
-echo (Ex: 3rd day of week input as 3)
-echo (This option works with your calendar)
+echo (Ex: for set Monday input as MON)
+echo (Specify days: MON, TUE, WED, THU, FRI, SAT, SUN)
 set/p "weeklyupday=>"
 echo.
 echo Enter update intervel...
