@@ -24,17 +24,17 @@ cd "C:\ProgramData\HotspotMakerData"
 ::get download links
 ::new version
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/Asau8iwy").content"'
+  'powershell -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/Asau8iwy").content"'
 ) Do Set NewVersionLink=%%A
 ::unrar
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/rTVNmgSR").content"'
+  'powershell -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/rTVNmgSR").content"'
 ) Do Set UnRARLink=%%A
 ::download files
 ::new version
-powershell -Command "Invoke-WebRequest %NewVersionLink% -Outfile NewVersion.rar"
+powershell -Command "Invoke-WebRequest -UseBasicParsing %NewVersionLink% -Outfile NewVersion.rar"
 ::unrar
-powershell -Command "Invoke-WebRequest %UnRARLink% -Outfile UnRAR.exe"
+powershell -Command "Invoke-WebRequest -UseBasicParsing %UnRARLink% -Outfile UnRAR.exe"
 ::error while downloading
 if not exist "C:\ProgramData\HotspotMakerData\NewVersion.rar" goto UPHOME
 if not exist "C:\ProgramData\HotspotMakerData\UnRAR.exe" goto UPHOME

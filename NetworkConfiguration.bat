@@ -235,7 +235,7 @@ echo.
 ::internet check
 echo Please wait for check the internet connection...
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/3Tgw3Eid").content"'
+  'powershell -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/3Tgw3Eid").content"'
 ) Do Set intcheck=%%A
 if %intcheck%==2004 goto PUBIPSTART
 echo.
@@ -262,7 +262,7 @@ echo.
 ::get public ip
 :: web - http://api.ipify.org
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest "http://api.ipify.org").content"'
+  'powershell -command "(Invoke-Webrequest -UseBasicParsing "http://api.ipify.org").content"'
 ) Do Set ExtIP=%%A
 echo Your Public IP is : %ExtIP%
 echo.

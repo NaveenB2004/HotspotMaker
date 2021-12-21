@@ -28,7 +28,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add a startup script. Add auto-update checker on computer starts. Add code breaks (comments) for easy editings. Add operator for comparing new versions when updating. Add new options to the Network Configuration tab (Open network connection window, renew network IP addresses, view computer hostname).
+echo # v2.2 - Fix error while getting infomation from internet on some computers (Internet Explorer Engine not available or Internet Explorer's first-launch configuration is not compleate error).
 echo.
 echo ..........................................................
 echo.
