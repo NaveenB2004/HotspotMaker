@@ -15,7 +15,7 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo .......................(20.12.2021).......................
+echo .......................(28.01.2022).......................
 echo.
 ::contack information
 echo Created by: Naveen Balasooriya
@@ -28,7 +28,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.2 - Fix error while getting infomation from internet on some computers (Internet Explorer Engine not available or Internet Explorer's first-launch configuration is not compleate error).
+echo # v2.2 - Fix error while getting infomation from internet on some computers (Internet Explorer Engine not available or Internet Explorer's first-launch configuration is not compleate error). Add variables for temp file location for easy accessing. Make 'Uninstaller' file for main app unstallation.
 echo.
 echo ..........................................................
 echo.
