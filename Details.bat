@@ -15,7 +15,7 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo ........................(20.12.2021)......................
+echo .......................(20.12.2021).......................
 echo.
 ::contack information
 echo Created by: Naveen Balasooriya
@@ -37,8 +37,8 @@ echo Have you a problem when starting the hostspot?
 echo Choose "Hotspot Problems" option to get help.
 echo.
 ::autoupdate status read
-if EXIST "C:\ProgramData\HotspotMakerData\AutoUpdate.nnb" set autupdatestat=YES
-if NOT EXIST "C:\ProgramData\HotspotMakerData\AutoUpdate.nnb" set autupdatestat=NO
+if EXIST "%path%\AutoUpdate.nnb" set autupdatestat=YES
+if NOT EXIST "%path%\AutoUpdate.nnb" set autupdatestat=NO
 ::user choicess
 echo A - Home&echo B - Check Updates&echo C - Setup Auto Update (Status: %autupdatestat%)&echo D - Change Font Color&echo E - Hotspot Problems&echo F - Full Version History&echo G - Exit
 echo.

@@ -3,7 +3,7 @@
 
 :HOME
 ::check and remove update leftovers
-if EXIST "C:\ProgramData\HotspotMakerData\updateinstaller.bat" del "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
+if EXIST "%path%\updateinstaller.bat" del "%path%\updateinstaller.bat"
 ::clear before outputs
 cls
 ::title

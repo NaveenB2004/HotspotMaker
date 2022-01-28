@@ -15,15 +15,15 @@ echo.
 ::steps
 echo Enter Network SSID (Name) for use as default:
 set/p "defname=>"
-echo %defname%>"C:\ProgramData\HotspotMakerData\defaultssid.ini"
+echo %defname%>"%path%\defaultssid.ini"
 echo.
 echo Enter Network PASSWORD for use as default:
 set/p "defpass=>"
-echo %defpass%>"C:\ProgramData\HotspotMakerData\defaultpass.ini"
+echo %defpass%>"%path%\defaultpass.ini"
 echo.
 echo Success...!
 ::generate default username and password information
-echo defuser>"C:\ProgramData\HotspotMakerData\defuser.nnb"
+echo defuser>"%path%\defuser.nnb"
 echo.
 ::user choicess
 echo A - Home&echo B - Details&echo C - Exit

@@ -99,7 +99,7 @@ echo.
 echo Downloading script files...
 echo (This may take five seconds)
 ::save working path for post update use
-echo %nowpath%>"C:\ProgramData\HotspotMakerData\nowpath.ini"
+echo %nowpath%>"%path%\nowpath.ini"
 cd "C:\ProgramData\HotspotMakerData"
 ::get download link
 For /f %%A in (

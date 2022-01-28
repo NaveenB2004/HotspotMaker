@@ -4,8 +4,8 @@
 
 :AUTOUPDATE
 ::check autoupdate setup
-if EXIST "C:\ProgramData\HotspotMakerData\AutoUpdate.nnb" set/p autupdatesavecho=<"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"&goto AUTOUPDATETRUE
-if NOT EXIST "C:\ProgramData\HotspotMakerData\AutoUpdate.nnb" goto AUTOUPDATEFALSE
+if EXIST "%path%\AutoUpdate.nnb" set/p autupdatesavecho=<"%path%\AutoUpdate.nnb"&goto AUTOUPDATETRUE
+if NOT EXIST "%path%\AutoUpdate.nnb" goto AUTOUPDATEFALSE
 
 :AUTOUPDATEFALSE
 ::clear before outputs
@@ -61,7 +61,7 @@ echo (Please wait...)
 ::shedule task to run at computer startup
 SCHTASKS /CREATE /SC ONLOGON /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
-if %errorlevel% equ 0 echo ECS>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
+if %errorlevel% equ 0 echo ECS>"%path%\AutoUpdate.nnb"
 echo Compleated!
 echo.
 ::user choicess
@@ -100,7 +100,7 @@ echo (Please wait...)
 ::shedule task to run at computer startup
 SCHTASKS /CREATE /SC DAILY /ST %dailyuptime% /MO %dailyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
-if %errorlevel% equ 0 echo DAILY>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
+if %errorlevel% equ 0 echo DAILY>"%path%\AutoUpdate.nnb"
 echo Compleated!
 echo.
 ::user choicess
@@ -140,7 +140,7 @@ echo (Please wait...)
 ::shedule task to run at computer startup
 SCHTASKS /CREATE /SC WEEKLY /D %weeklyupday% /MO %weeklyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
-if %errorlevel% equ 0 echo WEEKLY>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
+if %errorlevel% equ 0 echo WEEKLY>"%path%\AutoUpdate.nnb"
 echo Compleated!
 echo.
 ::user choicess
@@ -179,7 +179,7 @@ echo (Please wait...)
 ::shedule task to run at computer startup
 SCHTASKS /CREATE /SC MONTHLY /D %monthlyupdate% /MO %monthupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
-if %errorlevel% equ 0 echo MONTHLY>"C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
+if %errorlevel% equ 0 echo MONTHLY>"%path%\AutoUpdate.nnb"
 echo Compleated!
 echo.
 ::user choicess
@@ -242,7 +242,7 @@ echo (Please wait...)
 echo Press [Y] and [ENTER] to continue...
 SCHTASKS /DELETE /TN "HotspotMaker\AutoUpdate"
 ::remove generated true file for true oparation
-del "C:\ProgramData\HotspotMakerData\AutoUpdate.nnb"
+del "%path%\AutoUpdate.nnb"
 timeout 5
 if %autcho%==A goto AUTOUPDATE
 if %autcho%==a goto AUTOUPDATE

@@ -15,8 +15,8 @@ echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo 
 echo [ Start Hotspot ]
 echo.
 ::import default username and password
-set/p hotspotname=<"C:\ProgramData\HotspotMakerData\defaultssid.ini"
-set/p hotspotpassword=<"C:\ProgramData\HotspotMakerData\defaultpass.ini"
+set/p hotspotname=<"%path%\defaultssid.ini"
+set/p hotspotpassword=<"%path%\defaultpass.ini"
 ::steps (for defalt ssid and password)
 echo Do you want to use default SSID and Password? (Y/N)
 echo SSID: %hotspotname%     Password: %hotspotpassword%

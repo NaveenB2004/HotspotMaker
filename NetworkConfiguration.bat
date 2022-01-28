@@ -49,9 +49,9 @@ echo.
 echo Working...
 echo.
 ::command
-hostname>"C:\ProgramData\HotspotMakerData\chostname.ini"
-set/p hostname=<"C:\ProgramData\HotspotMakerData\chostname.ini"
-del "C:\ProgramData\HotspotMakerData\chostname.ini"
+hostname>"%path%\chostname.ini"
+set/p hostname=<"%path%\chostname.ini"
+del "%path%\chostname.ini"
 echo Computer Hostname: %hostname%
 ::comment
 echo.

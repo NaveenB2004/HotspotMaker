@@ -136,8 +136,8 @@ echo.
 echo Downloading script files...
 echo (This may take five seconds)
 ::save working path for post update use
-echo %nowpath%>"C:\ProgramData\HotspotMakerData\nowpath.ini"
-cd "C:\ProgramData\HotspotMakerData"
+echo %nowpath%>"%path%\nowpath.ini"
+cd "%path%"
 ::get download link
 For /f %%A in (
   'powershell -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/yfPgsENY").content"'
