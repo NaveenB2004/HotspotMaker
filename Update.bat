@@ -12,6 +12,8 @@ echo --------------------------------------------
 echo  THIS WIZARD ONLY CONTAINS OFFICIAL UPDATES 
 echo --------------------------------------------
 echo.
+echo Standalones available at https://github.com/naveenb2004/HotspotMaker
+echo.
 ::MS-DOS running version
 ver
 ::steps

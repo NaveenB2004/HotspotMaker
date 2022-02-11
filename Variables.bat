@@ -33,8 +33,6 @@ SET CREDIT5=                 ***                 - Open Source Project -        
 SET CREDIT6=                 ***                                                        ***
 SET CREDIT7=                 **************************************************************
 SET CREDIT8=                 --------------------------------------------------------------
-::check uninstaller
-if %unins%==1 call "%nowpath%\Uninstaller.bat"
 ::check default username and password
 if EXIST "%path%\defuser.nnb" call "%nowpath%\Home.bat"
 if NOT EXIST "%path%\defuser.nnb" call "%nowpath%\SaveCredits.bat"
