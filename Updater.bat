@@ -137,7 +137,8 @@ echo Downloading script files...
 echo (This may take five seconds)
 ::save working path for post update use
 echo %nowpath%>"%path%\nowpath.ini"
-cd "%path%"
+if not exist "%path%\updates" md "%path%\updates"
+cd "%path%\updates"
 ::get download link
 For /f %%A in (
   'powershell -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/yfPgsENY").content"'
@@ -146,7 +147,7 @@ For /f %%A in (
 powershell -Command "Invoke-WebRequest -UseBasicParsing %UpdaterDownLink% -Outfile updateinstaller.bat"
 timeout 5 /nobreak
 ::switch to 'updateinstaller.bat' (new downloaded)
-call "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
+call "%path%\updates\updateinstaller.bat"
 ::when calling error, steps
 echo Error while starting the updater...
 echo Please download the standalone version and install it...

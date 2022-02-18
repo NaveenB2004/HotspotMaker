@@ -4,7 +4,7 @@
 
 :AUTOUPDATE
 ::check autoupdate setup
-if EXIST "%path%\AutoUpdate.nnb" set/p autupdatesavecho=<"%path%\AutoUpdate.nnb"&goto AUTOUPDATETRUE
+if EXIST "%path%\AutoUpdate.nnb" set/p autupdatesavecho=<"%path%\AutoUpdate.nnb" &goto AUTOUPDATETRUE
 if NOT EXIST "%path%\AutoUpdate.nnb" goto AUTOUPDATEFALSE
 
 :AUTOUPDATEFALSE

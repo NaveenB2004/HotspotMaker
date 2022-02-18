@@ -28,7 +28,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.2 - Fix error while getting infomation from internet on some computers (Internet Explorer Engine not available or Internet Explorer's first-launch configuration is not compleate error). Add variables for temp file location for easy accessing. Other minor improvements.
+echo # v2.3 - 
 echo.
 echo ..........................................................
 echo.
@@ -37,17 +37,17 @@ echo Have you a problem when starting the hostspot?
 echo Choose "Hotspot Problems" option to get help.
 echo.
 ::autoupdate status read
-if EXIST "%path%\AutoUpdate.nnb" set autupdatestat=YES
-if NOT EXIST "%path%\AutoUpdate.nnb" set autupdatestat=NO
+if EXIST "%path%\AutoUpdate.nnb" set autupdatestat=ON
+if NOT EXIST "%path%\AutoUpdate.nnb" set autupdatestat=OFF
 ::user choicess
 echo A - Home&echo B - Check Updates&echo C - Setup Auto Update (Status: %autupdatestat%)&echo D - Change Font Color&echo E - Hotspot Problems&echo F - Full Version History&echo G - Exit
 echo.
+::when you change the dcho, look AutoUpdate.bat and change it
 set/p "dcho=>"
 if %dcho%==A call "%nowpath%\Home.bat"
 if %dcho%==a call "%nowpath%\Home.bat"
 if %dcho%==B call "%nowpath%\Update.bat"
 if %dcho%==b call "%nowpath%\Update.bat"
-::when you change the dcho, look AutoUpdate.bat and change it
 if %dcho%==C call "%nowpath%\AutoUpdate.bat"
 if %dcho%==c call "%nowpath%\AutoUpdate.bat"
 if %dcho%==D call "%nowpath%\Colors.bat"

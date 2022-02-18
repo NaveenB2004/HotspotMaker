@@ -1,7 +1,7 @@
 :UPHOME
 ::remove leftovers
-if exist "%path%\NewVersion.rar" del "%path%\UnRAR.exe"
-if exist "%path%\UnRAR.exe" del "%path%\NewVersion.rar"
+if exist "%path%\updates\NewVersion.rar" del "%path%\updates\UnRAR.exe"
+if exist "%path%\updates\UnRAR.exe" del "%path%\updates\NewVersion.rar"
 ::clear before outputs
 cls
 ::title
@@ -20,7 +20,7 @@ timeout 6
 echo [Step 1 of 3]
 echo Downloading required files...
 echo (This may take five seconds)
-cd "%path%"
+cd "%path%\updates"
 ::get download links
 ::new version
 For /f %%A in (
@@ -36,8 +36,8 @@ powershell -Command "Invoke-WebRequest -UseBasicParsing %NewVersionLink% -Outfil
 ::unrar
 powershell -Command "Invoke-WebRequest -UseBasicParsing %UnRARLink% -Outfile UnRAR.exe"
 ::error while downloading
-if not exist "%path%\NewVersion.rar" goto UPHOME
-if not exist "%path%\UnRAR.exe" goto UPHOME
+if not exist "%path%\updates\NewVersion.rar" goto UPHOME
+if not exist "%path%\updates\UnRAR.exe" goto UPHOME
 ::compleated
 echo Download compleated!
 ::title
@@ -48,11 +48,10 @@ echo [Step 2 of 3]
 echo Removing previous installations...
 echo (This may take five seconds)
 ::copy Hotspot Maker.exe and unins000.exe to temp path
-copy "%nowpath%\Hotspot Maker.exe" "%path%"
-copy "%nowpath%\unins000.exe" "%path%"
+copy "%nowpath%\Hotspot Maker.exe" "%path%\updates"
+copy "%nowpath%\unins000.exe" "%path%\updates"
 ::remove previous installation
 del /s /q "%nowpath%"
-del "%path%\nowpath.ini"
 echo Remove compleated!
 echo.
 ::steps
@@ -60,23 +59,18 @@ echo [Step 3 of 3]
 echo Installing files...
 echo (This may take five seconds)
 ::copy new version and unrar to installation path
-copy "%path%\NewVersion.rar" "%nowpath%"
-copy "%path%\UnRAR.exe" "%nowpath%"
-::delete new version and unrar from temp path
-del "%path%\NewVersion.rar"
-del "%path%\UnRAR.exe"
+move "%path%\updates\NewVersion.rar" "%nowpath%"
+move "%path%\updates\UnRAR.exe" "%nowpath%"
 cd "%nowpath%"
 ::extract new version files
 UnRAR.exe x NewVersion.rar
 ::remove update leftovers
-del "%nowpath%\NewVersion.rar"
+del "NewVersion.rar"
 del "UnRAR.exe"
 ::copy Hotspot Maker.exe and unins000.exe to installation path
 ::and remove from temp path
-copy "%path%\Hotspot Maker.exe" "%nowpath%"
-del "%path%\Hotspot Maker.exe"
-copy "%path%\unins000.exe" "%nowpath%"
-del "%path%\unins000.exe"
+move "%path%\updates\Hotspot Maker.exe" "%nowpath%"
+move "%path%\updates\unins000.exe" "%nowpath%"
 ::comments
 echo Installation Compleated!
 echo.

@@ -8,7 +8,7 @@ set/p version=<"%nowpath%\Version.ini"
 ::window title
 set title=Hotspot Maker (v%version%)
 ::check and remove update leftovers
-if EXIST "%path%\updateinstaller.bat" del "%path%\updateinstaller.bat"
+if EXIST "%path%\updateinstaller.bat" set leftovers=found &del "%path%\updateinstaller.bat"
 ::check and import color
 if EXIST "%path%\colorcode.ini" goto WIZARDSTART
 if NOT EXIST "%path%\colorcode.ini" goto COLORMAKE
@@ -33,6 +33,7 @@ SET CREDIT5=                 ***                 - Open Source Project -        
 SET CREDIT6=                 ***                                                        ***
 SET CREDIT7=                 **************************************************************
 SET CREDIT8=                 --------------------------------------------------------------
+echo [%date%] [%time%] set interface credits >>"%path%\Logger.log"
 ::check default username and password
 if EXIST "%path%\defuser.nnb" call "%nowpath%\Home.bat"
 if NOT EXIST "%path%\defuser.nnb" call "%nowpath%\SaveCredits.bat"
