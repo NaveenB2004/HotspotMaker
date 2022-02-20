@@ -28,7 +28,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.3 - Add system32 and powershell variables for some bug fix. Correct true names for system32 files (optional work).
+echo # v2.4 - Set default window and buffer sizes.
 echo.
 echo ..........................................................
 echo.

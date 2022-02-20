@@ -11,6 +11,8 @@ set title=Hotspot Maker (v%version%)
 set powershell=%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\powershell.exe
 set rootpath=%SYSTEMROOT%\System32
 set timeout=%rootpath%\timeout.exe
+::set window size
+%powershell% -command "&{$w=(get-host).ui.rawui;$w.buffersize=@{width=100;height=300};$w.windowsize=@{width=100;height=50};}"
 ::check and import color
 if EXIST "%path%\colorcode.ini" goto WIZARDSTART
 if NOT EXIST "%path%\colorcode.ini" goto COLORMAKE
@@ -26,15 +28,15 @@ goto WIZARDSTART
 set/p defCOLORCODEnum=<"%path%\colorcode.ini"
 color %defCOLORCODEnum%
 ::set credits
-SET CREDIT0=                 --------------------------------------------------------------
-SET CREDIT1=                 **************************************************************
-SET CREDIT2=                 ***                                                        ***
-SET CREDIT3=                 ***                   (:  -WELCOME-  :)                    ***
-SET CREDIT4=                 ***   : Hotspot Creating Wizard for Windows 8/10(v%version%)  :  ***
-SET CREDIT5=                 ***                 - Open Source Project -                ***
-SET CREDIT6=                 ***                                                        ***
-SET CREDIT7=                 **************************************************************
-SET CREDIT8=                 --------------------------------------------------------------
+SET CREDIT0=                   --------------------------------------------------------------
+SET CREDIT1=                   **************************************************************
+SET CREDIT2=                   ***                                                        ***
+SET CREDIT3=                   ***                   (:  -WELCOME-  :)                    ***
+SET CREDIT4=                   ***   : Hotspot Creating Wizard for Windows 8/10(v%version%)  :  ***
+SET CREDIT5=                   ***                 - Open Source Project -                ***
+SET CREDIT6=                   ***                                                        ***
+SET CREDIT7=                   **************************************************************
+SET CREDIT8=                   --------------------------------------------------------------
 ::check default username and password
 if EXIST "%path%\defuser.nnb" call "%nowpath%\Home.bat"
 if NOT EXIST "%path%\defuser.nnb" call "%nowpath%\SaveCredits.bat"
