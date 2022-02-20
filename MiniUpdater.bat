@@ -31,7 +31,7 @@ set/a count=%count%+1
 if %count%==4 (echo Connection Fail... &timeout 5 &goto END)
 ::network check and getting tempversion
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/RmwHLAQ6").content"'
+  '%powershell% -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/RmwHLAQ6").content"'
 ) Do Set tempversion=%%A
 if %tempversion%==okeWebRequestCommand goto END
 if not %tempversion%==okeWebRequestCommand goto NETCHECKPASS
@@ -103,10 +103,10 @@ echo %nowpath%>"%path%\nowpath.ini"
 cd "C:\ProgramData\HotspotMakerData"
 ::get download link
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/yfPgsENY").content"'
+  '%powershell% -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/yfPgsENY").content"'
 ) Do Set UpdaterDownLink=%%A
 ::download script file
-powershell -Command "Invoke-WebRequest -UseBasicParsing %UpdaterDownLink% -Outfile updateinstaller.bat"
+%powershell% -Command "Invoke-WebRequest -UseBasicParsing %UpdaterDownLink% -Outfile updateinstaller.bat"
 timeout 5 /nobreak
 ::switch to 'updateinstaller.bat' (new downloaded)
 call "C:\ProgramData\HotspotMakerData\updateinstaller.bat"

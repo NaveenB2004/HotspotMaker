@@ -19,7 +19,7 @@ set/a count=%count%+1
 if %count%==4 goto NETCHECKFAIL
 ::network check and getting tempversion
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/RmwHLAQ6").content"'
+  '%powershell% -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/RmwHLAQ6").content"'
 ) Do Set tempversion=%%A
 if %tempversion%==okeWebRequestCommand goto NETCHECKFAIL
 if not %tempversion%==okeWebRequestCommand goto NETCHECKPASS
@@ -141,10 +141,10 @@ if not exist "%path%\updates" md "%path%\updates"
 cd "%path%\updates"
 ::get download link
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/yfPgsENY").content"'
+  '%powershell% -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/yfPgsENY").content"'
 ) Do Set UpdaterDownLink=%%A
 ::download script file
-powershell -Command "Invoke-WebRequest -UseBasicParsing %UpdaterDownLink% -Outfile updateinstaller.bat"
+%powershell% -Command "Invoke-WebRequest -UseBasicParsing %UpdaterDownLink% -Outfile updateinstaller.bat"
 timeout 5 /nobreak
 ::switch to 'updateinstaller.bat' (new downloaded)
 call "%path%\updates\updateinstaller.bat"

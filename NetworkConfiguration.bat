@@ -23,8 +23,8 @@ if %netconfigcho%==C goto NETSTATUS
 if %netconfigcho%==c goto NETSTATUS
 if %netconfigcho%==D goto PINGTEST
 if %netconfigcho%==d goto PINGTEST
-if %netconfigcho%==E goto PUBIP
-if %netconfigcho%==e goto PUBIP
+if %netconfigcho%==E goto GETPUBIP
+if %netconfigcho%==e goto GETPUBIP
 if %netconfigcho%==F goto NCWINDOW
 if %netconfigcho%==f goto NCWINDOW
 if %netconfigcho%==G goto RNIA
@@ -173,7 +173,7 @@ echo.
 ::steps
 echo Starting IP Configuration...
 ::ipconfig command
-ipconfig /all
+%systemroot%\system32\ipconfig /all
 echo Compleated.
 echo.
 ::user choicess
@@ -220,7 +220,7 @@ echo invalid choice... Try again...
 timeout 6
 goto NETSTATUS
 
-:PUBIP
+:GETPUBIP
 ::clear before outputs
 cls
 ::credits
@@ -235,7 +235,7 @@ echo.
 ::internet check
 echo Please wait for check the internet connection...
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest "https://pastebin.com/raw/3Tgw3Eid").content"'
+  '%powershell% -command "(Invoke-Webrequest "https://pastebin.com/raw/3Tgw3Eid").content"'
 ) Do Set intcheck=%%A
 if %intcheck%==2004 goto PUBIPSTART
 echo.
@@ -262,7 +262,7 @@ echo.
 ::get public ip
 :: web - http://api.ipify.org
 For /f %%A in (
-  'powershell -command "(Invoke-Webrequest "http://api.ipify.org").content"'
+  '%powershell% -command "(Invoke-Webrequest "http://api.ipify.org").content"'
 ) Do Set ExtIP=%%A
 echo Your Public IP is : %ExtIP%
 echo.
