@@ -11,6 +11,8 @@ set title=Hotspot Maker (v%version%)
 set powershell=%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\powershell.exe
 set rootpath=%SYSTEMROOT%\System32
 set timeout=%rootpath%\timeout.exe
+::clean auto update leftovers
+del /s /q "%path%\UpdateMsg.vbs"
 ::set window size
 %powershell% -command "&{$w=(get-host).ui.rawui;$w.buffersize=@{width=100;height=300};$w.windowsize=@{width=100;height=50};}"
 ::check and import color
