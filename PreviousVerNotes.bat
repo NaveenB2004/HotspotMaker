@@ -34,7 +34,7 @@ echo # v2.1 - Bugs fixed (minor bugs). Remove direct call for variables and add 
 echo.
 echo # v2.2 - Fix error while getting infomation from internet on some computers (Internet Explorer Engine not available or Internet Explorer's first-launch configuration is not compleate error). Add variables for temp file location for easy accessing. Other minor improvements.
 echo.
-echo # v2.3 - Add system32 and powershell variables for some bug fix. Correct true names for system32 files (optional work). Set default window and buffer sizes. Bug fix updater codes error, Improve auto update check.
+echo # v2.3 (this) - # v2.3 - Set default window and buffer sizes. Bugfix (task schedule for auto-update check environment variable error, updater codes error), Improve auto-update check.
 echo.
 echo ..........................................................
 echo.

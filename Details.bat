@@ -28,7 +28,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.3 - Set default window and buffer sizes. Bug fix (task shedule for auto update chaeck environment variable error, updater codes error), Improve auto update check.
+echo # v2.3 - # v2.3 - Set default window and buffer sizes. Bugfix (task schedule for auto-update check environment variable error, updater codes error), Improve auto-update check.
 echo.
 echo ..........................................................
 echo.
