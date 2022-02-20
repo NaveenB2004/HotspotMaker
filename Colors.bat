@@ -60,6 +60,6 @@ echo Color Set Successed...
 set/p defCOLORCODEnum=<"%path%\colorcode.ini"
 color %defCOLORCODEnum%
 echo.
-timeout 6
+%timeout% 6
 ::switch to 'Details.bat'
 call "%nowpath%\Details.bat"

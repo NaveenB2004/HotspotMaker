@@ -33,5 +33,5 @@ if %homecho%==e call "%nowpath%\Details.bat"
 if %homecho%==F call "%nowpath%\Exit.bat"
 if %homecho%==f call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto HOME

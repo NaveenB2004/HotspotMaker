@@ -36,5 +36,5 @@ if %svcredit%==b call "%nowpath%\Details.bat"
 if %svcredit%==C call "%nowpath%\Exit.bat"
 if %svcredit%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 call "%nowpath%\Home.bat"

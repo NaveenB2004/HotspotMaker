@@ -47,7 +47,7 @@ if %netcheckfailcho%==a goto UPHOME
 if %netcheckfailcho%==B call "%nowpath%\Home.bat"
 if %netcheckfailcho%==b call "%nowpath%\Home.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto NETCHECKFAIL
 
 :NETCHECKPASS
@@ -65,7 +65,7 @@ echo Internet connection : OK!
 echo.
 echo Checking new versions...
 echo.
-timeout 5
+%timeout% 5
 ::new version check (compare)
 if %tempversion% LEQ %version% goto THSISILAST
 if not %tempversion% LEQ %version% goto NEWAVILABLE
@@ -92,7 +92,7 @@ if %thisislastcho%==a call "%nowpath%\Home.bat"
 if %thisislastcho%==B call "%nowpath%\Exit.bat"
 if %thisislastcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto THSISILAST
 
 :NEWAVILABLE
@@ -121,7 +121,7 @@ if %newversioncho%==b call "%nowpath%\Home.bat"
 if %newversioncho%==C call "%nowpath%\Exit.bat"
 if %newversioncho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto NEWAVILABLE
 
 :INSTALLATION
@@ -145,12 +145,12 @@ For /f %%A in (
 ) Do Set UpdaterDownLink=%%A
 ::download script file
 %powershell% -Command "Invoke-WebRequest -UseBasicParsing %UpdaterDownLink% -Outfile updateinstaller.bat"
-timeout 5 /nobreak
+%timeout% 5 /nobreak
 ::switch to 'updateinstaller.bat' (new downloaded)
 call "%path%\updates\updateinstaller.bat"
 ::when calling error, steps
 echo Error while starting the updater...
 echo Please download the standalone version and install it...
 start https://github.com/naveenb2004/HotspotMaker/releases
-timeout 12
+%timeout% 12
 call "%nowpath%\Home.bat"

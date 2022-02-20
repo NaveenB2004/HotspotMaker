@@ -10,6 +10,7 @@ set title=Hotspot Maker (v%version%)
 ::fix environmet errors
 set powershell=%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\powershell.exe
 set rootpath=%SYSTEMROOT%\System32
+set timeout=%rootpath%\timeout.exe
 ::check and import color
 if EXIST "%path%\colorcode.ini" goto WIZARDSTART
 if NOT EXIST "%path%\colorcode.ini" goto COLORMAKE

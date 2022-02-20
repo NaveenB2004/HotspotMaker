@@ -47,5 +47,5 @@ if %pvncho%==b call "%nowpath%\Details.bat"
 if %pvncho%==C call "%nowpath%\Exit.bat"
 if %pvncho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto PVNOTES

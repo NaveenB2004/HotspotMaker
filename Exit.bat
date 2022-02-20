@@ -21,7 +21,7 @@ if %exitcho%==b call "%nowpath%\Home.bat"
 if %exitcho%==C call "%nowpath%\Details.bat"
 if %exitcho%==c call "%nowpath%\Details.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto EXIT
 
 :END

@@ -43,7 +43,7 @@ if %aufcho%==e call "%nowpath%\Home.bat"
 if %aufcho%==F call "%nowpath%\Exit.bat"
 if %aufcho%==f call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto AUTOUPDATEFALSE
 
 :ECS
@@ -73,7 +73,7 @@ if %ausetupcho%==a call "%nowpath%\Home.bat"
 if %ausetupcho%==B call "%nowpath%\Exit.bat"
 if %ausetupcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 call "%nowpath%\Home.bat"
 
 :DAILY
@@ -112,7 +112,7 @@ if %ausetupcho%==a call "%nowpath%\Home.bat"
 if %ausetupcho%==B call "%nowpath%\Exit.bat"
 if %ausetupcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 call "%nowpath%\Home.bat"
 
 :WEEKLY
@@ -152,7 +152,7 @@ if %ausetupcho%==a call "%nowpath%\Home.bat"
 if %ausetupcho%==B call "%nowpath%\Exit.bat"
 if %ausetupcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 call "%nowpath%\Home.bat"
 
 :MONTHLY
@@ -191,7 +191,7 @@ if %ausetupcho%==a call "%nowpath%\Home.bat"
 if %ausetupcho%==B call "%nowpath%\Exit.bat"
 if %ausetupcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 call "%nowpath%\Home.bat"
 
 :AUTOUPDATETRUE
@@ -218,7 +218,7 @@ if %autcho%==c call "%nowpath%\Home.bat"
 if %autcho%==D call "%nowpath%\Exit.bat"
 if %autcho%==d call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto AUTOUPDATETRUE
 
 :AUSTOP
@@ -243,7 +243,7 @@ echo Press [Y] and [ENTER] to continue...
 SCHTASKS /DELETE /TN "HotspotMaker\AutoUpdate"
 ::remove generated true file for true oparation
 del "%path%\AutoUpdate.nnb"
-timeout 5
+%timeout% 5
 if %autcho%==A goto AUTOUPDATE
 if %autcho%==a goto AUTOUPDATE
 if %autcho%==B echo Compleated!
@@ -258,5 +258,5 @@ if %ausetuptcho%==a call "%nowpath%\Home.bat"
 if %ausetuptcho%==B call "%nowpath%\Exit.bat"
 if %ausetuptcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 call "%nowpath%\Home.bat"

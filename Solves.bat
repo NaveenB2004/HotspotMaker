@@ -58,7 +58,7 @@ if %hpcho%==c call "%nowpath%\Details.bat"
 if %hpcho%==D call "%nowpath%\Exit.bat"
 if %hpcho%==d call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto HOTSPOTPROBLEMS
 
 :ADVANCEDSOLVES
@@ -86,5 +86,5 @@ if %hpcho%==b call "%nowpath%\Details.bat"
 if %hpcho%==C call "%nowpath%\Exit.bat"
 if %hpcho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto HOTSPOTPROBLEMS

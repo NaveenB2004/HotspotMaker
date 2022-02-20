@@ -11,6 +11,10 @@ SET CREDIT5=                 ***                 - Open Source Project -        
 SET CREDIT6=                 ***                                                        ***
 SET CREDIT7=                 **************************************************************
 SET CREDIT8=                 --------------------------------------------------------------
+::fix environmet errors
+set powershell=%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\powershell.exe
+set rootpath=%SYSTEMROOT%\System32
+set timeout=%rootpath%\timeout.exe
 ::working path
 set nowpath=%~dp0
 set/p version=<"%nowpath%\Version.ini"
@@ -28,7 +32,7 @@ echo Please wait for check your internet connection...
 ::network check fail counting
 set count=0
 set/a count=%count%+1
-if %count%==4 (echo Connection Fail... &timeout 5 &goto END)
+if %count%==4 (echo Connection Fail... &%timeout% 5 &goto END)
 ::network check and getting tempversion
 For /f %%A in (
   '%powershell% -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/RmwHLAQ6").content"'
@@ -49,7 +53,7 @@ echo Internet connection : OK!
 echo.
 echo Checking new versions...
 echo.
-timeout 5
+%timeout% 5
 set/p version=<"%nowpath%\Version.ini"
 ::new version check (compare)
 if %tempversion% LEQ %version% goto THSISILAST
@@ -68,7 +72,7 @@ echo Congratulations!
 echo You are using the latest version of Hotspot Maker...
 echo This version is v%version%
 echo.
-timeout 10
+%timeout% 10
 goto END
 
 :NEWAVILABLE
@@ -84,7 +88,7 @@ echo New version of Hotspot Maker available...
 echo You are running on v%version%
 echo Available version is v%tempversion%
 echo.
-timeout 10
+%timeout% 10
 goto INSTALLATION
 
 :INSTALLATION
@@ -107,14 +111,14 @@ For /f %%A in (
 ) Do Set UpdaterDownLink=%%A
 ::download script file
 %powershell% -Command "Invoke-WebRequest -UseBasicParsing %UpdaterDownLink% -Outfile updateinstaller.bat"
-timeout 5 /nobreak
+%timeout% 5 /nobreak
 ::switch to 'updateinstaller.bat' (new downloaded)
 call "C:\ProgramData\HotspotMakerData\updateinstaller.bat"
 ::when calling error, steps
 echo Error while starting the updater...
 echo Please download the standalone version and install it...
 start https://github.com/naveenb2004/HotspotMaker/releases
-timeout 20
+%timeout% 20
 goto END
 
 :END

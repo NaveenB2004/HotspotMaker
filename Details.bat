@@ -28,7 +28,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.3 - 
+echo # v2.3 - Add system32 and powershell variables for some bug fix. Correct true names for system32 files (optional work).
 echo.
 echo ..........................................................
 echo.
@@ -59,5 +59,5 @@ if %dcho%==f call "%nowpath%\PreviousVerNotes.bat"
 if %dcho%==G call "%nowpath%\Exit.bat"
 if %dcho%==g call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto DETAILS

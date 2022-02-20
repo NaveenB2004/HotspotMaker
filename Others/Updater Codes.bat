@@ -14,7 +14,7 @@ echo.
 ::licesnce
 echo UnRAR Licence (copy) @
 echo https://pastebin.com/raw/9y3G331h
-timeout 6
+%timeout% 6
 ::steps
 ::download files
 echo [Step 1 of 3]
@@ -76,7 +76,7 @@ echo Installation Compleated!
 echo.
 echo (Redirecting to next step...)
 echo.
-timeout 20
+%timeout% 20
 goto FINALRESULT
 
 :FINALRESULT

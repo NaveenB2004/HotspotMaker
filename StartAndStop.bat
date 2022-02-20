@@ -46,7 +46,7 @@ if %startcho%==c call "%nowpath%\Details.bat"
 if %startcho%==D call "%nowpath%\Exit.bat"
 if %startcho%==d call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto START
 
 :DEFSTART
@@ -65,9 +65,9 @@ echo.
 echo Starting hotspot as SSID (name)- %hotspotname% Password- %hotspotpassword%
 echo .........................................................
 ::set ssid and password
-netsh wlan set hostednetwork mode=allow ssid="%hotspotname%" key="%hotspotpassword%"
+%rootpath%\netsh.exe wlan set hostednetwork mode=allow ssid="%hotspotname%" key="%hotspotpassword%"
 ::start hotspot
-netsh wlan start hostednetwork
+%rootpath%\netsh.exe wlan start hostednetwork
 echo.
 ::little instructions
 echo # Go to Details when wizard shows network starting problems #
@@ -87,7 +87,7 @@ if %sccho%==d call "%nowpath%\Details.bat"
 if %sccho%==E call "%nowpath%\Exit.bat"
 if %sccho%==e call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto START
 
 :STOP
@@ -114,7 +114,7 @@ if %stopcho%==c call "%nowpath%\Details.bat"
 if %stopcho%==D call "%nowpath%\Exit.bat"
 if %stopcho%==d call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto STOP
 
 :STOPCONTINUE
@@ -128,7 +128,7 @@ echo.
 ::steps
 echo Stopping the hotspot...
 ::stop hotspot
-netsh wlan stop hostednetwork
+%rootpath%\netsh.exe wlan stop hostednetwork
 echo.
 ::user choicess
 echo A - Home&echo B - Details&echo C - Exit
@@ -141,5 +141,5 @@ if %stccho%==b call "%nowpath%\Details.bat"
 if %stccho%==C call "%nowpath%\Exit.bat"
 if %stccho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 call "%nowpath%\Home.bat"

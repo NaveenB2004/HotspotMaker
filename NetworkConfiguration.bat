@@ -34,7 +34,7 @@ if %netconfigcho%==h goto CHOSTNAME
 if %netconfigcho%==I call "%nowpath%\Exit.bat"
 if %netconfigcho%==i call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto NETCONFIG
 
 :CHOSTNAME
@@ -49,7 +49,7 @@ echo.
 echo Working...
 echo.
 ::command
-hostname>"%path%\chostname.ini"
+%rootpath%\HOSTNAME.EXE>"%path%\chostname.ini"
 set/p hostname=<"%path%\chostname.ini"
 del "%path%\chostname.ini"
 echo Computer Hostname: %hostname%
@@ -68,7 +68,7 @@ if %rniacho%==b goto NETCONFIG
 if %rniacho%==C call "%nowpath%\Exit.bat"
 if %rniacho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto CHOSTNAME
 
 :RNIA
@@ -82,9 +82,9 @@ echo.
 ::comments
 echo Working...
 ::release ip
-ipconfig /release
+%rootpath%\ipconfig /release
 ::renew ip
-ipconfig /renew
+%rootpath%\ipconfig /renew
 echo Compleated!
 echo.
 ::user choicess
@@ -98,7 +98,7 @@ if %rniacho%==b goto NETCONFIG
 if %rniacho%==C call "%nowpath%\Exit.bat"
 if %rniacho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto NETCONFIG
 
 :NCWINDOW
@@ -112,7 +112,7 @@ echo.
 ::comments
 echo Please wait for open the Network Connection window...
 ::network connection windows command
-ncpa.cpl
+%rootpath%\ncpa.cpl
 echo Compleated!
 echo.
 ::user choicess
@@ -126,7 +126,7 @@ if %ncwindowcho%==b goto NETCONFIG
 if %ncwindowcho%==C call "%nowpath%\Exit.bat"
 if %ncwindowcho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto NETCONFIG
 
 :PINGTEST
@@ -146,7 +146,7 @@ echo # Value 0 to 4294967295 #
 set/p "pingcount=>"
 echo.
 ::ping command
-ping %pingaddress% -n %pingcount%
+%rootpath%\PING.EXE %pingaddress% -n %pingcount%
 echo.
 ::user choicess
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
@@ -159,7 +159,7 @@ if %ipconfigcho%==b goto NETCONFIG
 if %ipconfigcho%==C call "%nowpath%\Exit.bat"
 if %ipconfigcho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto PINGTEST
 
 :IPCONFIGURATION
@@ -187,7 +187,7 @@ if %ipconfigcho%==b goto NETCONFIG
 if %ipconfigcho%==C call "%nowpath%\Exit.bat"
 if %ipconfigcho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto IPCONFIGURATION
 
 :NETSTATUS
@@ -201,9 +201,9 @@ echo.
 ::steps
 echo Starting network status...
 ::hostednetwork details command
-netsh wlan show hostednetwork
+%rootpath%\netsh.exe wlan show hostednetwork
 ::hostednetwork details command (security)
-netsh wlan show hostednetwork setting=security
+%rootpath%\netsh.exe wlan show hostednetwork setting=security
 echo Compleated.
 echo.
 ::user choicess
@@ -217,7 +217,7 @@ if %netstatuscho%==b goto NETCONFIG
 if %netstatuscho%==C call "%nowpath%\Exit.bat"
 if %netstatuscho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto NETSTATUS
 
 :GETPUBIP
@@ -252,7 +252,7 @@ if %netstatuscho%==b goto NETCONFIG
 if %netstatuscho%==C call "%nowpath%\Exit.bat"
 if %netstatuscho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto PUBIP
 
 :PUBIPSTART
@@ -277,5 +277,5 @@ if %netstatuscho%==b goto NETCONFIG
 if %netstatuscho%==C call "%nowpath%\Exit.bat"
 if %netstatuscho%==c call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
-timeout 6
+%timeout% 6
 goto PUBIP
