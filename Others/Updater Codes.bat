@@ -1,4 +1,15 @@
 :UPHOME
+::temp path
+set path=C:\ProgramData\HotspotMakerData
+::working path
+set/p nowpath=<"%path%\nowpath.ini"
+del "%path%\nowpath.ini"
+::fix environmet errors
+set powershell=%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\powershell.exe
+set rootpath=%SYSTEMROOT%\System32
+set timeout=%rootpath%\timeout.exe
+::for previous versions
+if not exist "%path%\updates" md "%path%\updates"
 ::remove leftovers
 if exist "%path%\updates\NewVersion.rar" del "%path%\updates\UnRAR.exe"
 if exist "%path%\updates\UnRAR.exe" del "%path%\updates\NewVersion.rar"

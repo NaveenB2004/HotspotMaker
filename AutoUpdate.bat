@@ -59,7 +59,7 @@ echo.
 echo Setting Auto Update for Hotspot Maker...
 echo (Please wait...)
 ::shedule task to run at computer startup
-SCHTASKS /CREATE /SC ONLOGON /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
+%rootpath%\schtasks.exe /CREATE /SC ONLOGON /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo ECS>"%path%\AutoUpdate.nnb"
 echo Compleated!
@@ -98,7 +98,7 @@ echo.
 echo Setting Auto Update for Hotspot Maker...
 echo (Please wait...)
 ::shedule task to run at computer startup
-SCHTASKS /CREATE /SC DAILY /ST %dailyuptime% /MO %dailyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
+%rootpath%\schtasks.exe /CREATE /SC DAILY /ST %dailyuptime% /MO %dailyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo DAILY>"%path%\AutoUpdate.nnb"
 echo Compleated!
@@ -138,7 +138,7 @@ echo.
 echo Setting Auto Update for Hotspot Maker...
 echo (Please wait...)
 ::shedule task to run at computer startup
-SCHTASKS /CREATE /SC WEEKLY /D %weeklyupday% /MO %weeklyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
+%rootpath%\schtasks.exe /CREATE /SC WEEKLY /D %weeklyupday% /MO %weeklyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo WEEKLY>"%path%\AutoUpdate.nnb"
 echo Compleated!
@@ -177,7 +177,7 @@ echo.
 echo Setting Auto Update for Hotspot Maker...
 echo (Please wait...)
 ::shedule task to run at computer startup
-SCHTASKS /CREATE /SC MONTHLY /D %monthlyupdate% /MO %monthupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
+%rootpath%\schtasks.exe /CREATE /SC MONTHLY /D %monthlyupdate% /MO %monthupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo MONTHLY>"%path%\AutoUpdate.nnb"
 echo Compleated!
@@ -240,7 +240,7 @@ echo %rorc% Auto Update for Hotspot Maker...
 echo (Please wait...)
 ::remove sheduled task
 echo Press [Y] and [ENTER] to continue...
-SCHTASKS /DELETE /TN "HotspotMaker\AutoUpdate"
+%rootpath%\schtasks.exe /DELETE /TN "HotspotMaker\AutoUpdate"
 ::remove generated true file for true oparation
 del "%path%\AutoUpdate.nnb"
 %timeout% 5

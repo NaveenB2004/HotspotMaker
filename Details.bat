@@ -15,7 +15,7 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo .......................(11.02.2022).......................
+echo .......................(20.02.2022).......................
 echo.
 ::contack information
 echo Created by: Naveen Balasooriya
@@ -28,7 +28,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.4 - Set default window and buffer sizes.
+echo # v2.3 - Set default window and buffer sizes. Bug fix (task shedule for auto update chaeck environment variable error, updater codes error), Improve auto update check.
 echo.
 echo ..........................................................
 echo.
