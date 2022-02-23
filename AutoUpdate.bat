@@ -3,6 +3,9 @@
 ::https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks
 
 :AUTOUPDATE
+::change one line color steps (01)
+SETLOCAL EnableDelayedExpansion
+for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1) do rem"') do (set "DEL=%%a")
 ::check autoupdate setup
 if EXIST "%path%\AutoUpdate.nnb" set/p autupdatesavecho=<"%path%\AutoUpdate.nnb" &goto AUTOUPDATETRUE
 if NOT EXIST "%path%\AutoUpdate.nnb" goto AUTOUPDATEFALSE
@@ -21,8 +24,11 @@ echo.
 echo Hotspot Maker Auto Update...
 echo You can setup auto update option for Hotspot Maker.
 echo If you setup this option,
-echo    the Hotspot Maker will check and download updates when you loged in.
-echo THE UPDATER WILL NOT WORK WHILE YOU ARE WORKING ON BATTERY POWER
+echo    the Hotspot Maker will check updates when you loged in.
+::the down line will show with the body color light green (start line)
+call :colorEcho a0 "THE UPDATER WILL NOT WORK WHILE YOU ARE WORKING ON BATTERY POWER"
+echo.
+::(end line)
 echo.
 echo Do you wish to continue...?
 echo.
@@ -260,3 +266,10 @@ if %ausetuptcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 %timeout% 6
 call "%nowpath%\Home.bat"
+
+::change one line color steps (02)
+:colorEcho
+echo off
+<nul set /p ".=%DEL%" > "%~2"
+%rootpath%\findstr.exe /v /a:%1 /R "^$" "%~2" nul
+del "%~2" > nul 2>&1i
