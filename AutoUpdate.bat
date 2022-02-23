@@ -22,9 +22,7 @@ echo Hotspot Maker Auto Update...
 echo You can setup auto update option for Hotspot Maker.
 echo If you setup this option,
 echo    the Hotspot Maker will check updates when you loged in.
-::the down line will show with the body color light green (start line)
-call :colorEcho %defbgCOLORnum% "THE UPDATER WILL NOT WORK WHILE YOU ARE WORKING ON BATTERY POWER" &echo.
-::(end line)
+echo THE UPDATER WILL NOT WORK WHILE YOU ARE WORKING ON BATTERY POWER
 echo.
 echo Do you wish to continue...?
 echo.
@@ -262,11 +260,3 @@ if %ausetuptcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 %timeout% 6
 call "%nowpath%\Home.bat"
-
-::change one line color steps (02)
-::must add this for change line bg color
-:colorEcho
-echo off
-<nul set /p ".=%DEL%" > "%~2"
-%rootpath%\findstr.exe /v /a:%1 /R "^$" "%~2" nul
-del "%~2" > nul 2>&1i

@@ -8,11 +8,9 @@ echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo 
 ::tab title
 echo [ Check Updates ]
 echo.
-::the down line will show with the body color light green (start lines)
-call :colorEcho %defbgCOLORnum% "----------------------------------------------" &echo.
-call :colorEcho %defbgCOLORnum% "- THIS WIZARD ONLY CONTAINS OFFICIAL UPDATES -" &echo.
-call :colorEcho %defbgCOLORnum% "----------------------------------------------" &echo.
-::(end lines)
+echo ----------------------------------------------
+echo - THIS WIZARD ONLY CONTAINS OFFICIAL UPDATES -
+echo ----------------------------------------------
 echo.
 echo Standalones available at https://github.com/naveenb2004/HotspotMaker
 echo.
@@ -25,11 +23,3 @@ echo Please wait a moment...
 %timeout% 10
 ::switch to 'Updater.bat'
 call "%nowpath%\Updater.bat"
-
-::change one line color steps (02)
-::must add this for change line bg color
-:colorEcho
-echo off
-<nul set /p ".=%DEL%" > "%~2"
-%rootpath%\findstr.exe /v /a:%1 /R "^$" "%~2" nul
-del "%~2" > nul 2>&1i
