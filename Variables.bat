@@ -15,6 +15,9 @@ set timeout=%rootpath%\timeout.exe
 if exist "%path%\UpdateMsg.vbs" del /s /q "%path%\UpdateMsg.vbs"
 ::set window size
 %powershell% -command "&{$w=(get-host).ui.rawui;$w.buffersize=@{width=100;height=300};$w.windowsize=@{width=100;height=50};}"
+::change one line color steps (01)
+SETLOCAL EnableDelayedExpansion
+for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1) do rem"') do (set "DEL=%%a")
 ::check and import color
 if EXIST "%path%\colorcode.ini" goto WIZARDSTART
 if NOT EXIST "%path%\colorcode.ini" goto COLORMAKE
@@ -28,6 +31,7 @@ goto WIZARDSTART
 :WIZARDSTART
 ::import and set color
 set/p defCOLORCODEnum=<"%path%\colorcode.ini"
+set/p defbgCOLORnum=<"%path%\colorbg.ini"
 color %defCOLORCODEnum%
 ::set credits
 SET CREDIT0=                   --------------------------------------------------------------

@@ -3,9 +3,6 @@
 ::https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks
 
 :AUTOUPDATE
-::change one line color steps (01)
-SETLOCAL EnableDelayedExpansion
-for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1) do rem"') do (set "DEL=%%a")
 ::check autoupdate setup
 if EXIST "%path%\AutoUpdate.nnb" set/p autupdatesavecho=<"%path%\AutoUpdate.nnb" &goto AUTOUPDATETRUE
 if NOT EXIST "%path%\AutoUpdate.nnb" goto AUTOUPDATEFALSE
@@ -26,8 +23,7 @@ echo You can setup auto update option for Hotspot Maker.
 echo If you setup this option,
 echo    the Hotspot Maker will check updates when you loged in.
 ::the down line will show with the body color light green (start line)
-call :colorEcho a0 "THE UPDATER WILL NOT WORK WHILE YOU ARE WORKING ON BATTERY POWER"
-echo.
+call :colorEcho %defbgCOLORnum% "THE UPDATER WILL NOT WORK WHILE YOU ARE WORKING ON BATTERY POWER" &echo.
 ::(end line)
 echo.
 echo Do you wish to continue...?
@@ -268,6 +264,7 @@ echo invalid choice... Try again...
 call "%nowpath%\Home.bat"
 
 ::change one line color steps (02)
+::must add this for change line bg color
 :colorEcho
 echo off
 <nul set /p ".=%DEL%" > "%~2"
