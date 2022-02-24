@@ -65,7 +65,7 @@ echo Internet connection : OK!
 echo.
 echo Checking new versions...
 echo.
-%timeout% 5
+%timeout% 3 >nul
 ::new version check (compare)
 if %tempversion% LEQ %version% goto THSISILAST
 if not %tempversion% LEQ %version% goto NEWAVILABLE

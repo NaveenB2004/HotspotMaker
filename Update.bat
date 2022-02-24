@@ -19,7 +19,7 @@ ver
 ::steps
 echo Checking Updates...
 echo (You are running on v%version%)
-echo Please wait a moment...
+echo.
 %timeout% 10
 ::switch to 'Updater.bat'
 call "%nowpath%\Updater.bat"
