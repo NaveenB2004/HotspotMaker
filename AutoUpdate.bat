@@ -62,6 +62,7 @@ echo (Please wait...)
 %rootpath%\schtasks.exe /CREATE /SC ONLOGON /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo ECS>"%path%\AutoUpdate.nnb"
+::make invisible run file for run updater invisiblelly
 set backstep=ESC
 goto INVISIBLECODE
 echo Compleated!
@@ -103,6 +104,7 @@ echo (Please wait...)
 %rootpath%\schtasks.exe /CREATE /SC DAILY /ST %dailyuptime% /MO %dailyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo DAILY>"%path%\AutoUpdate.nnb"
+::make invisible run file for run updater invisiblelly
 set backstep=DAILY
 goto INVISIBLECODE
 echo Compleated!
@@ -145,6 +147,7 @@ echo (Please wait...)
 %rootpath%\schtasks.exe /CREATE /SC WEEKLY /D %weeklyupday% /MO %weeklyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo WEEKLY>"%path%\AutoUpdate.nnb"
+::make invisible run file for run updater invisiblelly
 set backstep=WEEKLY
 goto INVISIBLECODE
 echo Compleated!
@@ -186,6 +189,7 @@ echo (Please wait...)
 %rootpath%\schtasks.exe /CREATE /SC MONTHLY /D %monthlyupdate% /MO %monthupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo MONTHLY>"%path%\AutoUpdate.nnb"
+::make invisible run file for run updater invisiblelly
 set backstep=MONTHLY
 goto INVISIBLECODE
 echo Compleated!
@@ -249,6 +253,8 @@ echo (Please wait...)
 ::remove sheduled task
 echo Press [Y] and [ENTER] to continue...
 %rootpath%\schtasks.exe /DELETE /TN "HotspotMaker\AutoUpdate"
+::remove invisible run vbs
+del "%nowpath%\InvisibleUpdateChecker.vbs"
 ::remove generated true file for true oparation
 del "%path%\AutoUpdate.nnb"
 %timeout% 5
@@ -270,5 +276,7 @@ echo invalid choice... Try again...
 call "%nowpath%\Home.bat"
 
 :INVISIBLECODE
+::invisible update checker is a vbs file for run update checker invisibelly
+::it will help to user to not destroy his/her forcus
 echo CreateObject("Wscript.Shell").Run """" & WScript.Arguments(0) & """", 0, False >"%nowpath%\InvisibleUpdateChecker.vbs"
 goto %backstep%
