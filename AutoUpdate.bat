@@ -62,6 +62,8 @@ echo (Please wait...)
 %rootpath%\schtasks.exe /CREATE /SC ONLOGON /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo ECS>"%path%\AutoUpdate.nnb"
+set backstep=ESC
+goto INVISIBLECODE
 echo Compleated!
 echo.
 ::user choicess
@@ -101,6 +103,8 @@ echo (Please wait...)
 %rootpath%\schtasks.exe /CREATE /SC DAILY /ST %dailyuptime% /MO %dailyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo DAILY>"%path%\AutoUpdate.nnb"
+set backstep=DAILY
+goto INVISIBLECODE
 echo Compleated!
 echo.
 ::user choicess
@@ -141,6 +145,8 @@ echo (Please wait...)
 %rootpath%\schtasks.exe /CREATE /SC WEEKLY /D %weeklyupday% /MO %weeklyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo WEEKLY>"%path%\AutoUpdate.nnb"
+set backstep=WEEKLY
+goto INVISIBLECODE
 echo Compleated!
 echo.
 ::user choicess
@@ -180,6 +186,8 @@ echo (Please wait...)
 %rootpath%\schtasks.exe /CREATE /SC MONTHLY /D %monthlyupdate% /MO %monthupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo MONTHLY>"%path%\AutoUpdate.nnb"
+set backstep=MONTHLY
+goto INVISIBLECODE
 echo Compleated!
 echo.
 ::user choicess
@@ -260,3 +268,7 @@ if %ausetuptcho%==b call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 %timeout% 6
 call "%nowpath%\Home.bat"
+
+:INVISIBLECODE
+echo CreateObject("Wscript.Shell").Run """" & WScript.Arguments(0) & """", 0, False >"%nowpath%\InvisibleUpdateChecker.vbs"
+goto %backstep%
