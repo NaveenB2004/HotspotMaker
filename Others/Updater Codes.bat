@@ -51,7 +51,7 @@ if not exist "%path%\updates\NewVersion.rar" goto UPHOME
 if not exist "%path%\updates\UnRAR.exe" goto UPHOME
 ::compleated
 echo Download compleated!
-timeout 3 >nul
+%timeout% 3 >nul
 ::title
 title %title%
 echo.
@@ -65,7 +65,7 @@ copy "%nowpath%\unins000.exe" "%path%\updates"
 ::remove previous installation
 del /s /q "%nowpath%"
 echo Remove compleated!
-timeout 3 >nul
+%timeout% 3 >nul
 echo.
 ::steps
 echo [Step 3 of 3]
@@ -105,5 +105,6 @@ echo Installation successfully compleated!
 echo Installed version is v%tempversion%
 echo.
 pause
+cls
 ::switch to 'Startup.bat'
 call "%nowpath%\Startup.bat"
