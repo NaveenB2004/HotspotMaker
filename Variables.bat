@@ -1,3 +1,6 @@
+cls
+goto VARIABLES
+
 :VARIABLES
 ::working path
 echo Loading path variables...

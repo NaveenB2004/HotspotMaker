@@ -15,20 +15,19 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo .......................(28.02.2022).......................
+echo .......................(25.03.2022).......................
 echo.
 ::contack information
 echo Created by: Naveen Balasooriya
 echo Contact me: naveennbalasooriya2004@gmail.com      (Email)
 echo             https://t.me/NaveenB2004              (Telegram)
-echo             https://wa.me/message/KP75DUMMIKMTC1  (Whatsapp)
 echo Visit my website: https://sites.google.com/sites/naveenb2004
 echo ..........................................................
 echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.4 - Minor improvements with bug fixes.
+echo # v2.5 - Code file checking system for dicrease errors while modules loading (Startup.bat).
 echo.
 echo ..........................................................
 echo.

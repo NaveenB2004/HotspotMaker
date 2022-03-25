@@ -36,7 +36,9 @@ echo # v2.2 - Fix error while getting infomation from internet on some computers
 echo.
 echo # v2.3 - Set default window and buffer sizes. Bugfix (task schedule for auto-update check environment variable error, updater codes error), Improve auto-update check.
 echo.
-echo # v2.4 (this) - Minor improvements with bug fixes.
+echo # v2.4 - Minor improvements with bug fixes.
+echo.
+echo # v2.5 (this) - Code file checking system for dicrease errors while modules loading (Startup.bat).
 echo.
 echo ..........................................................
 echo.

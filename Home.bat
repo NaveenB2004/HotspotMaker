@@ -15,6 +15,7 @@ echo [ Home ]
 echo.
 ::little instructions
 echo #Go to Details for Check new versions and change the Font color of the Wizard#
+if %version%==TEMP echo ** Some files are currepted. You need to update the wizard immediately. **
 echo.
 ::user choicess
 echo A - Start Hotspot&echo B - Stop Hotspot&echo C - Network Configuration&echo D - Set Default SSID and Password&echo E - Details&echo F - Exit
