@@ -10,29 +10,102 @@ set/p checkcount=<"C:\ProgramData\HotspotMakerData\modules.ini"
 
 :TESTING
 cls
-if %checkcount%==4 (
+if %checkcount%==4 (goto MODULECHECK) else (set/a %checkcount%=%checkcount%+1&echo %checkcount%>"C:\ProgramData\HotspotMakerData\modules.ini")
+
+:MODULECHECK
 title Hotspot Maker - Modules Check
 echo Checking modules...
 set errors=0
 echo.
-if exist "%nowpath%\AutoUpdate.bat" (
-	echo AutoUpdate.bat found!
-) else (
-	echo AutoUpdate.bat not found!
-	set/a %errors%=%errors%+1
-	if %fixneed%==1 
-	(
+
+if exist "%nowpath%\AutoUpdate.bat"				(echo AutoUpdate.bat found!)			else (echo AutoUpdate.bat not found!			&set/a %errors%=%errors%+1)	
+if exist "%nowpath%\Colors.bat"					(echo Colors.bat found!)				else (echo Colors.bat not found!				&set/a %errors%=%errors%+1)
+if exist "%nowpath%\Details.bat"				(echo Details.bat found!)				else (echo Details.bat not found!				&set/a %errors%=%errors%+1)
+if exist "%nowpath%\Exit.bat"					(echo Exit.bat found!)					else (echo Exit.bat not found!					&set/a %errors%=%errors%+1)
+if exist "%nowpath%\Home.bat"					(echo Home.bat found!)					else (echo Home.bat not found!					&set/a %errors%=%errors%+1)
+if exist "%nowpath%\MiniUpdater.bat"			(echo MiniUpdater.bat found!)			else (echo MiniUpdater.bat not found!			&set/a %errors%=%errors%+1)
+if exist "%nowpath%\MiniUpdaterWorker.bat"		(echo MiniUpdaterWorker.bat found!)		else (echo MiniUpdaterWorker.bat not found!		&set/a %errors%=%errors%+1)
+if exist "%nowpath%\NetworkConfiguration.bat"	(echo NetworkConfiguration.bat found!)	else (echo NetworkConfiguration.bat not found!	&set/a %errors%=%errors%+1)
+if exist "%nowpath%\PreviouseVerNotes.bat"		(echo PreviouseVerNotes.bat found!)		else (echo PreviouseVerNotes.bat not found!		&set/a %errors%=%errors%+1)
+if exist "%nowpath%\SaveCredits.bat"			(echo SaveCredits.bat found!)			else (echo SaveCredits.bat not found!			&set/a %errors%=%errors%+1)
+if exist "%nowpath%\Solves.bat"					(echo Solves.bat found!)				else (echo Solves.bat not found!				&set/a %errors%=%errors%+1)
+if exist "%nowpath%\StartAndStop.bat"			(echo StartAndStop.bat found!)			else (echo StartAndStop.bat not found!			&set/a %errors%=%errors%+1)
+if exist "%nowpath%\Update.bat"					(echo Update.bat found!)				else (echo Update.bat not found!				&set/a %errors%=%errors%+1)
+if exist "%nowpath%\Updater.bat"				(echo Updater.bat found!)				else (echo Updater.bat not found!				&set/a %errors%=%errors%+1)
+if exist "%nowpath%\Variables.bat"				(echo Variables.bat found!)				else (echo Variables.bat not found!				&set/a %errors%=%errors%+1)
+if exist "%nowpath%\Version.ini"				(echo Version.ini found!)				else (echo Version.ini not found!				&set/a %errors%=%errors%+1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	if %fixneed%==1
 		For /f %%A in (
   		'%powershell% -command "(Invoke-Webrequest -UseBasicParsing "%pastbin%We125R88").content"'
 		) Do Set downloadlink=%%A
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile AutoUpdate.bat"
-	)
-)
-if exist "%nowpath%\Colors.bat" (
-	echo Colors.bat found!
-) else (
-	echo Colors.bat not found!
-	set/a %errors%=%errors%+1
+
+
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -41,11 +114,7 @@ if exist "%nowpath%\Colors.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile Colors.bat"
 	)
 )
-if exist "%nowpath%\Details.bat" (
-	echo Details.bat found!
-) else (
-	echo Details.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -54,11 +123,7 @@ if exist "%nowpath%\Details.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile Details.bat"
 	)
 )
-if exist "%nowpath%\Exit.bat" (
-	echo Exit.bat found!
-) else (
-	echo Exit.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -67,11 +132,7 @@ if exist "%nowpath%\Exit.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile Exit.bat"
 	)
 )
-if exist "%nowpath%\Home.bat" (
-	echo Home.bat found!
-) else (
-	echo Home.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -80,11 +141,7 @@ if exist "%nowpath%\Home.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile Home.bat"
 	)
 )
-if exist "%nowpath%\MiniUpdater.bat" (
-	echo MiniUpdater.bat found!
-) else (
-	echo MiniUpdater.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -93,11 +150,7 @@ if exist "%nowpath%\MiniUpdater.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile MiniUpdater.bat"
 	)
 )
-if exist "%nowpath%\MiniUpdaterWorker.bat" (
-	echo MiniUpdaterWorker.bat found!
-) else (
-	echo MiniUpdaterWorker.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -106,11 +159,7 @@ if exist "%nowpath%\MiniUpdaterWorker.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile MiniUpdaterWorker.bat"
 	)
 )
-if exist "%nowpath%\NetworkConfiguration.bat" (
-	echo NetworkConfiguration.bat found!
-) else (
-	echo NetworkConfiguration.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -119,11 +168,7 @@ if exist "%nowpath%\NetworkConfiguration.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile NetworkConfiguration.bat"
 	)
 )
-if exist "%nowpath%\PreviouseVerNotes.bat" (
-	echo PreviouseVerNotes.bat found!
-) else (
-	echo PreviouseVerNotes.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -132,11 +177,7 @@ if exist "%nowpath%\PreviouseVerNotes.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile PreviouseVerNotes.bat"
 	)
 )
-if exist "%nowpath%\SaveCredits.bat" (
-	echo SaveCredits.bat found!
-) else (
-	echo SaveCredits.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -145,11 +186,7 @@ if exist "%nowpath%\SaveCredits.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile SaveCredits.bat"
 	)
 )
-if exist "%nowpath%\Solves.bat" (
-	echo Solves.bat found!
-) else (
-	echo Solves.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -158,11 +195,7 @@ if exist "%nowpath%\Solves.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile Solves.bat"
 	)
 )
-if exist "%nowpath%\StartAndStop.bat" (
-	echo StartAndStop.bat found!
-) else (
-	echo StartAndStop.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -171,11 +204,7 @@ if exist "%nowpath%\StartAndStop.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile StartAndStop.bat"
 	)
 )
-if exist "%nowpath%\Update.bat" (
-	echo Update.bat found!
-) else (
-	echo Update.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -184,11 +213,7 @@ if exist "%nowpath%\Update.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile Update.bat"
 	)
 )
-if exist "%nowpath%\Updater.bat" (
-	echo Updater.bat found!
-) else (
-	echo Updater.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -197,11 +222,7 @@ if exist "%nowpath%\Updater.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile Updater.bat"
 	)
 )
-if exist "%nowpath%\Variables.bat" (
-	echo Variables.bat found!
-) else (
-	echo Variables.bat not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -210,12 +231,7 @@ if exist "%nowpath%\Variables.bat" (
 		%powershell% -Command "Invoke-WebRequest -UseBasicParsing %gdrivelink% -Outfile Variables.bat"
 	)
 )
-if exist "%nowpath%\Version.ini" (
-	echo Version.ini found!
-	if not %errors%==0 echo TEMP >"%nowpath%\Version.ini"
-) else (
-	echo Version.ini not found!
-	set/a %errors%=%errors%+1
+
 	if %fixneed%==1 
 	(
 		For /f %%A in (
@@ -227,14 +243,7 @@ if exist "%nowpath%\Version.ini" (
 echo.
 if %fixneed%==1 goto TESTING
 echo Total modules errors found - %errors%
-if %errors%==0 (
-	echo 0 >"C:\ProgramData\HotspotMakerData\modules.ini"
-) else (
- goto FIX )
-) else (
-set/a %checkcount%=%checkcount%+1
-echo %checkcount% >"C:\ProgramData\HotspotMakerData\modules.ini"
-)
+if %errors%==0 (echo 0 >"C:\ProgramData\HotspotMakerData\modules.ini") else (goto FIX)
 
 :FIX
 echo.
