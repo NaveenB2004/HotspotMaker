@@ -125,8 +125,6 @@ echo invalid choice... Try again...
 goto NEWAVILABLE
 
 :INSTALLATION
-::save working path
-echo %nowpath%>>"%path%\nowpath.ini"
 ::clear before outputs
 cls
 ::credits
