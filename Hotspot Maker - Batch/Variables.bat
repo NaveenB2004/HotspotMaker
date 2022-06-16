@@ -22,7 +22,7 @@ set timeout=%rootpath%\timeout.exe
 if exist "%path%\UpdateMsg.vbs" del /s /q "%path%\UpdateMsg.vbs"
 ::set window size
 echo Setting window sizes...
-%powershell% -command "&{$w=(get-host).ui.rawui;$w.buffersize=@{width=100;height=300};$w.windowsize=@{width=100;height=50};}"
+%powershell% -command "&{$w=(get-host).ui.rawui;$w.buffersize=@{width=80;height=500};$w.windowsize=@{width=80;height=35};}"
 ::check and import color
 echo Checking font colors...
 if EXIST "%path%\colorcode.ini" goto WIZARDSTART
@@ -43,15 +43,15 @@ set/p defbgCOLORnum=<"%path%\colorbg.ini"
 color %defCOLORCODEnum%
 ::set credits
 echo Setting credit variables...
-SET CREDIT0=                   --------------------------------------------------------------
-SET CREDIT1=                   **************************************************************
-SET CREDIT2=                   ***                                                        ***
-SET CREDIT3=                   ***                   (:  -WELCOME-  :)                    ***
-SET CREDIT4=                   ***   : Hotspot Creating Wizard for Windows 8/10(v%version%)  :  ***
-SET CREDIT5=                   ***                 - Open Source Project -                ***
-SET CREDIT6=                   ***                                                        ***
-SET CREDIT7=                   **************************************************************
-SET CREDIT8=                   --------------------------------------------------------------
+SET CREDIT0=         --------------------------------------------------------------
+SET CREDIT1=         **************************************************************
+SET CREDIT2=         ***                                                        ***
+SET CREDIT3=         ***                   (:  -WELCOME-  :)                    ***
+SET CREDIT4=         ***   : Hotspot Creating Wizard for Windows 8/10(v%version%)  :  ***
+SET CREDIT5=         ***                 - Open Source Project -                ***
+SET CREDIT6=         ***                                                        ***
+SET CREDIT7=         **************************************************************
+SET CREDIT8=         --------------------------------------------------------------
 ::check default username and password
 echo Checking default username and password...
 echo Load compleated!

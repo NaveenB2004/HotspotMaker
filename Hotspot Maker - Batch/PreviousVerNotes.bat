@@ -38,7 +38,9 @@ echo # v2.3 - Set default window and buffer sizes. Bugfix (task schedule for aut
 echo.
 echo # v2.4 - Minor improvements with bug fixes.
 echo.
-echo # v2.5 (this) - Code file checking system for dicrease errors while modules loading (Startup.bat).
+echo # v2.5 - Code file checking system for dicrease errors while modules loading (Startup.bat).
+echo.
+echo # v2.6 (this) - 
 echo.
 echo ..........................................................
 echo.
