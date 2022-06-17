@@ -20,6 +20,7 @@ public class MainInterface extends javax.swing.JFrame {
      */
     public MainInterface() {
         initComponents();
+        stopbutton.setEnabled(false);
     }
 
     /**
@@ -38,8 +39,8 @@ public class MainInterface extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        startbutton = new javax.swing.JButton();
+        stopbutton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -79,14 +80,19 @@ public class MainInterface extends javax.swing.JFrame {
 
         jLabel3.setText("Password:");
 
-        jButton1.setText("Start");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        startbutton.setText("Start");
+        startbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                startbuttonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Stop");
+        stopbutton.setText("Stop");
+        stopbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopbuttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -106,9 +112,9 @@ public class MainInterface extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(stopbutton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(startbutton)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -126,8 +132,8 @@ public class MainInterface extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2)))
+                        .addComponent(startbutton)
+                        .addComponent(stopbutton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -217,7 +223,9 @@ public class MainInterface extends javax.swing.JFrame {
         info.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void startbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startbuttonActionPerformed
+        startbutton.setEnabled(false);
+        
         try {
         ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call D:\\aaa.bat");
         processBuilder.redirectErrorStream(true);
@@ -230,8 +238,15 @@ public class MainInterface extends javax.swing.JFrame {
         }                
     } catch (Exception e) {
         e.printStackTrace();
-    }       
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }      
+        stopbutton.setEnabled(true);
+    }//GEN-LAST:event_startbuttonActionPerformed
+
+    private void stopbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopbuttonActionPerformed
+        // TODO add your handling code here:
+        stopbutton.setEnabled(false);
+        startbutton.setEnabled(true);
+    }//GEN-LAST:event_stopbuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,8 +285,6 @@ public class MainInterface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea console;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -284,5 +297,7 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton startbutton;
+    private javax.swing.JButton stopbutton;
     // End of variables declaration//GEN-END:variables
 }
