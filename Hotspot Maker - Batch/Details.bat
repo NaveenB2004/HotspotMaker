@@ -27,7 +27,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.6 (CLI) - Break versions as CLI Version and GUI Version (For more info. visit the website). Renew window and buffer sizes. Add codes for costum renew window and buffer sizes.
+echo # v2.6 (CLI) - Break versions as CLI Version and GUI Version (For more information visit the website).
 echo.
 echo ..........................................................
 echo.
@@ -39,7 +39,7 @@ echo.
 if EXIST "%path%\AutoUpdate.nnb" set autupdatestat=ON
 if NOT EXIST "%path%\AutoUpdate.nnb" set autupdatestat=OFF
 ::user choicess
-echo A - Home&echo B - Check Updates&echo C - Setup Auto Update (Status: %autupdatestat%)&echo D - Change Font Color&echo E - Set Window size&echo F - Hotspot Problems&echo G - Full Version History&echo H - Exit
+echo A - Home&echo B - Check Updates&echo C - Setup Auto Update (Status: %autupdatestat%)&echo D - Change Font Color&echo E - Hotspot Problems&echo F - Full Version History&echo G - Exit
 echo.
 ::when you change the dcho, look AutoUpdate.bat and change it
 set/p "dcho=>"
@@ -51,14 +51,12 @@ if %dcho%==C call "%nowpath%\AutoUpdate.bat"
 if %dcho%==c call "%nowpath%\AutoUpdate.bat"
 if %dcho%==D call "%nowpath%\Colors.bat"
 if %dcho%==d call "%nowpath%\Colors.bat"
-if %dcho%==E call "%nowpath%\Sizes.bat"
-if %dcho%==e call "%nowpath%\Sizes.bat"
-if %dcho%==F call "%nowpath%\Solves.bat"
-if %dcho%==f call "%nowpath%\Solves.bat"
-if %dcho%==G call "%nowpath%\PreviousVerNotes.bat"
-if %dcho%==g call "%nowpath%\PreviousVerNotes.bat"
-if %dcho%==H call "%nowpath%\Exit.bat"
-if %dcho%==h call "%nowpath%\Exit.bat"
+if %dcho%==E call "%nowpath%\Solves.bat"
+if %dcho%==e call "%nowpath%\Solves.bat"
+if %dcho%==F call "%nowpath%\PreviousVerNotes.bat"
+if %dcho%==f call "%nowpath%\PreviousVerNotes.bat"
+if %dcho%==G call "%nowpath%\Exit.bat"
+if %dcho%==g call "%nowpath%\Exit.bat"
 echo invalid choice... Try again...
 %timeout% 6
 goto DETAILS
