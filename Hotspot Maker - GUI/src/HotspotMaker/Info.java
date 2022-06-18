@@ -56,7 +56,7 @@ public class Info extends javax.swing.JFrame {
 
         jTextPane1.setEditable(false);
         jTextPane1.setFont(new java.awt.Font("Sitka Display", 0, 12)); // NOI18N
-        jTextPane1.setText("Stable Edition\n11.04.2022\n\nCreated by: Naveen Balasooriya\nContact me: naveennbalasooriya2004@gmail.com      (Email)\n                       https://t.me/NaveenB2004                  (Telegram)\nVisit my website: https://sites.google.com/sites/naveenb2004\n\nDownload Available @\nhttps://github.com/naveenb2004/HotspotMaker");
+        jTextPane1.setText("Stable Edition\n18.06.2022\n\nCreated by: Naveen Balasooriya\nContact me: naveennbalasooriya2004@gmail.com      (Email)\n                       https://t.me/NaveenB2004                  (Telegram)\nVisit my website: https://sites.google.com/sites/naveenb2004\n\nDownload Available @\nhttps://github.com/naveenb2004/HotspotMaker");
         jScrollPane1.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
