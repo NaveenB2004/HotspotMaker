@@ -50,7 +50,7 @@ public class Info extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Hotspot Maker");
 
-        jLabel2.setText("CLI Version: v2.6 | GUI Version: v1.0");
+        jLabel2.setText("GUI Version: v1.0  |  CLI Version: v1.0  |  Main Release Version: v2.6");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -107,7 +107,7 @@ public class Info extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Download Page");
+        jButton2.setText("GitHub");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

@@ -112,7 +112,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CLI Version: v2.6 | GUI Version: v1.0"/>
+            <Property name="text" type="java.lang.String" value="GUI Version: v1.0  |  CLI Version: v1.0  |  Main Release Version: v2.6"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -177,7 +177,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Download Page"/>
+        <Property name="text" type="java.lang.String" value="GitHub"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
