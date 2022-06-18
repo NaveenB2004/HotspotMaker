@@ -5,9 +5,14 @@
 package HotspotMaker;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-
-
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,8 +42,8 @@ public class MainInterface extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        ssid = new javax.swing.JTextField();
+        psw = new javax.swing.JPasswordField();
         startbutton = new javax.swing.JButton();
         stopbutton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -107,8 +112,8 @@ public class MainInterface extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jPasswordField1)))
+                            .addComponent(ssid)
+                            .addComponent(psw)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -123,11 +128,11 @@ public class MainInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ssid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(psw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,28 +229,59 @@ public class MainInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void startbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startbuttonActionPerformed
-        startbutton.setEnabled(false);
-        
-        try {
-        ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call D:\\aaa.bat");
-        processBuilder.redirectErrorStream(true);
-        Process p = processBuilder.start();
-        p.waitFor();        
-        String line = null;
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        while((line = bufferedReader.readLine()) != null) {
-            console.append(line + "\n");
-        }                
-    } catch (Exception e) {
-        e.printStackTrace();
-    }      
-        stopbutton.setEnabled(true);
+        console.setText("");
+        String name = ssid.getText();
+        String password = String.valueOf(psw.getPassword());
+        if (name.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "SSID or Password musn't be empty!", "Alert", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try ( PrintStream out = new PrintStream(new File("ssid.ini"))) {
+                out.println(name);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MainInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try ( PrintStream out = new PrintStream(new File("psw.ini"))) {
+                out.println(password);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MainInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call start.bat");
+                processBuilder.redirectErrorStream(true);
+                Process p = processBuilder.start();
+                p.waitFor();
+                String line = null;
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                while ((line = bufferedReader.readLine()) != null) {
+                    console.append(line + "\n");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            stopbutton.setEnabled(true);
+        }
     }//GEN-LAST:event_startbuttonActionPerformed
 
     private void stopbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopbuttonActionPerformed
         // TODO add your handling code here:
         stopbutton.setEnabled(false);
+        console.setText("");
+        try {
+                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call stop.bat");
+                processBuilder.redirectErrorStream(true);
+                Process p = processBuilder.start();
+                p.waitFor();
+                String line = null;
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                while ((line = bufferedReader.readLine()) != null) {
+                    console.append(line + "\n");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         startbutton.setEnabled(true);
+        
     }//GEN-LAST:event_stopbuttonActionPerformed
 
     /**
@@ -294,9 +330,9 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField psw;
+    private javax.swing.JTextField ssid;
     private javax.swing.JButton startbutton;
     private javax.swing.JButton stopbutton;
     // End of variables declaration//GEN-END:variables
