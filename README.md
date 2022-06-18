@@ -1,5 +1,4 @@
-![Capture](https://user-images.githubusercontent.com/95101859/174439275-b8cda2b5-264e-464c-a613-d55987bd536c.PNG)
-
+![Untitled](https://user-images.githubusercontent.com/95101859/174439428-51b3dffa-ea00-4e9d-83a3-bd4c52745025.png)
 
 Hello!
 The Hotspot Maker, made for use with Windows Operating System to start and stop hotspots with coustem settings. It is working with simple command line interface and decorated with some functions. There are some features to work with your network. But they are not advanced!
