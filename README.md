@@ -24,6 +24,6 @@ I hope you will try this out!
 - Website: https://sites.google.com/view/naveenb2004
 - IDE: Netbeans (https://netbeans.apache.org) - for Java
 - Text Editor: VS Code (https://code.visualstudio.com) - for Batch
-- Launcher EXE Converter: Launche4j (http://launch4j.sourceforge.net)
+- Launcher EXE Converter: Launch4j (http://launch4j.sourceforge.net)
 - Get Admin vbs to exe Converter: Vbs To Exe (https://github.com/Makazzz/VbsToExePortable)
 - Full Version EXE Packed: Inno Setup (https://jrsoftware.org/isinfo.php)
