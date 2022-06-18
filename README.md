@@ -1,10 +1,9 @@
-`█████████████████████████████████████████████████████████████████████████`
-`█─█─█─▄▄─█─▄─▄─█─▄▄▄▄█▄─▄▄─█─▄▄─█─▄─▄─███▄─▀█▀─▄██▀▄─██▄─█─▄█▄─▄▄─█▄─▄▄▀█`
-`█─▄─█─██─███─███▄▄▄▄─██─▄▄▄█─██─███─██████─█▄█─███─▀─███─▄▀███─▄█▀██─▄─▄█`
-`▀▄▀▄▀▄▄▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▄▀▀▀▄▄▄▄▀▀▄▄▄▀▀▀▀▄▄▄▀▄▄▄▀▄▄▀▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀`
+![Capture](https://user-images.githubusercontent.com/95101859/174439275-b8cda2b5-264e-464c-a613-d55987bd536c.PNG)
+
 
 Hello!
 The Hotspot Maker, made for use with Windows Operating System to start and stop hotspots with coustem settings. It is working with simple command line interface and decorated with some functions. There are some features to work with your network. But they are not advanced!
+
 This programe is coded with Batch scripts (CLI) & Java (GUI). I'm learning about those programming languages and also I have some knowledge more than a beginer for that.
 I hope you will try this out!
 
