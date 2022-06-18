@@ -29,7 +29,6 @@ if exist "%nowpath%\MiniUpdaterWorker.bat"    (echo MiniUpdaterWorker.bat found!
 if exist "%nowpath%\NetworkConfiguration.bat" (echo NetworkConfiguration.bat found!) else (echo NetworkConfiguration.bat not found!	&set/a errors=%errors%+1)
 if exist "%nowpath%\PreviousVerNotes.bat"     (echo PreviouseVerNotes.bat found!	  ) else (echo PreviouseVerNotes.bat not found!		&set/a errors=%errors%+1)
 if exist "%nowpath%\SaveCredits.bat"          (echo SaveCredits.bat found!		     ) else (echo SaveCredits.bat not found!			   &set/a errors=%errors%+1)
-if exist "%nowpath%\Sizes.bat"                (echo Sizes.bat found!			        ) else (echo Sizes.bat not found!				      &set/a errors=%errors%+1)
 if exist "%nowpath%\Solves.bat"               (echo Solves.bat found!				  ) else (echo Solves.bat not found!					&set/a errors=%errors%+1)
 if exist "%nowpath%\StartAndStop.bat"         (echo StartAndStop.bat found!		  ) else (echo StartAndStop.bat not found!			&set/a errors=%errors%+1)
 if exist "%nowpath%\Update.bat"               (echo Update.bat found!				  ) else (echo Update.bat not found!					&set/a errors=%errors%+1)

@@ -15,7 +15,7 @@ echo ---------------------{Stable Edition}---------------------
 echo.
 echo --------------------------(v%version%)--------------------------
 echo.
-echo .......................(11.04.2022).......................
+echo .......................(18.06.2022).......................
 echo.
 ::contack information
 echo Created by: Naveen Balasooriya
@@ -27,7 +27,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.6 (CLI) - Break versions as CLI Version and GUI Version (For more information visit the website).
+echo # v2.6 - Break versions as CLI Version and GUI Version (For more information visit the website). Release new Logo.
 echo.
 echo ..........................................................
 echo.
