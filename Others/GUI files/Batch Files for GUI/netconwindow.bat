@@ -10,10 +10,9 @@ echo GUI Version %guiver%
 echo CLI Version %cliver%
 echo.
 
-::print details and stop hostednetwork
-echo Stopping Hotspot...
-echo.
-netsh wlan stop hostednetwork
+echo Working...
+ncpa.cpl
+echo Done!
 
 echo.
 echo *** *** *** *** ***

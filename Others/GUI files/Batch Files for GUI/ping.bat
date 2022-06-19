@@ -10,10 +10,13 @@ echo GUI Version %guiver%
 echo CLI Version %cliver%
 echo.
 
-::print details and stop hostednetwork
-echo Stopping Hotspot...
+::get inputs
+set/p pingaddress=<"ping address.ini"
+set/p pingcount=<"ping count.ini"
+::ping command
+echo Pinging...
 echo.
-netsh wlan stop hostednetwork
+PING %pingaddress% -n %pingcount%
 
 echo.
 echo *** *** *** *** ***

@@ -50,7 +50,7 @@ public class Info extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Hotspot Maker");
 
-        jLabel2.setText("GUI Version: v1.0  |  CLI Version: v1.0  |  Main Release Version: v2.6");
+        jLabel2.setText("GUI Version: v1.1  |  CLI Version: v1.1");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

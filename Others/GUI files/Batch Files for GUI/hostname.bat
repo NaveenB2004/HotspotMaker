@@ -10,10 +10,10 @@ echo GUI Version %guiver%
 echo CLI Version %cliver%
 echo.
 
-::print details and stop hostednetwork
-echo Stopping Hotspot...
+::print hostname
+echo Working...
 echo.
-netsh wlan stop hostednetwork
+hostname
 
 echo.
 echo *** *** *** *** ***
