@@ -8,6 +8,8 @@ import HotspotMaker.MainInterface;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.logging.Level;
@@ -276,6 +278,7 @@ public class AdvancedMain extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         try {
             ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call ping.bat");
             processBuilder.redirectErrorStream(true);
@@ -295,108 +298,108 @@ public class AdvancedMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         console.setText("");
         try {
-                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call ipconfiguration.bat");
-                processBuilder.redirectErrorStream(true);
-                Process p = processBuilder.start();
-                p.waitFor();
-                String line = null;
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                while ((line = bufferedReader.readLine()) != null) {
-                    console.append(line + "\n");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call ipconfiguration.bat");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            p.waitFor();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                console.append(line + "\n");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         console.setText("");
         try {
-                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call hotspotstatus.bat");
-                processBuilder.redirectErrorStream(true);
-                Process p = processBuilder.start();
-                p.waitFor();
-                String line = null;
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                while ((line = bufferedReader.readLine()) != null) {
-                    console.append(line + "\n");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call hotspotstatus.bat");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            p.waitFor();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                console.append(line + "\n");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         console.setText("");
         try {
-                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call publicip.bat");
-                processBuilder.redirectErrorStream(true);
-                Process p = processBuilder.start();
-                p.waitFor();
-                String line = null;
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                while ((line = bufferedReader.readLine()) != null) {
-                    console.append(line + "\n");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call publicip.bat");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            p.waitFor();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                console.append(line + "\n");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         console.setText("");
         try {
-                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call netconwindow.bat");
-                processBuilder.redirectErrorStream(true);
-                Process p = processBuilder.start();
-                p.waitFor();
-                String line = null;
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                while ((line = bufferedReader.readLine()) != null) {
-                    console.append(line + "\n");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call netconwindow.bat");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            p.waitFor();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                console.append(line + "\n");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         console.setText("");
         try {
-                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call renewip.bat");
-                processBuilder.redirectErrorStream(true);
-                Process p = processBuilder.start();
-                p.waitFor();
-                String line = null;
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                while ((line = bufferedReader.readLine()) != null) {
-                    console.append(line + "\n");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call renewip.bat");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            p.waitFor();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                console.append(line + "\n");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         console.setText("");
         try {
-                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call hostname.bat");
-                processBuilder.redirectErrorStream(true);
-                Process p = processBuilder.start();
-                p.waitFor();
-                String line = null;
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                while ((line = bufferedReader.readLine()) != null) {
-                    console.append(line + "\n");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call hostname.bat");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            p.waitFor();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                console.append(line + "\n");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
