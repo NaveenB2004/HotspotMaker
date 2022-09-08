@@ -1,5 +1,6 @@
 :UPHOME
 ::temp path
+echo %date%%time% - Set variables>>"C:\ProgramData\HotspotMakerData\Logger.log"
 set path=C:\ProgramData\HotspotMakerData
 ::working path
 set/p nowpath=<"%path%\nowpath.ini"
@@ -11,6 +12,7 @@ set timeout=%rootpath%\timeout.exe
 ::for previous versions
 if not exist "%path%\updates" md "%path%\updates"
 ::remove leftovers
+echo %date%%time% - Remove leftovers>>"C:\ProgramData\HotspotMakerData\Logger.log"
 if exist "%path%\updates\NewVersion.rar" del "%path%\updates\UnRAR.exe"
 if exist "%path%\updates\UnRAR.exe" del "%path%\updates\NewVersion.rar"
 ::clear before outputs
@@ -34,6 +36,7 @@ echo (This may take five seconds)
 cd "%path%\updates"
 ::get download links
 ::new version
+echo %date%%time% - Get download links for new version>>"C:\ProgramData\HotspotMakerData\Logger.log"
 For /f %%A in (
   '%powershell% -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/Asau8iwy").content"'
 ) Do Set NewVersionLink=%%A
@@ -43,14 +46,17 @@ For /f %%A in (
 ) Do Set UnRARLink=%%A
 ::download files
 ::new version
+echo %date%%time% - Download new version>>"C:\ProgramData\HotspotMakerData\Logger.log"
 %powershell% -Command "Invoke-WebRequest -UseBasicParsing %NewVersionLink% -Outfile NewVersion.rar"
 ::unrar
+echo %date%%time% - Download UnRAR>>"C:\ProgramData\HotspotMakerData\Logger.log"
 %powershell% -Command "Invoke-WebRequest -UseBasicParsing %UnRARLink% -Outfile UnRAR.exe"
 ::error while downloading
-if not exist "%path%\updates\NewVersion.rar" goto UPHOME
-if not exist "%path%\updates\UnRAR.exe" goto UPHOME
+if not exist "%path%\updates\NewVersion.rar" echo %date%%time% - NewVersion.rar not found>>"C:\ProgramData\HotspotMakerData\Logger.log" &goto UPHOME
+if not exist "%path%\updates\UnRAR.exe" echo %date%%time% - UnRAR.exe not found>>"C:\ProgramData\HotspotMakerData\Logger.log" &goto UPHOME
 ::compleated
 echo Download compleated!
+echo %date%%time% - New version download ok>>"C:\ProgramData\HotspotMakerData\Logger.log"
 %timeout% 3 >nul
 ::title
 title %title%
@@ -59,6 +65,7 @@ echo.
 echo [Step 2 of 3]
 echo Removing previous installations...
 echo (This may take five seconds)
+echo %date%%time% - Remove previous installation>>"C:\ProgramData\HotspotMakerData\Logger.log"
 ::copy Hotspot Maker.exe and unins000.exe to temp path
 copy "%nowpath%\Hotspot Maker.exe" "%path%\updates"
 copy "%nowpath%\unins000.exe" "%path%\updates"
@@ -71,6 +78,7 @@ echo.
 echo [Step 3 of 3]
 echo Installing files...
 echo (This may take five seconds)
+echo %date%%time% - Install new version>>"C:\ProgramData\HotspotMakerData\Logger.log"
 ::copy new version and unrar to installation path
 move "%path%\updates\NewVersion.rar" "%nowpath%"
 move "%path%\updates\UnRAR.exe" "%nowpath%"
@@ -93,6 +101,7 @@ echo.
 goto FINALRESULT
 
 :FINALRESULT
+echo %date%%time% - New version ok!!>>"C:\ProgramData\HotspotMakerData\Logger.log"
 ::clear befor outputs
 cls
 ::credits

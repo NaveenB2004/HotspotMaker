@@ -40,7 +40,9 @@ echo # v2.4 - Minor improvements with bug fixes.
 echo.
 echo # v2.5 - Code file checking system for dicrease errors while modules loading (Startup.bat).
 echo.
-echo # v2.6 (this) - Break versions as CLI Version and GUI Version (For more information visit the website). Release new Logo.
+echo # v2.6 - Break versions as CLI Version and GUI Version (For more information visit the website). Release new Logo.
+echo.
+echo # v2.7 (this) - Add new validations for smooth use with errorlevels. Set logger for future bug fixes.
 echo.
 echo ..........................................................
 echo.

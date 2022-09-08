@@ -48,6 +48,7 @@ echo.
 ::comment
 echo Working...
 echo.
+echo %date%%time% - Get computer host name>>"%logger%"
 ::command
 %rootpath%\HOSTNAME.EXE>"%path%\chostname.ini"
 set/p hostname=<"%path%\chostname.ini"
@@ -55,7 +56,7 @@ del "%path%\chostname.ini"
 echo Computer Hostname: %hostname%
 ::comment
 echo.
-echo Compleated!
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 echo.
 ::user choicess
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
@@ -81,11 +82,13 @@ echo [ Renew Network IP ]
 echo.
 ::comments
 echo Working...
+echo %date%%time% - Renew network ip>>"%logger%"
 ::release ip
 %rootpath%\ipconfig /release
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Release Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 ::renew ip
 %rootpath%\ipconfig /renew
-echo Compleated!
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Renew Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 echo.
 ::user choicess
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
@@ -111,9 +114,10 @@ echo [ Network Connections ]
 echo.
 ::comments
 echo Please wait for open the Network Connection window...
+echo %date%%time% - Open network connections window>>"%logger%"
 ::network connection windows command
 %rootpath%\ncpa.cpl
-echo Compleated!
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 echo.
 ::user choicess
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
@@ -146,7 +150,10 @@ echo # Value 0 to 4294967295 #
 set/p "pingcount=>"
 echo.
 ::ping command
+echo %date%%time% - Send Ping>>"%logger%"
+echo %date%%time% - (Address - %pingaddress%) , (Count - %pingcount%)>>"%logger%"
 %rootpath%\PING.EXE %pingaddress% -n %pingcount%
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 echo.
 ::user choicess
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
@@ -172,9 +179,10 @@ echo [ IP Configuration ]
 echo.
 ::steps
 echo Starting IP Configuration...
+echo %date%%time% - Ipconfiguration>>"%logger%"
 ::ipconfig command
 %systemroot%\system32\ipconfig /all
-echo Compleated.
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 echo.
 ::user choicess
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
@@ -200,11 +208,13 @@ echo [ Hotspot Status ]
 echo.
 ::steps
 echo Starting network status...
+echo %date%%time% - Get network status>>"%logger%"
 ::hostednetwork details command
-%rootpath%\netsh.exe wlan show hostednetwork
+%rootpath%\netsh.exe wlan show hostednetwork && set level1=%errorlevel%
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 ::hostednetwork details command (security)
-%rootpath%\netsh.exe wlan show hostednetwork setting=security
-echo Compleated.
+%rootpath%\netsh.exe wlan show hostednetwork setting=security && set level2=%errorlevel%
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 echo.
 ::user choicess
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit
@@ -232,6 +242,7 @@ echo.
 echo This tab made for show your public IP address.
 echo (You need to connect to the internet to get a public IP)
 echo.
+echo %date%%time% - Get public ip>>"%logger%"
 ::internet check
 echo Please wait for check the internet connection...
 For /f %%A in (
@@ -239,6 +250,7 @@ For /f %%A in (
 ) Do Set intcheck=%%A
 if %intcheck%==2004 goto PUBIPSTART
 echo.
+echo %date%%time% - Network error>>"%logger%"
 echo Error white connect to the internet. Please check your internet connection and try again.
 echo.
 ::user choicess
@@ -256,6 +268,7 @@ echo invalid choice... Try again...
 goto PUBIP
 
 :PUBIPSTART
+echo %date%%time% - Connection ok>>"%logger%"
 echo Connected to the internet!
 echo Please wait for get your public IP...
 echo.
@@ -265,6 +278,7 @@ For /f %%A in (
   '%powershell% -command "(Invoke-Webrequest "http://api.ipify.org").content"'
 ) Do Set ExtIP=%%A
 echo Your Public IP is : %ExtIP%
+echo %date%%time% - Ip got>>"%logger%"
 echo.
 ::user choicess
 echo A - Home&echo B - Back to Network Configuration&echo C - Exit

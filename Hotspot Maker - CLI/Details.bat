@@ -27,7 +27,7 @@ echo.
 ::version notes
 echo Version Notes...
 echo.
-echo # v2.6 - Break versions as CLI Version and GUI Version (For more information visit the website). Release new Logo.
+echo # v2.7 - Add new validations for smooth use with errorlevels. Set logger for future bug fixes.
 echo.
 echo ..........................................................
 echo.
@@ -39,7 +39,8 @@ echo.
 if EXIST "%path%\AutoUpdate.nnb" set autupdatestat=ON
 if NOT EXIST "%path%\AutoUpdate.nnb" set autupdatestat=OFF
 ::user choicess
-echo A - Home&echo B - Check Updates&echo C - Setup Auto Update (Status: %autupdatestat%)&echo D - Change Font Color&echo E - Hotspot Problems&echo F - Full Version History&echo G - Exit
+echo A - Home&echo B - Check Updates&echo C - Setup Auto Update (Status: %autupdatestat%)&echo D - Change Font Color
+echo E - Hotspot Problems&echo F - Full Version History&echo G - Exit
 echo.
 ::when you change the dcho, look AutoUpdate.bat and change it
 set/p "dcho=>"

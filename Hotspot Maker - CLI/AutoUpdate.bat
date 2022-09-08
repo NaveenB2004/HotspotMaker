@@ -27,7 +27,8 @@ echo.
 echo Do you wish to continue...?
 echo.
 ::user choicess
-echo A - Every Computer Starts&echo B - Daily (set time)&echo C - Weekly (set date and time)&echo D - Monthly (set date and time)&echo E - Cancle and back to Home&echo F - Exit
+echo A - Every Computer Starts&echo B - Daily (set time)&echo C - Weekly (set date and time)
+echo D - Monthly (set date and time)&echo E - Cancle and back to Home&echo F - Exit
 echo.
 set/p "aufcho=>"
 if %aufcho%==A goto ECS
@@ -58,8 +59,9 @@ echo.
 ::steps
 echo Setting Auto Update for Hotspot Maker...
 echo (Please wait...)
+echo %date%%time% - Set auto update @ Every computer start>>"%logger%"
 ::shedule task to run at computer startup
-%rootpath%\schtasks.exe /CREATE /SC ONLOGON /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
+%rootpath%\schtasks.exe /CREATE /SC ONLOGON /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST &echo %date%%time% - Errorlevel %errorlevel%>>"%logger%"
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo ECS>"%path%\AutoUpdate.nnb"
 ::make invisible run file for run updater invisiblelly
@@ -100,8 +102,10 @@ set/p "dailyupintervel=>"
 echo.
 echo Setting Auto Update for Hotspot Maker...
 echo (Please wait...)
+echo %date%%time% - Set auto update @ Daily>>"%logger%"
+echo %date%%time% - (dailyuptime - %dailyuptime%) , (dailyupintervel - %dailyupintervel%)>>"%logger%"
 ::shedule task to run at computer startup
-%rootpath%\schtasks.exe /CREATE /SC DAILY /ST %dailyuptime% /MO %dailyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
+%rootpath%\schtasks.exe /CREATE /SC DAILY /ST %dailyuptime% /MO %dailyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST &echo %date%%time% - Errorlevel %errorlevel%>>"%logger%"
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo DAILY>"%path%\AutoUpdate.nnb"
 ::make invisible run file for run updater invisiblelly
@@ -143,8 +147,10 @@ set/p "weeklyupintervel=>"
 echo.
 echo Setting Auto Update for Hotspot Maker...
 echo (Please wait...)
+echo %date%%time% - Set auto update @ Weekly>>"%logger%"
+echo %date%%time% - (weeklyupday - %weeklyupday%) , (weeklyupintervel - %weeklyupintervel%)>>"%logger%"
 ::shedule task to run at computer startup
-%rootpath%\schtasks.exe /CREATE /SC WEEKLY /D %weeklyupday% /MO %weeklyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
+%rootpath%\schtasks.exe /CREATE /SC WEEKLY /D %weeklyupday% /MO %weeklyupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST &echo %date%%time% - Errorlevel %errorlevel%>>"%logger%"
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo WEEKLY>"%path%\AutoUpdate.nnb"
 ::make invisible run file for run updater invisiblelly
@@ -185,8 +191,10 @@ set/p "monthupintervel=>"
 echo.
 echo Setting Auto Update for Hotspot Maker...
 echo (Please wait...)
+echo %date%%time% - Set auto update @ Monthly>>"%logger%"
+echo %date%%time% - (monthlyupdate - %monthlyupdate%) , (monthupintervel - %monthupintervel%)>>"%logger%"
 ::shedule task to run at computer startup
-%rootpath%\schtasks.exe /CREATE /SC MONTHLY /D %monthlyupdate% /MO %monthupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST
+%rootpath%\schtasks.exe /CREATE /SC MONTHLY /D %monthlyupdate% /MO %monthupintervel% /TN "HotspotMaker\AutoUpdate" /TR "%nowpath%\MiniUpdater.bat" /RL HIGHEST &echo %date%%time% - Errorlevel %errorlevel%>>"%logger%"
 ::generate true file for this oparation
 if %errorlevel% equ 0 echo MONTHLY>"%path%\AutoUpdate.nnb"
 ::make invisible run file for run updater invisiblelly
@@ -250,13 +258,14 @@ echo.
 echo Processing...!
 echo %rorc% Auto Update for Hotspot Maker...
 echo (Please wait...)
+echo %date%%time% - Remove auto update>>"%logger%"
 ::remove sheduled task
 echo Press [Y] and [ENTER] to continue...
-%rootpath%\schtasks.exe /DELETE /TN "HotspotMaker\AutoUpdate"
+%rootpath%\schtasks.exe /DELETE /TN "HotspotMaker\AutoUpdate" &echo %date%%time% - Errorlevel %errorlevel%>>"%logger%"
 ::remove invisible run vbs
-del "%nowpath%\InvisibleUpdateChecker.vbs"
+del "%nowpath%\InvisibleUpdateChecker.vbs" &echo %date%%time% - Errorlevel %errorlevel%>>"%logger%"
 ::remove generated true file for true oparation
-del "%path%\AutoUpdate.nnb"
+del "%path%\AutoUpdate.nnb" &echo %date%%time% - Errorlevel %errorlevel%>>"%logger%"
 %timeout% 5
 if %autcho%==A goto AUTOUPDATE
 if %autcho%==a goto AUTOUPDATE
@@ -278,5 +287,6 @@ call "%nowpath%\Home.bat"
 :INVISIBLECODE
 ::invisible update checker is a vbs file for run update checker invisibelly
 ::it will help to user to not destroy his/her forcus
-echo CreateObject("Wscript.Shell").Run """" & WScript.Arguments(0) & """", 0, False >"%nowpath%\InvisibleUpdateChecker.vbs"
+echo %date%%time% - Set invisible auto update check>>"%logger%"
+echo CreateObject("Wscript.Shell").Run """" & WScript.Arguments(0) & """", 0, False >"%nowpath%\InvisibleUpdateChecker.vbs" &echo %date%%time% - Errorlevel %errorlevel%>>"%logger%"
 goto %backstep%

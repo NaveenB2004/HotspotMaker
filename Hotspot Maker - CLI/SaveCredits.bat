@@ -12,16 +12,18 @@ echo.
 echo You can save hotspot SSID(name) and password for easily start Hotspot with given data.
 echo # You should input data for use this option. If you not input data, default ssid and password will not work.
 echo.
+echo %date%%time% - Set credits>>"%logger%"
 ::steps
 echo Enter Network SSID (Name) for use as default:
 set/p "defname=>"
 echo %defname%>"%path%\defaultssid.ini"
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 echo.
 echo Enter Network PASSWORD for use as default:
 set/p "defpass=>"
 echo %defpass%>"%path%\defaultpass.ini"
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 echo.
-echo Success...!
 ::generate default username and password information
 echo defuser>"%path%\defuser.nnb"
 echo.

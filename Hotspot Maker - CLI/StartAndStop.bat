@@ -64,10 +64,14 @@ echo.
 ::steps
 echo Starting hotspot as SSID (name)- %hotspotname% Password- %hotspotpassword%
 echo .........................................................
+echo %date%%time% - Start hotspot>>"%logger%"
+echo %date%%time% - (SSID - %hotspotname%) , (Psw - %hotspotpassword%)>>"%logger%"
 ::set ssid and password
 %rootpath%\netsh.exe wlan set hostednetwork mode=allow ssid="%hotspotname%" key="%hotspotpassword%"
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 ::start hotspot
 %rootpath%\netsh.exe wlan start hostednetwork
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 echo.
 ::little instructions
 echo # Go to Details when wizard shows network starting problems #
@@ -127,8 +131,10 @@ echo [ Continue Hotspot Stop ]
 echo.
 ::steps
 echo Stopping the hotspot...
+echo %date%%time% - Stop hotspot>>"%logger%"
 ::stop hotspot
 %rootpath%\netsh.exe wlan stop hostednetwork
+if %errorlevel%==0 (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Compleated!) else (echo %date%%time% - Errorlevel %errorlevel%>>"%logger%" &echo Error!)
 echo.
 ::user choicess
 echo A - Home&echo B - Details&echo C - Exit

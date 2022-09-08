@@ -17,12 +17,13 @@ echo Please wait for check the internet connection...
 set count=0
 set/a count=%count%+1
 if %count%==4 goto NETCHECKFAIL
+echo %date%%time% - Check connection count %count%>>"%logger%"
 ::network check and getting tempversion
 For /f %%A in (
   '%powershell% -command "(Invoke-Webrequest -UseBasicParsing "https://pastebin.com/raw/RmwHLAQ6").content"'
 ) Do Set tempversion=%%A
-if %tempversion%==okeWebRequestCommand goto NETCHECKFAIL
-if not %tempversion%==okeWebRequestCommand goto NETCHECKPASS
+if %tempversion%==okeWebRequestCommand echo %date%%time% - Net check failed>>"%logger%" &goto NETCHECKFAIL
+if not %tempversion%==okeWebRequestCommand echo %date%%time% - Net check passed>>"%logger%" &goto NETCHECKPASS
 
 :NETCHECKFAIL
 ::clear before outputs
@@ -67,10 +68,12 @@ echo Checking new versions...
 echo.
 %timeout% 3 >nul
 ::new version check (compare)
+echo %date%%time% - Compare versions>>"%logger%"
 if %tempversion% LEQ %version% goto THSISILAST
 if not %tempversion% LEQ %version% goto NEWAVILABLE
 
 :THSISILAST
+echo %date%%time% - Ths version is last v%version%>>"%logger%"
 ::clear before outputs
 cls
 ::credits
@@ -96,6 +99,7 @@ echo invalid choice... Try again...
 goto THSISILAST
 
 :NEWAVILABLE
+echo %date%%time% - New version available v%tempversion%>>"%logger%"
 ::clear before outputs
 cls
 ::credits
@@ -133,6 +137,7 @@ echo %CREDIT0%&echo %CREDIT1%&echo %CREDIT2%&echo %CREDIT4%&echo %CREDIT5%&echo 
 echo [ Installation ]
 echo.
 ::steps (get link to download updater scripts file)
+echo %date%%time% - Download script for install new version>>"%logger%"
 echo Downloading script files...
 echo (This may take five seconds)
 ::save working path for post update use
@@ -149,6 +154,7 @@ For /f %%A in (
 ::switch to 'updateinstaller.bat' (new downloaded)
 call "%path%\updates\updateinstaller.bat"
 ::when calling error, steps
+echo %date%%time% - File run error>>"%logger%"
 echo Error while starting the updater...
 echo Please download the standalone version and install it...
 start https://github.com/naveenb2004/HotspotMaker/releases

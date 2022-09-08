@@ -1,6 +1,8 @@
 :STARTUP
-::working path
 set nowpath=%~dp0
+echo.>>"%logger%"
+echo *** *** *** *** *** *** *** *** *** ***>>"%logger%"
+echo %date%%time% - New session Started>>"%logger%"
 ::check modules per 5 runs
 if not exist "C:\ProgramData\HotspotMakerData\modules.ini" md C:\ProgramData\HotspotMakerData &echo 4 >"C:\ProgramData\HotspotMakerData\modules.ini"
 set/p checkcount=<"C:\ProgramData\HotspotMakerData\modules.ini"
@@ -19,22 +21,23 @@ echo Checking modules...
 set errors=0
 echo.
 ::chek modules
-if exist "%nowpath%\AutoUpdate.bat"           (echo AutoUpdate.bat found!			  ) else (echo AutoUpdate.bat not found!				&set/a errors=%errors%+1)	
-if exist "%nowpath%\Colors.bat"               (echo Colors.bat found!				  ) else (echo Colors.bat not found!					&set/a errors=%errors%+1)
-if exist "%nowpath%\Details.bat"				    (echo Details.bat found!			     ) else (echo Details.bat not found!				   &set/a errors=%errors%+1)
-if exist "%nowpath%\Exit.bat"                 (echo Exit.bat found!				     ) else (echo Exit.bat not found!					   &set/a errors=%errors%+1)
-if exist "%nowpath%\Home.bat"                 (echo Home.bat found!				     ) else (echo Home.bat not found!					   &set/a errors=%errors%+1)
-if exist "%nowpath%\MiniUpdater.bat"          (echo MiniUpdater.bat found!		     ) else (echo MiniUpdater.bat not found!			   &set/a errors=%errors%+1)
-if exist "%nowpath%\MiniUpdaterWorker.bat"    (echo MiniUpdaterWorker.bat found!   ) else (echo MiniUpdaterWorker.bat not found!		&set/a errors=%errors%+1)
-if exist "%nowpath%\NetworkConfiguration.bat" (echo NetworkConfiguration.bat found!) else (echo NetworkConfiguration.bat not found!	&set/a errors=%errors%+1)
-if exist "%nowpath%\PreviousVerNotes.bat"     (echo PreviouseVerNotes.bat found!	  ) else (echo PreviouseVerNotes.bat not found!		&set/a errors=%errors%+1)
-if exist "%nowpath%\SaveCredits.bat"          (echo SaveCredits.bat found!		     ) else (echo SaveCredits.bat not found!			   &set/a errors=%errors%+1)
-if exist "%nowpath%\Solves.bat"               (echo Solves.bat found!				  ) else (echo Solves.bat not found!					&set/a errors=%errors%+1)
-if exist "%nowpath%\StartAndStop.bat"         (echo StartAndStop.bat found!		  ) else (echo StartAndStop.bat not found!			&set/a errors=%errors%+1)
-if exist "%nowpath%\Update.bat"               (echo Update.bat found!				  ) else (echo Update.bat not found!					&set/a errors=%errors%+1)
-if exist "%nowpath%\Updater.bat"              (echo Updater.bat found!			     ) else (echo Updater.bat not found!				   &set/a errors=%errors%+1)
-if exist "%nowpath%\Variables.bat"            (echo Variables.bat found!			  ) else (echo Variables.bat not found!				&set/a errors=%errors%+1)
-if exist "%nowpath%\Version.ini"              (echo Version.ini found!			     ) else (echo Version.ini not found!				   &set/a errors=%errors%+1)
+if exist "%nowpath%\AutoUpdate.bat" (echo %date%%time% - AutoUpdate.bat found!>>"%logger%") else (echo %date%%time% - AutoUpdate.bat not found!>>%logger% &set/a errors=%errors%+1)	
+if exist "%nowpath%\Colors.bat" (echo %date%%time% - Colors.bat found!>>"%logger%") else (echo %date%%time% - Colors.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\Details.bat" (echo %date%%time% - Details.bat found!>>"%logger%") else (echo %date%%time% - Details.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\Exit.bat" (echo %date%%time% - Exit.bat found!>>"%logger%") else (echo %date%%time% - Exit.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\Home.bat" (echo %date%%time% - Home.bat found!>>"%logger%") else (echo %date%%time% - Home.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\MiniUpdater.bat" (echo %date%%time% - MiniUpdater.bat found!>>"%logger%") else (echo %date%%time% - MiniUpdater.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\MiniUpdaterWorker.bat" (echo %date%%time% - MiniUpdaterWorker.bat found!>>"%logger%") else (echo %date%%time% - MiniUpdaterWorker.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\NetworkConfiguration.bat" (echo %date%%time% - NetworkConfiguration.bat found!>>"%logger%") else (echo %date%%time% - NetworkConfiguration.bat not found!>>%logger%	&set/a errors=%errors%+1)
+if exist "%nowpath%\PreviousVerNotes.bat" (echo %date%%time% - PreviouseVerNotes.bat found!>>"%logger%") else (echo %date%%time% - PreviouseVerNotes.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\SaveCredits.bat" (echo %date%%time% - SaveCredits.bat found!>>"%logger%") else (echo %date%%time% - SaveCredits.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\Solves.bat" (echo %date%%time% - Solves.bat found!>>"%logger%") else (echo %date%%time% - Solves.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\StartAndStop.bat" (echo %date%%time% - StartAndStop.bat found!>>"%logger%") else (echo %date%%time% - StartAndStop.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\Update.bat" (echo %date%%time% - Update.bat found!>>"%logger%") else (echo %date%%time% - Update.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\Updater.bat" (echo %date%%time% - Updater.bat found!>>"%logger%") else (echo %date%%time% - Updater.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\Variables.bat" (echo %date%%time% - Variables.bat found!>>"%logger%") else (echo %date%%time% - Variables.bat not found!>>%logger% &set/a errors=%errors%+1)
+if exist "%nowpath%\Version.ini" (echo %date%%time% - Version.ini found!>>"%logger%") else (echo %date%%time% - Version.ini not found!>>%logger% &set/a errors=%errors%+1)
+echo %date%%time% - Total errors found %errors%>>%logger%
 "%SYSTEMROOT%\System32\timeout.exe" 3 >nul
 if %errors%==0 (goto TESTPASS) else (goto TESTFAIL)
 
@@ -49,6 +52,7 @@ echo           https://github.com/naveenb2004/HotspotMaker/releases
 start https://github.com/naveenb2004/HotspotMaker/releases
 echo.
 echo.
+echo %date%%time% - Exit>>%logger%
 pause
 goto END
 
