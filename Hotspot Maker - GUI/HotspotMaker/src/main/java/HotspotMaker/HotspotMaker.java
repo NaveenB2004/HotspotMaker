@@ -90,7 +90,7 @@ public class HotspotMaker extends JWindow {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
         Main.MainUI main = new Main.MainUI();
         main.setVisible(true);
     }

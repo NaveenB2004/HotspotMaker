@@ -21,7 +21,6 @@ public class MainUI extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
     }
     
-    
     private void chooseaction () {
         jRadioButton1.setSelected(true);
         
