@@ -17,7 +17,7 @@ public class Settings extends javax.swing.JFrame {
      */
     public Settings() {
         initComponents();
-//        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
     }
 
     /**

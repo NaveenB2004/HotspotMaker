@@ -17,7 +17,7 @@ public class Advanced extends javax.swing.JFrame {
      */
     public Advanced() {
         initComponents();
-//        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
     }
 
     /**
