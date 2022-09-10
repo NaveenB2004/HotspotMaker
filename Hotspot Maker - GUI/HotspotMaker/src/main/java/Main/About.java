@@ -7,9 +7,12 @@ package Main;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,35 +31,25 @@ public class About extends javax.swing.JFrame {
 
     private void GetVersion() {
         File guiver = new File("GUI Version.ini");
-        if (guiver.exists()){
-        try {
-            Scanner myReader = new Scanner(guiver);
-            while (myReader.hasNextLine()) {
-                String guiversionn = myReader.nextLine();
+        if (guiver.exists()) {
+            try {
+                String guiversionn = Files.readAllLines(Paths.get("GUI Version.ini")).get(1);
                 guiversion.setText(guiversionn);
+            } catch (IOException ex) {
+                Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, ex);
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
         }
         File cliver = new File("CLI Version.ini");
-        if (cliver.exists()){
-        try {
-            Scanner myReader = new Scanner(cliver);
-            while (myReader.hasNextLine()) {
-                String cliversionn = myReader.nextLine();
+        if (cliver.exists()) {
+            try {
+                String cliversionn = Files.readAllLines(Paths.get("CLI Version.ini")).get(1);
                 cliversion.setText(cliversionn);
+            } catch (IOException ex) {
+                Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, ex);
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
         }
-        }
-        jLabel2.setText("GUI Version : " + guiversion.getText() + 
-                "  |  CLI Version : " + cliversion.getText());
+        jLabel2.setText("GUI Version : " + guiversion.getText()
+                + "  |  CLI Version : " + cliversion.getText());
     }
 
     /**

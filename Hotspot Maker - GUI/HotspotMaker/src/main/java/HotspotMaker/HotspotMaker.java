@@ -26,7 +26,7 @@ public class HotspotMaker extends JWindow {
     //add all images to src/main/resources/pkg(imgs)/
     Image splashScreen;
     ImageIcon imageIcon;
-    
+
     public HotspotMaker() {
         splashScreen = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Splash.jpg"));
         // Create ImageIcon from Image
@@ -44,13 +44,22 @@ public class HotspotMaker extends JWindow {
         // Make JWindow visible
         setVisible(true);
     }
+
     // Paint image onto JWindow
     public void paint(Graphics g) {
         super.paint(g);
         g.drawImage(splashScreen, 0, 0, this);
     }
-    
+
     public static void main(String[] args) {
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call supportcheck.bat");
+            processBuilder.redirectErrorStream(true);
+            processBuilder.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         File myObj = new File("C:\\Windows\\Temp\\HMTheme.ini");
         if (myObj.exists()) {
             try {
@@ -81,7 +90,7 @@ public class HotspotMaker extends JWindow {
             } catch (Exception e) {
             }
         }
-        
+
         HotspotMaker splash = new HotspotMaker();
         try {
             // Make JWindow appear for 3 seconds before disappear
@@ -90,7 +99,7 @@ public class HotspotMaker extends JWindow {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         Main.MainUI main = new Main.MainUI();
         main.setVisible(true);
     }
