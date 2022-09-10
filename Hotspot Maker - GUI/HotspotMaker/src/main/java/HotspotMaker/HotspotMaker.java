@@ -57,37 +57,35 @@ public class HotspotMaker extends JWindow {
             processBuilder.redirectErrorStream(true);
             processBuilder.start();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("0001" + e);
         }
 
-        File myObj = new File("C:\\Windows\\Temp\\HMTheme.ini");
-        if (myObj.exists()) {
-            try {
-                Scanner myReader = new Scanner(myObj);
-                while (myReader.hasNextLine()) {
-                    String data = myReader.nextLine();
-                    if (data.equals("Light")) {
-                        FlatLightLaf.setup();
-                    } else if (data.equals("Dark")) {
-                        FlatDarkLaf.setup();
-                    } else {
-                        try {
-                            UIManager.setLookAndFeel(
-                                    UIManager.getSystemLookAndFeelClassName());
-                        } catch (Exception e) {
-                        }
+        File myObj = new File("theme.ini");
+        try {
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if (data.equals("Default")) {
+                    try {
+                        UIManager.setLookAndFeel(
+                                UIManager.getSystemLookAndFeelClassName());
+                    } catch (Exception e) {
+                        System.out.println("0002" + e);
                     }
+                } else if (data.equals("Dark")) {
+                    FlatDarkLaf.setup();
+                } else if (data.equals("Light")) {
+                    FlatLightLaf.setup();
                 }
-                myReader.close();
-            } catch (FileNotFoundException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
             }
-        } else {
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("0003" + e);
             try {
                 UIManager.setLookAndFeel(
                         UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception e) {
+            } catch (Exception ex) {
+                System.out.println("0004" + ex);
             }
         }
 
@@ -97,7 +95,7 @@ public class HotspotMaker extends JWindow {
             Thread.sleep(3000);
             splash.dispose();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("0005" + e);
         }
 
         Main.MainUI main = new Main.MainUI();

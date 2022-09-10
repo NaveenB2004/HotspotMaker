@@ -35,12 +35,10 @@ public class About extends javax.swing.JFrame {
         try ( Stream<String> lines = Files.lines(Paths.get("CLI Version.ini"))) {
             cliver = lines.skip(0).findFirst().get();
         } catch (IOException ex) {
-            Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, ex);
         }
-      try ( Stream<String> lines = Files.lines(Paths.get("GUI Version.ini"))) {
+        try ( Stream<String> lines = Files.lines(Paths.get("GUI Version.ini"))) {
             guiver = lines.skip(0).findFirst().get();
         } catch (IOException ex) {
-            Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, ex);
         }
         jLabel2.setText("GUI Version : " + guiver
                 + "  |  CLI Version : " + cliver);

@@ -4,17 +4,19 @@
  */
 package Main;
 
+import com.github.javafaker.Faker;
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,6 +36,7 @@ public class MainUI extends javax.swing.JFrame {
     }
 
     private void chooseaction() {
+        jButton7.setEnabled(false);
         jRadioButton1.setSelected(true);
         Component[] com = onetimepanel.getComponents();
         for (int a = 0; a < com.length; a++) {
@@ -48,7 +51,8 @@ public class MainUI extends javax.swing.JFrame {
             while (myReader.hasNextLine()) {
                 String supportn = myReader.nextLine();
                 if (supportn.equals("    Hosted network supported  : Yes")) {
-                    try ( PrintStream out = new PrintStream(new File("support check pass.ini"))) {
+                    try ( PrintStream out
+                            = new PrintStream(new File("support check pass.ini"))) {
                         out.println("1");
                     } catch (FileNotFoundException ex) {
                     }
@@ -57,14 +61,15 @@ public class MainUI extends javax.swing.JFrame {
             myReader.close();
         } catch (FileNotFoundException ex) {
         }
-//        try {
-//            String scpassn = Files.readAllLines(Paths.get("support check pass.ini")).get(1);
-//            JOptionPane.showMessageDialog(this, scpassn);
-//            if (scpassn.equals("1")) {
-//               JOptionPane.showMessageDialog(this, "aaa");
-//            }
-//        } catch (IOException ex) {
-//        }
+        try ( Stream<String> lines = Files.lines(Paths.get("support check pass.ini"))) {
+            String scpassn = lines.skip(0).findFirst().get();
+            if (!scpassn.equals("1")) {
+                JOptionPane.showMessageDialog(this,
+                        "Your wireless network driver doesn't support for hotspot!",
+                        "Alert", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (IOException ex) {
+        }
     }
 
     /**
@@ -102,7 +107,7 @@ public class MainUI extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        console = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hotspot Maker");
@@ -145,8 +150,18 @@ public class MainUI extends javax.swing.JFrame {
         jLabel3.setText("Password :");
 
         jButton2.setText("Generate Random");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Start");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout onetimepanelLayout = new javax.swing.GroupLayout(onetimepanel);
         onetimepanel.setLayout(onetimepanelLayout);
@@ -242,6 +257,11 @@ public class MainUI extends javax.swing.JFrame {
         jLabel6.setText("Password :");
 
         jButton6.setText("Start");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jTextField3.setEditable(false);
         jTextField3.setFocusable(false);
@@ -302,15 +322,20 @@ public class MainUI extends javax.swing.JFrame {
         );
 
         jButton7.setText("Stop");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Console :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 0, 12))); // NOI18N
 
         jScrollPane1.setAutoscrolls(true);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextArea1.setRows(10);
-        jScrollPane1.setViewportView(jTextArea1);
+        console.setColumns(20);
+        console.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        console.setRows(10);
+        jScrollPane1.setViewportView(console);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -394,27 +419,130 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
-        Component[] com1 = onetimepanel.getComponents();
-        for (int a = 0; a < com1.length; a++) {
-            com1[a].setEnabled(true);
-        }
-        Component[] com = defsettings.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
+        if (!jButton7.isEnabled()) {
+            Component[] com1 = onetimepanel.getComponents();
+            for (int a = 0; a < com1.length; a++) {
+                com1[a].setEnabled(true);
+            }
+            Component[] com = defsettings.getComponents();
+            for (int a = 0; a < com.length; a++) {
+                com[a].setEnabled(false);
+            }
         }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
-        Component[] com1 = defsettings.getComponents();
-        for (int a = 0; a < com1.length; a++) {
-            com1[a].setEnabled(true);
+        if (!jButton7.isEnabled()) {
+            Component[] com1 = defsettings.getComponents();
+            for (int a = 0; a < com1.length; a++) {
+                com1[a].setEnabled(true);
+            }
+            Component[] com = onetimepanel.getComponents();
+            for (int a = 0; a < com.length; a++) {
+                com[a].setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Faker faker = new Faker();
+        String randomssid = faker.harryPotter().character();
+        String randompsw = faker.number().digits(10);
+        jTextField1.setText(randomssid);
+        jTextField2.setText(randompsw);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        jRadioButton2.setEnabled(false);
+        jButton6.setEnabled(false);
+        String ssid = jTextField3.getText();
+        String psw = jTextField4.getText();
+        try ( PrintStream out = new PrintStream(new File("ssid.ini"))) {
+            out.println(ssid);
+        } catch (FileNotFoundException ex) {
+        }
+        try ( PrintStream out = new PrintStream(new File("psw.ini"))) {
+            out.println(psw);
+        } catch (FileNotFoundException ex) {
+        }
+        try {
+            ProcessBuilder processBuilder
+                    = new ProcessBuilder("cmd.exe", "/c", "call start.bat");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                console.append(line + "\n");
+            }
+        } catch (Exception e) {
+        }
+        Component[] com = defsettings.getComponents();
+        for (int a = 0; a < com.length; a++) {
+            com[a].setEnabled(false);
+        }
+        jButton7.setEnabled(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        jRadioButton1.setEnabled(false);
+        jButton1.setEnabled(false);
+        String ssid = jTextField1.getText();
+        String psw = jTextField2.getText();
+        try ( PrintStream out = new PrintStream(new File("ssid.ini"))) {
+            out.println(ssid);
+        } catch (FileNotFoundException ex) {
+        }
+        try ( PrintStream out = new PrintStream(new File("psw.ini"))) {
+            out.println(psw);
+        } catch (FileNotFoundException ex) {
+        }
+        try {
+            ProcessBuilder processBuilder
+                    = new ProcessBuilder("cmd.exe", "/c", "call start.bat");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                console.append(line + "\n");
+            }
+        } catch (Exception e) {
         }
         Component[] com = onetimepanel.getComponents();
         for (int a = 0; a < com.length; a++) {
             com[a].setEnabled(false);
         }
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+        jButton7.setEnabled(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        jButton7.setEnabled(false);
+        try {
+            ProcessBuilder processBuilder
+                    = new ProcessBuilder("cmd.exe", "/c", "call stop.bat");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                console.append(line + "\n");
+            }
+        } catch (Exception e) {
+        }
+        jRadioButton1.setEnabled(true);
+        jRadioButton2.setEnabled(true);
+        if (jRadioButton1.isSelected()) {
+            jRadioButton1ActionPerformed(evt);
+        } else if (jRadioButton2.isSelected()) {
+            jRadioButton2ActionPerformed(evt);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -453,6 +581,7 @@ public class MainUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextArea console;
     private javax.swing.JPanel defsettings;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -473,7 +602,6 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
