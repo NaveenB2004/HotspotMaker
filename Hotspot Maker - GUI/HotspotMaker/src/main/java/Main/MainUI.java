@@ -6,6 +6,16 @@ package Main;
 
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,9 +40,31 @@ public class MainUI extends javax.swing.JFrame {
             com[a].setEnabled(false);
         }
     }
-    
-    private void checksupport(){
-        
+
+    private void checksupport() {
+        try {
+            File support = new File("support check.ini");
+            Scanner myReader = new Scanner(support);
+            while (myReader.hasNextLine()) {
+                String supportn = myReader.nextLine();
+                if (supportn.equals("    Hosted network supported  : Yes")) {
+                    try ( PrintStream out = new PrintStream(new File("support check pass.ini"))) {
+                        out.println("1");
+                    } catch (FileNotFoundException ex) {
+                    }
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException ex) {
+        }
+//        try {
+//            String scpassn = Files.readAllLines(Paths.get("support check pass.ini")).get(1);
+//            JOptionPane.showMessageDialog(this, scpassn);
+//            if (scpassn.equals("1")) {
+//               JOptionPane.showMessageDialog(this, "aaa");
+//            }
+//        } catch (IOException ex) {
+//        }
     }
 
     /**

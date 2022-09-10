@@ -6,13 +6,13 @@ package Main;
 
 import java.awt.Desktop;
 import java.awt.Toolkit;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 /**
  *
@@ -30,26 +30,20 @@ public class About extends javax.swing.JFrame {
     }
 
     private void GetVersion() {
-        File guiver = new File("GUI Version.ini");
-        if (guiver.exists()) {
-            try {
-                String guiversionn = Files.readAllLines(Paths.get("GUI Version.ini")).get(1);
-                guiversion.setText(guiversionn);
-            } catch (IOException ex) {
-                Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        String cliver = null;
+        String guiver = null;
+        try ( Stream<String> lines = Files.lines(Paths.get("CLI Version.ini"))) {
+            cliver = lines.skip(0).findFirst().get();
+        } catch (IOException ex) {
+            Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, ex);
         }
-        File cliver = new File("CLI Version.ini");
-        if (cliver.exists()) {
-            try {
-                String cliversionn = Files.readAllLines(Paths.get("CLI Version.ini")).get(1);
-                cliversion.setText(cliversionn);
-            } catch (IOException ex) {
-                Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, ex);
-            }
+      try ( Stream<String> lines = Files.lines(Paths.get("GUI Version.ini"))) {
+            guiver = lines.skip(0).findFirst().get();
+        } catch (IOException ex) {
+            Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jLabel2.setText("GUI Version : " + guiversion.getText()
-                + "  |  CLI Version : " + cliversion.getText());
+        jLabel2.setText("GUI Version : " + guiver
+                + "  |  CLI Version : " + cliver);
     }
 
     /**
