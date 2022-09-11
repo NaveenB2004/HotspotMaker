@@ -6,6 +6,7 @@ package Main;
 
 import com.github.javafaker.Faker;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
@@ -75,7 +76,7 @@ public class MainUI extends javax.swing.JFrame {
                         out.println("1");
                     } catch (FileNotFoundException ex) {
                     }
-                } else if (statusn.equals("    Status                 : Not started")){
+                } else if (statusn.equals("    Status                 : Not started")) {
                     try ( PrintStream out
                             = new PrintStream(new File("status pass.ini"))) {
                         out.println("0");
@@ -119,6 +120,20 @@ public class MainUI extends javax.swing.JFrame {
         try ( Stream<String> lines = Files.lines(Paths.get("def psw.ini"))) {
             String defpsw = lines.skip(0).findFirst().get();
             jTextField4.setText(defpsw);
+        } catch (IOException ex) {
+        }
+        try ( Stream<String> lines = Files.lines(Paths.get("font.ini"))) {
+            String f1 = lines.skip(0).findFirst().get();
+            String f2 = lines.skip(1).findFirst().get();
+            String f3 = lines.skip(2).findFirst().get();
+            int fsize = Integer.parseInt(f3);
+            if (f2.equals("Plane")) {
+                console.setFont(new Font(f1, Font.PLAIN, fsize));
+            } else if (f2.equals("Bold")) {
+                console.setFont(new Font(f1, Font.BOLD, fsize));
+            } else if (f2.equals("Italic")) {
+                console.setFont(new Font(f1, Font.ITALIC, fsize));
+            }
         } catch (IOException ex) {
         }
     }

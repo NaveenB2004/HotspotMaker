@@ -5,15 +5,13 @@
 package Advanced;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
@@ -31,7 +29,25 @@ public class Advanced extends javax.swing.JFrame {
      */
     public Advanced() {
         initComponents();
+        startup();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
+    }
+
+    private void startup() {
+        try ( Stream<String> lines = Files.lines(Paths.get("font.ini"))) {
+            String f1 = lines.skip(0).findFirst().get();
+            String f2 = lines.skip(1).findFirst().get();
+            String f3 = lines.skip(2).findFirst().get();
+            int fsize = Integer.parseInt(f3);
+            if (f2.equals("Plane")) {
+                console.setFont(new Font(f1, Font.PLAIN, fsize));
+            } else if (f2.equals("Bold")) {
+                console.setFont(new Font(f1, Font.BOLD, fsize));
+            } else if (f2.equals("Italic")) {
+                console.setFont(new Font(f1, Font.ITALIC, fsize));
+            }
+        } catch (IOException ex) {
+        }
     }
 
     /**
