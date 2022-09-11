@@ -11,7 +11,7 @@ echo.
 echo.
 hostname && set level=%errorlevel%
 echo.
-if level==0 (echo Return Value : Success!) else (echo Return Value : Failed!)
+echo Return Value : %level%
 echo.
 echo *** *** *** *** ***
 exit

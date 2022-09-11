@@ -18,11 +18,11 @@ echo Password: %psw%
 echo.
 netsh wlan set hostednetwork mode=allow ssid="%ssid%" key="%psw%" && set level=%errorlevel%
 echo.
-if level==0 (echo Return Value : Success!) else (echo Return Value : Failed!)
+echo Return Value : %level%
 echo.
 netsh wlan start hostednetwork && set level=%errorlevel%
 echo.
-if level==0 (echo Return Value : Success!) else (echo Return Value : Failed!)
+echo Return Value : %level%
 echo.
 echo *** *** *** *** ***
 exit
