@@ -51,11 +51,11 @@ public class Settings extends javax.swing.JFrame {
             String f3 = lines.skip(2).findFirst().get();
             String f4 = lines.skip(3).findFirst().get();
             String f5 = lines.skip(4).findFirst().get();
-            jComboBox2
-                    jComboBox5
-                    jComboBox6
-                            jComboBox3
-                            jComboBox4
+            jComboBox2.setSelectedItem(f1);
+            jComboBox5.setSelectedItem(f2);
+            jComboBox6.setSelectedItem(f3);
+            jComboBox3.setSelectedItem(f4);
+            jComboBox4.setSelectedItem(f5);
         } catch (IOException ex) {
         }
     }
