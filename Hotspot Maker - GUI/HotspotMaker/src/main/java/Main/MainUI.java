@@ -30,18 +30,9 @@ public class MainUI extends javax.swing.JFrame {
      */
     public MainUI() {
         initComponents();
-        chooseaction();
+        startup();
         checksupport();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
-    }
-
-    private void chooseaction() {
-        jButton7.setEnabled(false);
-        jRadioButton1.setSelected(true);
-        Component[] com = onetimepanel.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
-        }
     }
 
     private void checksupport() {
@@ -68,6 +59,66 @@ public class MainUI extends javax.swing.JFrame {
                         "Your wireless network driver doesn't support for hotspot!",
                         "Alert", JOptionPane.WARNING_MESSAGE);
             }
+        } catch (IOException ex) {
+        }
+    }
+
+    private void startup() {
+        try {
+            File status = new File("status.ini");
+            Scanner myReader = new Scanner(status);
+            while (myReader.hasNextLine()) {
+                String statusn = myReader.nextLine();
+                if (statusn.equals("    Status                 : Started")) {
+                    try ( PrintStream out
+                            = new PrintStream(new File("status pass.ini"))) {
+                        out.println("1");
+                    } catch (FileNotFoundException ex) {
+                    }
+                } else if (statusn.equals("    Status                 : Not started")){
+                    try ( PrintStream out
+                            = new PrintStream(new File("status pass.ini"))) {
+                        out.println("0");
+                    } catch (FileNotFoundException ex) {
+                    }
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException ex) {
+        }
+        try ( Stream<String> lines = Files.lines(Paths.get("status pass.ini"))) {
+            String statuspass = lines.skip(0).findFirst().get();
+            if (statuspass.equals("1")) {
+                jRadioButton1.setSelected(false);
+                jRadioButton2.setSelected(false);
+                jButton7.setEnabled(true);
+                Component[] com = defsettings.getComponents();
+                for (int a = 0; a < com.length; a++) {
+                    com[a].setEnabled(false);
+                }
+                Component[] com1 = onetimepanel.getComponents();
+                for (int a = 0; a < com1.length; a++) {
+                    com1[a].setEnabled(false);
+                }
+                console.setText("Hosted network running...\n");
+            } else if (statuspass.equals("0")) {
+                jButton7.setEnabled(false);
+                jRadioButton1.setSelected(true);
+                Component[] com = onetimepanel.getComponents();
+                for (int a = 0; a < com.length; a++) {
+                    com[a].setEnabled(false);
+                }
+            }
+        } catch (IOException ex) {
+        }
+        try ( Stream<String> lines = Files.lines(Paths.get("def ssid.ini"))) {
+            String defssid = lines.skip(0).findFirst().get();
+            jTextField3.setText(defssid);
+        } catch (IOException ex) {
+        }
+        try ( Stream<String> lines = Files.lines(Paths.get("def psw.ini"))) {
+            String defpsw = lines.skip(0).findFirst().get();
+            jTextField4.setText(defpsw);
         } catch (IOException ex) {
         }
     }
@@ -124,7 +175,7 @@ public class MainUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -273,18 +324,20 @@ public class MainUI extends javax.swing.JFrame {
         defsettings.setLayout(defsettingsLayout);
         defsettingsLayout.setHorizontalGroup(
             defsettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defsettingsLayout.createSequentialGroup()
+            .addGroup(defsettingsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(defsettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(defsettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(defsettingsLayout.createSequentialGroup()
                         .addGroup(defsettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(defsettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(defsettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField3)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE))))
+                            .addComponent(jTextField4)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defsettingsLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         defsettingsLayout.setVerticalGroup(
@@ -297,9 +350,9 @@ public class MainUI extends javax.swing.JFrame {
                 .addGroup(defsettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -309,7 +362,7 @@ public class MainUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jRadioButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(569, Short.MAX_VALUE))
             .addComponent(defsettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
@@ -349,7 +402,7 @@ public class MainUI extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -384,9 +437,9 @@ public class MainUI extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4)

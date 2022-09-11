@@ -59,6 +59,14 @@ public class HotspotMaker extends JWindow {
         } catch (Exception e) {
             System.out.println("0001" + e);
         }
+        
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call status.bat");
+            processBuilder.redirectErrorStream(true);
+            processBuilder.start();
+        } catch (Exception e) {
+            System.out.println("0002" + e);
+        }
 
         File myObj = new File("theme.ini");
         try {
@@ -70,7 +78,7 @@ public class HotspotMaker extends JWindow {
                         UIManager.setLookAndFeel(
                                 UIManager.getSystemLookAndFeelClassName());
                     } catch (Exception e) {
-                        System.out.println("0002" + e);
+                        System.out.println("0003" + e);
                     }
                 } else if (data.equals("Dark")) {
                     FlatDarkLaf.setup();
@@ -80,12 +88,12 @@ public class HotspotMaker extends JWindow {
             }
             myReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("0003" + e);
+            System.out.println("0004" + e);
             try {
                 UIManager.setLookAndFeel(
                         UIManager.getSystemLookAndFeelClassName());
             } catch (Exception ex) {
-                System.out.println("0004" + ex);
+                System.out.println("0005" + ex);
             }
         }
 
@@ -95,7 +103,7 @@ public class HotspotMaker extends JWindow {
             Thread.sleep(3000);
             splash.dispose();
         } catch (Exception e) {
-            System.out.println("0005" + e);
+            System.out.println("0006" + e);
         }
 
         Main.MainUI main = new Main.MainUI();

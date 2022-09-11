@@ -17,10 +17,12 @@ echo Password: %psw%
 ::start hostednetwork by given details
 echo.
 netsh wlan set hostednetwork mode=allow ssid="%ssid%" key="%psw%" && set level=%errorlevel%
-if level==0 (echo Return Value : Success!>status.ini) else (echo Return Value : Failed!>status.ini)
+echo.
+if level==0 (echo Return Value : Success!) else (echo Return Value : Failed!)
 echo.
 netsh wlan start hostednetwork && set level=%errorlevel%
-if level==0 (echo Return Value : Success!>status.ini) else (echo Return Value : Failed!>status.ini)
+echo.
+if level==0 (echo Return Value : Success!) else (echo Return Value : Failed!)
 echo.
 echo *** *** *** *** ***
 exit

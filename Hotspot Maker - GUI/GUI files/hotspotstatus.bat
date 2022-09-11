@@ -11,10 +11,13 @@ echo.
 echo Getting network status...
 ::hostednetwork details command
 netsh wlan show hostednetwork && set level=%errorlevel%
-if level==0 (echo Return Value : Success!>status.ini) else (echo Return Value : Failed!>status.ini)
+echo.
+if level==0 (echo Return Value : Success!) else (echo Return Value : Failed!)
+echo.
 ::hostednetwork details command (security)
 netsh wlan show hostednetwork setting=security && set level=%errorlevel%
-if level==0 (echo Return Value : Success!>status.ini) else (echo Return Value : Failed!>status.ini)
+echo.
+if level==0 (echo Return Value : Success!) else (echo Return Value : Failed!)
 echo.
 echo *** *** *** *** ***
 exit

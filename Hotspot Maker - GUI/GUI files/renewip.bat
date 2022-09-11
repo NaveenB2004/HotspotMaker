@@ -10,12 +10,18 @@ echo.
 echo Working...
 ::release ip
 ipconfig /release && set level=%errorlevel%
-if level==0 (echo Return Value : Success!>status.ini) else (echo Return Value : Failed!>status.ini)
+echo.
+if level==0 (echo Return Value : Success!) else (echo Return Value : Failed!)
+echo.
 ::renew ip
 ipconfig /renew && set level=%errorlevel%
-if level==0 (echo Return Value : Success!>status.ini) else (echo Return Value : Failed!>status.ini)
+echo.
+if level==0 (echo Return Value : Success!) else (echo Return Value : Failed!)
+echo.
 ::ipconfig
-ipconfig
+ipconfig && set level=%errorlevel%
+echo.
+if level==0 (echo Return Value : Success!) else (echo Return Value : Failed!)
 echo.
 echo *** *** *** *** ***
 exit
