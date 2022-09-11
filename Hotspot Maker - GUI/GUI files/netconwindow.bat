@@ -8,9 +8,7 @@ echo GUI Version %guiver%
 echo CLI Version %cliver%
 echo.
 echo Working...
-ncpa.cpl && set level=%errorlevel%
-echo.
-echo Return Value : %level%
+ncpa.cpl
 echo.
 echo *** *** *** *** ***
 exit
