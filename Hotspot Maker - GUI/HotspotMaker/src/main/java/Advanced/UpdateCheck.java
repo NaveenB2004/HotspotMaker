@@ -178,7 +178,7 @@ public class UpdateCheck extends javax.swing.JFrame {
         String yesno1 = null;
         String yesno2 = null;
         try {
-            url = new URL("https://pastebin.com/raw/RmwHLAQ6");
+            url = new URL("https://pastebin.com/raw/VT779EGg");
 
             URLConnection con = url.openConnection();
             InputStream is = con.getInputStream();
@@ -196,7 +196,7 @@ public class UpdateCheck extends javax.swing.JFrame {
             Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            url = new URL("https://pastebin.com/raw/RmwHLAQ6");
+            url = new URL("https://pastebin.com/raw/Rktvd3nR");
 
             URLConnection con = url.openConnection();
             InputStream is = con.getInputStream();
