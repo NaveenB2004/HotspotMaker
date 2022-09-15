@@ -36,96 +36,96 @@ public class MainUI extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
     }
 
+    String scpassn = null;
+
     private void checksupport() {
         try {
-            File support = new File("support check.ini");
+            File support = new File("SupportCheck.ini");
             Scanner myReader = new Scanner(support);
             while (myReader.hasNextLine()) {
                 String supportn = myReader.nextLine();
                 if (supportn.equals("    Hosted network supported  : Yes")) {
-                    try ( PrintStream out
-                            = new PrintStream(new File("support check pass.ini"))) {
-                        out.println("1");
-                    } catch (FileNotFoundException ex) {
-                    }
+                    scpassn = "1";
                 }
             }
             myReader.close();
         } catch (FileNotFoundException ex) {
         }
-        try ( Stream<String> lines = Files.lines(Paths.get("support check pass.ini"))) {
-            String scpassn = lines.skip(0).findFirst().get();
-            if (!scpassn.equals("1")) {
-                JOptionPane.showMessageDialog(this,
-                        "Your wireless network driver doesn't support for hotspot!",
-                        "Alert", JOptionPane.WARNING_MESSAGE);
-            }
-        } catch (IOException ex) {
+        if (!scpassn.equals("1")) {
+            JOptionPane.showMessageDialog(this,
+                    "Your wireless network driver doesn't support for hotspot!",
+                    "Alert", JOptionPane.WARNING_MESSAGE);
         }
     }
 
+    String statuspass = null;
+
     private void startup() {
         try {
-            File status = new File("status.ini");
+            File status = new File("Status.ini");
             Scanner myReader = new Scanner(status);
             while (myReader.hasNextLine()) {
                 String statusn = myReader.nextLine();
                 if (statusn.equals("    Status                 : Started")) {
-                    try ( PrintStream out
-                            = new PrintStream(new File("status pass.ini"))) {
-                        out.println("1");
-                    } catch (FileNotFoundException ex) {
-                    }
+                    statuspass = "1";
                 } else if (statusn.equals("    Status                 : Not started")) {
-                    try ( PrintStream out
-                            = new PrintStream(new File("status pass.ini"))) {
-                        out.println("0");
-                    } catch (FileNotFoundException ex) {
-                    }
+                    statuspass = "0";
                 }
             }
             myReader.close();
         } catch (FileNotFoundException ex) {
         }
-        try ( Stream<String> lines = Files.lines(Paths.get("status pass.ini"))) {
-            String statuspass = lines.skip(0).findFirst().get();
-            if (statuspass.equals("1")) {
-                jRadioButton1.setSelected(false);
-                jRadioButton2.setSelected(false);
-                jButton7.setEnabled(true);
-                Component[] com = defsettings.getComponents();
-                for (int a = 0; a < com.length; a++) {
-                    com[a].setEnabled(false);
-                }
-                Component[] com1 = onetimepanel.getComponents();
-                for (int a = 0; a < com1.length; a++) {
-                    com1[a].setEnabled(false);
-                }
-                console.setText("Hosted network running...\n");
-            } else if (statuspass.equals("0")) {
-                jButton7.setEnabled(false);
-                jRadioButton1.setSelected(true);
-                Component[] com = onetimepanel.getComponents();
-                for (int a = 0; a < com.length; a++) {
-                    com[a].setEnabled(false);
-                }
+        if (statuspass.equals("1")) {
+            jRadioButton1.setSelected(false);
+            jRadioButton2.setSelected(false);
+            jButton7.setEnabled(true);
+            Component[] com = defsettings.getComponents();
+            for (int a = 0; a < com.length; a++) {
+                com[a].setEnabled(false);
             }
-        } catch (IOException ex) {
+            Component[] com1 = onetimepanel.getComponents();
+            for (int a = 0; a < com1.length; a++) {
+                com1[a].setEnabled(false);
+            }
+            console.setText("Hosted network running...\n");
+        } else if (statuspass.equals("0")) {
+            jButton7.setEnabled(false);
+            jRadioButton1.setSelected(true);
+            Component[] com = onetimepanel.getComponents();
+            for (int a = 0; a < com.length; a++) {
+                com[a].setEnabled(false);
+            }
         }
-        try ( Stream<String> lines = Files.lines(Paths.get("def ssid.ini"))) {
+        try ( Stream<String> lines = Files.lines(Paths.get("DefSsid.ini"))) {
             String defssid = lines.skip(0).findFirst().get();
             jTextField3.setText(defssid);
         } catch (IOException ex) {
         }
-        try ( Stream<String> lines = Files.lines(Paths.get("def psw.ini"))) {
+        try ( Stream<String> lines = Files.lines(Paths.get("DefPsw.ini"))) {
             String defpsw = lines.skip(0).findFirst().get();
             jTextField4.setText(defpsw);
         } catch (IOException ex) {
         }
-        try ( Stream<String> lines = Files.lines(Paths.get("font.ini"))) {
-            String f1 = lines.skip(0).findFirst().get();
-            String f2 = lines.skip(1).findFirst().get();
-            String f3 = lines.skip(2).findFirst().get();
+
+        try {
+            int x = 0;
+            File fonts = new File("C:\\ProgramData\\HotspotMakerData\\Font.ini");
+            Scanner myReader = new Scanner(fonts);
+            while (myReader.hasNextLine()) {
+                String fontsn = myReader.nextLine();
+                x = x + 1;
+                if (x == 1) {
+                    f1r.setText(fontsn);
+                } else if (x == 2) {
+                    f2r.setText(fontsn);
+                } else if (x == 3) {
+                    f3r.setText(fontsn);
+                }
+            }
+            myReader.close();
+            String f1 = f1r.getText();
+            String f2 = f2r.getText();
+            String f3 = f3r.getText();
             int fsize = Integer.parseInt(f3);
             if (f2.equals("Plane")) {
                 console.setFont(new Font(f1, Font.PLAIN, fsize));
@@ -134,7 +134,7 @@ public class MainUI extends javax.swing.JFrame {
             } else if (f2.equals("Italic")) {
                 console.setFont(new Font(f1, Font.ITALIC, fsize));
             }
-        } catch (IOException ex) {
+        } catch (FileNotFoundException ex) {
         }
     }
 
@@ -148,6 +148,9 @@ public class MainUI extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        f1r = new javax.swing.JLabel();
+        f2r = new javax.swing.JLabel();
+        f3r = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -174,6 +177,12 @@ public class MainUI extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
+
+        f1r.setText("jLabel4");
+
+        f2r.setText("jLabel7");
+
+        f3r.setText("jLabel8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hotspot Maker");
@@ -651,6 +660,9 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextArea console;
     private javax.swing.JPanel defsettings;
+    private javax.swing.JLabel f1r;
+    private javax.swing.JLabel f2r;
+    private javax.swing.JLabel f3r;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

@@ -12,7 +12,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 import javax.swing.ImageIcon;
 import javax.swing.JWindow;
 import javax.swing.UIManager;
@@ -53,47 +57,60 @@ public class HotspotMaker extends JWindow {
 
     public static void main(String[] args) {
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call supportcheck.bat");
+            ProcessBuilder processBuilder
+                    = new ProcessBuilder("cmd.exe", "/c", "netsh wlan show drive>SupportCheck.ini");
             processBuilder.redirectErrorStream(true);
             processBuilder.start();
         } catch (Exception e) {
             System.out.println("0001" + e);
         }
-        
+
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "call status.bat");
+            ProcessBuilder processBuilder
+                    = new ProcessBuilder("cmd.exe", "/c", "netsh wlan show hostednetwork>Status.ini");
             processBuilder.redirectErrorStream(true);
             processBuilder.start();
         } catch (Exception e) {
             System.out.println("0002" + e);
         }
 
-        File myObj = new File("theme.ini");
-        try {
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                if (data.equals("Default")) {
+        String themespath = "C:\\ProgramData\\HotspotMakerData\\Theme.ini";
+        File themes = new File(themespath);
+        if (themes.exists()) {
+            try ( Stream<String> lines = Files.lines(Paths.get(themespath))) {
+                String theme = lines.skip(0).findFirst().get();
+                if (theme.equals("Light")) {
+                    FlatLightLaf.setup();
+                } else if (theme.equals("Dark")) {
+                    FlatDarkLaf.setup();
+                } else {
                     try {
                         UIManager.setLookAndFeel(
                                 UIManager.getSystemLookAndFeelClassName());
-                    } catch (Exception e) {
-                        System.out.println("0003" + e);
+                    } catch (Exception ex) {
+                        System.out.println("0003" + ex);
                     }
-                } else if (data.equals("Dark")) {
-                    FlatDarkLaf.setup();
-                } else if (data.equals("Light")) {
-                    FlatLightLaf.setup();
                 }
+            } catch (IOException ex) {
+                System.out.println("0004" + ex);
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("0004" + e);
+        } else {
             try {
                 UIManager.setLookAndFeel(
                         UIManager.getSystemLookAndFeelClassName());
             } catch (Exception ex) {
                 System.out.println("0005" + ex);
+            }
+        }
+
+        String fontspath = "C:\\ProgramData\\HotspotMakerData\\Font.ini";
+        File fonts = new File(fontspath);
+        if (!fonts.exists()) {
+            try ( PrintStream out = new PrintStream(new File(fontspath))) {
+                out.println("Consolas");
+                out.println("Plain");
+                out.println("12");
+            } catch (FileNotFoundException ex) {
             }
         }
 

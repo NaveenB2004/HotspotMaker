@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Scanner;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
@@ -30,8 +31,11 @@ public class Settings extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
     }
 
+    String themespath = "C:\\ProgramData\\HotspotMakerData\\Theme.ini";
+    String fontspath = "C:\\ProgramData\\HotspotMakerData\\Font.ini";
+
     private void startup() {
-        try ( Stream<String> lines = Files.lines(Paths.get("theme.ini"))) {
+        try ( Stream<String> lines = Files.lines(Paths.get(themespath))) {
             String theme = lines.skip(0).findFirst().get();
             if (theme.equals("Light")) {
                 jComboBox1.setSelectedIndex(1);
@@ -42,14 +46,29 @@ public class Settings extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
         }
-        try ( Stream<String> lines = Files.lines(Paths.get("font.ini"))) {
-            String f1 = lines.skip(0).findFirst().get();
-            String f2 = lines.skip(1).findFirst().get();
-            String f3 = lines.skip(2).findFirst().get();
+        try {
+            String x = "0";
+            String f1 = null;
+            String f2 = null;
+            String f3 = null;
+            File fonts = new File(fontspath);
+            Scanner myReader = new Scanner(fonts);
+            while (myReader.hasNextLine()) {
+                String fontsn = myReader.nextLine();
+                x = x + 1;
+                if (x.equals("1")) {
+                    f1 = fontsn;
+                } else if (x.equals("2")) {
+                    f2 = fontsn;
+                } else if (x.equals("3")) {
+                    f3 = fontsn;
+                }
+            }
+            myReader.close();
             jComboBox2.setSelectedItem(f1);
             jComboBox5.setSelectedItem(f2);
             jComboBox6.setSelectedItem(f3);
-        } catch (IOException ex) {
+        } catch (FileNotFoundException ex) {
         }
     }
 
@@ -327,7 +346,7 @@ public class Settings extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String theme = jComboBox1.getSelectedItem().toString();
-        try ( PrintStream out = new PrintStream(new File("theme.ini"))) {
+        try ( PrintStream out = new PrintStream(new File(themespath))) {
             out.println(theme);
         } catch (FileNotFoundException ex) {
         }
@@ -348,15 +367,15 @@ public class Settings extends javax.swing.JFrame {
         // TODO add your handling code here:
         String ssid = jTextField1.getText();
         String psw = jTextField2.getText();
-        try ( PrintStream out = new PrintStream(new File("def ssid.ini"))) {
+        try ( PrintStream out = new PrintStream(new File("DefSsid.ini"))) {
             out.println(ssid);
         } catch (FileNotFoundException ex) {
         }
-        try ( PrintStream out = new PrintStream(new File("def psw.ini"))) {
+        try ( PrintStream out = new PrintStream(new File("DefPsw.ini"))) {
             out.println(psw);
         } catch (FileNotFoundException ex) {
         }
-        JOptionPane.showMessageDialog(this, "Success!");
+        JOptionPane.showMessageDialog(this, "You need to restart the application\nto apply changes!");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -364,13 +383,13 @@ public class Settings extends javax.swing.JFrame {
         String a1 = jComboBox2.getSelectedItem().toString();
         String a2 = jComboBox5.getSelectedItem().toString();
         String a3 = jComboBox6.getSelectedItem().toString();
-        try ( PrintStream out = new PrintStream(new File("font.ini"))) {
+        try ( PrintStream out = new PrintStream(new File(fontspath))) {
             out.println(a1);
             out.println(a2);
             out.println(a3);
         } catch (FileNotFoundException ex) {
         }
-        JOptionPane.showMessageDialog(this, "Success!");
+        JOptionPane.showMessageDialog(this, "You need to restart the application\nto apply changes!");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
@@ -385,13 +404,14 @@ public class Settings extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        try ( PrintStream out = new PrintStream(new File("font.ini"))) {
+        try ( PrintStream out = new PrintStream(new File(fontspath))) {
             out.println("Consolas");
             out.println("Plain");
             out.println("12");
         } catch (FileNotFoundException ex) {
         }
         automate();
+        JOptionPane.showMessageDialog(this, "You need to restart the application\nto apply changes!");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

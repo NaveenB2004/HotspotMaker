@@ -10,11 +10,10 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
+import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -34,10 +33,25 @@ public class Advanced extends javax.swing.JFrame {
     }
 
     private void startup() {
-        try ( Stream<String> lines = Files.lines(Paths.get("font.ini"))) {
-            String f1 = lines.skip(0).findFirst().get();
-            String f2 = lines.skip(1).findFirst().get();
-            String f3 = lines.skip(2).findFirst().get();
+        try {
+            String x = "0";
+            String f1 = null;
+            String f2 = null;
+            String f3 = null;
+            File fonts = new File("C:\\ProgramData\\HotspotMakerData\\Font.ini");
+            Scanner myReader = new Scanner(fonts);
+            while (myReader.hasNextLine()) {
+                String fontsn = myReader.nextLine();
+                x = x + 1;
+                if (x.equals("1")) {
+                    f1 = fontsn;
+                } else if (x.equals("2")) {
+                    f2 = fontsn;
+                } else if (x.equals("3")) {
+                    f3 = fontsn;
+                }
+            }
+            myReader.close();
             int fsize = Integer.parseInt(f3);
             if (f2.equals("Plane")) {
                 console.setFont(new Font(f1, Font.PLAIN, fsize));
@@ -46,7 +60,7 @@ public class Advanced extends javax.swing.JFrame {
             } else if (f2.equals("Italic")) {
                 console.setFont(new Font(f1, Font.ITALIC, fsize));
             }
-        } catch (IOException ex) {
+        } catch (FileNotFoundException ex) {
         }
     }
 
@@ -229,7 +243,7 @@ public class Advanced extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -268,9 +282,11 @@ public class Advanced extends javax.swing.JFrame {
         for (int a = 0; a < com.length; a++) {
             com[a].setEnabled(false);
         }
+
         try {
             ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "call hotspotstatus.bat");
+                    = new ProcessBuilder("cmd.exe", "/c", "netsh wlan show hostednetwork && "
+                            + "netsh wlan show hostednetwork setting=security");
             processBuilder.redirectErrorStream(true);
             Process p = processBuilder.start();
             String line = null;
@@ -280,6 +296,7 @@ public class Advanced extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
+
         Component[] com1 = jPanel1.getComponents();
         for (int a = 0; a < com1.length; a++) {
             com[a].setEnabled(true);
@@ -293,9 +310,10 @@ public class Advanced extends javax.swing.JFrame {
         for (int a = 0; a < com.length; a++) {
             com[a].setEnabled(false);
         }
+
         try {
             ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "call ipconfiguration.bat");
+                    = new ProcessBuilder("cmd.exe", "/c", "ipconfig /all");
             processBuilder.redirectErrorStream(true);
             Process p = processBuilder.start();
             String line = null;
@@ -305,6 +323,7 @@ public class Advanced extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
+
         Component[] com1 = jPanel1.getComponents();
         for (int a = 0; a < com1.length; a++) {
             com[a].setEnabled(true);
@@ -318,9 +337,11 @@ public class Advanced extends javax.swing.JFrame {
         for (int a = 0; a < com.length; a++) {
             com[a].setEnabled(false);
         }
+
         try {
             ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "call renewip.bat");
+                    = new ProcessBuilder("cmd.exe", "/c", "ipconfig /release && "
+                            + "ipconfig /renew");
             processBuilder.redirectErrorStream(true);
             Process p = processBuilder.start();
             String line = null;
@@ -330,6 +351,7 @@ public class Advanced extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
+
         Component[] com1 = jPanel1.getComponents();
         for (int a = 0; a < com1.length; a++) {
             com[a].setEnabled(true);
@@ -343,9 +365,11 @@ public class Advanced extends javax.swing.JFrame {
         for (int a = 0; a < com.length; a++) {
             com[a].setEnabled(false);
         }
+
         try {
             ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "call publicip.bat");
+                    = new ProcessBuilder("cmd.exe", "/c", "powershell -command "
+                            + "\"(Invoke-Webrequest \"http://api.ipify.org\").content\"");
             processBuilder.redirectErrorStream(true);
             Process p = processBuilder.start();
             String line = null;
@@ -355,6 +379,7 @@ public class Advanced extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
+
         Component[] com1 = jPanel1.getComponents();
         for (int a = 0; a < com1.length; a++) {
             com[a].setEnabled(true);
@@ -369,19 +394,6 @@ public class Advanced extends javax.swing.JFrame {
             com[a].setEnabled(false);
         }
 
-        String cliver = null;
-        String guiver = null;
-        try ( Stream<String> lines = Files.lines(Paths.get("CLI Version.ini"))) {
-            cliver = lines.skip(0).findFirst().get();
-        } catch (IOException ex) {
-        }
-        try ( Stream<String> lines = Files.lines(Paths.get("GUI Version.ini"))) {
-            guiver = lines.skip(0).findFirst().get();
-        } catch (IOException ex) {
-        }
-
-        console.append("*** *** *** *** ***\n\nGUI Version " + guiver + "\nCLI Version "
-                + cliver + "\n\nPlease Wait...\n\n");
         try {
             ProcessBuilder processBuilder
                     = new ProcessBuilder("cmd.exe", "/c", "hostname");
@@ -390,11 +402,10 @@ public class Advanced extends javax.swing.JFrame {
             String line = null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
-                console.append("Hostname is : " + line + "\n");
+                console.append(line + "\n");
             }
         } catch (Exception e) {
         }
-        console.append("\n*** *** *** *** ***");
 
         Component[] com1 = jPanel1.getComponents();
         for (int a = 0; a < com1.length; a++) {
@@ -409,9 +420,10 @@ public class Advanced extends javax.swing.JFrame {
         for (int a = 0; a < com.length; a++) {
             com[a].setEnabled(false);
         }
+
         try {
             ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "call netconwindow.bat");
+                    = new ProcessBuilder("cmd.exe", "/c", "ncpa.cpl");
             processBuilder.redirectErrorStream(true);
             Process p = processBuilder.start();
             String line = null;
@@ -421,6 +433,7 @@ public class Advanced extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
+
         Component[] com1 = jPanel1.getComponents();
         for (int a = 0; a < com1.length; a++) {
             com[a].setEnabled(true);
@@ -440,22 +453,9 @@ public class Advanced extends javax.swing.JFrame {
         JFrame f1 = new JFrame();
         String count = JOptionPane.showInputDialog(f1, "Enter Ping Count:");
 
-        String cliver = null;
-        String guiver = null;
-        try ( Stream<String> lines = Files.lines(Paths.get("CLI Version.ini"))) {
-            cliver = lines.skip(0).findFirst().get();
-        } catch (IOException ex) {
-        }
-        try ( Stream<String> lines = Files.lines(Paths.get("GUI Version.ini"))) {
-            guiver = lines.skip(0).findFirst().get();
-        } catch (IOException ex) {
-        }
-
-        console.append("*** *** *** *** ***\n\nGUI Version " + guiver + "\nCLI Version "
-                + cliver + "\n\nPlease Wait...\n\n");
         try {
             ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "ping " + host + " -n " + count + "");
+                    = new ProcessBuilder("cmd.exe", "/c", "ping " + host + "/n" + count);
             processBuilder.redirectErrorStream(true);
             Process p = processBuilder.start();
             String line = null;
@@ -465,7 +465,7 @@ public class Advanced extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
-        console.append("\n*** *** *** *** ***");
+
         Component[] com1 = jPanel1.getComponents();
         for (int a = 0; a < com1.length; a++) {
             com[a].setEnabled(true);
