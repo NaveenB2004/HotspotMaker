@@ -47,29 +47,27 @@ public class Settings extends javax.swing.JFrame {
         } catch (IOException ex) {
         }
         try {
-            String x = "0";
-            String f1 = null;
-            String f2 = null;
-            String f3 = null;
+            int x = 0;
             File fonts = new File(fontspath);
             Scanner myReader = new Scanner(fonts);
             while (myReader.hasNextLine()) {
                 String fontsn = myReader.nextLine();
                 x = x + 1;
-                if (x.equals("1")) {
-                    f1 = fontsn;
-                } else if (x.equals("2")) {
-                    f2 = fontsn;
-                } else if (x.equals("3")) {
-                    f3 = fontsn;
+                if (x == 1) {
+                    f1r.setText(fontsn);
+                } else if (x == 2) {
+                    f2r.setText(fontsn);
+                } else if (x == 3) {
+                    f3r.setText(fontsn);
                 }
             }
             myReader.close();
-            jComboBox2.setSelectedItem(f1);
-            jComboBox5.setSelectedItem(f2);
-            jComboBox6.setSelectedItem(f3);
+            jComboBox2.setSelectedItem(f1r.getText());
+            jComboBox5.setSelectedItem(f2r.getText());
+            jComboBox6.setSelectedItem(f3r.getText());
         } catch (FileNotFoundException ex) {
         }
+        automate();
     }
 
     private void automate() {
@@ -95,6 +93,9 @@ public class Settings extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        f1r = new javax.swing.JLabel();
+        f2r = new javax.swing.JLabel();
+        f3r = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -116,6 +117,12 @@ public class Settings extends javax.swing.JFrame {
         jComboBox5 = new javax.swing.JComboBox<>();
         jComboBox6 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
+
+        f1r.setText("jLabel4");
+
+        f2r.setText("jLabel5");
+
+        f3r.setText("jLabel8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Settings");
@@ -450,6 +457,9 @@ public class Settings extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel f1r;
+    private javax.swing.JLabel f2r;
+    private javax.swing.JLabel f3r;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

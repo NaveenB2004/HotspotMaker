@@ -40,7 +40,7 @@ public class MainUI extends javax.swing.JFrame {
 
     private void checksupport() {
         try {
-            File support = new File("SupportCheck.ini");
+            File support = new File("C:\\ProgramData\\HotspotMakerData\\SupportCheck.ini");
             Scanner myReader = new Scanner(support);
             while (myReader.hasNextLine()) {
                 String supportn = myReader.nextLine();
@@ -53,7 +53,7 @@ public class MainUI extends javax.swing.JFrame {
         }
         if (!scpassn.equals("1")) {
             JOptionPane.showMessageDialog(this,
-                    "Your wireless network driver doesn't support for hotspot!",
+                    "Your wireless network driver doesn't support for make hotspot!",
                     "Alert", JOptionPane.WARNING_MESSAGE);
         }
     }
@@ -62,7 +62,7 @@ public class MainUI extends javax.swing.JFrame {
 
     private void startup() {
         try {
-            File status = new File("Status.ini");
+            File status = new File("C:\\ProgramData\\HotspotMakerData\\Status.ini");
             Scanner myReader = new Scanner(status);
             while (myReader.hasNextLine()) {
                 String statusn = myReader.nextLine();

@@ -56,9 +56,11 @@ public class HotspotMaker extends JWindow {
     }
 
     public static void main(String[] args) {
+        String SupportPath = "C:/ProgramData/HotspotMakerData/";
         try {
             ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "netsh wlan show drive>SupportCheck.ini");
+                    = new ProcessBuilder("cmd.exe", "/c",
+                            "netsh wlan show drive>" + SupportPath + "SupportCheck.ini");
             processBuilder.redirectErrorStream(true);
             processBuilder.start();
         } catch (Exception e) {
@@ -67,7 +69,8 @@ public class HotspotMaker extends JWindow {
 
         try {
             ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "netsh wlan show hostednetwork>Status.ini");
+                    = new ProcessBuilder("cmd.exe", "/c",
+                            "netsh wlan show hostednetwork>" + SupportPath + "Status.ini");
             processBuilder.redirectErrorStream(true);
             processBuilder.start();
         } catch (Exception e) {

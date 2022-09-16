@@ -34,24 +34,24 @@ public class Advanced extends javax.swing.JFrame {
 
     private void startup() {
         try {
-            String x = "0";
-            String f1 = null;
-            String f2 = null;
-            String f3 = null;
+            int x = 0;
             File fonts = new File("C:\\ProgramData\\HotspotMakerData\\Font.ini");
             Scanner myReader = new Scanner(fonts);
             while (myReader.hasNextLine()) {
                 String fontsn = myReader.nextLine();
                 x = x + 1;
-                if (x.equals("1")) {
-                    f1 = fontsn;
-                } else if (x.equals("2")) {
-                    f2 = fontsn;
-                } else if (x.equals("3")) {
-                    f3 = fontsn;
+                if (x == 1) {
+                    f1r.setText(fontsn);
+                } else if (x == 2) {
+                    f2r.setText(fontsn);
+                } else if (x == 3) {
+                    f3r.setText(fontsn);
                 }
             }
             myReader.close();
+            String f1 = f1r.getText();
+            String f2 = f2r.getText();
+            String f3 = f3r.getText();
             int fsize = Integer.parseInt(f3);
             if (f2.equals("Plane")) {
                 console.setFont(new Font(f1, Font.PLAIN, fsize));
@@ -73,6 +73,9 @@ public class Advanced extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        f1r = new javax.swing.JLabel();
+        f2r = new javax.swing.JLabel();
+        f3r = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -86,6 +89,12 @@ public class Advanced extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
         jButton8 = new javax.swing.JButton();
+
+        f1r.setText("jLabel1");
+
+        f2r.setText("jLabel2");
+
+        f3r.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Advanced");
@@ -366,6 +375,8 @@ public class Advanced extends javax.swing.JFrame {
             com[a].setEnabled(false);
         }
 
+        console.setText("You need active internet connection to get public ip...\n\n");
+        
         try {
             ProcessBuilder processBuilder
                     = new ProcessBuilder("cmd.exe", "/c", "powershell -command "
@@ -509,6 +520,9 @@ public class Advanced extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea console;
+    private javax.swing.JLabel f1r;
+    private javax.swing.JLabel f2r;
+    private javax.swing.JLabel f3r;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
