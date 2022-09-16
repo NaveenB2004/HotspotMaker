@@ -84,6 +84,7 @@ public class Advanced extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -150,6 +151,13 @@ public class Advanced extends javax.swing.JFrame {
             }
         });
 
+        jButton10.setText("Execute Custom Command");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -163,7 +171,8 @@ public class Advanced extends javax.swing.JFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -183,6 +192,8 @@ public class Advanced extends javax.swing.JFrame {
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -207,7 +218,7 @@ public class Advanced extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -376,7 +387,7 @@ public class Advanced extends javax.swing.JFrame {
         }
 
         console.setText("You need active internet connection to get public ip...\n\n");
-        
+
         try {
             ProcessBuilder processBuilder
                     = new ProcessBuilder("cmd.exe", "/c", "powershell -command "
@@ -466,7 +477,7 @@ public class Advanced extends javax.swing.JFrame {
 
         try {
             ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "ping " + host + "/n" + count);
+                    = new ProcessBuilder("cmd.exe", "/c", "ping " + host + " " + "/n " + count);
             processBuilder.redirectErrorStream(true);
             Process p = processBuilder.start();
             String line = null;
@@ -482,6 +493,36 @@ public class Advanced extends javax.swing.JFrame {
             com[a].setEnabled(true);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        console.setText("");
+        Component[] com = jPanel1.getComponents();
+        for (int a = 0; a < com.length; a++) {
+            com[a].setEnabled(false);
+        }
+
+        JFrame f = new JFrame();
+        String cmd = JOptionPane.showInputDialog(f, "Enter Command:");
+
+        try {
+            ProcessBuilder processBuilder
+                    = new ProcessBuilder("cmd.exe", "/c", cmd);
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                console.append(line + "\n");
+            }
+        } catch (Exception e) {
+        }
+
+        Component[] com1 = jPanel1.getComponents();
+        for (int a = 0; a < com1.length; a++) {
+            com[a].setEnabled(true);
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -524,6 +565,7 @@ public class Advanced extends javax.swing.JFrame {
     private javax.swing.JLabel f2r;
     private javax.swing.JLabel f3r;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

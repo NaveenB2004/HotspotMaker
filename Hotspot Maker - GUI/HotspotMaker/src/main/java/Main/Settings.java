@@ -35,6 +35,17 @@ public class Settings extends javax.swing.JFrame {
     String fontspath = "C:\\ProgramData\\HotspotMakerData\\Font.ini";
 
     private void startup() {
+        try ( Stream<String> lines = Files.lines(Paths.get("DefSsid.ini"))) {
+            String defssid = lines.skip(0).findFirst().get();
+            jTextField1.setText(defssid);
+        } catch (IOException ex) {
+        }
+        try ( Stream<String> lines = Files.lines(Paths.get("DefPsw.ini"))) {
+            String defpsw = lines.skip(0).findFirst().get();
+            jTextField2.setText(defpsw);
+        } catch (IOException ex) {
+        }
+
         try ( Stream<String> lines = Files.lines(Paths.get(themespath))) {
             String theme = lines.skip(0).findFirst().get();
             if (theme.equals("Light")) {
@@ -216,6 +227,7 @@ public class Settings extends javax.swing.JFrame {
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setText("1234567890\nHotspot Maker GUI\nby naveenb2004\n!@#$%^&*()_+-=\n[]\\;',./<>?:\"{}|`~");
+        jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel3.setText("Font :");
@@ -289,20 +301,20 @@ public class Settings extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -417,6 +429,9 @@ public class Settings extends javax.swing.JFrame {
             out.println("12");
         } catch (FileNotFoundException ex) {
         }
+        jComboBox2.setSelectedItem("Consolas");
+        jComboBox5.setSelectedItem("Plain");
+        jComboBox6.setSelectedItem("12");
         automate();
         JOptionPane.showMessageDialog(this, "You need to restart the application\nto apply changes!");
     }//GEN-LAST:event_jButton3ActionPerformed

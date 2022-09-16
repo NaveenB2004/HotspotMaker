@@ -34,15 +34,48 @@ public class UpdateCheck extends javax.swing.JFrame {
     }
 
     private void startup() {
-        try ( Stream<String> lines = Files.lines(Paths.get("GUI Version.ini"))) {
+        try ( Stream<String> lines = Files.lines(Paths.get("Version.ini"))) {
             String defssid = lines.skip(0).findFirst().get();
             jLabel3.setText(defssid);
         } catch (IOException ex) {
         }
-        try ( Stream<String> lines = Files.lines(Paths.get("CLI Version.ini"))) {
-            String defpsw = lines.skip(0).findFirst().get();
-            jLabel4.setText(defpsw);
+    }
+
+    private void updatecheck() {
+        URL url;
+        String tempversion = null;
+        try {
+            url = new URL("https://pastebin.com/raw/VT779EGg");
+
+            URLConnection con = url.openConnection();
+            InputStream is = con.getInputStream();
+
+            try ( BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                String line = null;
+
+                while ((line = br.readLine()) != null) {
+                    tempversion = line;
+                }
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (!tempversion.equals(jLabel3.getText())) {
+            jLabel6.setText("New Version Available!");
+            int download = JOptionPane.showConfirmDialog(null, "Do you want to download the new version?"
+                    + "\nVersion : " + tempversion,
+                    "Warning", JOptionPane.YES_NO_OPTION);
+            if (download == JOptionPane.YES_OPTION) {
+                try {
+                    Desktop.getDesktop().browse(new URL("https://github.com/naveenb2004/HotspotMaker/releases").toURI());
+                } catch (Exception e) {
+                }
+            }
+        } else {
+            jLabel6.setText("This is the Latest Version!");
         }
     }
 
@@ -59,9 +92,7 @@ public class UpdateCheck extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -90,13 +121,9 @@ public class UpdateCheck extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Runnig GUI Version :");
-
-        jLabel2.setText("Running CLI Version :");
+        jLabel1.setText("Runnig Version :");
 
         jLabel3.setText("---");
-
-        jLabel4.setText("---");
 
         jLabel5.setText("Status :");
 
@@ -113,10 +140,6 @@ public class UpdateCheck extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,10 +155,6 @@ public class UpdateCheck extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -161,8 +180,8 @@ public class UpdateCheck extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -174,60 +193,7 @@ public class UpdateCheck extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         jButton2.setText("Working...");
-        URL url;
-        String yesno1 = null;
-        String yesno2 = null;
-        try {
-            url = new URL("https://pastebin.com/raw/VT779EGg");
-
-            URLConnection con = url.openConnection();
-            InputStream is = con.getInputStream();
-
-            try ( BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-                String line = null;
-
-                while ((line = br.readLine()) != null) {
-                    yesno1 = line;
-                }
-            }
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            url = new URL("https://pastebin.com/raw/Rktvd3nR");
-
-            URLConnection con = url.openConnection();
-            InputStream is = con.getInputStream();
-
-            try ( BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-                String line = null;
-
-                while ((line = br.readLine()) != null) {
-                    yesno2 = line;
-                }
-            }
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (!yesno1.equals(jLabel3.getText()) || !yesno2.equals(jLabel4.getText())) {
-            jLabel6.setText("New Version Available!");
-            int download = JOptionPane.showConfirmDialog(null, "Do you want to download the new version?"
-                    + "\nGUI Version : " + yesno1 + " CLI Version : " + yesno2,
-                    "Warning", JOptionPane.YES_NO_OPTION);
-            if (download == JOptionPane.YES_OPTION) {
-                try {
-                    Desktop.getDesktop().browse(new URL("https://github.com/naveenb2004/HotspotMaker/releases").toURI());
-                } catch (Exception e) {
-                }
-            }
-        } else {
-            jLabel6.setText("This is the Latest Version!");
-        }
+        updatecheck();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -281,9 +247,7 @@ public class UpdateCheck extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

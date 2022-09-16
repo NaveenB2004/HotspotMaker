@@ -28,18 +28,12 @@ public class About extends javax.swing.JFrame {
     }
 
     private void GetVersion() {
-        String cliver = null;
         String guiver = null;
-        try ( Stream<String> lines = Files.lines(Paths.get("CLI Version.ini"))) {
-            cliver = lines.skip(0).findFirst().get();
-        } catch (IOException ex) {
-        }
-        try ( Stream<String> lines = Files.lines(Paths.get("GUI Version.ini"))) {
+        try ( Stream<String> lines = Files.lines(Paths.get("Version.ini"))) {
             guiver = lines.skip(0).findFirst().get();
         } catch (IOException ex) {
         }
-        jLabel2.setText("GUI Version : " + guiver
-                + "  |  CLI Version : " + cliver);
+        jLabel2.setText("GUI Version : " + guiver);
     }
 
     /**
@@ -98,7 +92,7 @@ public class About extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("GUI Version : ---  |  CLI Version : ---");
+        jLabel2.setText("Version : ---");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
