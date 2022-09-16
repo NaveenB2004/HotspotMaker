@@ -41,44 +41,6 @@ public class UpdateCheck extends javax.swing.JFrame {
         }
     }
 
-    private void updatecheck() {
-        URL url;
-        String tempversion = null;
-        try {
-            url = new URL("https://pastebin.com/raw/VT779EGg");
-
-            URLConnection con = url.openConnection();
-            InputStream is = con.getInputStream();
-
-            try ( BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-                String line = null;
-
-                while ((line = br.readLine()) != null) {
-                    tempversion = line;
-                }
-            }
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (!tempversion.equals(jLabel3.getText())) {
-            jLabel6.setText("New Version Available!");
-            int download = JOptionPane.showConfirmDialog(null, "Do you want to download the new version?"
-                    + "\nVersion : " + tempversion,
-                    "Warning", JOptionPane.YES_NO_OPTION);
-            if (download == JOptionPane.YES_OPTION) {
-                try {
-                    Desktop.getDesktop().browse(new URL("https://github.com/naveenb2004/HotspotMaker/releases").toURI());
-                } catch (Exception e) {
-                }
-            }
-        } else {
-            jLabel6.setText("This is the Latest Version!");
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,8 +154,41 @@ public class UpdateCheck extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        jButton2.setText("Working...");
-        updatecheck();
+        URL url;
+        String tempversion = null;
+        try {
+            url = new URL("https://pastebin.com/raw/VT779EGg");
+
+            URLConnection con = url.openConnection();
+            InputStream is = con.getInputStream();
+
+            try ( BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                String line = null;
+
+                while ((line = br.readLine()) != null) {
+                    tempversion = line;
+                }
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (!tempversion.equals(jLabel3.getText())) {
+            jLabel6.setText("New Version Available!");
+            int download = JOptionPane.showConfirmDialog(null, "Do you want to download the new version?"
+                    + "\nVersion : " + tempversion,
+                    "Warning", JOptionPane.YES_NO_OPTION);
+            if (download == JOptionPane.YES_OPTION) {
+                try {
+                    Desktop.getDesktop().browse(new URL("https://github.com/naveenb2004/HotspotMaker/releases").toURI());
+                } catch (Exception e) {
+                }
+            }
+        } else {
+            jLabel6.setText("This is the Latest Version!");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -205,7 +200,6 @@ public class UpdateCheck extends javax.swing.JFrame {
 
     private void jButton2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseMoved
         // TODO add your handling code here:
-        jButton2.setText("Check for Updates!");
     }//GEN-LAST:event_jButton2MouseMoved
 
     /**
