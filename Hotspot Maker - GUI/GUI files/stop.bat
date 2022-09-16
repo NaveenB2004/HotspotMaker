@@ -2,10 +2,8 @@
 echo *** *** *** *** ***
 echo.
 ::print versions
-set/p guiver=<"GUI Version.ini"
-set/p cliver=<"CLI Version.ini"
-echo GUI Version %guiver%
-echo CLI Version %cliver%
+set/p ver=<"Version.ini"
+echo Version %ver%
 echo.
 ::print details and stop hostednetwork
 echo Stopping Hotspot...

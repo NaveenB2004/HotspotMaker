@@ -3,17 +3,17 @@
   <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
   <jar>HotspotMaker-1.1.jar</jar>
-  <outfile>C:\Users\Naveen\Desktop\hm\Hotspot Maker - GUI\GUI files\Hotspot Maker Launcher.exe</outfile>
-  <errTitle></errTitle>
+  <outfile>C:\Users\Naveen\Desktop\Hotspot Maker - GUI\GUI files\Hotspot Maker.exe</outfile>
+  <errTitle>You need to install Java Runtime (v11 or high)</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
   <priority>normal</priority>
-  <downloadUrl>http://java.com/download</downloadUrl>
-  <supportUrl></supportUrl>
+  <downloadUrl>https://www.oracle.com/java/technologies/downloads/</downloadUrl>
+  <supportUrl>https://www.oracle.com/java/technologies/downloads/</supportUrl>
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
-  <manifest>C:\Users\Naveen\Desktop\l4j admin wrapper mainfest.manifest</manifest>
-  <icon>C:\Users\Naveen\Desktop\hm\Others\Icon.ico</icon>
+  <manifest>C:\Users\Naveen\Desktop\Others\Launch4j\admin wrapper (l4j).manifest</manifest>
+  <icon>C:\Users\Naveen\Desktop\Others\Icon.ico</icon>
   <jre>
     <path></path>
     <bundledJre64Bit>false</bundledJre64Bit>
@@ -23,4 +23,18 @@
     <jdkPreference>preferJre</jdkPreference>
     <runtimeBits>64/32</runtimeBits>
   </jre>
+  <versionInfo>
+    <fileVersion>1.1.0.0</fileVersion>
+    <txtFileVersion>1.1.0.0</txtFileVersion>
+    <fileDescription>Hotspot Maker</fileDescription>
+    <copyright>The Unlicense</copyright>
+    <productVersion>1.1.0.0</productVersion>
+    <txtProductVersion>1.1.0.0</txtProductVersion>
+    <productName>Hotspot Maker</productName>
+    <companyName>naveenb2004</companyName>
+    <internalName>Hotspot Maker</internalName>
+    <originalFilename>Hotspot Maker.exe</originalFilename>
+    <trademarks>naveenb2004</trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
 </launch4jConfig>
