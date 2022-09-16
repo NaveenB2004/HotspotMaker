@@ -12,10 +12,7 @@ echo.
 echo Details about the wi-fi hotspot craeting wizard...
 echo ..........................................................
 echo ---------------------{Stable Edition}---------------------
-echo.
 echo --------------------------(v%version%)--------------------------
-echo.
-echo .......................(18.06.2022).......................
 echo.
 ::contack information
 echo Created by: Naveen Balasooriya
