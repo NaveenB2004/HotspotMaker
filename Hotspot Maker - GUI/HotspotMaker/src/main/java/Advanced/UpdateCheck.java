@@ -10,18 +10,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author NaveenBalasooriya
+ * @author naveenb2004
  */
 public class UpdateCheck extends javax.swing.JFrame {
 
@@ -34,11 +30,7 @@ public class UpdateCheck extends javax.swing.JFrame {
     }
 
     private void startup() {
-        try ( Stream<String> lines = Files.lines(Paths.get("Version.ini"))) {
-            String defssid = lines.skip(0).findFirst().get();
-            jLabel3.setText(defssid);
-        } catch (IOException ex) {
-        }
+        jLabel3.setText("v" + HotspotMaker.details.version);
     }
 
     /**
@@ -154,40 +146,38 @@ public class UpdateCheck extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        URL url;
         String tempversion = null;
         try {
-            url = new URL("https://pastebin.com/raw/VT779EGg");
-
+            URL url = new URL("https://pastebin.com/raw/VT779EGg");
             URLConnection con = url.openConnection();
             InputStream is = con.getInputStream();
-
-            try ( BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
                 String line = null;
-
                 while ((line = br.readLine()) != null) {
                     tempversion = line;
                 }
             }
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(UpdateCheck.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (!tempversion.equals(jLabel3.getText())) {
-            jLabel6.setText("New Version Available!");
-            int download = JOptionPane.showConfirmDialog(null, "Do you want to download the new version?"
-                    + "\nVersion : " + tempversion,
-                    "Warning", JOptionPane.YES_NO_OPTION);
-            if (download == JOptionPane.YES_OPTION) {
-                try {
-                    Desktop.getDesktop().browse(new URL("https://github.com/naveenb2004/HotspotMaker/releases").toURI());
-                } catch (Exception e) {
+            if (!tempversion.equals(HotspotMaker.details.version)) {
+                jLabel6.setText("New Version Available!");
+                int download = JOptionPane.showConfirmDialog(null,
+                        "Do you want to download the new version?"
+                        + "\nVersion : " + tempversion,
+                        "Warning", JOptionPane.YES_NO_OPTION);
+                if (download == JOptionPane.YES_OPTION) {
+                    try {
+                        Desktop.getDesktop().browse(new URL(
+                                "https://github.com/naveenb2004/HotspotMaker/releases").toURI());
+                    } catch (IOException | URISyntaxException e) {
+                        System.out.println(e);
+                    }
                 }
+            } else {
+                jLabel6.setText("This is the Latest Version!");
             }
-        } else {
-            jLabel6.setText("This is the Latest Version!");
+        } catch (MalformedURLException ex) {
+            JOptionPane.showMessageDialog(this, "Connection error!\n" + ex);
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

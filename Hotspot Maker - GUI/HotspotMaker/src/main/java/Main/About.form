@@ -202,7 +202,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Imgs/GitHub-60px.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="GitHub"/>
+            <Property name="toolTipText" type="java.lang.String" value="Github: http://github.com/naveenb2004/HotspotMaker"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -222,7 +222,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Imgs/Web-60px.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Web"/>
+            <Property name="toolTipText" type="java.lang.String" value="Web: https://sites.google.com/view/naveenb2004"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -242,7 +242,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Imgs/Email-60px.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Email"/>
+            <Property name="toolTipText" type="java.lang.String" value="Email: naveennbalasooriya2004@gmail.com"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

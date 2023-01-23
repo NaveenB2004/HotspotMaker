@@ -23,7 +23,7 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author NaveenBalasooriya
+ * @author naveenb2004
  */
 public class HotspotMaker extends JWindow {
 

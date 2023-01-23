@@ -12,14 +12,18 @@ import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author NaveenBalasooriya
+ * @author naveenb2004
  */
 public class Advanced extends javax.swing.JFrame {
 
@@ -61,7 +65,46 @@ public class Advanced extends javax.swing.JFrame {
                 console.setFont(new Font(f1, Font.ITALIC, fsize));
             }
         } catch (FileNotFoundException ex) {
+            System.out.println(ex);
         }
+    }
+
+    String command;
+
+    private void operations() {
+        console.setText("");
+
+        Component[] com = jPanel1.getComponents();
+        for (int a = 0; a < com.length; a++) {
+            com[a].setEnabled(false);
+        }
+
+        new Thread(
+                new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ProcessBuilder processBuilder
+                            = new ProcessBuilder("cmd.exe", "/c", command);
+                    processBuilder.redirectErrorStream(true);
+                    Process p = processBuilder.start();
+                    String line = null;
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    while ((line = bufferedReader.readLine()) != null) {
+                        console.append(line + "\n");
+                    }
+                } catch (IOException e) {
+                    console.append(e + "\n");
+                }
+
+                Component[] com1 = jPanel1.getComponents();
+                for (int a = 0; a < com1.length; a++) {
+                    com[a].setEnabled(true);
+                }
+            }
+        }
+        ).start();
+
     }
 
     /**
@@ -84,7 +127,6 @@ public class Advanced extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -151,13 +193,6 @@ public class Advanced extends javax.swing.JFrame {
             }
         });
 
-        jButton10.setText("Execute Custom Command");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -171,8 +206,7 @@ public class Advanced extends javax.swing.JFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -192,8 +226,6 @@ public class Advanced extends javax.swing.JFrame {
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -229,7 +261,7 @@ public class Advanced extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton8.setText("Copy Console Output to Clipboard");
+        jButton8.setText("Copy Console");
         jButton8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jButton8MouseMoved(evt);
@@ -248,9 +280,11 @@ public class Advanced extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -262,10 +296,11 @@ public class Advanced extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -292,237 +327,63 @@ public class Advanced extends javax.swing.JFrame {
 
     private void jButton8MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseMoved
         // TODO add your handling code here:
-        jButton8.setText("Copy Console Output to Clipboard");
+        jButton8.setText("Copy Console");
     }//GEN-LAST:event_jButton8MouseMoved
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        console.setText("");
-        Component[] com = jPanel1.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
-        }
-
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "netsh wlan show hostednetwork && "
-                            + "netsh wlan show hostednetwork setting=security");
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                console.append(line + "\n");
-            }
-        } catch (Exception e) {
-        }
-
-        Component[] com1 = jPanel1.getComponents();
-        for (int a = 0; a < com1.length; a++) {
-            com[a].setEnabled(true);
-        }
+        command = "netsh wlan show hostednetwork && netsh wlan show hostednetwork setting=security";
+        operations();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        console.setText("");
-        Component[] com = jPanel1.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
-        }
-
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "ipconfig /all");
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                console.append(line + "\n");
-            }
-        } catch (Exception e) {
-        }
-
-        Component[] com1 = jPanel1.getComponents();
-        for (int a = 0; a < com1.length; a++) {
-            com[a].setEnabled(true);
-        }
+        command = "ipconfig /all";
+        operations();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        console.setText("");
-        Component[] com = jPanel1.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
-        }
-
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "ipconfig /release && "
-                            + "ipconfig /renew");
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                console.append(line + "\n");
-            }
-        } catch (Exception e) {
-        }
-
-        Component[] com1 = jPanel1.getComponents();
-        for (int a = 0; a < com1.length; a++) {
-            com[a].setEnabled(true);
-        }
+        command = "ipconfig /release && ipconfig /renew";
+        operations();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        console.setText("");
-        Component[] com = jPanel1.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
-        }
-
-        console.setText("You need active internet connection to get public ip...\n\n");
-
         try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "powershell -command "
-                            + "\"(Invoke-Webrequest \"http://api.ipify.org\").content\"");
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                console.append(line + "\n");
-            }
-        } catch (Exception e) {
-        }
-
-        Component[] com1 = jPanel1.getComponents();
-        for (int a = 0; a < com1.length; a++) {
-            com[a].setEnabled(true);
+            URL url = new URL("http://api.ipify.org");
+            URLConnection connection = url.openConnection();
+            connection.connect();
+            command = "powershell -command \"(Invoke-Webrequest \"http://api.ipify.org\").content\"";
+            operations();
+        } catch (MalformedURLException e) {
+            console.append("Connection failed!\n" + e);
+        } catch (IOException e) {
+            console.append("Connection failed!\n" + e);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        console.setText("");
-        Component[] com = jPanel1.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
-        }
-
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "hostname");
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                console.append(line + "\n");
-            }
-        } catch (Exception e) {
-        }
-
-        Component[] com1 = jPanel1.getComponents();
-        for (int a = 0; a < com1.length; a++) {
-            com[a].setEnabled(true);
-        }
+        command = "hostname";
+        operations();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        console.setText("");
-        Component[] com = jPanel1.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
-        }
-
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "ncpa.cpl");
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                console.append(line + "\n");
-            }
-        } catch (Exception e) {
-        }
-
-        Component[] com1 = jPanel1.getComponents();
-        for (int a = 0; a < com1.length; a++) {
-            com[a].setEnabled(true);
-        }
+        command = "ncpa.cpl";
+        operations();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        console.setText("");
-        Component[] com = jPanel1.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
-        }
-
         JFrame f = new JFrame();
         String host = JOptionPane.showInputDialog(f, "Enter IP (or Host):");
         JFrame f1 = new JFrame();
         String count = JOptionPane.showInputDialog(f1, "Enter Ping Count:");
-
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "ping " + host + " " + "/n " + count);
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                console.append(line + "\n");
-            }
-        } catch (Exception e) {
-        }
-
-        Component[] com1 = jPanel1.getComponents();
-        for (int a = 0; a < com1.length; a++) {
-            com[a].setEnabled(true);
-        }
+        command = "ping " + host + " " + "/n " + count;
+        operations();
     }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-        console.setText("");
-        Component[] com = jPanel1.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
-        }
-
-        JFrame f = new JFrame();
-        String cmd = JOptionPane.showInputDialog(f, "Enter Command:");
-
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", cmd);
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                console.append(line + "\n");
-            }
-        } catch (Exception e) {
-        }
-
-        Component[] com1 = jPanel1.getComponents();
-        for (int a = 0; a < com1.length; a++) {
-            com[a].setEnabled(true);
-        }
-    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -565,7 +426,6 @@ public class Advanced extends javax.swing.JFrame {
     private javax.swing.JLabel f2r;
     private javax.swing.JLabel f3r;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

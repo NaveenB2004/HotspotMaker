@@ -7,6 +7,7 @@ package Main;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,7 +15,7 @@ import java.util.stream.Stream;
 
 /**
  *
- * @author NaveenBalasooriya
+ * @author naveenb2004
  */
 public class About extends javax.swing.JFrame {
 
@@ -108,7 +109,7 @@ public class About extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/GitHub-60px.png"))); // NOI18N
-        jButton3.setToolTipText("GitHub");
+        jButton3.setToolTipText("Github: http://github.com/naveenb2004/HotspotMaker");
         jButton3.setBorder(null);
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
@@ -121,7 +122,7 @@ public class About extends javax.swing.JFrame {
         });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Web-60px.png"))); // NOI18N
-        jButton2.setToolTipText("Web");
+        jButton2.setToolTipText("Web: https://sites.google.com/view/naveenb2004");
         jButton2.setBorder(null);
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
@@ -134,7 +135,7 @@ public class About extends javax.swing.JFrame {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Email-60px.png"))); // NOI18N
-        jButton1.setToolTipText("Email");
+        jButton1.setToolTipText("Email: naveennbalasooriya2004@gmail.com");
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
@@ -232,7 +233,8 @@ public class About extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Desktop.getDesktop().browse(new URL("http://github.com/naveenb2004/HotspotMaker").toURI());
-        } catch (Exception e) {
+        } catch (IOException | URISyntaxException e) {
+            System.out.println(e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -240,7 +242,8 @@ public class About extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Desktop.getDesktop().browse(new URL("https://sites.google.com/view/naveenb2004").toURI());
-        } catch (Exception e) {
+        } catch (IOException | URISyntaxException e) {
+            System.out.println(e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -248,7 +251,8 @@ public class About extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Desktop.getDesktop().browse(new URL("mailto:naveennbalasooriya2004@gmail.com").toURI());
-        } catch (Exception e) {
+        } catch (IOException | URISyntaxException e) {
+            System.out.println(e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

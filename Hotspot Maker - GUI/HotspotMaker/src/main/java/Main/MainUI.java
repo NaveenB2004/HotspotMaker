@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.stream.Stream;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -61,6 +62,8 @@ public class MainUI extends javax.swing.JFrame {
     String statuspass = null;
 
     private void startup() {
+        jButton8.setIcon(new ImageIcon(getClass().getResource("Imgs/dark.png")));
+
         try {
             File status = new File("C:\\ProgramData\\HotspotMakerData\\Status.ini");
             Scanner myReader = new Scanner(status);
@@ -96,12 +99,12 @@ public class MainUI extends javax.swing.JFrame {
                 com[a].setEnabled(false);
             }
         }
-        try ( Stream<String> lines = Files.lines(Paths.get("DefSsid.ini"))) {
+        try (Stream<String> lines = Files.lines(Paths.get("DefSsid.ini"))) {
             String defssid = lines.skip(0).findFirst().get();
             jTextField3.setText(defssid);
         } catch (IOException ex) {
         }
-        try ( Stream<String> lines = Files.lines(Paths.get("DefPsw.ini"))) {
+        try (Stream<String> lines = Files.lines(Paths.get("DefPsw.ini"))) {
             String defpsw = lines.skip(0).findFirst().get();
             jTextField4.setText(defpsw);
         } catch (IOException ex) {
@@ -177,6 +180,7 @@ public class MainUI extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
+        jButton8 = new javax.swing.JButton();
 
         f1r.setText("jLabel4");
 
@@ -199,7 +203,7 @@ public class MainUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -386,7 +390,7 @@ public class MainUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jRadioButton1)
-                .addContainerGap(569, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(defsettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
@@ -420,6 +424,8 @@ public class MainUI extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1)
                 .addContainerGap())
         );
@@ -428,6 +434,10 @@ public class MainUI extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -437,7 +447,6 @@ public class MainUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -447,7 +456,8 @@ public class MainUI extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -537,11 +547,11 @@ public class MainUI extends javax.swing.JFrame {
         jButton6.setEnabled(false);
         String ssid = jTextField3.getText();
         String psw = jTextField4.getText();
-        try ( PrintStream out = new PrintStream(new File("ssid.ini"))) {
+        try (PrintStream out = new PrintStream(new File("ssid.ini"))) {
             out.println(ssid);
         } catch (FileNotFoundException ex) {
         }
-        try ( PrintStream out = new PrintStream(new File("psw.ini"))) {
+        try (PrintStream out = new PrintStream(new File("psw.ini"))) {
             out.println(psw);
         } catch (FileNotFoundException ex) {
         }
@@ -566,35 +576,7 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        jRadioButton1.setEnabled(false);
-        jButton1.setEnabled(false);
-        String ssid = jTextField1.getText();
-        String psw = jTextField2.getText();
-        try ( PrintStream out = new PrintStream(new File("ssid.ini"))) {
-            out.println(ssid);
-        } catch (FileNotFoundException ex) {
-        }
-        try ( PrintStream out = new PrintStream(new File("psw.ini"))) {
-            out.println(psw);
-        } catch (FileNotFoundException ex) {
-        }
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "call start.bat");
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                console.append(line + "\n");
-            }
-        } catch (Exception e) {
-        }
-        Component[] com = onetimepanel.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
-        }
-        jButton7.setEnabled(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -670,6 +652,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
