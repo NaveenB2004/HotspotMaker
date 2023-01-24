@@ -7,19 +7,19 @@ This programe is coded with Batch scripts (CLI - not maintained) & Java (GUI). I
 I hope you will try this out!
 
 ### **CLI**
-`(not maintained)`
+`(not maintained)` - latest [v2.7](https://github.com/naveenb2004/HotspotMaker/releases/tag/v2.7)
 - Package Name: Hotspot Maker
 - Coded By: Naveen Balasooriya
-- Website: https://sites.google.com/view/naveenb2004
-- Text Editor: VS Code (https://code.visualstudio.com)
-- Cloud Web Request Store: Pastebin (https://pastebin.com/u/naveenb2004)
-- Cloud Updates Store: Google Drive (https://shorturl.at/mxHZ9)
-- Launcher EXE Converter: Bat2EXE Converter (https://shorturl.at/ekoKS)
-- Full Version EXE Packed: Inno Setup (https://jrsoftware.org/isinfo.php)
+- [Take a visit](https://sites.google.com/view/naveenb2004)
+- Text Editor: [VS Code](https://code.visualstudio.com)
+- Cloud Web Request Store: [Pastebin](https://pastebin.com/u/naveenb2004)
+- Cloud Updates Store: [Google Drive](https://shorturl.at/mxHZ9)
+- Launcher EXE Converter: [Bat2EXE Converter](https://shorturl.at/ekoKS)
+- Full Version EXE Packed: [Inno Setup](https://jrsoftware.org/isinfo.php)
 
 ### **GUI (portable)**
 - Package Name: Hotspot Maker
 - Coded By: Naveen Balasooriya
-- Website: https://sites.google.com/view/naveenb2004
-- IDE: Netbeans (v16) (https://netbeans.apache.org) - with Java (jdk 17)
-- Launcher EXE Converter: Launch4j (http://launch4j.sourceforge.net)
+- [Take a visit](https://sites.google.com/view/naveenb2004)
+- IDE: [Netbeans](https://netbeans.apache.org) (v16) - with [Java - JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- Launcher EXE Converter: [Launch4j](http://launch4j.sourceforge.net)
