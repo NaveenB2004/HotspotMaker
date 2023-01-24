@@ -1,28 +1,25 @@
 ![HotspotMaker](https://user-images.githubusercontent.com/95101859/174438759-f0aeb763-7c9b-4e37-9de6-ab479bfc4a4f.jpg)
 
 Hello!
-The Hotspot Maker, made for use with Windows Operating System to start and stop hotspots with custom settings. It is working with simple command line interface and decorated with some functions. There are some features to work with your network. But they are not advanced!
+The Hotspot Maker, made for use with Windows Operating System to start and stop hotspots with custom settings. It is working with simple command line interface and decorated with some functions. There are some features to work with your network!
 
-This programe is coded with Batch scripts (CLI) & Java (GUI). I'm learning about those programming languages and also I have some knowledge more than a beginer for that.
+This programe is coded with Batch scripts (CLI - not maintained) & Java (GUI). I'm learning about those programming languages and also I have some kind of knowledge more than a beginer level for that.
 I hope you will try this out!
 
 ### **CLI**
+`(not maintained)` - latest [v2.7](https://github.com/naveenb2004/HotspotMaker/releases/tag/v2.7)
 - Package Name: Hotspot Maker
 - Coded By: Naveen Balasooriya
-- Website: https://sites.google.com/view/naveenb2004
-- Text Editor: VS Code (https://code.visualstudio.com)
-- Cloud Web Request Store: Pastebin (https://pastebin.com/u/naveenb2004)
-- Cloud Updates Store: Google Drive (https://shorturl.at/mxHZ9)
-- Launcher EXE Converter: Bat2EXE Converter (https://shorturl.at/ekoKS)
-- Full Version EXE Packed: Inno Setup (https://jrsoftware.org/isinfo.php)
+- [Take a visit](https://sites.google.com/view/naveenb2004)
+- Text Editor: [VS Code](https://code.visualstudio.com)
+- Cloud Web Request Store: [Pastebin](https://pastebin.com/u/naveenb2004)
+- Cloud Updates Store: [Google Drive](https://shorturl.at/mxHZ9)
+- Launcher EXE Converter: [Bat2EXE Converter](https://shorturl.at/ekoKS)
+- Full Version EXE Packed: [Inno Setup](https://jrsoftware.org/isinfo.php)
 
-### **GUI**
+### **GUI (portable)**
 - Package Name: Hotspot Maker
 - Coded By: Naveen Balasooriya
-- Website: https://sites.google.com/view/naveenb2004
-- IDE: Netbeans (v13) (https://netbeans.apache.org) - for Java (jdk 11)
-- Text Editor: VS Code (https://code.visualstudio.com) - for Batch
-- Text Editor: Sublime Text (https://www.sublimetext.com) - for Batch
-- Launcher EXE Converter: Launch4j (http://launch4j.sourceforge.net)
-- Get Admin vbs to exe Converter: Vbs To Exe (https://github.com/Makazzz/VbsToExePortable)
-- Full Version EXE Packed: Inno Setup (https://jrsoftware.org/isinfo.php)
+- [Take a visit](https://sites.google.com/view/naveenb2004)
+- IDE: [Netbeans](https://netbeans.apache.org) (v16) - with [Java - JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- Launcher EXE Converter: [Launch4j](http://launch4j.sourceforge.net)
