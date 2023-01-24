@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,21 +38,20 @@ public class MainUI extends javax.swing.JFrame {
                 getClass().getResource("/Imgs/Icon.png")));
 
         if (HotspotMaker.details.status = true) {
-            jRadioButton1.setSelected(false);
-            jRadioButton2.setSelected(false);
             jButton7.setEnabled(true);
-            Component[] com = defsettings.getComponents();
-            for (int a = 0; a < com.length; a++) {
-                com[a].setEnabled(false);
+            Component[] com = jPanel3.getComponents();
+            for (Component com1 : com) {
+                com1.setEnabled(false);
             }
-            Component[] com1 = onetimepanel.getComponents();
-            for (int a = 0; a < com1.length; a++) {
-                com1[a].setEnabled(false);
+            Component[] com1 = jPanel2.getComponents();
+            for (Component com11 : com1) {
+                com11.setEnabled(false);
             }
             console.setText("Hosted network running...\n");
         } else {
             jButton7.setEnabled(false);
             if (new File(HotspotMaker.details.space + "Credentials.ini").exists()) {
+                HotspotMaker.details.defCred = true;
                 try (Stream<String> lines = Files.lines(Paths.get(
                         HotspotMaker.details.space + "Credentials.ini"))) {
                     String defssid = lines.skip(0).findFirst().get();
@@ -67,15 +67,16 @@ public class MainUI extends javax.swing.JFrame {
                     System.out.println(ex);
                 }
                 jRadioButton1.setSelected(true);
-                Component[] com = defsettings.getComponents();
-                for (int a = 0; a < com.length; a++) {
-                    com[a].setEnabled(false);
+                Component[] com = onetimepanel.getComponents();
+                for (Component com1 : com) {
+                    com1.setEnabled(false);
                 }
             } else {
+                HotspotMaker.details.defCred = false;
                 jRadioButton2.setSelected(true);
-                Component[] com = onetimepanel.getComponents();
-                for (int a = 0; a < com.length; a++) {
-                    com[a].setEnabled(false);
+                Component[] com = defsettings.getComponents();
+                for (Component com1 : com) {
+                    com1.setEnabled(false);
                 }
             }
         }
@@ -459,29 +460,29 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
-        if (!jButton7.isEnabled()) {
-            Component[] com1 = onetimepanel.getComponents();
-            for (int a = 0; a < com1.length; a++) {
-                com1[a].setEnabled(true);
-            }
-            Component[] com = defsettings.getComponents();
-            for (int a = 0; a < com.length; a++) {
-                com[a].setEnabled(false);
-            }
+        Component[] com1 = onetimepanel.getComponents();
+        for (Component com11 : com1) {
+            com11.setEnabled(true);
+        }
+        Component[] com = defsettings.getComponents();
+        for (Component com2 : com) {
+            com2.setEnabled(false);
         }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
-        if (!jButton7.isEnabled()) {
+        if (HotspotMaker.details.defCred = true) {
             Component[] com1 = defsettings.getComponents();
-            for (int a = 0; a < com1.length; a++) {
-                com1[a].setEnabled(true);
+            for (Component com11 : com1) {
+                com11.setEnabled(true);
             }
             Component[] com = onetimepanel.getComponents();
-            for (int a = 0; a < com.length; a++) {
-                com[a].setEnabled(false);
+            for (Component com2 : com) {
+                com2.setEnabled(false);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Set default SSID & Password first!\n(Settings)");
         }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
@@ -497,8 +498,12 @@ public class MainUI extends javax.swing.JFrame {
                 + "netsh wlan start hostednetwork";
         operations();
         Component[] com = jPanel3.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
+        for (Component com1 : com) {
+            com1.setEnabled(false);
+        }
+        Component[] com2 = jPanel2.getComponents();
+        for (Component com1 : com2) {
+            com1.setEnabled(false);
         }
         jButton7.setEnabled(true);
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -509,8 +514,12 @@ public class MainUI extends javax.swing.JFrame {
                 + "netsh wlan start hostednetwork";
         operations();
         Component[] com = jPanel2.getComponents();
-        for (int a = 0; a < com.length; a++) {
-            com[a].setEnabled(false);
+        for (Component com1 : com) {
+            com1.setEnabled(false);
+        }
+        Component[] com2 = jPanel3.getComponents();
+        for (Component com1 : com2) {
+            com1.setEnabled(false);
         }
         jButton7.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed

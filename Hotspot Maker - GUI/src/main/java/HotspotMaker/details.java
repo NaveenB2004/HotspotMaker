@@ -14,5 +14,6 @@ public class details {
     public static boolean support;
     public static boolean status = false;
     public static String space = "C:\\ProgramData\\naveenb2004\\HospotMaker\\";
+    public static boolean defCred;
 
 }
