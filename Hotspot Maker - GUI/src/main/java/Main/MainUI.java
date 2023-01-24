@@ -30,20 +30,22 @@ public class MainUI extends javax.swing.JFrame {
         initComponents();
         startup();
     }
-
+    
     String command;
-
+    
     private void startup() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
         
         if (HotspotMaker.details.status == true) {
             jButton7.setEnabled(true);
-            Component[] com = jPanel3.getComponents();
+            jRadioButton1.setEnabled(false);
+            jRadioButton2.setEnabled(false);
+            Component[] com = defsettings.getComponents();
             for (Component com1 : com) {
                 com1.setEnabled(false);
             }
-            Component[] com1 = jPanel2.getComponents();
+            Component[] com1 = onetimepanel.getComponents();
             for (Component com11 : com1) {
                 com11.setEnabled(false);
             }
@@ -81,11 +83,12 @@ public class MainUI extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void operations() {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                console.setText("");
                 console.append("========== Hotspot Maker (v" + details.version + ") ==========\n\n");
                 try {
                     ProcessBuilder processBuilder
@@ -472,7 +475,7 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
-        if (HotspotMaker.details.defCred = true) {
+        if (HotspotMaker.details.defCred == true) {
             Component[] com1 = defsettings.getComponents();
             for (Component com11 : com1) {
                 com11.setEnabled(true);
@@ -493,35 +496,39 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        jButton7.setEnabled(true);
+        jRadioButton1.setEnabled(false);
+        jRadioButton2.setEnabled(false);
+        Component[] com = defsettings.getComponents();
+        for (Component com1 : com) {
+            com1.setEnabled(false);
+        }
+        Component[] com1 = onetimepanel.getComponents();
+        for (Component com11 : com1) {
+            com11.setEnabled(false);
+        }
         command = "netsh wlan set hostednetwork mode=allow ssid=\""
                 + jTextField3.getText() + "\" key=\"" + jTextField4.getText() + "\" && "
                 + "netsh wlan start hostednetwork";
         operations();
-        Component[] com = jPanel3.getComponents();
-        for (Component com1 : com) {
-            com1.setEnabled(false);
-        }
-        Component[] com2 = jPanel2.getComponents();
-        for (Component com1 : com2) {
-            com1.setEnabled(false);
-        }
-        jButton7.setEnabled(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jButton7.setEnabled(true);
+        jRadioButton1.setEnabled(false);
+        jRadioButton2.setEnabled(false);
+        Component[] com = defsettings.getComponents();
+        for (Component com1 : com) {
+            com1.setEnabled(false);
+        }
+        Component[] com1 = onetimepanel.getComponents();
+        for (Component com11 : com1) {
+            com11.setEnabled(false);
+        }
         command = "netsh wlan set hostednetwork mode=allow ssid=\""
                 + jTextField3.getText() + "\" key=\"" + jTextField4.getText() + "\" && "
                 + "netsh wlan start hostednetwork";
         operations();
-        Component[] com = jPanel2.getComponents();
-        for (Component com1 : com) {
-            com1.setEnabled(false);
-        }
-        Component[] com2 = jPanel3.getComponents();
-        for (Component com1 : com2) {
-            com1.setEnabled(false);
-        }
-        jButton7.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -533,7 +540,8 @@ public class MainUI extends javax.swing.JFrame {
         jRadioButton2.setEnabled(true);
         if (jRadioButton1.isSelected()) {
             jRadioButton1ActionPerformed(evt);
-        } else if (jRadioButton2.isSelected()) {
+        }
+        if (jRadioButton2.isSelected()) {
             jRadioButton2ActionPerformed(evt);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
