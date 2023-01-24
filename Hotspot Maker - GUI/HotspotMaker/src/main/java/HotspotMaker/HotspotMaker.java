@@ -6,20 +6,19 @@ package HotspotMaker;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
-import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JWindow;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -27,70 +26,67 @@ import javax.swing.UIManager;
  */
 public class HotspotMaker extends JWindow {
 
-    //add all images to src/main/resources/pkg(imgs)/
-    Image splashScreen;
-    ImageIcon imageIcon;
-
-    public HotspotMaker() {
-        splashScreen = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Splash.jpg"));
-        // Create ImageIcon from Image
-        imageIcon = new ImageIcon(splashScreen);
-        // Set JWindow size from image size
-        setSize(imageIcon.getIconWidth(), imageIcon.getIconHeight());
-        // Get current screen size
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        // Get x coordinate on screen for make JWindow locate at center
-        int x = (screenSize.width - getSize().width) / 2;
-        // Get y coordinate on screen for make JWindow locate at center
-        int y = (screenSize.height - getSize().height) / 2;
-        // Set new location for JWindow
-        setLocation(x, y);
-        // Make JWindow visible
-        setVisible(true);
-    }
-
-    // Paint image onto JWindow
-    public void paint(Graphics g) {
-        super.paint(g);
-        g.drawImage(splashScreen, 0, 0, this);
-    }
-
     public static void main(String[] args) {
-        String SupportPath = "C:/ProgramData/HotspotMakerData/";
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c",
-                            "netsh wlan show drive>" + SupportPath + "SupportCheck.ini");
-            processBuilder.redirectErrorStream(true);
-            processBuilder.start();
-        } catch (Exception e) {
-            System.out.println("0001" + e);
+        Splash splash = new Splash();
+        splash.setVisible(true);
+
+        if (!new File(details.space).exists()) {
+            new File(details.space).mkdirs();
         }
 
         try {
             ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c",
-                            "netsh wlan show hostednetwork>" + SupportPath + "Status.ini");
+                    = new ProcessBuilder("cmd.exe", "/c", "netsh wlan show drive");
             processBuilder.redirectErrorStream(true);
-            processBuilder.start();
-        } catch (Exception e) {
-            System.out.println("0002" + e);
+            Process p = processBuilder.start();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.equals("    Hosted network supported  : Yes")) {
+                    details.support = true;
+                }
+            }
+            if (details.support = false) {
+                JOptionPane.showMessageDialog(splash,
+                        "Your network interface doesn't support for make hotspot!");
+                System.exit(0);
+            }
+        } catch (IOException e) {
+            System.out.println(e);
         }
 
-        String themespath = "C:\\ProgramData\\HotspotMakerData\\Theme.ini";
-        File themes = new File(themespath);
+        try {
+            ProcessBuilder processBuilder
+                    = new ProcessBuilder("cmd.exe", "/c", "netsh wlan show hostednetwork");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            String line = null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.equals("    Status                 : Started")) {
+                    details.status = true;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        File themes = new File(details.space + "Theme.ini");
         if (themes.exists()) {
-            try ( Stream<String> lines = Files.lines(Paths.get(themespath))) {
+            try (Stream<String> lines = Files.lines(Paths.get(details.space + "Theme.ini"))) {
                 String theme = lines.skip(0).findFirst().get();
                 if (theme.equals("Light")) {
                     FlatLightLaf.setup();
-                } else if (theme.equals("Dark")) {
+                }
+                if (theme.equals("Dark")) {
                     FlatDarkLaf.setup();
-                } else {
+                }
+                if (theme.equals("Default")) {
                     try {
                         UIManager.setLookAndFeel(
                                 UIManager.getSystemLookAndFeelClassName());
-                    } catch (Exception ex) {
+                    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
+                            | UnsupportedLookAndFeelException ex) {
                         System.out.println("0003" + ex);
                     }
                 }
@@ -101,32 +97,14 @@ public class HotspotMaker extends JWindow {
             try {
                 UIManager.setLookAndFeel(
                         UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception ex) {
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
+                    | UnsupportedLookAndFeelException ex) {
                 System.out.println("0005" + ex);
             }
         }
 
-        String fontspath = "C:\\ProgramData\\HotspotMakerData\\Font.ini";
-        File fonts = new File(fontspath);
-        if (!fonts.exists()) {
-            try ( PrintStream out = new PrintStream(new File(fontspath))) {
-                out.println("Consolas");
-                out.println("Plain");
-                out.println("12");
-            } catch (FileNotFoundException ex) {
-            }
-        }
-
-        HotspotMaker splash = new HotspotMaker();
-        try {
-            // Make JWindow appear for 3 seconds before disappear
-            Thread.sleep(3000);
-            splash.dispose();
-        } catch (Exception e) {
-            System.out.println("0006" + e);
-        }
-
         Main.MainUI main = new Main.MainUI();
+        splash.dispose();
         main.setVisible(true);
     }
 }

@@ -11,5 +11,8 @@ package HotspotMaker;
 public class details {
 
     public static String version = "1.2";
+    public static boolean support;
+    public static boolean status = false;
+    public static String space = "C:\\ProgramData\\naveenb2004\\HospotMaker\\";
 
 }

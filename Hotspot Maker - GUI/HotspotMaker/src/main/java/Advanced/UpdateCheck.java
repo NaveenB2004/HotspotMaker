@@ -146,39 +146,46 @@ public class UpdateCheck extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String tempversion = null;
-        try {
-            URL url = new URL("https://pastebin.com/raw/VT779EGg");
-            URLConnection con = url.openConnection();
-            InputStream is = con.getInputStream();
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-                String line = null;
-                while ((line = br.readLine()) != null) {
-                    tempversion = line;
-                }
-            }
-            if (!tempversion.equals(HotspotMaker.details.version)) {
-                jLabel6.setText("New Version Available!");
-                int download = JOptionPane.showConfirmDialog(null,
-                        "Do you want to download the new version?"
-                        + "\nVersion : " + tempversion,
-                        "Warning", JOptionPane.YES_NO_OPTION);
-                if (download == JOptionPane.YES_OPTION) {
-                    try {
-                        Desktop.getDesktop().browse(new URL(
-                                "https://github.com/naveenb2004/HotspotMaker/releases").toURI());
-                    } catch (IOException | URISyntaxException e) {
-                        System.out.println(e);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                jLabel6.setText("Checking...");
+                String tempversion = null;
+                try {
+                    URL url = new URL("https://pastebin.com/raw/VT779EGg");
+                    URLConnection con = url.openConnection();
+                    InputStream is = con.getInputStream();
+                    try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                        String line = null;
+                        while ((line = br.readLine()) != null) {
+                            tempversion = line;
+                        }
                     }
+                    if (!tempversion.equals(HotspotMaker.details.version)) {
+                        jLabel6.setText("New Version Available!");
+                        int download = JOptionPane.showConfirmDialog(null,
+                                "Do you want to download the new version?"
+                                + "\nVersion : " + tempversion,
+                                "Warning", JOptionPane.YES_NO_OPTION);
+                        if (download == JOptionPane.YES_OPTION) {
+                            try {
+                                Desktop.getDesktop().browse(new URL(
+                                        "https://github.com/naveenb2004/HotspotMaker/releases").toURI());
+                            } catch (IOException | URISyntaxException e) {
+                                System.out.println(e);
+                            }
+                        }
+                    } else {
+                        jLabel6.setText("This is the Latest Version!");
+                    }
+                } catch (MalformedURLException ex) {
+                    jLabel6.setText("Error!");
+                    JOptionPane.showMessageDialog(new UpdateCheck(), "Connection error!\n" + ex);
+                } catch (IOException ex) {
+                    System.out.println(ex);
                 }
-            } else {
-                jLabel6.setText("This is the Latest Version!");
             }
-        } catch (MalformedURLException ex) {
-            JOptionPane.showMessageDialog(this, "Connection error!\n" + ex);
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+        }).start();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

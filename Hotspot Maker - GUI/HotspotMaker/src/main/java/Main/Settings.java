@@ -4,7 +4,6 @@
  */
 package Main;
 
-import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
@@ -28,70 +26,41 @@ public class Settings extends javax.swing.JFrame {
     public Settings() {
         initComponents();
         startup();
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
     }
-
-    String themespath = "C:\\ProgramData\\HotspotMakerData\\Theme.ini";
-    String fontspath = "C:\\ProgramData\\HotspotMakerData\\Font.ini";
 
     private void startup() {
-        try ( Stream<String> lines = Files.lines(Paths.get("DefSsid.ini"))) {
-            String defssid = lines.skip(0).findFirst().get();
-            jTextField1.setText(defssid);
-        } catch (IOException ex) {
-        }
-        try ( Stream<String> lines = Files.lines(Paths.get("DefPsw.ini"))) {
-            String defpsw = lines.skip(0).findFirst().get();
-            jTextField2.setText(defpsw);
-        } catch (IOException ex) {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
+
+        if (new File(HotspotMaker.details.space + "Credentials.ini").exists()) {
+            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.details.space + "Credentials.ini"))) {
+                String defssid = lines.skip(0).findFirst().get();
+                jTextField1.setText(defssid);
+            } catch (IOException ex) {
+                System.out.println(ex);
+            }
+            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.details.space + "Credentials.ini"))) {
+                String defpsw = lines.skip(1).findFirst().get();
+                jTextField2.setText(defpsw);
+            } catch (IOException ex) {
+                System.out.println(ex);
+            }
         }
 
-        try ( Stream<String> lines = Files.lines(Paths.get(themespath))) {
-            String theme = lines.skip(0).findFirst().get();
-            if (theme.equals("Light")) {
-                jComboBox1.setSelectedIndex(1);
-            } else if (theme.equals("Dark")) {
-                jComboBox1.setSelectedIndex(2);
-            } else {
-                jComboBox1.setSelectedIndex(0);
-            }
-        } catch (IOException ex) {
-        }
-        try {
-            int x = 0;
-            File fonts = new File(fontspath);
-            Scanner myReader = new Scanner(fonts);
-            while (myReader.hasNextLine()) {
-                String fontsn = myReader.nextLine();
-                x = x + 1;
-                if (x == 1) {
-                    f1r.setText(fontsn);
-                } else if (x == 2) {
-                    f2r.setText(fontsn);
-                } else if (x == 3) {
-                    f3r.setText(fontsn);
+        if (new File(HotspotMaker.details.space + "Theme.ini").exists()) {
+            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.details.space + "Theme.ini"))) {
+                String theme = lines.skip(0).findFirst().get();
+                if (theme.equals("Light")) {
+                    jComboBox1.setSelectedIndex(1);
                 }
+                if (theme.equals("Dark")) {
+                    jComboBox1.setSelectedIndex(2);
+                }
+                if (theme.equals("Default")) {
+                    jComboBox1.setSelectedIndex(0);
+                }
+            } catch (IOException ex) {
+                System.out.println(ex);
             }
-            myReader.close();
-            jComboBox2.setSelectedItem(f1r.getText());
-            jComboBox5.setSelectedItem(f2r.getText());
-            jComboBox6.setSelectedItem(f3r.getText());
-        } catch (FileNotFoundException ex) {
-        }
-        automate();
-    }
-
-    private void automate() {
-        String a1 = jComboBox2.getSelectedItem().toString();
-        String a2 = jComboBox5.getSelectedItem().toString();
-        String a3 = jComboBox6.getSelectedItem().toString();
-        int fsize = Integer.parseInt(a3);
-        if (a2.equals("Plane")) {
-            jTextArea1.setFont(new Font(a1, Font.PLAIN, fsize));
-        } else if (a2.equals("Bold")) {
-            jTextArea1.setFont(new Font(a1, Font.BOLD, fsize));
-        } else if (a2.equals("Italic")) {
-            jTextArea1.setFont(new Font(a1, Font.ITALIC, fsize));
         }
     }
 
@@ -116,17 +85,6 @@ public class Settings extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
 
         f1r.setText("jLabel4");
@@ -205,7 +163,7 @@ public class Settings extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBox1, 0, 243, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -218,108 +176,6 @@ public class Settings extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Console Appierance :"));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("1234567890\nHotspot Maker GUI\nby naveenb2004\n!@#$%^&*()_+-=\n[]\\;',./<>?:\"{}|`~");
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jLabel3.setText("Font :");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arial", "BankGothic Lt BT", "Batang", "CalibriComic Sans MS", "Complex", "Consolas", "Courier New", "DFKai-SB", "Gabriola", "GothicE", "Italic" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Reset to Defaults");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Save");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("Font Style :");
-
-        jLabel7.setText("Font Size :");
-
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plane", "Bold", "Italic" }));
-        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox5ActionPerformed(evt);
-            }
-        });
-
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3", "5", "8", "10", "12", "14", "18", "24", "36", "48" }));
-        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox6ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 236, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, 0, 212, Short.MAX_VALUE)
-                            .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton5))
-                .addContainerGap())
         );
 
         jButton4.setText("Close");
@@ -338,7 +194,6 @@ public class Settings extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -351,8 +206,6 @@ public class Settings extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addContainerGap())
@@ -365,11 +218,12 @@ public class Settings extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String theme = jComboBox1.getSelectedItem().toString();
-        try ( PrintStream out = new PrintStream(new File(themespath))) {
+        try (PrintStream out = new PrintStream(new File(HotspotMaker.details.space + "Theme.ini"))) {
             out.println(theme);
         } catch (FileNotFoundException ex) {
+            System.out.println(ex);
         }
-        JOptionPane.showMessageDialog(this, "You need to restart the application\nto apply changes!");
+        JOptionPane.showMessageDialog(this, "You need to restart the application to apply changes!");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -377,64 +231,15 @@ public class Settings extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-        automate();
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String ssid = jTextField1.getText();
-        String psw = jTextField2.getText();
-        try ( PrintStream out = new PrintStream(new File("DefSsid.ini"))) {
-            out.println(ssid);
+        try (PrintStream out = new PrintStream(new File(HotspotMaker.details.space + "Credentials.ini"))) {
+            out.println(jTextField1.getText());
+            out.println(jTextField2.getText());
         } catch (FileNotFoundException ex) {
+            System.out.println(ex);
         }
-        try ( PrintStream out = new PrintStream(new File("DefPsw.ini"))) {
-            out.println(psw);
-        } catch (FileNotFoundException ex) {
-        }
-        JOptionPane.showMessageDialog(this, "You need to restart the application\nto apply changes!");
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        String a1 = jComboBox2.getSelectedItem().toString();
-        String a2 = jComboBox5.getSelectedItem().toString();
-        String a3 = jComboBox6.getSelectedItem().toString();
-        try ( PrintStream out = new PrintStream(new File(fontspath))) {
-            out.println(a1);
-            out.println(a2);
-            out.println(a3);
-        } catch (FileNotFoundException ex) {
-        }
-        JOptionPane.showMessageDialog(this, "You need to restart the application\nto apply changes!");
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
-        // TODO add your handling code here:
-        automate();
-    }//GEN-LAST:event_jComboBox5ActionPerformed
-
-    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
-        // TODO add your handling code here:
-        automate();
-    }//GEN-LAST:event_jComboBox6ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        try ( PrintStream out = new PrintStream(new File(fontspath))) {
-            out.println("Consolas");
-            out.println("Plain");
-            out.println("12");
-        } catch (FileNotFoundException ex) {
-        }
-        jComboBox2.setSelectedItem("Consolas");
-        jComboBox5.setSelectedItem("Plain");
-        jComboBox6.setSelectedItem("12");
-        automate();
-        JOptionPane.showMessageDialog(this, "You need to restart the application\nto apply changes!");
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -477,23 +282,12 @@ public class Settings extends javax.swing.JFrame {
     private javax.swing.JLabel f3r;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

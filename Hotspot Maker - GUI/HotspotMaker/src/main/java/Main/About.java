@@ -24,17 +24,12 @@ public class About extends javax.swing.JFrame {
      */
     public About() {
         initComponents();
-        GetVersion();
+        startup();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
     }
 
-    private void GetVersion() {
-        String guiver = null;
-        try ( Stream<String> lines = Files.lines(Paths.get("Version.ini"))) {
-            guiver = lines.skip(0).findFirst().get();
-        } catch (IOException ex) {
-        }
-        jLabel2.setText("GUI Version : " + guiver);
+    private void startup() {
+        jLabel2.setText("GUI Version : " + HotspotMaker.details.version);
     }
 
     /**

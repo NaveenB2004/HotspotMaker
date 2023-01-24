@@ -3,13 +3,16 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.naveenb2004</groupId>
     <artifactId>HotspotMaker</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <exec.mainClass>HotspotMaker.HotspotMaker</exec.mainClass>
     </properties>
+    
     <dependencies>
         <dependency>
             <groupId>com.formdev</groupId>
@@ -22,7 +25,9 @@
             <version>1.0.2</version>
         </dependency>
     </dependencies>
+    
     <name>HotspotMaker</name>
+    
     <build>
         <plugins>
             <plugin>
@@ -30,7 +35,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>HotspotMaker.HotspotMaker</mainClass>
+                            <mainClass>${exec.mainClass}</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -49,5 +54,7 @@
             </plugin>
         </plugins>
     </build>
+    
     <description>Hotspot Maker - GUI</description>
+    
 </project>
