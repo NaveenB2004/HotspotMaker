@@ -40,7 +40,7 @@ public class HotspotMaker extends JWindow {
             String line = null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
-                if (line.equals("    Hosted network supported  : Yes")) {
+                if (line.endsWith("Hosted network supported  : Yes")) {
                     details.support = true;
                 }
             }
@@ -61,8 +61,8 @@ public class HotspotMaker extends JWindow {
             String line = null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
-                if (line.equals("    Status                 : Started")) {
-                    details.status = true;
+                if (line.endsWith("Not started")) {
+                    details.status = false;
                 }
             }
         } catch (IOException e) {

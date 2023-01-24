@@ -36,8 +36,8 @@ public class MainUI extends javax.swing.JFrame {
     private void startup() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
-
-        if (HotspotMaker.details.status = true) {
+        
+        if (HotspotMaker.details.status == true) {
             jButton7.setEnabled(true);
             Component[] com = jPanel3.getComponents();
             for (Component com1 : com) {
