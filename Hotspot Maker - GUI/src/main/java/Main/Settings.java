@@ -228,6 +228,7 @@ public class Settings extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        new MainUI().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -236,8 +237,10 @@ public class Settings extends javax.swing.JFrame {
         try (PrintStream out = new PrintStream(new File(HotspotMaker.details.space + "Credentials.ini"))) {
             out.println(jTextField1.getText());
             out.println(jTextField2.getText());
+            JOptionPane.showMessageDialog(this, "Success!");
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
+            JOptionPane.showMessageDialog(this, "Error!\n" + ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
