@@ -145,7 +145,7 @@
             </Property>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="10"/>
-            <Property name="text" type="java.lang.String" value="Stable Edition&#xa;18.06.2022&#xa;&#xa;Created by: Naveen Balasooriya&#xa;Contact me: naveennbalasooriya2004@gmail.com (Email)&#xa;            https://t.me/NaveenB2004 (Telegram)&#xa;Visit my website: https://sites.google.com/sites/naveenb2004&#xa;&#xa;Downloads Available @&#xa;https://github.com/naveenb2004/HotspotMaker"/>
+            <Property name="text" type="java.lang.String" value="Stable Edition&#xa;24.01.2022&#xa;&#xa;Created by: Naveen Balasooriya&#xa;Contact me: naveennbalasooriya2004@gmail.com (Email)&#xa;            https://t.me/NaveenB2004 (Telegram)&#xa;Visit my website: https://sites.google.com/sites/naveenb2004&#xa;&#xa;Downloads Available @&#xa;https://github.com/naveenb2004/HotspotMaker/releases"/>
             <Property name="wrapStyleWord" type="boolean" value="true"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
