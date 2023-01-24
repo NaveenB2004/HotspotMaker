@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>C:\Users\Anupama\Documents\HotspotMaker\Hotspot Maker - GUI\target\HotspotMaker-1.2-jar-with-dependencies.jar</jar>
-  <outfile>C:\Users\Naveen\Desktop\Hotspot Maker - GUI\GUI files\Hotspot Maker.exe</outfile>
+  <outfile>C:\Users\Anupama\Documents\HotspotMaker\Hotspot Maker - GUI\target\Hotspot Maker.exe</outfile>
   <errTitle>You need to install JDK (v17 or high)</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
