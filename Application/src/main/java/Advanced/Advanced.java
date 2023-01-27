@@ -1,5 +1,7 @@
 package Advanced;
 
+import HotspotMaker.details;
+
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -79,6 +81,8 @@ public class Advanced extends javax.swing.JFrame {
                 new Runnable() {
             @Override
             public void run() {
+                console.setText("");
+                console.append("========== Hotspot Maker (v" + details.version + ") ==========\n\n");
                 try {
                     ProcessBuilder processBuilder
                             = new ProcessBuilder("cmd.exe", "/c", command);
@@ -92,6 +96,7 @@ public class Advanced extends javax.swing.JFrame {
                 } catch (IOException e) {
                     console.append(e + "\n");
                 }
+                console.append("\n=========================================\n");
 
                 Component[] com1 = jPanel1.getComponents();
                 for (int a = 0; a < com1.length; a++) {
