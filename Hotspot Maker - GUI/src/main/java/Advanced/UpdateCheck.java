@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Advanced;
 
 import java.awt.Desktop;
@@ -30,7 +26,7 @@ public class UpdateCheck extends javax.swing.JFrame {
     }
 
     private void startup() {
-        jLabel3.setText("v" + HotspotMaker.operations.version);
+        jLabel3.setText("v" + HotspotMaker.details.version);
     }
 
     /**
