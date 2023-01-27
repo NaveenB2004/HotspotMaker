@@ -21,6 +21,38 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class HotspotMaker extends JWindow {
 
     public static void main(String[] args) {
+        File themes = new File(details.space + "Theme.ini");
+        if (themes.exists()) {
+            try (Stream<String> lines = Files.lines(Paths.get(details.space + "Theme.ini"))) {
+                String theme = lines.skip(0).findFirst().get();
+                if (theme.equals("Light")) {
+                    FlatLightLaf.setup();
+                }
+                if (theme.equals("Dark")) {
+                    FlatDarkLaf.setup();
+                }
+                if (theme.equals("Default")) {
+                    try {
+                        UIManager.setLookAndFeel(
+                                UIManager.getSystemLookAndFeelClassName());
+                    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
+                             | UnsupportedLookAndFeelException ex) {
+                        System.out.println("0003" + ex);
+                    }
+                }
+            } catch (IOException ex) {
+                System.out.println("0004" + ex);
+            }
+        } else {
+            try {
+                UIManager.setLookAndFeel(
+                        UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
+                     | UnsupportedLookAndFeelException ex) {
+                System.out.println("0005" + ex);
+            }
+        }
+
         Splash splash = new Splash();
         splash.setVisible(true);
 
@@ -63,38 +95,6 @@ public class HotspotMaker extends JWindow {
             }
         } catch (IOException e) {
             System.out.println(e);
-        }
-
-        File themes = new File(details.space + "Theme.ini");
-        if (themes.exists()) {
-            try (Stream<String> lines = Files.lines(Paths.get(details.space + "Theme.ini"))) {
-                String theme = lines.skip(0).findFirst().get();
-                if (theme.equals("Light")) {
-                    FlatLightLaf.setup();
-                }
-                if (theme.equals("Dark")) {
-                    FlatDarkLaf.setup();
-                }
-                if (theme.equals("Default")) {
-                    try {
-                        UIManager.setLookAndFeel(
-                                UIManager.getSystemLookAndFeelClassName());
-                    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
-                            | UnsupportedLookAndFeelException ex) {
-                        System.out.println("0003" + ex);
-                    }
-                }
-            } catch (IOException ex) {
-                System.out.println("0004" + ex);
-            }
-        } else {
-            try {
-                UIManager.setLookAndFeel(
-                        UIManager.getSystemLookAndFeelClassName());
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
-                    | UnsupportedLookAndFeelException ex) {
-                System.out.println("0005" + ex);
-            }
         }
 
         Main.MainUI main = new Main.MainUI();
