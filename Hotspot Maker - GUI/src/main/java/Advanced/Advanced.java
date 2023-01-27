@@ -379,10 +379,14 @@ public class Advanced extends javax.swing.JFrame {
         // TODO add your handling code here:
         JFrame f = new JFrame();
         String host = JOptionPane.showInputDialog(f, "Enter IP (or Host):");
-        JFrame f1 = new JFrame();
-        String count = JOptionPane.showInputDialog(f1, "Enter Ping Count:");
-        command = "ping " + host + " " + "/n " + count;
-        operations();
+        if (host!=null) {
+            JFrame f1 = new JFrame();
+            String count = JOptionPane.showInputDialog(f1, "Enter Ping Count:");
+            if (count!=null) {
+                command = "ping " + host + " " + "/n " + count;
+                operations();
+            }
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
