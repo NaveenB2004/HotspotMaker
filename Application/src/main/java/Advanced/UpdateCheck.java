@@ -148,7 +148,9 @@ public class UpdateCheck extends javax.swing.JFrame {
                 jLabel6.setText("Checking...");
                 String tempversion = null;
                 try {
-                    URL url = new URL("https://pastebin.com/raw/VT779EGg");
+                    URL url = new URL(
+                            "https://raw.githubusercontent.com/"
+                            + "naveenb2004/HotspotMaker/main/Others/LatestVersion.txt");
                     URLConnection con = url.openConnection();
                     InputStream is = con.getInputStream();
                     try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
