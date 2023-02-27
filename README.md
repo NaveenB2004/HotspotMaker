@@ -18,7 +18,7 @@ I hope you will try this out!
 - Full Version EXE Packed: [Inno Setup](https://jrsoftware.org/isinfo.php)
 
 ### **GUI (portable)**
-`This application will maintain future version as root version.`
+`This application will maintain future GUI version as root version.`
 - Package Name: Hotspot Maker
 - Coded By: Naveen Balasooriya
 - [Take a visit](https://sites.google.com/view/naveenb2004)
