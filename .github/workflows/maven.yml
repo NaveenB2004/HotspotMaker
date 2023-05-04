@@ -29,5 +29,3 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file Application/pom.xml
-    - name: Run JAR
-      run: java -jar target\HotspotMaker-2.9-jar-with-dependencies.jar
