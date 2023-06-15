@@ -5,13 +5,10 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 /**
  *
- * @author naveenb2004
+ * @author NaveenB2004
  */
 public class About extends javax.swing.JFrame {
 
@@ -25,7 +22,7 @@ public class About extends javax.swing.JFrame {
     }
 
     private void startup() {
-        jLabel2.setText("GUI Version : " + HotspotMaker.details.version);
+        jLabel2.setText("GUI Version : " + HotspotMaker.Details.version);
     }
 
     /**
@@ -262,7 +259,7 @@ public class About extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For Details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

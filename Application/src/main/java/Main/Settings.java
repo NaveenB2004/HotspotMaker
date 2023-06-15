@@ -27,14 +27,14 @@ public class Settings extends javax.swing.JFrame {
     private void startup() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
 
-        if (new File(HotspotMaker.details.space + "Credentials.ini").exists()) {
-            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.details.space + "Credentials.ini"))) {
+        if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
+            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defssid = lines.skip(0).findFirst().get();
                 jTextField1.setText(defssid);
             } catch (IOException ex) {
                 System.out.println(ex);
             }
-            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.details.space + "Credentials.ini"))) {
+            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defpsw = lines.skip(1).findFirst().get();
                 jTextField2.setText(defpsw);
             } catch (IOException ex) {
@@ -42,8 +42,8 @@ public class Settings extends javax.swing.JFrame {
             }
         }
 
-        if (new File(HotspotMaker.details.space + "Theme.ini").exists()) {
-            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.details.space + "Theme.ini"))) {
+        if (new File(HotspotMaker.Details.space + "Theme.ini").exists()) {
+            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Theme.ini"))) {
                 String theme = lines.skip(0).findFirst().get();
                 if (theme.equals("Light")) {
                     jComboBox1.setSelectedIndex(1);
@@ -214,12 +214,12 @@ public class Settings extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String theme = jComboBox1.getSelectedItem().toString();
-        try (PrintStream out = new PrintStream(new File(HotspotMaker.details.space + "Theme.ini"))) {
+        try (PrintStream out = new PrintStream(new File(HotspotMaker.Details.space + "Theme.ini"))) {
             out.println(theme);
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
         }
-        JOptionPane.showMessageDialog(this, "You need to restart the application to apply changes!");
+        HotspotMaker.HotspotMaker.setTheme();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -230,7 +230,7 @@ public class Settings extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try (PrintStream out = new PrintStream(new File(HotspotMaker.details.space + "Credentials.ini"))) {
+        try (PrintStream out = new PrintStream(new File(HotspotMaker.Details.space + "Credentials.ini"))) {
             out.println(jTextField1.getText());
             out.println(jTextField2.getText());
             JOptionPane.showMessageDialog(this, "Success!");
@@ -247,7 +247,7 @@ public class Settings extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For Details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author naveenb2004
+ * @author NaveenB2004
  */
 public class UpdateCheck extends javax.swing.JFrame {
 
@@ -26,7 +26,7 @@ public class UpdateCheck extends javax.swing.JFrame {
     }
 
     private void startup() {
-        jLabel3.setText("v" + HotspotMaker.details.version);
+        jLabel3.setText("v" + HotspotMaker.Details.version);
     }
 
     /**
@@ -159,7 +159,7 @@ public class UpdateCheck extends javax.swing.JFrame {
                             tempversion = line;
                         }
                     }
-                    if (!tempversion.equals(HotspotMaker.details.version)) {
+                    if (!tempversion.equals(HotspotMaker.Details.version)) {
                         jLabel6.setText("New Version Available!");
                         int download = JOptionPane.showConfirmDialog(null,
                                 "Do you want to download the new version?"
@@ -204,7 +204,7 @@ public class UpdateCheck extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For Details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

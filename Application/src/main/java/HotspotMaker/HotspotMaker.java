@@ -1,6 +1,7 @@
 package HotspotMaker;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,48 +17,18 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
- * @author naveenb2004
+ * @author NaveenB2004
  */
 public class HotspotMaker extends JWindow {
 
     public static void main(String[] args) {
-        File themes = new File(details.space + "Theme.ini");
-        if (themes.exists()) {
-            try (Stream<String> lines = Files.lines(Paths.get(details.space + "Theme.ini"))) {
-                String theme = lines.skip(0).findFirst().get();
-                if (theme.equals("Light")) {
-                    FlatLightLaf.setup();
-                }
-                if (theme.equals("Dark")) {
-                    FlatDarkLaf.setup();
-                }
-                if (theme.equals("Default")) {
-                    try {
-                        UIManager.setLookAndFeel(
-                                UIManager.getSystemLookAndFeelClassName());
-                    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
-                             | UnsupportedLookAndFeelException ex) {
-                        System.out.println("0003" + ex);
-                    }
-                }
-            } catch (IOException ex) {
-                System.out.println("0004" + ex);
-            }
-        } else {
-            try {
-                UIManager.setLookAndFeel(
-                        UIManager.getSystemLookAndFeelClassName());
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
-                     | UnsupportedLookAndFeelException ex) {
-                System.out.println("0005" + ex);
-            }
-        }
-
+        setTheme();
+        
         Splash splash = new Splash();
         splash.setVisible(true);
 
-        if (!new File(details.space).exists()) {
-            new File(details.space).mkdirs();
+        if (!new File(Details.space).exists()) {
+            new File(Details.space).mkdirs();
         }
 
         try {
@@ -69,10 +40,10 @@ public class HotspotMaker extends JWindow {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
                 if (line.endsWith("Hosted network supported  : Yes")) {
-                    details.support = true;
+                    Details.support = true;
                 }
             }
-            if (details.support = false) {
+            if (Details.support = false) {
                 JOptionPane.showMessageDialog(splash,
                         "Your network interface doesn't support for make hotspot!");
                 System.exit(0);
@@ -90,7 +61,7 @@ public class HotspotMaker extends JWindow {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
                 if (line.endsWith("Not started")) {
-                    details.status = false;
+                    Details.status = false;
                 }
             }
         } catch (IOException e) {
@@ -100,5 +71,40 @@ public class HotspotMaker extends JWindow {
         Main.MainUI main = new Main.MainUI();
         splash.dispose();
         main.setVisible(true);
+    }
+
+    public static void setTheme() {
+        File themes = new File(Details.space + "Theme.ini");
+        if (themes.exists()) {
+            try (Stream<String> lines = Files.lines(Paths.get(Details.space + "Theme.ini"))) {
+                String theme = lines.skip(0).findFirst().get();
+                if (theme.equals("Light")) {
+                    FlatLightLaf.setup();
+                }
+                if (theme.equals("Dark")) {
+                    FlatDarkLaf.setup();
+                }
+                if (theme.equals("Default")) {
+                    try {
+                        UIManager.setLookAndFeel(
+                                UIManager.getSystemLookAndFeelClassName());
+                    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
+                            | UnsupportedLookAndFeelException ex) {
+                        System.out.println("0003" + ex);
+                    }
+                }
+            } catch (IOException ex) {
+                System.out.println("0004" + ex);
+            }
+        } else {
+            try {
+                UIManager.setLookAndFeel(
+                        UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
+                    | UnsupportedLookAndFeelException ex) {
+                System.out.println("0005" + ex);
+            }
+        }
+        FlatLaf.updateUI();
     }
 }

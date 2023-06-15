@@ -2,7 +2,7 @@ package HotspotMaker;
 
 /**
  *
- * @author naveenb2004
+ * @author NaveenB2004
  */
 public class Splash extends javax.swing.JFrame {
 

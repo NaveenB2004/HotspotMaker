@@ -1,6 +1,6 @@
 package Advanced;
 
-import HotspotMaker.details;
+import HotspotMaker.Details;
 
 import java.awt.Component;
 import java.awt.Font;
@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author naveenb2004
+ * @author NaveenB2004
  */
 public class Advanced extends javax.swing.JFrame {
 
@@ -82,7 +82,7 @@ public class Advanced extends javax.swing.JFrame {
             @Override
             public void run() {
                 console.setText("");
-                console.append("========== Hotspot Maker (v" + details.version + ") ==========\n\n");
+                console.append("========== Hotspot Maker (v" + Details.version + ") ==========\n\n");
                 try {
                     ProcessBuilder processBuilder
                             = new ProcessBuilder("cmd.exe", "/c", command);
@@ -397,7 +397,7 @@ public class Advanced extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For Details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
