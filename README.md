@@ -1,26 +1,5 @@
 ![HotspotMaker](https://user-images.githubusercontent.com/95101859/174438759-f0aeb763-7c9b-4e37-9de6-ab479bfc4a4f.jpg)
 
-Hello!
-The Hotspot Maker, made for use with Windows Operating System to start and stop hotspots with custom settings. It is working with simple command line interface and decorated with some functions. There are some features to work with your network!
+Hotspot Maker is a software you can use to basically start & stop hotspots in a Windows environment. There we release `Java-based` GUI applications to make a better experience for users. Our old [CLI application](https://github.com/NaveenB2004/HotspotMaker/releases/tag/v2.7) is here for experiments. Try this out! And make sure to send feedback!
 
-This programe is coded with Batch scripts (CLI - not maintained) & Java (GUI). I'm learning about those programming languages and also I have some kind of knowledge more than a beginer level for that.
-I hope you will try this out!
-
-### **CLI**
-`(not maintained)` - latest [v2.7](https://github.com/naveenb2004/HotspotMaker/releases/tag/v2.7)
-- Package Name: Hotspot Maker
-- Coded By: Naveen Balasooriya
-- [Take a visit](https://sites.google.com/view/naveenb2004)
-- Text Editor: [VS Code](https://code.visualstudio.com)
-- Cloud Web Request Store: [Pastebin](https://pastebin.com/u/naveenb2004)
-- Cloud Updates Store: [Google Drive](https://shorturl.at/mxHZ9)
-- Launcher EXE Converter: [Bat2EXE Converter](https://shorturl.at/ekoKS)
-- Full Version EXE Packed: [Inno Setup](https://jrsoftware.org/isinfo.php)
-
-### **GUI (portable)**
-`This application will maintain future GUI version as root version.`
-- Package Name: Hotspot Maker
-- Coded By: Naveen Balasooriya
-- [Take a visit](https://sites.google.com/view/naveenb2004)
-- IDE: [Netbeans](https://netbeans.apache.org) (v16) - with [Java - JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-- Launcher EXE Converter: [Launch4j](http://launch4j.sourceforge.net)
+![Preview](https://github.com/NaveenB2004/HotspotMaker/assets/95101859/ac3ec758-9695-4a1c-b60c-cab71154e1dd)
