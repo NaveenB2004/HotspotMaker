@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch4jConfig>
-  <dontWrapJar>true</dontWrapJar>
+  <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>Hotspot Maker.jar</jar>
-  <outfile>C:\Users\Dell\Desktop\Hotspot Maker\Hotspot Maker.exe</outfile>
+  <jar>C:\Users\Dell\Desktop\Hotspot Maker.jar</jar>
+  <outfile>C:\Users\Dell\Desktop\Hotspot Maker.exe</outfile>
   <errTitle>You need to install JDK (v17 or high)</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -15,7 +15,7 @@
   <manifest>C:\Users\Dell\Documents\HotspotMaker\Others\Launch4j\admin wrapper (l4j).manifest</manifest>
   <icon>C:\Users\Dell\Documents\HotspotMaker\Others\icon.ico</icon>
   <jre>
-    <path>JRE</path>
+    <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>false</requiresJdk>
     <requires64Bit>false</requires64Bit>
     <minVersion>17</minVersion>
