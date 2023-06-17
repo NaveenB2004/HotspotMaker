@@ -23,7 +23,7 @@ public class HotspotMaker extends JWindow {
 
     public static void main(String[] args) {
         setTheme();
-        
+
         Splash splash = new Splash();
         splash.setVisible(true);
 
@@ -31,42 +31,7 @@ public class HotspotMaker extends JWindow {
             new File(Details.space).mkdirs();
         }
 
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "netsh wlan show drive");
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                if (line.endsWith("Hosted network supported  : Yes")) {
-                    Details.support = true;
-                }
-            }
-            if (Details.support = false) {
-                JOptionPane.showMessageDialog(splash,
-                        "Your network interface doesn't support for make hotspot!");
-                System.exit(0);
-            }
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c", "netsh wlan show hostednetwork");
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                if (line.endsWith("Not started")) {
-                    Details.status = false;
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        new Status().checkStatus();
 
         Main.MainUI main = new Main.MainUI();
         splash.dispose();

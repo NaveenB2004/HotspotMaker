@@ -6,7 +6,7 @@ package HotspotMaker;
  */
 public class Details {
 
-    public static String version = "2.9";
+    public static String version = "3.0";
     public static boolean support = false;
     public static boolean status = true;
     public static String space = "C:\\ProgramData\\NaveenB2004\\HospotMaker\\";
