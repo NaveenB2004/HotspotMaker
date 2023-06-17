@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -68,6 +69,7 @@ public class Advanced extends javax.swing.JFrame {
     }
 
     String command;
+    boolean publicIp = false;
 
     private void operations() {
         console.setText("");
@@ -81,22 +83,36 @@ public class Advanced extends javax.swing.JFrame {
                 new Runnable() {
             @Override
             public void run() {
-                console.setText("");
-                console.append("========== Hotspot Maker (v" + Details.version + ") ==========\n\n");
-                try {
-                    ProcessBuilder processBuilder
-                            = new ProcessBuilder("cmd.exe", "/c", command);
-                    processBuilder.redirectErrorStream(true);
-                    Process p = processBuilder.start();
-                    String line = null;
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                    while ((line = bufferedReader.readLine()) != null) {
-                        console.append(line + "\n");
+                if (publicIp == false) {
+                    try {
+                        ProcessBuilder processBuilder
+                                = new ProcessBuilder("cmd.exe", "/c", command);
+                        processBuilder.redirectErrorStream(true);
+                        Process p = processBuilder.start();
+                        String line = null;
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                        while ((line = bufferedReader.readLine()) != null) {
+                            console.append(line + "\n");
+                        }
+                    } catch (IOException e) {
+                        console.append(e + "\n");
                     }
-                } catch (IOException e) {
-                    console.append(e + "\n");
+                } else {
+                    try {
+                        URL url = new URL(command);
+                        URLConnection con = url.openConnection();
+                        InputStream is = con.getInputStream();
+                        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                            String line = null;
+                            while ((line = br.readLine()) != null) {
+                                console.append(line + "\n");
+                            }
+                        }
+                    } catch (IOException e) {
+                        console.append(e + "\n");
+                        System.out.println(e);
+                    }
                 }
-                console.append("\n=========================================\n");
 
                 Component[] com1 = jPanel1.getComponents();
                 for (int a = 0; a < com1.length; a++) {
@@ -351,17 +367,9 @@ public class Advanced extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        try {
-            URL url = new URL("http://api.ipify.org");
-            URLConnection connection = url.openConnection();
-            connection.connect();
-            command = "powershell -command \"(Invoke-Webrequest \"http://api.ipify.org\").content\"";
-            operations();
-        } catch (MalformedURLException e) {
-            console.append("Connection failed!\n" + e);
-        } catch (IOException e) {
-            console.append("Connection failed!\n" + e);
-        }
+        publicIp = true;
+        command = "https://myexternalip.com/raw";
+        operations();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -380,10 +388,10 @@ public class Advanced extends javax.swing.JFrame {
         // TODO add your handling code here:
         JFrame f = new JFrame();
         String host = JOptionPane.showInputDialog(f, "Enter IP (or Host):");
-        if (host!=null) {
+        if (host != null) {
             JFrame f1 = new JFrame();
             String count = JOptionPane.showInputDialog(f1, "Enter Ping Count:");
-            if (count!=null) {
+            if (count != null) {
                 command = "ping " + host + " " + "/n " + count;
                 operations();
             }
