@@ -553,7 +553,7 @@ public class MainUI extends javax.swing.JFrame {
             com11.setEnabled(false);
         }
         command = "netsh wlan set hostednetwork mode=allow ssid=\""
-                + jTextField3.getText() + "\" key=\"" + jTextField4.getText() + "\" && "
+                + jTextField1.getText() + "\" key=\"" + jTextField2.getText() + "\" && "
                 + "netsh wlan start hostednetwork";
         operations();
     }//GEN-LAST:event_jButton1ActionPerformed
