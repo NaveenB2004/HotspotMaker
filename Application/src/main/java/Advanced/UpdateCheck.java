@@ -162,7 +162,7 @@ public class UpdateCheck extends javax.swing.JFrame {
                     if (!tempversion.equals(HotspotMaker.Details.version)) {
                         jLabel6.setText("New Version Available!");
                         int download = JOptionPane.showConfirmDialog(null,
-                                "Do you want to download the new version?"
+                                "New Version Available!\nDo you want to download the new version?"
                                 + "\nVersion : " + tempversion,
                                 "Warning", JOptionPane.YES_NO_OPTION);
                         if (download == JOptionPane.YES_OPTION) {
@@ -173,12 +173,9 @@ public class UpdateCheck extends javax.swing.JFrame {
                                 System.out.println(e);
                             }
                         }
-                    } else {
-                        jLabel6.setText("This is the Latest Version!");
                     }
                 } catch (MalformedURLException ex) {
-                    jLabel6.setText("Error!");
-                    JOptionPane.showMessageDialog(new UpdateCheck(), "Connection error!\n" + ex);
+                    System.out.println(ex);
                 } catch (IOException ex) {
                     System.out.println(ex);
                 }

@@ -1,9 +1,15 @@
 package HotspotMaker;
 
+import java.awt.Desktop;
 import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class Status {
 
-    public void checkStatus() {
+    public void checkHotspotStatus() {
         try {
             ProcessBuilder processBuilder
                     = new ProcessBuilder("cmd.exe", "/c",
@@ -55,4 +61,45 @@ public class Status {
             System.out.println(e);
         }
     }
+
+    public void checkUpdateStatus() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String tempversion = null;
+                try {
+                    URL url = new URL(
+                            "https://raw.githubusercontent.com/"
+                            + "naveenb2004/HotspotMaker/main/Others/LatestVersion.txt");
+                    URLConnection con = url.openConnection();
+                    InputStream is = con.getInputStream();
+                    try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                        String line = null;
+                        while ((line = br.readLine()) != null) {
+                            tempversion = line;
+                        }
+                    }
+                    if (!tempversion.equals(Details.version)) {
+                        int download = JOptionPane.showConfirmDialog(null,
+                                "New Version Available!\nDo you want to download the new version?"
+                                + "\nVersion : " + tempversion,
+                                "Warning", JOptionPane.YES_NO_OPTION);
+                        if (download == JOptionPane.YES_OPTION) {
+                            try {
+                                Desktop.getDesktop().browse(new URL(
+                                        "https://github.com/naveenb2004/HotspotMaker/releases").toURI());
+                            } catch (IOException | URISyntaxException e) {
+                                System.out.println(e);
+                            }
+                        }
+                    }
+                } catch (MalformedURLException ex) {
+                    System.out.println(ex);
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }).start();
+    }
+
 }
