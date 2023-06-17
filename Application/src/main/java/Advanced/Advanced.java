@@ -1,7 +1,5 @@
 package Advanced;
 
-import HotspotMaker.Details;
-
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -13,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
@@ -43,12 +40,16 @@ public class Advanced extends javax.swing.JFrame {
             while (myReader.hasNextLine()) {
                 String fontsn = myReader.nextLine();
                 x = x + 1;
-                if (x == 1) {
-                    f1r.setText(fontsn);
-                } else if (x == 2) {
-                    f2r.setText(fontsn);
-                } else if (x == 3) {
-                    f3r.setText(fontsn);
+                switch (x) {
+                    case 1:
+                        f1r.setText(fontsn);
+                        break;
+                    case 2:
+                        f2r.setText(fontsn);
+                        break;
+                    case 3:
+                        f3r.setText(fontsn);
+                        break;
                 }
             }
             myReader.close();
