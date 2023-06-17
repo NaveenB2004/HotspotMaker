@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>C:\Users\Dell\Desktop\Hotspot Maker.jar</jar>
-  <outfile>C:\Users\Dell\Desktop\Hotspot Maker.exe</outfile>
+  <outfile>C:\Users\Dell\Desktop\Hotspot Maker Portable.exe</outfile>
   <errTitle>You need to install JDK (v17 or high)</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
