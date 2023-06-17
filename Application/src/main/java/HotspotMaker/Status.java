@@ -30,7 +30,6 @@ public class Status {
             String line = null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
                 if (line.startsWith("Hosted network supported") && line.endsWith("Yes")) {
                     Details.support = true;
                 }
@@ -53,12 +52,10 @@ public class Status {
             String line = null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
                 if (line.endsWith("Not started")) {
                     Details.status = false;
                 }
             }
-            System.out.println(Details.status);
         } catch (IOException e) {
             Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
         }
