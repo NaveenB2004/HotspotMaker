@@ -46,7 +46,7 @@ public class Status {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
-                if (line.startsWith("Status") && line.endsWith("Not started")) {
+                if (line.endsWith("Not started")) {
                     Details.status = false;
                 }
             }
