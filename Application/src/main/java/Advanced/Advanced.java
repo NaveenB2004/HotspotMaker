@@ -74,6 +74,7 @@ public class Advanced extends javax.swing.JFrame {
                         console.append(e + "\n");
                         Logger.getLogger(Advanced.class.getName()).log(Level.SEVERE, null, e);
                     }
+                    publicIp = false;
                 }
 
                 Component[] com1 = jPanel1.getComponents();
