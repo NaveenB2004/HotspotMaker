@@ -574,6 +574,7 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void getStatus() {
+        Details.status = true;
         new HotspotMaker.Status().checkHotspotStatus();
     }
 
