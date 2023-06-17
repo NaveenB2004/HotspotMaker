@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
@@ -31,14 +33,14 @@ public class Settings extends javax.swing.JFrame {
             try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defssid = lines.skip(0).findFirst().get();
                 jTextField1.setText(defssid);
-            } catch (IOException ex) {
-                System.out.println(ex);
+            } catch (IOException e) {
+                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
             }
             try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defpsw = lines.skip(1).findFirst().get();
                 jTextField2.setText(defpsw);
-            } catch (IOException ex) {
-                System.out.println(ex);
+            } catch (IOException e) {
+                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
             }
         }
 
@@ -54,8 +56,8 @@ public class Settings extends javax.swing.JFrame {
                 if (theme.equals("Default")) {
                     jComboBox1.setSelectedIndex(0);
                 }
-            } catch (IOException ex) {
-                System.out.println(ex);
+            } catch (IOException e) {
+                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
             }
         }
     }
@@ -216,8 +218,8 @@ public class Settings extends javax.swing.JFrame {
         String theme = jComboBox1.getSelectedItem().toString();
         try (PrintStream out = new PrintStream(new File(HotspotMaker.Details.space + "Theme.ini"))) {
             out.println(theme);
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
+        } catch (FileNotFoundException e) {
+            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
         }
         HotspotMaker.HotspotMaker.setTheme();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -234,9 +236,9 @@ public class Settings extends javax.swing.JFrame {
             out.println(jTextField1.getText());
             out.println(jTextField2.getText());
             JOptionPane.showMessageDialog(this, "Success!");
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
-            JOptionPane.showMessageDialog(this, "Error!\n" + ex);
+        } catch (FileNotFoundException e) {
+            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error!\n" + e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -256,15 +258,11 @@ public class Settings extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Settings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the form */

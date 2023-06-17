@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
@@ -26,15 +28,15 @@ public class MainUI extends javax.swing.JFrame {
         initComponents();
         startup();
     }
-    
+
     String command;
-    
+
     private void startup() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
-        
+
         jLabel1.setText("Hotspot Maker (v" + HotspotMaker.Details.version + ")");
-        
+
         if (HotspotMaker.Details.status == true) {
             jButton7.setEnabled(true);
             jRadioButton1.setEnabled(false);
@@ -55,14 +57,14 @@ public class MainUI extends javax.swing.JFrame {
                 try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                     String defssid = lines.skip(0).findFirst().get();
                     jTextField3.setText(defssid);
-                } catch (IOException ex) {
-                    System.out.println(ex);
+                } catch (IOException e) {
+                    Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, e);
                 }
                 try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                     String defpsw = lines.skip(1).findFirst().get();
                     jTextField4.setText(defpsw);
-                } catch (IOException ex) {
-                    System.out.println(ex);
+                } catch (IOException e) {
+                    Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, e);
                 }
                 jRadioButton1.setSelected(true);
                 Component[] com = onetimepanel.getComponents();
@@ -79,7 +81,7 @@ public class MainUI extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void operations() {
         new Thread(new Runnable() {
             @Override
@@ -97,7 +99,7 @@ public class MainUI extends javax.swing.JFrame {
                         console.append(line + "\n");
                     }
                 } catch (IOException e) {
-                    System.out.println(e);
+                    Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, e);
                 }
                 console.append("\n=========================================\n");
             }
@@ -585,15 +587,11 @@ public class MainUI extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the form */

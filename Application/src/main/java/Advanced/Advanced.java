@@ -14,6 +14,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -64,8 +66,8 @@ public class Advanced extends javax.swing.JFrame {
             } else if (f2.equals("Italic")) {
                 console.setFont(new Font(f1, Font.ITALIC, fsize));
             }
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
+        } catch (FileNotFoundException e) {
+            Logger.getLogger(Advanced.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -97,6 +99,7 @@ public class Advanced extends javax.swing.JFrame {
                         }
                     } catch (IOException e) {
                         console.append(e + "\n");
+                        Logger.getLogger(Advanced.class.getName()).log(Level.SEVERE, null, e);
                     }
                 } else {
                     try {
@@ -111,7 +114,7 @@ public class Advanced extends javax.swing.JFrame {
                         }
                     } catch (IOException e) {
                         console.append(e + "\n");
-                        System.out.println(e);
+                        Logger.getLogger(Advanced.class.getName()).log(Level.SEVERE, null, e);
                     }
                 }
 

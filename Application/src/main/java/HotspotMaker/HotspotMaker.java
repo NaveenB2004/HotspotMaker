@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.JWindow;
 import javax.swing.UIManager;
@@ -29,7 +31,7 @@ public class HotspotMaker extends JWindow {
         }
 
         new Status().checkHotspotStatus();
-        
+
         new Status().checkUpdateStatus();
 
         Main.MainUI main = new Main.MainUI();
@@ -53,20 +55,20 @@ public class HotspotMaker extends JWindow {
                         UIManager.setLookAndFeel(
                                 UIManager.getSystemLookAndFeelClassName());
                     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
-                            | UnsupportedLookAndFeelException ex) {
-                        System.out.println("0003" + ex);
+                            | UnsupportedLookAndFeelException e) {
+                        Logger.getLogger(HotspotMaker.class.getName()).log(Level.SEVERE, null, e);
                     }
                 }
-            } catch (IOException ex) {
-                System.out.println("0004" + ex);
+            } catch (IOException e) {
+                Logger.getLogger(HotspotMaker.class.getName()).log(Level.SEVERE, null, e);
             }
         } else {
             try {
                 UIManager.setLookAndFeel(
                         UIManager.getSystemLookAndFeelClassName());
             } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
-                    | UnsupportedLookAndFeelException ex) {
-                System.out.println("0005" + ex);
+                    | UnsupportedLookAndFeelException e) {
+                Logger.getLogger(HotspotMaker.class.getName()).log(Level.SEVERE, null, e);
             }
         }
         FlatLaf.updateUI();

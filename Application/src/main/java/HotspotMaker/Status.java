@@ -10,6 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,7 +41,7 @@ public class Status {
                 System.exit(0);
             }
         } catch (IOException e) {
-            System.out.println(e);
+            Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
         }
 
         try {
@@ -58,7 +60,7 @@ public class Status {
             }
             System.out.println(Details.status);
         } catch (IOException e) {
-            System.out.println(e);
+            Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -89,14 +91,14 @@ public class Status {
                                 Desktop.getDesktop().browse(new URL(
                                         "https://github.com/naveenb2004/HotspotMaker/releases").toURI());
                             } catch (IOException | URISyntaxException e) {
-                                System.out.println(e);
+                                Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
                             }
                         }
                     }
-                } catch (MalformedURLException ex) {
-                    System.out.println(ex);
-                } catch (IOException ex) {
-                    System.out.println(ex);
+                } catch (MalformedURLException e) {
+                    Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
+                } catch (IOException e) {
+                    Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
                 }
             }
         }).start();

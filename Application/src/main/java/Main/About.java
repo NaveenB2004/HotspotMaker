@@ -1,10 +1,13 @@
 package Main;
 
+import HotspotMaker.Status;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -149,10 +152,10 @@ public class About extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -192,7 +195,7 @@ public class About extends javax.swing.JFrame {
         try {
             Desktop.getDesktop().browse(new URL("http://github.com/naveenb2004/HotspotMaker").toURI());
         } catch (IOException | URISyntaxException e) {
-            System.out.println(e);
+            Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -201,7 +204,7 @@ public class About extends javax.swing.JFrame {
         try {
             Desktop.getDesktop().browse(new URL("https://sites.google.com/view/naveenb2004").toURI());
         } catch (IOException | URISyntaxException e) {
-            System.out.println(e);
+            Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -210,7 +213,7 @@ public class About extends javax.swing.JFrame {
         try {
             Desktop.getDesktop().browse(new URL("mailto:naveennbalasooriya2004@gmail.com").toURI());
         } catch (IOException | URISyntaxException e) {
-            System.out.println(e);
+            Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
