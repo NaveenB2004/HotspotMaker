@@ -1,6 +1,5 @@
 package Main;
 
-import HotspotMaker.Status;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.io.IOException;
