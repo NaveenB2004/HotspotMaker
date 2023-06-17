@@ -32,8 +32,6 @@ public class MainUI extends javax.swing.JFrame {
     String command;
 
     private void startup() {
-        new HotspotMaker.Status().checkHotspotStatus();
-
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
 
@@ -478,12 +476,14 @@ public class MainUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Settings().setVisible(true);
         this.dispose();
+        getStatus();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         new Advanced.Advanced().setVisible(true);
         this.dispose();
+        getStatus();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -572,6 +572,10 @@ public class MainUI extends javax.swing.JFrame {
             jRadioButton2ActionPerformed(evt);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void getStatus() {
+        new HotspotMaker.Status().checkHotspotStatus();
+    }
 
     /**
      * @param args the command line arguments

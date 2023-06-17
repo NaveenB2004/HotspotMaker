@@ -29,7 +29,9 @@ public class HotspotMaker extends JWindow {
         if (!new File(Details.space).exists()) {
             new File(Details.space).mkdirs();
         }
-
+        
+        new Status().checkHotspotStatus();
+        
         new Status().checkUpdateStatus();
 
         Main.MainUI main = new Main.MainUI();
