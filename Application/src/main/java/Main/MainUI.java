@@ -32,6 +32,8 @@ public class MainUI extends javax.swing.JFrame {
     String command;
 
     private void startup() {
+        new HotspotMaker.Status().checkHotspotStatus();
+
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
 
