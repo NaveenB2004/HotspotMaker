@@ -36,7 +36,7 @@ public class MainUI extends javax.swing.JFrame {
                 getClass().getResource("/Imgs/Icon.png")));
 
         jLabel1.setText("Hotspot Maker (v" + HotspotMaker.Details.version + ")");
-        
+
         if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
             try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defssid = lines.skip(0).findFirst().get();
@@ -65,21 +65,27 @@ public class MainUI extends javax.swing.JFrame {
                 com11.setEnabled(false);
             }
         } else {
-            jButton7.setEnabled(false);
-            if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
-                HotspotMaker.Details.defCred = true;
-                jRadioButton1.setSelected(true);
-                Component[] com = onetimepanel.getComponents();
-                for (Component com1 : com) {
-                    com1.setEnabled(false);
-                }
-            } else {
-                HotspotMaker.Details.defCred = false;
-                jRadioButton2.setSelected(true);
-                Component[] com = defsettings.getComponents();
-                for (Component com1 : com) {
-                    com1.setEnabled(false);
-                }
+            stopOperations();
+        }
+    }
+
+    private void stopOperations() {
+        jButton7.setEnabled(false);
+        if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
+            HotspotMaker.Details.defCred = true;
+            jRadioButton1.setEnabled(true);
+            jRadioButton1.setSelected(true);
+            Component[] com = onetimepanel.getComponents();
+            for (Component com1 : com) {
+                com1.setEnabled(false);
+            }
+        } else {
+            HotspotMaker.Details.defCred = false;
+            jRadioButton2.setEnabled(true);
+            jRadioButton2.setSelected(true);
+            Component[] com = defsettings.getComponents();
+            for (Component com1 : com) {
+                com1.setEnabled(false);
             }
         }
     }
@@ -518,7 +524,7 @@ public class MainUI extends javax.swing.JFrame {
         } else {
             jRadioButton2.setSelected(true);
             JOptionPane.showMessageDialog(this, "Set default SSID & Password first!"
-                    + "\n(from Settings)");
+                    + "\n(go to Settings)");
         }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
@@ -569,14 +575,15 @@ public class MainUI extends javax.swing.JFrame {
         jButton7.setEnabled(false);
         command = "netsh wlan stop hostednetwork";
         operations();
-        jRadioButton1.setEnabled(true);
-        jRadioButton2.setEnabled(true);
-        if (jRadioButton1.isSelected()) {
-            jRadioButton1ActionPerformed(evt);
-        }
-        if (jRadioButton2.isSelected()) {
-            jRadioButton2ActionPerformed(evt);
-        }
+//        jRadioButton1.setEnabled(true);
+//        jRadioButton2.setEnabled(true);
+//        if (jRadioButton1.isSelected()) {
+//            jRadioButton1ActionPerformed(evt);
+//        }
+//        if (jRadioButton2.isSelected()) {
+//            jRadioButton2ActionPerformed(evt);
+//        }
+        stopOperations();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
