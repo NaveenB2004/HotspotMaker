@@ -64,6 +64,7 @@ public class Status {
                                 if (Main.MainUI.realState.isDisplayable()) {
                                     Main.MainUI.realState.setText("Not Started!");
                                     Main.MainUI.realState.setBackground(Color.YELLOW);
+                                    Main.MainUI.realState.setForeground(Color.BLACK);
                                 }
                             }
                             if (line.endsWith("Started")) {
@@ -71,6 +72,7 @@ public class Status {
                                 if (Main.MainUI.realState.isDisplayable()) {
                                     Main.MainUI.realState.setText("Started!");
                                     Main.MainUI.realState.setBackground(Color.GREEN);
+                                    Main.MainUI.realState.setForeground(Color.BLACK);
                                 }
                             }
                         }
