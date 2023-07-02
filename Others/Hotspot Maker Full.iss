@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Hotspot Maker"
-#define MyAppVersion "2.9"
+#define MyAppVersion "3.1"
 #define MyAppPublisher "NaveenB2004"
 #define MyAppURL "https://sites.google.com/view/NaveenB2004"
 #define MyAppExeName "Hotspot Maker.exe"
