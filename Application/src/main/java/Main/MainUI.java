@@ -29,16 +29,16 @@ public class MainUI extends javax.swing.JFrame {
         initComponents();
         startup();
     }
-
+    
     String command;
     ActionEvent evt = null;
-
+    
     private void startup() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
-
+        
         jLabel1.setText("Hotspot Maker (v" + HotspotMaker.Details.version + ")");
-
+        
         if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
             try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defssid = lines.skip(0).findFirst().get();
@@ -53,7 +53,10 @@ public class MainUI extends javax.swing.JFrame {
                 Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, e);
             }
         }
-
+        
+        jTextField1.setText(HotspotMaker.Details.oneTimeSSID);
+        jTextField2.setText(HotspotMaker.Details.oneTimePassword);
+        
         if (HotspotMaker.Details.status == true) {
             jButton7.setEnabled(true);
             jRadioButton1.setEnabled(false);
@@ -70,7 +73,7 @@ public class MainUI extends javax.swing.JFrame {
             stopOperations();
         }
     }
-
+    
     private void stopOperations() {
         jButton7.setEnabled(false);
         jRadioButton1.setEnabled(true);
@@ -85,7 +88,7 @@ public class MainUI extends javax.swing.JFrame {
             jRadioButton2ActionPerformed(evt);
         }
     }
-
+    
     private void operations() {
         new Thread(new Runnable() {
             @Override
@@ -564,6 +567,8 @@ public class MainUI extends javax.swing.JFrame {
                 + jTextField1.getText() + "\" key=\"" + jTextField2.getText() + "\" && "
                 + "netsh wlan start hostednetwork";
         operations();
+        HotspotMaker.Details.oneTimeSSID = jTextField1.getText();
+        HotspotMaker.Details.oneTimePassword = jTextField2.getText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
