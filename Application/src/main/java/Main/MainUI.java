@@ -4,6 +4,7 @@ import HotspotMaker.Details;
 import com.github.javafaker.Faker;
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class MainUI extends javax.swing.JFrame {
     }
 
     String command;
+    ActionEvent evt = null;
 
     private void startup() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
@@ -71,22 +73,16 @@ public class MainUI extends javax.swing.JFrame {
 
     private void stopOperations() {
         jButton7.setEnabled(false);
+        jRadioButton1.setEnabled(true);
+        jRadioButton2.setEnabled(true);
         if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
             HotspotMaker.Details.defCred = true;
-            jRadioButton1.setEnabled(true);
             jRadioButton1.setSelected(true);
-            Component[] com = onetimepanel.getComponents();
-            for (Component com1 : com) {
-                com1.setEnabled(false);
-            }
+            jRadioButton1ActionPerformed(evt);
         } else {
             HotspotMaker.Details.defCred = false;
-            jRadioButton2.setEnabled(true);
             jRadioButton2.setSelected(true);
-            Component[] com = defsettings.getComponents();
-            for (Component com1 : com) {
-                com1.setEnabled(false);
-            }
+            jRadioButton2ActionPerformed(evt);
         }
     }
 
@@ -575,14 +571,6 @@ public class MainUI extends javax.swing.JFrame {
         jButton7.setEnabled(false);
         command = "netsh wlan stop hostednetwork";
         operations();
-//        jRadioButton1.setEnabled(true);
-//        jRadioButton2.setEnabled(true);
-//        if (jRadioButton1.isSelected()) {
-//            jRadioButton1ActionPerformed(evt);
-//        }
-//        if (jRadioButton2.isSelected()) {
-//            jRadioButton2ActionPerformed(evt);
-//        }
         stopOperations();
     }//GEN-LAST:event_jButton7ActionPerformed
 
