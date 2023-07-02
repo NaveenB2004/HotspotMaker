@@ -75,6 +75,10 @@ public class Status {
                                     Main.MainUI.realState.setForeground(Color.BLACK);
                                 }
                             }
+                            if (line.startsWith("    Number of clients")){
+                                String[] clients = line.split(": ");
+                                Main.MainUI.clientCount.setText(clients[1]);
+                            }
                         }
                     } catch (IOException e) {
                         Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);

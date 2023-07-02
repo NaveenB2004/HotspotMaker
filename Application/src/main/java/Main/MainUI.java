@@ -29,16 +29,16 @@ public class MainUI extends javax.swing.JFrame {
         initComponents();
         startup();
     }
-    
+
     String command;
     ActionEvent evt = null;
-    
+
     private void startup() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
-        
+
         jLabel1.setText("Hotspot Maker (v" + HotspotMaker.Details.version + ")");
-        
+
         if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
             try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defssid = lines.skip(0).findFirst().get();
@@ -53,10 +53,10 @@ public class MainUI extends javax.swing.JFrame {
                 Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, e);
             }
         }
-        
+
         jTextField1.setText(HotspotMaker.Details.oneTimeSSID);
         jTextField2.setText(HotspotMaker.Details.oneTimePassword);
-        
+
         if (HotspotMaker.Details.status == true) {
             jButton7.setEnabled(true);
             jRadioButton1.setEnabled(false);
@@ -73,7 +73,7 @@ public class MainUI extends javax.swing.JFrame {
             stopOperations();
         }
     }
-    
+
     private void stopOperations() {
         jButton7.setEnabled(false);
         jRadioButton1.setEnabled(true);
@@ -88,7 +88,7 @@ public class MainUI extends javax.swing.JFrame {
             jRadioButton2ActionPerformed(evt);
         }
     }
-    
+
     private void operations() {
         new Thread(new Runnable() {
             @Override
@@ -154,6 +154,8 @@ public class MainUI extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         realState = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        clientCount = new javax.swing.JLabel();
 
         f1r.setText("jLabel4");
 
@@ -436,6 +438,10 @@ public class MainUI extends javax.swing.JFrame {
         realState.setEditable(false);
         realState.setText("---");
 
+        jLabel4.setText("Clients : ");
+
+        clientCount.setText("---");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -449,7 +455,12 @@ public class MainUI extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(realState))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(realState)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clientCount, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -469,7 +480,10 @@ public class MainUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(realState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(realState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(clientCount)))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -552,23 +566,29 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jButton7.setEnabled(true);
-        jRadioButton1.setEnabled(false);
-        jRadioButton2.setEnabled(false);
-        Component[] com = defsettings.getComponents();
-        for (Component com1 : com) {
-            com1.setEnabled(false);
+        if (jTextField2.getText().length() < 8 || jTextField2.getText().length() > 16
+                || jTextField1.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "SSID musn't be empty!\n"
+                    + "Password must contain 8 to 16 characters!");
+        } else {
+            jButton7.setEnabled(true);
+            jRadioButton1.setEnabled(false);
+            jRadioButton2.setEnabled(false);
+            Component[] com = defsettings.getComponents();
+            for (Component com1 : com) {
+                com1.setEnabled(false);
+            }
+            Component[] com1 = onetimepanel.getComponents();
+            for (Component com11 : com1) {
+                com11.setEnabled(false);
+            }
+            command = "netsh wlan set hostednetwork mode=allow ssid=\""
+                    + jTextField1.getText() + "\" key=\"" + jTextField2.getText() + "\" && "
+                    + "netsh wlan start hostednetwork";
+            operations();
+            HotspotMaker.Details.oneTimeSSID = jTextField1.getText();
+            HotspotMaker.Details.oneTimePassword = jTextField2.getText();
         }
-        Component[] com1 = onetimepanel.getComponents();
-        for (Component com11 : com1) {
-            com11.setEnabled(false);
-        }
-        command = "netsh wlan set hostednetwork mode=allow ssid=\""
-                + jTextField1.getText() + "\" key=\"" + jTextField2.getText() + "\" && "
-                + "netsh wlan start hostednetwork";
-        operations();
-        HotspotMaker.Details.oneTimeSSID = jTextField1.getText();
-        HotspotMaker.Details.oneTimePassword = jTextField2.getText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -612,6 +632,7 @@ public class MainUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    public static javax.swing.JLabel clientCount;
     private javax.swing.JTextArea console;
     private javax.swing.JPanel defsettings;
     private javax.swing.JLabel f1r;
@@ -627,6 +648,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

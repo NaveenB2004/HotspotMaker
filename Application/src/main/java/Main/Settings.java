@@ -232,13 +232,19 @@ public class Settings extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try (PrintStream out = new PrintStream(new File(HotspotMaker.Details.space + "Credentials.ini"))) {
-            out.println(jTextField1.getText());
-            out.println(jTextField2.getText());
-            JOptionPane.showMessageDialog(this, "Success!");
-        } catch (FileNotFoundException e) {
-            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
-            JOptionPane.showMessageDialog(this, "Error!\n" + e);
+        if (jTextField1.getText().length() < 8 || jTextField1.getText().length() > 16
+                || jTextField2.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "SSID musn't be empty!\n"
+                    + "Password must contain 8 to 16 characters!");
+        } else {
+            try (PrintStream out = new PrintStream(new File(HotspotMaker.Details.space + "Credentials.ini"))) {
+                out.println(jTextField1.getText());
+                out.println(jTextField2.getText());
+                JOptionPane.showMessageDialog(this, "Success!");
+            } catch (FileNotFoundException e) {
+                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
