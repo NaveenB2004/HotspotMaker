@@ -1,5 +1,6 @@
 package HotspotMaker;
 
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Frame;
 import java.io.BufferedReader;
@@ -20,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class Status {
 
-    public void checkHotspotStatus() {
+    public void checkStarterStatus() {
         try {
             ProcessBuilder processBuilder
                     = new ProcessBuilder("cmd.exe", "/c",
@@ -42,23 +43,48 @@ public class Status {
         } catch (IOException e) {
             Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
 
-        try {
-            ProcessBuilder processBuilder
-                    = new ProcessBuilder("cmd.exe", "/c",
-                            "netsh wlan show hostednetwork");
-            processBuilder.redirectErrorStream(true);
-            Process p = processBuilder.start();
-            String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {
-                if (line.endsWith("Not started")) {
-                    Details.status = false;
+    public void checkHotspotStatus() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        ProcessBuilder processBuilder
+                                = new ProcessBuilder("cmd.exe", "/c",
+                                        "netsh wlan show hostednetwork");
+                        processBuilder.redirectErrorStream(true);
+                        Process p = processBuilder.start();
+                        String line = null;
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                        while ((line = bufferedReader.readLine()) != null) {
+                            if (line.endsWith("Not started")) {
+                                Details.status = false;
+                                if (Main.MainUI.realState.isDisplayable()) {
+                                    Main.MainUI.realState.setText("Not Started!");
+                                    Main.MainUI.realState.setBackground(Color.YELLOW);
+                                }
+                            }
+                            if (line.endsWith("Started")) {
+                                Details.status = true;
+                                if (Main.MainUI.realState.isDisplayable()) {
+                                    Main.MainUI.realState.setText("Started!");
+                                    Main.MainUI.realState.setBackground(Color.GREEN);
+                                }
+                            }
+                        }
+                    } catch (IOException e) {
+                        Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
-        } catch (IOException e) {
-            Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
-        }
+        }).start();
     }
 
     public void checkUpdateStatus() {
