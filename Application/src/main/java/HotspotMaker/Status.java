@@ -75,9 +75,13 @@ public class Status {
                                     Main.MainUI.realState.setForeground(Color.BLACK);
                                 }
                             }
-                            if (line.startsWith("    Number of clients")){
+                            if (line.startsWith("    Number of clients")) {
                                 String[] clients = line.split(": ");
-                                Main.MainUI.clientCount.setText(clients[1]);
+                                Main.MainUI.clientsConnected.setText(clients[1]);
+                            }
+                            if (line.startsWith("    Max number of clients")) {
+                                String[] clients = line.split(": ");
+                                Main.MainUI.clientsCanConnect.setText(clients[1]);
                             }
                         }
                     } catch (IOException e) {

@@ -57,7 +57,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="clientCount" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="clientsConnected" min="-2" pref="25" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="clientsCanConnect" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -86,7 +90,9 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="realState" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="clientCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="clientsConnected" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="clientsCanConnect" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jPanel4" max="32767" attributes="0"/>
@@ -535,7 +541,21 @@
         <Property name="text" type="java.lang.String" value="Clients : "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="clientCount">
+    <Component class="javax.swing.JLabel" name="clientsConnected">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+        <Property name="text" type="java.lang.String" value="---"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="clientsCanConnect">
       <Properties>
         <Property name="text" type="java.lang.String" value="---"/>
       </Properties>
