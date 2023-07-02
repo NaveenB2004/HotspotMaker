@@ -232,10 +232,10 @@ public class Settings extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (jTextField1.getText().length() < 8 || jTextField1.getText().length() > 16
+        if (jTextField1.getText().length() < 8 || jTextField1.getText().length() > 63
                 || jTextField2.getText().isBlank()) {
             JOptionPane.showMessageDialog(this, "SSID musn't be empty!\n"
-                    + "Password must contain 8 to 16 characters!");
+                    + "Password must contain 8 to 63 characters!");
         } else {
             try (PrintStream out = new PrintStream(new File(HotspotMaker.Details.space + "Credentials.ini"))) {
                 out.println(jTextField1.getText());
