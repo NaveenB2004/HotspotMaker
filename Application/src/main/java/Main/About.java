@@ -217,7 +217,9 @@ public class About extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try {
-            Desktop.getDesktop().browse(new URL("http://github.com/naveenb2004/HotspotMaker").toURI());
+            Desktop.getDesktop().browse(
+                    new URL("https://github.com/NaveenB2004/HotspotMaker/tree/main/Others/3rd%20Party%20License")
+                            .toURI());
         } catch (IOException | URISyntaxException e) {
             Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, e);
         }
