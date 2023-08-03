@@ -640,7 +640,7 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        new Advanced.Extensions().setVisible(true);
+        new Advanced.Extensions.Extensions().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
