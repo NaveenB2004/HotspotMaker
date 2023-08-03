@@ -58,7 +58,7 @@ public class Status {
                         while ((line = bufferedReader.readLine()) != null) {
                             if (line.endsWith("Not started")) {
                                 Details.status = false;
-                                if (Main.MainUI.realState.isDisplayable()) {
+                                if (Main.MainUI.realState != null) {
                                     Main.MainUI.realState.setText("Not Started!");
                                     Main.MainUI.realState.setBackground(Color.YELLOW);
                                     Main.MainUI.realState.setForeground(Color.BLACK);
@@ -66,17 +66,19 @@ public class Status {
                             }
                             if (line.endsWith("Started")) {
                                 Details.status = true;
-                                if (Main.MainUI.realState.isDisplayable()) {
+                                if (Main.MainUI.realState != null) {
                                     Main.MainUI.realState.setText("Started!");
                                     Main.MainUI.realState.setBackground(Color.GREEN);
                                     Main.MainUI.realState.setForeground(Color.BLACK);
                                 }
                             }
-                            if (line.startsWith("    Number of clients")) {
+                            if (line.startsWith("    Number of clients")
+                                    && Main.MainUI.clientsConnected != null) {
                                 String[] clients = line.split(": ");
                                 Main.MainUI.clientsConnected.setText(clients[1]);
                             }
-                            if (line.startsWith("    Max number of clients")) {
+                            if (line.startsWith("    Max number of clients")
+                                    && Main.MainUI.clientsCanConnect != null) {
                                 String[] clients = line.split(": ");
                                 Main.MainUI.clientsCanConnect.setText(clients[1]);
                             }
