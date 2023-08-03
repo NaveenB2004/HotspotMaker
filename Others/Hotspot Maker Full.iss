@@ -21,12 +21,12 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=C:\Users\Dell\Documents\HotspotMaker\Others\License.txt
+LicenseFile=D:\Projects\HotspotMaker\Others\License.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=C:\Users\Dell\Desktop
+OutputDir=C:\Users\NaveenB2004\Desktop
 OutputBaseFilename=Hotspot Maker Full
-SetupIconFile=C:\Users\Dell\Documents\HotspotMaker\Others\icon.ico
+SetupIconFile=D:\Projects\HotspotMaker\Others\icon.ico
 SolidCompression=yes
 Compression=lzma2/ultra64
 LZMAUseSeparateProcess=yes
@@ -39,8 +39,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\Dell\Desktop\Hotspot Maker\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Dell\Desktop\Hotspot Maker\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\NaveenB2004\Desktop\Hotspot Maker\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\NaveenB2004\Desktop\Hotspot Maker\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
