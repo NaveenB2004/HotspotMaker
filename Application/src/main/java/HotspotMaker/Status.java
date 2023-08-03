@@ -31,14 +31,11 @@ public class Status {
             String line = null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
-                if (line.startsWith("Hosted network supported") && line.endsWith("Yes")) {
-                    Details.support = true;
+                if (line.startsWith("Hosted network supported") && line.endsWith("No")) {
+                    JOptionPane.showMessageDialog(new Frame(),
+                            "Your network interface doesn't support for make hotspot!");
+                    System.exit(0);
                 }
-            }
-            if (Details.support = false) {
-                JOptionPane.showMessageDialog(new Frame(),
-                        "Your network interface doesn't support for make hotspot!");
-                System.exit(0);
             }
         } catch (IOException e) {
             Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);

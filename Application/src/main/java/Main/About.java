@@ -89,7 +89,7 @@ public class About extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("GulimChe", 0, 12)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(10);
-        jTextArea1.setText("17.06.2023\n\nCreated by: Naveen Balasooriya\nContact me: naveennbalasooriya2004@gmail.com (Email)\n            https://t.me/NaveenB2004 (Telegram)\nVisit my website: https://sites.google.com/sites/naveenb2004\n\nDownloads Available @\nhttps://github.com/naveenb2004/HotspotMaker/releases");
+        jTextArea1.setText("03.08.2023\n\nCreated by: Naveen Balasooriya\nContact me: naveennbalasooriya2004@gmail.com (Email)\n            https://t.me/NaveenB2004 (Telegram)\nVisit my website: https://sites.google.com/sites/naveenb2004\n\nDownloads Available @\nhttps://github.com/naveenb2004/HotspotMaker/releases");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));

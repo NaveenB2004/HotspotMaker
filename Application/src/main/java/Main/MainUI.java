@@ -423,7 +423,8 @@ public class MainUI extends javax.swing.JFrame {
         });
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/ico_extensions_16px_dark.png"))); // NOI18N
-        jButton8.setToolTipText("Extensions");
+        jButton8.setToolTipText("Extensions (will come with new version!)");
+        jButton8.setEnabled(false);
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
