@@ -1,5 +1,7 @@
 package HotspotMaker;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author NaveenB2004
@@ -11,6 +13,8 @@ public class Splash extends javax.swing.JFrame {
      */
     public Splash() {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(
+                getClass().getResource("/Imgs/Icon.png")));
     }
 
     /**
