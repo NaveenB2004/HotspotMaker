@@ -29,11 +29,19 @@ public class HotspotMaker extends JWindow {
         if (!new File(Details.space).exists()) {
             new File(Details.space).mkdirs();
         }
-        
+
         new Status().checkStarterStatus();
         new Status().checkHotspotStatus();
-        
+
         new Status().checkUpdateStatus();
+
+        // this delay added cuz checkHotspotStatus()
+        // getting some tome to read the current status
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(HotspotMaker.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         Main.MainUI main = new Main.MainUI();
         splash.dispose();
