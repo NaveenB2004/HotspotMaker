@@ -1,5 +1,6 @@
 package Advanced;
 
+import java.io.File;
 import javax.swing.JFileChooser;
 
 /**
@@ -15,8 +16,16 @@ public class Extensions extends javax.swing.JFrame {
         initComponents();
     }
 
+    File location = new File(HotspotMaker.Details.space + "Extensions\\");
     private static final String _01 = "";
-    
+
+    private void downloader(String exNo) {
+        if (!location.exists()){
+            location.mkdirs();
+        }
+        
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +57,11 @@ public class Extensions extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/ico_download_16px_dark.png"))); // NOI18N
         jButton1.setToolTipText("");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/ico_find_16px_dark.png"))); // NOI18N
         jButton3.setToolTipText("Set Installed Location");
@@ -124,6 +138,11 @@ public class Extensions extends javax.swing.JFrame {
         jFileChooser1.showOpenDialog(this);
         String location = jFileChooser1.getSelectedFile().getAbsolutePath();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        downloader(_01);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
