@@ -1,7 +1,15 @@
 package Advanced;
 
 import java.io.File;
-import javax.swing.JFileChooser;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,16 +22,47 @@ public class Extensions extends javax.swing.JFrame {
      */
     public Extensions() {
         initComponents();
+        startup();
     }
 
-    File location = new File(HotspotMaker.Details.space + "Extensions\\");
-    private static final String _01 = "";
+    private static final String spaceLocation = HotspotMaker.Details.space + "Extensions\\";
+    ImageIcon open = new ImageIcon(getClass().getResource("/Imgs/ico_open_16px_dark.png"));
+    
+    private static final String ext_01 = "";
 
-    private void downloader(String exNo) {
-        if (!location.exists()){
-            location.mkdirs();
+    private void startup() {
+        if (new File(spaceLocation + "ext_01.jar").exists()) {
+            jButton1.setIcon(open);
         }
-        
+    }
+
+    private void importer(String extNum) {
+        jFileChooser1.showOpenDialog(this);
+        String location = jFileChooser1.getSelectedFile().getAbsolutePath();
+        if (!location.endsWith(".source")) {
+            JOptionPane.showMessageDialog(this, "Invalid source file selected!");
+        } else {
+            try (Stream<String> lines = Files.lines(Paths.get(location))) {
+                String source = lines.skip(0).findFirst().get();
+                try {
+                    Files.copy(Paths.get(source),
+                            Paths.get(spaceLocation + "ext_" + extNum + ".jar"),
+                            REPLACE_EXISTING);
+                    JOptionPane.showMessageDialog(this, "Done!");
+                } catch (IOException e) {
+                    Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, e);
+                }
+            } catch (IOException e) {
+                Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
+
+    private void downloader(String extNum) {
+        if (!new File(spaceLocation).exists()) {
+            new File(spaceLocation).mkdirs();
+        }
+
     }
 
     /**
@@ -41,6 +80,8 @@ public class Extensions extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+
+        jFileChooser1.setDialogTitle("Import Extension (.source)");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Extensions");
@@ -90,9 +131,8 @@ public class Extensions extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -133,15 +173,12 @@ public class Extensions extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        jFileChooser1.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        jFileChooser1.setDialogTitle("Restore");
-        jFileChooser1.showOpenDialog(this);
-        String location = jFileChooser1.getSelectedFile().getAbsolutePath();
+        importer("01");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        downloader(_01);
+        downloader(ext_01);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
