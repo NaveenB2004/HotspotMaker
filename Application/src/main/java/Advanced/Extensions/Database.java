@@ -15,12 +15,12 @@ import java.util.logging.Logger;
 public class Database {
 
     public static String dbLink
-            = "https://raw.githubusercontent.com/NaveenB2004/HotspotMaker/main/Others/Extensions.db";
+            = "https://github.com/NaveenB2004/HotspotMaker/raw/main/Others/Extensions.db";
 
     public static Connection Rconn() {
         Connection Rconn = null;
         try {
-            Rconn = DriverManager.getConnection("jdbc:sqlite::resource:" + dbLink);
+            Rconn = DriverManager.getConnection("jdbc:sqlite:" + dbLink);
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }

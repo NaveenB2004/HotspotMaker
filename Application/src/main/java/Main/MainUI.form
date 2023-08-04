@@ -557,8 +557,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Imgs/ico_extensions_16px_dark.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Extensions (will come with new version!)"/>
-            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="toolTipText" type="java.lang.String" value="Extensions"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>
