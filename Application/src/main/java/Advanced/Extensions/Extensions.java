@@ -1,11 +1,8 @@
 package Advanced.Extensions;
 
+import java.awt.Frame;
+import java.awt.Toolkit;
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +10,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,67 +25,45 @@ public class Extensions extends javax.swing.JFrame {
     public Extensions() {
         initComponents();
         startup();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(
+                getClass().getResource("/Imgs/Icon.png")));
     }
 
     Actions actions = new Actions();
-    JLabel title = Actions.title;
+    Connection conn = Database.conn();
     JLabel status = Actions.status;
     DefaultTableModel model;
 
     private void startup() {
-        model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
         actions.setVisible(true);
+        model = (DefaultTableModel) jTable1.getModel();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                // check thet can reach the online db by sending request
-                title.setText("checking connection");
-                status.setText("trying to reach remort db");
+                status.setText("Checking Database...");
                 if (!new File(HotspotMaker.Details.space + "\\Extnsions\\database.db").exists()) {
-                    Advanced.Extensions.Database.LdbSetup();
-                }
-                try {
-                    if (new URL(Database.dbLink).getUserInfo() != null) {
-                        status.setText("connection established!");
-                        fetchData(Database.Rconn(), 0);
+                    status.setText("Downloading Database...");
+                    if (Advanced.Extensions.Database.updateDB() == true) {
+                        status.setText("Fetching Data...");
+                        try {
+                            Statement stmt = conn.createStatement();
+                            ResultSet rs = stmt.executeQuery("SELECT id, name, author "
+                                    + "FROM extensions");
+                            while (rs.next()) {
+                                Object[] row = {rs.getString(1), rs.getString(2),
+                                    rs.getString(3)};
+                                model.addRow(row);
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     } else {
-                        status.setText("connection failed!");
-                        fetchData(Database.Lconn(), 1);
+                        actions.dispose();
+                        JOptionPane.showMessageDialog(new Frame(), "Something went wrong!\nTry again later!");
                     }
-                } catch (MalformedURLException ex) {
-                    Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }).start();
-    }
-
-    private void fetchData(Connection conn, int db) {
-        title.setText("fetching data");
-        if (db == 0) {
-            status.setText("from remort db");
-        } else {
-            status.setText("from local db");
-        }
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
-                    + "FROM extensions");
-            while (rs.next()) {
-                jLabel18.setText(rs.getString(1) + " Extension(s) found!");
-                Statement stmt0 = conn.createStatement();
-                ResultSet rs0 = stmt0.executeQuery("SELECT id, name, author "
-                        + "FROM extensions");
-                while (rs0.next()) {
-                    Object[] row = {rs0.getString(1),
-                        rs0.getString(2), rs0.getString(3)};
-                    model.addRow(row);
-                }
-            }
-            actions.dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -125,8 +101,14 @@ public class Extensions extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
 
         jFileChooser1.setDialogTitle("Import Extension (.source)");
 
@@ -216,6 +198,10 @@ public class Extensions extends javax.swing.JFrame {
         jButton5.setToolTipText("Uninstall");
         jButton5.setEnabled(false);
 
+        jLabel17.setText("Date : ");
+
+        jLabel19.setText("---");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -228,14 +214,17 @@ public class Extensions extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
@@ -300,7 +289,9 @@ public class Extensions extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -339,7 +330,16 @@ public class Extensions extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/ico_about_16px_dark.png"))); // NOI18N
         jButton2.setToolTipText("About");
 
-        jLabel18.setText("0 Extension(s) found!");
+        jLabel18.setText("Extensions Found : ");
+
+        jLabel20.setText("Database version : ");
+
+        jLabel21.setText("---");
+
+        jLabel22.setText("---");
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/ico_database_16px_dark.png"))); // NOI18N
+        jButton7.setToolTipText("Check Database Updates");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -350,20 +350,38 @@ public class Extensions extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel21))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel22)))
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -418,6 +436,7 @@ public class Extensions extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -427,8 +446,13 @@ public class Extensions extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

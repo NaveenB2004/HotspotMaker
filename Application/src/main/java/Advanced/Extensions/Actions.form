@@ -58,8 +58,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="status" alignment="1" max="32767" attributes="0"/>
-                      <Component id="title" alignment="1" max="32767" attributes="0"/>
+                      <Component id="status" pref="269" max="32767" attributes="0"/>
                       <Component id="jLabel1" alignment="0" pref="269" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -69,8 +68,6 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="title" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="status" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -88,15 +85,6 @@
               <Image iconType="3" name="/Imgs/Loding(100x25).gif"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="title">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="---"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="status">
           <Properties>

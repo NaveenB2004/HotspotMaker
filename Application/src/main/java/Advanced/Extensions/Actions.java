@@ -1,5 +1,7 @@
 package Advanced.Extensions;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author NaveenB2004
@@ -11,6 +13,8 @@ public class Actions extends javax.swing.JFrame {
      */
     public Actions() {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(
+                getClass().getResource("/Imgs/Icon.png")));
     }
 
     /**
@@ -24,7 +28,6 @@ public class Actions extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        title = new javax.swing.JLabel();
         status = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -36,9 +39,6 @@ public class Actions extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Loding(100x25).gif"))); // NOI18N
 
-        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("---");
-
         status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status.setText("---");
 
@@ -49,8 +49,7 @@ public class Actions extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(status, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(title, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(status, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -58,8 +57,6 @@ public class Actions extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(status)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
@@ -126,6 +123,5 @@ public class Actions extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JLabel status;
-    public static javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

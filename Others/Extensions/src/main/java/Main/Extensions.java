@@ -1,6 +1,5 @@
 package Main;
 
-
 import com.formdev.flatlaf.FlatDarkLaf;
 
 /**
