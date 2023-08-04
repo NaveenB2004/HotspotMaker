@@ -28,9 +28,9 @@ public class DB {
     }
 
     public void mkdb() {
+        System.out.println("called1");
         Connection conn = conn();
         if (!dbLocation.endsWith("Extensions.db")) {
-            dbLocation += "\\Extensions.db";
             try {
                 Statement stmt = conn.createStatement();
                 stmt.executeUpdate("CREATE TABLE extensions("
@@ -45,6 +45,7 @@ public class DB {
                         + "license TEXT NOT NULL,"
                         + "web TEXT NOT NULL,"
                         + "direct TEXT NOT NULL)");
+                System.out.println("called2");
             } catch (SQLException ex) {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -53,10 +54,21 @@ public class DB {
                 stmt.executeUpdate("CREATE TABLE version("
                         + "id INTEGER PRIMARY KEY,"
                         + "date TEXT NOT NULL)");
+                System.out.println("called3");
+
                 Statement stmt0 = conn.createStatement();
                 stmt0.executeUpdate("INSERT INTO version "
                         + "(date) VALUES "
                         + "('" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "')");
+                System.out.println("called4");
+            } catch (SQLException ex) {
+                Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dbLocation += "\\Extensions.db";
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate("backup to " + dbLocation);
+                System.out.println("called5");
             } catch (SQLException ex) {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -64,6 +76,7 @@ public class DB {
             try {
                 Statement stmt = conn.createStatement();
                 stmt.executeUpdate("restore from " + dbLocation);
+                conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }
