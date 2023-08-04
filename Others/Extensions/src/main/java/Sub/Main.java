@@ -334,6 +334,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tableData() {
+        new DB().mkdb();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         Connection conn = DB.conn();
@@ -355,16 +356,15 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         Connection conn = DB.conn();
         if (jComboBox2.getSelectedIndex() == 0) {
-            new DB().mkdb();
             try {
                 Statement stmt = conn.createStatement();
                 stmt.executeUpdate("INSERT INTO extensions "
                         + "(name, author, source, description, version, release, license, web, direct) "
                         + "VALUES "
-                        + "(" + jTextField1.getText() + "," + jTextField2.getText() + ","
-                        + jTextField3.getText() + "," + jTextField4.getText() + ","
-                        + jTextField5.getText() + "," + jComboBox1.getSelectedItem().toString() + ","
-                        + jTextField6.getText() + "," + jTextField7.getText() + "," + jTextField8.getText() + ")");
+                        + "('" + jTextField1.getText() + "','" + jTextField2.getText() + "','"
+                        + jTextField3.getText() + "','" + jTextField4.getText() + "','"
+                        + jTextField5.getText() + "','" + jComboBox1.getSelectedItem().toString() + "','"
+                        + jTextField6.getText() + "','" + jTextField7.getText() + "','" + jTextField8.getText() + "')");
                 JOptionPane.showMessageDialog(this, "Done!");
             } catch (SQLException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -404,15 +404,15 @@ public class Main extends javax.swing.JFrame {
                     + "FROM extensions "
                     + "WHERE id='" + jTextField9.getText() + "'");
             while (rs.next()) {
-                jTextField1.setText(rs.getString(1));
-                jTextField2.setText(rs.getString(2));
-                jTextField3.setText(rs.getString(3));
-                jTextField4.setText(rs.getString(4));
-                jTextField5.setText(rs.getString(5));
-                jComboBox1.setSelectedItem(rs.getString(6));
-                jTextField6.setText(rs.getString(7));
-                jTextField7.setText(rs.getString(8));
-                jTextField8.setText(rs.getString(9));
+                jTextField1.setText(rs.getString(2));
+                jTextField2.setText(rs.getString(3));
+                jTextField3.setText(rs.getString(4));
+                jTextField4.setText(rs.getString(5));
+                jTextField5.setText(rs.getString(6));
+                jComboBox1.setSelectedItem(rs.getString(7));
+                jTextField6.setText(rs.getString(8));
+                jTextField7.setText(rs.getString(9));
+                jTextField8.setText(rs.getString(10));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

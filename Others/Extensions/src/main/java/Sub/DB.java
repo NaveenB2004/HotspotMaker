@@ -27,6 +27,7 @@ public class DB {
 
     public void mkdb() {
         if (!dbLocation.endsWith("Extensions.db")) {
+            dbLocation += "\\Extensions.db";
             Connection conn = conn();
             try {
                 Statement stmt = conn.createStatement();
