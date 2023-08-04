@@ -1,4 +1,4 @@
-package Advanced.Extensions;
+package HotspotMaker;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,17 +12,13 @@ import java.util.logging.Logger;
  */
 public class Database {
 
-    public static String dbLink
-            = "https://raw.githubusercontent.com/NaveenB2004/HotspotMaker/main/Others/Extensions.db";
-
     public static Connection conn() {
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite::resource:" + dbLink);
+            conn = DriverManager.getConnection("jdbc:sqlite:");
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Advanced.Extensions.Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conn();
     }
-
 }
