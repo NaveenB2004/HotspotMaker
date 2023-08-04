@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.NaveenB2004</groupId>
-    <artifactId>HotspotMaker</artifactId>
-    <version>3.2</version>
+    <artifactId>Extensions</artifactId>
+    <version>0.1</version>
     <packaging>jar</packaging>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>HotspotMaker.HotspotMaker</exec.mainClass>
+        <exec.mainClass>Extensions</exec.mainClass>
     </properties>
     
     <dependencies>
@@ -20,23 +20,11 @@
             <version>2.4</version>
         </dependency>
         <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.13.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.42.0.0</version>
         </dependency>
     </dependencies>
-    
-    <name>HotspotMaker</name>
     
     <build>
         <plugins>
@@ -64,7 +52,4 @@
             </plugin>
         </plugins>
     </build>
-    
-    <description>Hotspot Maker - GUI</description>
-    
 </project>
