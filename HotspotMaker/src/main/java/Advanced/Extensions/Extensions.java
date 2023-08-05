@@ -68,6 +68,8 @@ public class Extensions extends javax.swing.JFrame {
         }
         if (Database.dbUpdate == 1) {
             readDB();
+            JOptionPane.showMessageDialog(new Frame(),
+                    "Done!");
         } else {
             actions.dispose();
             JOptionPane.showMessageDialog(new Frame(),
