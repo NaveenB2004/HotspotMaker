@@ -28,12 +28,12 @@ public class Extensions extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
     }
-    
+
     Actions actions = new Actions();
     Connection conn;
     JLabel status = Actions.status;
     DefaultTableModel model;
-    
+
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
         actions.setVisible(true);
@@ -49,17 +49,19 @@ public class Extensions extends javax.swing.JFrame {
             }
         }).start();
     }
-    
+
     private void updateDB() {
         if (!actions.isVisible()) {
             actions.setVisible(true);
         }
         setActions("Downloading Database...");
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Extensions.class.getName())
-                    .log(Level.SEVERE, null, ex);
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Extensions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
         }
         Database.dbUpdate = 0;
         Database.updateDB();
@@ -72,16 +74,22 @@ public class Extensions extends javax.swing.JFrame {
             }
         }
         if (Database.dbUpdate == 1) {
+            String ver = jLabel22.getText();
             readDB();
+            if (!ver.equals(jLabel22.getText())) {
+                ver = "Hooray! New version of Database!";
+            } else {
+                ver = "";
+            }
             JOptionPane.showMessageDialog(new Frame(),
-                    "Done!");
+                    "Done!\n" + ver);
         } else {
             actions.dispose();
             JOptionPane.showMessageDialog(new Frame(),
                     "Something went wrong!\nTry again later!");
         }
     }
-    
+
     private void readDB() {
         conn = Database.conn();
         clearFields();
@@ -123,7 +131,7 @@ public class Extensions extends javax.swing.JFrame {
         }
         actions.dispose();
     }
-    
+
     private void clearFields() {
         model.setRowCount(0);
         jLabel5.setText("---");
@@ -141,7 +149,7 @@ public class Extensions extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         jButton3.setEnabled(false);
     }
-    
+
     private void setActions(String text) {
         if (status != null) {
             status.setText(text);
@@ -469,11 +477,13 @@ public class Extensions extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Extensions.class.getName())
-                    .log(Level.SEVERE, null, ex);
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Extensions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
         }
         new Main.MainUI().setVisible(true);
     }//GEN-LAST:event_formWindowClosed
