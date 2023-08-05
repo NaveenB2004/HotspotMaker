@@ -2,8 +2,10 @@ package Advanced.Extensions;
 
 import java.awt.Desktop;
 import java.awt.Frame;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Connection;
@@ -68,6 +70,8 @@ public class BProcess {
                 version.setText(rs.getString("version"));
                 release.setText(rs.getString("release"));
                 date.setText(rs.getString("date"));
+                
+                status.setText(getStatus(version.getText()));
 
                 sourceLink = rs.getString("source");
                 licenseLink = rs.getString("license");
@@ -141,20 +145,24 @@ public class BProcess {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                setActions("Downloading...");
                 try {
+                    setActions("Downloading...");
                     FileUtils.copyURLToFile(new URL(directLink),
                             new File(extDir + "tmp\\ext-" + extId + ".zip"));
-                    setActions("Installing...");
 
+                    setActions("Installing...");
                     new ProcessBuilder("cmd.exe", "/c",
                             "\"" + winrar + "\" "
                             + "x "
                             + extDir + "tmp\\ext-" + extId + ".zip "
                             + extDir + "ext-" + extId).start();
 
+                    setActions("Finishing...");
+                    FileUtils.deleteDirectory(new File(extDir + "tmp\\ext-" + extId + ".zip"));
+                    getStatus(version.getText());
+
                     btnEnable();
-                    
+
                     actions.dispose();
                     JOptionPane.showMessageDialog(new Frame(), "Installed!");
                 } catch (IOException ex) {
@@ -169,6 +177,26 @@ public class BProcess {
 
     public void btnOpenClickEvt() {
 
+    }
+
+    private String getStatus(String version) {
+        String rtnStatus = null;
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
+            "");
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            String line = null;
+            BufferedReader bufferedReader
+                    = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                rtnStatus = line;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(BProcess.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        return rtnStatus;
     }
 
     private void callURL(String passedURL) {
