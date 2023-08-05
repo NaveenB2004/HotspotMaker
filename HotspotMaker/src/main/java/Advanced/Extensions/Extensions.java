@@ -24,7 +24,6 @@ public class Extensions extends javax.swing.JFrame {
      */
     public Extensions() {
         initComponents();
-        actions.setVisible(true);
         startup();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
@@ -37,6 +36,7 @@ public class Extensions extends javax.swing.JFrame {
     
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
+        actions.setVisible(true);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -51,11 +51,15 @@ public class Extensions extends javax.swing.JFrame {
     }
     
     private void updateDB() {
+        if (!actions.isVisible()) {
+            actions.setVisible(true);
+        }
         setActions("Downloading Database...");
         try {
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Extensions.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
         Database.dbUpdate = 0;
         Database.updateDB();
@@ -63,7 +67,8 @@ public class Extensions extends javax.swing.JFrame {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Extensions.class.getName())
+                        .log(Level.SEVERE, null, ex);
             }
         }
         if (Database.dbUpdate == 1) {
@@ -79,6 +84,7 @@ public class Extensions extends javax.swing.JFrame {
     
     private void readDB() {
         conn = Database.conn();
+        clearFields();
         setActions("Fetching Data...");
         try {
             Statement stmt = conn.createStatement();
@@ -102,7 +108,6 @@ public class Extensions extends javax.swing.JFrame {
             Logger.getLogger(Extensions.class.getName())
                     .log(Level.SEVERE, null, ex);
         }
-        model.setRowCount(0);
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id, name, author "
@@ -117,6 +122,24 @@ public class Extensions extends javax.swing.JFrame {
                     .log(Level.SEVERE, null, ex);
         }
         actions.dispose();
+    }
+    
+    private void clearFields() {
+        model.setRowCount(0);
+        jLabel5.setText("---");
+        jLabel6.setText("---");
+        jLabel7.setText("---");
+        jLabel10.setText("---");
+        jLabel14.setText("---");
+        jLabel12.setText("---");
+        jLabel12.setText("---");
+        jLabel12.setText("---");
+        jButton6.setEnabled(false);
+        jButton8.setEnabled(false);
+        jButton4.setEnabled(false);
+        jButton5.setEnabled(false);
+        jButton1.setEnabled(false);
+        jButton3.setEnabled(false);
     }
     
     private void setActions(String text) {
@@ -449,7 +472,8 @@ public class Extensions extends javax.swing.JFrame {
         try {
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Extensions.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
         new Main.MainUI().setVisible(true);
     }//GEN-LAST:event_formWindowClosed
@@ -459,7 +483,9 @@ public class Extensions extends javax.swing.JFrame {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                jButton7.setEnabled(false);
                 updateDB();
+                jButton7.setEnabled(true);
             }
         }).start();
     }//GEN-LAST:event_jButton7ActionPerformed
