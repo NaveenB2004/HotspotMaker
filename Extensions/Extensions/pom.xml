@@ -26,6 +26,9 @@
         </dependency>
     </dependencies>
     
+    <name>HotspotMaker-Extensions</name>
+    <description>Hotspot Maker extensions database manager</description>
+    
     <build>
         <plugins>
             <plugin>
