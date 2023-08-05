@@ -26,6 +26,9 @@ public class BProcess {
 
     Connection conn = Database.conn();
     String extDir = HotspotMaker.Details.space + "Extnsions\\";
+    String winrar = extDir + "winrar\\WinRAR.exe";
+    Actions actions = new Actions();
+    JLabel actionsStatus = Actions.status;
 
     JLabel id = Extensions.jLabel5;
     JLabel name = Extensions.jLabel6;
@@ -114,15 +117,19 @@ public class BProcess {
     }
 
     public void btnUninstallClickEvt() {
+        actions.setVisible(true);
         new Thread(new Runnable() {
             @Override
             public void run() {
+                setActions("Uninstalling...");
                 try {
                     FileUtils.deleteDirectory(new File(extDir + "ext-" + extId));
+                    actions.dispose();
                     JOptionPane.showMessageDialog(new Frame(), "Uninstalled!");
                 } catch (IOException ex) {
                     Logger.getLogger(BProcess.class.getName())
                             .log(Level.SEVERE, null, ex);
+                    actions.dispose();
                     JOptionPane.showMessageDialog(new Frame(), "Error!\n" + ex);
                 }
             }
@@ -130,7 +137,34 @@ public class BProcess {
     }
 
     public void btnInstallClickEvt() {
+        actions.setVisible(true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setActions("Downloading...");
+                try {
+                    FileUtils.copyURLToFile(new URL(directLink),
+                            new File(extDir + "tmp\\ext-" + extId + ".zip"));
+                    setActions("Installing...");
 
+                    new ProcessBuilder("cmd.exe", "/c",
+                            "\"" + winrar + "\" "
+                            + "x "
+                            + extDir + "tmp\\ext-" + extId + ".zip "
+                            + extDir + "ext-" + extId).start();
+
+                    btnEnable();
+                    
+                    actions.dispose();
+                    JOptionPane.showMessageDialog(new Frame(), "Installed!");
+                } catch (IOException ex) {
+                    Logger.getLogger(BProcess.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                    actions.dispose();
+                    JOptionPane.showMessageDialog(new Frame(), "Error!\n" + ex);
+                }
+            }
+        }).start();
     }
 
     public void btnOpenClickEvt() {
@@ -143,6 +177,12 @@ public class BProcess {
         } catch (IOException | URISyntaxException e) {
             Logger.getLogger(BProcess.class.getName())
                     .log(Level.SEVERE, null, e);
+        }
+    }
+
+    private void setActions(String text) {
+        if (actionsStatus != null) {
+            actionsStatus.setText(text);
         }
     }
 
