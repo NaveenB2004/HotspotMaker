@@ -42,31 +42,35 @@ public class Extensions extends javax.swing.JFrame {
             public void run() {
                 status.setText("Checking Database...");
                 if (!new File(Database.dbLocation).exists()) {
-                    setActions("Downloading Database...");
-                    Database.updateDB();
-                    while (Database.dbUpdate == 0) {
-                        System.out.println("loop ===============================");
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    if (Database.dbUpdate == 1) {
-                        readData();
-                    } else {
-                        actions.dispose();
-                        JOptionPane.showMessageDialog(new Frame(),
-                                "Something went wrong!\nTry again later!");
-                    }
+                    updateDB();
                 } else {
-                    readData();
+                    readDB();
                 }
             }
         }).start();
     }
 
-    private void readData() {
+    private void updateDB() {
+        setActions("Downloading Database...");
+        Database.dbUpdate = 0;
+        Database.updateDB();
+        while (Database.dbUpdate == 0) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (Database.dbUpdate == 1) {
+            readDB();
+        } else {
+            actions.dispose();
+            JOptionPane.showMessageDialog(new Frame(),
+                    "Something went wrong!\nTry again later!");
+        }
+    }
+
+    private void readDB() {
         conn = Database.conn();
         setActions("Fetching Data...");
         try {
@@ -378,6 +382,11 @@ public class Extensions extends javax.swing.JFrame {
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/ico_database_16px_dark.png"))); // NOI18N
         jButton7.setToolTipText("Check Database Updates");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -431,6 +440,16 @@ public class Extensions extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Main.MainUI().setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                updateDB();
+            }
+        }).start();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
