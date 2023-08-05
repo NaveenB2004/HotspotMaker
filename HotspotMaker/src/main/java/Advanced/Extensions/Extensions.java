@@ -446,6 +446,11 @@ public class Extensions extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
+        }
         new Main.MainUI().setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
