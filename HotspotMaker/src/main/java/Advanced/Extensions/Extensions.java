@@ -24,6 +24,7 @@ public class Extensions extends javax.swing.JFrame {
      */
     public Extensions() {
         initComponents();
+        actions.setVisible(true);
         startup();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
@@ -35,46 +36,79 @@ public class Extensions extends javax.swing.JFrame {
     DefaultTableModel model;
 
     private void startup() {
-        actions.setVisible(true);
         model = (DefaultTableModel) jTable1.getModel();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 status.setText("Checking Database...");
-                if (!new File(HotspotMaker.Details.space + "\\Extnsions\\database.db").exists()) {
-                    status.setText("Downloading Database...");
-                    if (Advanced.Extensions.Database.updateDB() == true) {
-                        status.setText("Fetching Data...");
+                if (!new File(Database.dbLocation).exists()) {
+                    setActions("Downloading Database...");
+                    Database.updateDB();
+                    while (Database.dbUpdate == 0) {
                         try {
-                            Statement stmt = conn.createStatement();
-                            ResultSet rs = stmt.executeQuery("SELECT date "
-                                    + "FROM version");
-                            while (rs.next()) {
-                                jLabel22.setText(rs.getString(1));
-                            }
-                        } catch (SQLException ex) {
-                            Logger.getLogger(Extensions.class.getName())
-                                    .log(Level.SEVERE, null, ex);
+                            Thread.sleep(1000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        try {
-                            Statement stmt = conn.createStatement();
-                            ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
-                                    + "FROM extensions");
-                            while (rs.next()) {
-                                jLabel21.setText(rs.getString(1));
-                            }
-                        } catch (SQLException ex) {
-                            Logger.getLogger(Extensions.class.getName())
-                                    .log(Level.SEVERE, null, ex);
-                        }
+                    }
+                    if (Database.dbUpdate == 1) {
+                        readData();
                     } else {
                         actions.dispose();
                         JOptionPane.showMessageDialog(new Frame(),
                                 "Something went wrong!\nTry again later!");
                     }
+                } else {
+                    readData();
                 }
             }
         }).start();
+    }
+
+    private void readData() {
+        setActions("Fetching Data...");
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT date "
+                    + "FROM version");
+            while (rs.next()) {
+                jLabel22.setText(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Extensions.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
+                    + "FROM extensions");
+            while (rs.next()) {
+                jLabel21.setText(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Extensions.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT id, name, author "
+                    + "FROM extensions");
+            while (rs.next()) {
+                Object[] row = {rs.getString(1), rs.getString(2),
+                    rs.getString(3)};
+                model.addRow(row);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Extensions.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        actions.dispose();
+    }
+
+    private void setActions(String text) {
+        if (status != null) {
+            status.setText(text);
+        }
     }
 
     /**

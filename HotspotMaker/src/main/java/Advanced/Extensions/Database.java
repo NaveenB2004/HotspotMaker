@@ -18,33 +18,33 @@ import org.apache.commons.io.FileUtils;
  */
 public class Database {
 
+    public static String dbLocation = HotspotMaker.Details.space + "Extnsions\\Extensions.db";
+    public static int dbUpdate = 0;
+
     public static Connection conn() {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:"
-                    + HotspotMaker.Details.space + "\\Extnsions\\database.db");
+                    + HotspotMaker.Details.space + "Extnsions\\Extensions.db");
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conn;
     }
 
-    public static boolean updateDB() {
-        boolean connection = false;
-
+    public static void updateDB() {
         String dbSource = "https://github.com/NaveenB2004/HotspotMaker/raw/main/Extensions/Database/Extensions.db";
-        String localSource = HotspotMaker.Details.space + "\\Extnsions\\database.db";
-
         try {
-            FileUtils.copyURLToFile(new URL(dbSource), new File(localSource));
-            connection = true;
+            FileUtils.copyURLToFile(new URL(dbSource), new File(dbLocation));
+            dbUpdate = 1;
         } catch (MalformedURLException ex) {
+            dbUpdate = 2;
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            dbUpdate = 2;
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return connection;
     }
 
 }
