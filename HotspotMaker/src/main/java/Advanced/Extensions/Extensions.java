@@ -29,12 +29,12 @@ public class Extensions extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
     }
-
+    
     Actions actions = new Actions();
     Connection conn;
     JLabel status = Actions.status;
     DefaultTableModel model;
-
+    
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
         new Thread(new Runnable() {
@@ -49,9 +49,14 @@ public class Extensions extends javax.swing.JFrame {
             }
         }).start();
     }
-
+    
     private void updateDB() {
         setActions("Downloading Database...");
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Database.dbUpdate = 0;
         Database.updateDB();
         while (Database.dbUpdate == 0) {
@@ -69,7 +74,7 @@ public class Extensions extends javax.swing.JFrame {
                     "Something went wrong!\nTry again later!");
         }
     }
-
+    
     private void readDB() {
         conn = Database.conn();
         setActions("Fetching Data...");
@@ -95,6 +100,7 @@ public class Extensions extends javax.swing.JFrame {
             Logger.getLogger(Extensions.class.getName())
                     .log(Level.SEVERE, null, ex);
         }
+        model.setRowCount(0);
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id, name, author "
@@ -110,7 +116,7 @@ public class Extensions extends javax.swing.JFrame {
         }
         actions.dispose();
     }
-
+    
     private void setActions(String text) {
         if (status != null) {
             status.setText(text);
