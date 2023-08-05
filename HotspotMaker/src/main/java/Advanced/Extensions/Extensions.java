@@ -31,7 +31,7 @@ public class Extensions extends javax.swing.JFrame {
     }
 
     Actions actions = new Actions();
-    Connection conn = Database.conn();
+    Connection conn;
     JLabel status = Actions.status;
     DefaultTableModel model;
 
@@ -44,7 +44,8 @@ public class Extensions extends javax.swing.JFrame {
                 if (!new File(Database.dbLocation).exists()) {
                     setActions("Downloading Database...");
                     Database.updateDB();
-                    while (Database.dbUpdate == 0) {
+                    while (Database.dbUpdate != 0) {
+                        System.out.println("loop ===============================");
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException ex) {
@@ -66,6 +67,7 @@ public class Extensions extends javax.swing.JFrame {
     }
 
     private void readData() {
+        conn = Database.conn();
         setActions("Fetching Data...");
         try {
             Statement stmt = conn.createStatement();
