@@ -47,19 +47,30 @@ public class Extensions extends javax.swing.JFrame {
                         status.setText("Fetching Data...");
                         try {
                             Statement stmt = conn.createStatement();
-                            ResultSet rs = stmt.executeQuery("SELECT id, name, author "
-                                    + "FROM extensions");
+                            ResultSet rs = stmt.executeQuery("SELECT date "
+                                    + "FROM version");
                             while (rs.next()) {
-                                Object[] row = {rs.getString(1), rs.getString(2),
-                                    rs.getString(3)};
-                                model.addRow(row);
+                                jLabel22.setText(rs.getString(1));
                             }
                         } catch (SQLException ex) {
-                            Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(Extensions.class.getName())
+                                    .log(Level.SEVERE, null, ex);
+                        }
+                        try {
+                            Statement stmt = conn.createStatement();
+                            ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
+                                    + "FROM extensions");
+                            while (rs.next()) {
+                                jLabel21.setText(rs.getString(1));
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Extensions.class.getName())
+                                    .log(Level.SEVERE, null, ex);
                         }
                     } else {
                         actions.dispose();
-                        JOptionPane.showMessageDialog(new Frame(), "Something went wrong!\nTry again later!");
+                        JOptionPane.showMessageDialog(new Frame(),
+                                "Something went wrong!\nTry again later!");
                     }
                 }
             }

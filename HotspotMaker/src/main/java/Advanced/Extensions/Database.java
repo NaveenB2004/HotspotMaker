@@ -18,9 +18,6 @@ import org.apache.commons.io.FileUtils;
  */
 public class Database {
 
-    public static String dbLink
-            = "https://github.com/NaveenB2004/HotspotMaker/raw/main/Others/Extensions.db";
-
     public static Connection conn() {
         Connection conn = null;
         try {
@@ -35,18 +32,15 @@ public class Database {
     public static boolean updateDB() {
         boolean connection = false;
 
-        String dbSource = "";
-        String localSource = HotspotMaker.Details.space + "\\Extnsions\\database_backup.db";
+        String dbSource = "https://github.com/NaveenB2004/HotspotMaker/raw/main/Extensions/Database/Extensions.db";
+        String localSource = HotspotMaker.Details.space + "\\Extnsions\\database.db";
 
         try {
             FileUtils.copyURLToFile(new URL(dbSource), new File(localSource));
-            Statement stmt = conn().createStatement();
-            stmt.executeUpdate("restore from " + localSource);
-            new File(localSource).delete();
             connection = true;
         } catch (MalformedURLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException | SQLException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
 
