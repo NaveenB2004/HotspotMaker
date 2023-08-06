@@ -58,7 +58,6 @@ public class BProcess {
     String directLink;
 
     String extId;
-    boolean installed;
 
     public void tableClickEvt(String ExtId) {
         this.extId = ExtId;
@@ -103,13 +102,11 @@ public class BProcess {
 
             uninstall.setEnabled(true);
             open.setEnabled(true);
-            installed = true;
 
         } else {
             install.setIcon(new ImageIcon(
                     getClass().getResource("/Imgs/ico_download_16px_dark.png")));
             install.setToolTipText("Install");
-            installed = false;
         }
     }
 
@@ -154,8 +151,8 @@ public class BProcess {
                     setActions("Downloading...");
                     FileUtils.copyURLToFile(new URL(directLink),
                             new File(extDir + "tmp\\ext-" + extId + ".zip"));
-                    
-                    setActions("Checking Extractor...");
+
+                    setActions("Checking Installer...");
                     winrar();
 
                     setActions("Installing...");
@@ -184,20 +181,37 @@ public class BProcess {
     }
 
     private void winrar() {
-        if (!new File(winrar).exists()){
+        if (!new File(winrar).exists()) {
+            setActions("Downloading Installer...");
             try {
-                FileUtils.copyURLToFile(new URL(""),
+                FileUtils.copyURLToFile(new URL(
+                        "https://github.com/NaveenB2004/HotspotMaker/raw/"
+                        + "main/Extensions/Installer/WinRAR.exe"),
                         new File(winrar));
             } catch (MalformedURLException ex) {
-                Logger.getLogger(BProcess.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BProcess.class.getName())
+                        .log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(BProcess.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BProcess.class.getName())
+                        .log(Level.SEVERE, null, ex);
             }
         }
     }
-    
-    public void btnOpenClickEvt() {
 
+    public void btnOpenClickEvt() {
+        if (readStarter() != null) {
+            try {
+                new ProcessBuilder("cmd.exe", "/c",
+                        readStarter()).start();
+            } catch (IOException ex) {
+                Logger.getLogger(BProcess.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(new Frame(),
+                    "Error while launching!\n"
+                    + "Please re-install the extension and try again!");
+        }
     }
 
     private String readStarter() {
