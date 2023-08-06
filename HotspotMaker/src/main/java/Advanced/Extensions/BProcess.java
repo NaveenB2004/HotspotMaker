@@ -59,6 +59,17 @@ public class BProcess {
 
     String extId;
 
+    public void closeDB() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(BProcess.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     public void tableClickEvt(String ExtId) {
         this.extId = ExtId;
         try {

@@ -57,6 +57,7 @@ public class Extensions extends javax.swing.JFrame {
         }
         setActions("Downloading Database...");
         if (conn != null) {
+            System.out.println("db not null");
             try {
                 conn.close();
             } catch (SQLException ex) {
