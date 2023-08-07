@@ -650,14 +650,19 @@ public class Extensions extends javax.swing.JFrame {
                     winrar();
 
                     setActions("Installing...");
-                    new ProcessBuilder("cmd.exe", "/c",
+                    if (!new File(extDir + "ext-" + extId).exists()) {
+                        new File(extDir + "ext-" + extId).mkdirs();
+                    }
+                    ProcessBuilder extract = new ProcessBuilder("cmd.exe", "/c",
                             "\"" + winrar + "\" "
                             + "x -o+ -ibck "
                             + extDir + "tmp\\ext-" + extId + ".zip "
-                            + extDir + "ext-" + extId).start();
-
+                            + extDir + "ext-" + extId);
+                    Process install = extract.start();
+                    install.waitFor();
+                    
                     setActions("Finishing...");
-                    FileUtils.deleteDirectory(new File(extDir + "tmp\\ext-" + extId + ".zip"));
+                    FileUtils.delete(new File(extDir + "tmp\\ext-" + extId + ".zip"));
                     status.setText(getStatus(jLabel12.getText()));
 
                     actions.dispose();
@@ -667,6 +672,8 @@ public class Extensions extends javax.swing.JFrame {
                             .log(Level.SEVERE, null, ex);
                     actions.dispose();
                     JOptionPane.showMessageDialog(new Frame(), "Error!\n" + ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 btnEnable();
             }
