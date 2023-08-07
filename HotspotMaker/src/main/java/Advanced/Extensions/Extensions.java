@@ -1,18 +1,29 @@
 package Advanced.Extensions;
 
+import java.awt.Desktop;
 import java.awt.Frame;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -34,6 +45,14 @@ public class Extensions extends javax.swing.JFrame {
     Connection conn;
     JLabel status = Actions.status;
     DefaultTableModel model;
+    String extDir = HotspotMaker.Details.space + "Extnsions\\";
+    String winrar = extDir + "winrar\\WinRAR.exe";
+    String extId;
+
+    String sourceLink;
+    String licenseLink;
+    String webLink;
+    String directLink;
 
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
@@ -543,37 +562,128 @@ public class Extensions extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         clearFields();
-        new BProcess().tableClickEvt(model.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        extId = model.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * "
+                    + "FROM extensions "
+                    + "WHERE id='" + extId + "'");
+            while (rs.next()) {
+                jLabel5.setText(rs.getString("id"));
+                jLabel6.setText(rs.getString("name"));
+                jLabel7.setText(rs.getString("author"));
+                jLabel10.setText(rs.getString("description"));
+                jLabel12.setText(rs.getString("version"));
+                jLabel16.setText(rs.getString("release"));
+                jLabel19.setText(rs.getString("date"));
+
+                jLabel14.setText(getStatus(jLabel12.getText()));
+
+                sourceLink = rs.getString("source");
+                licenseLink = rs.getString("license");
+                webLink = rs.getString("web");
+                directLink = rs.getString("direct");
+
+                btnEnable();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Extensions.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        new BProcess().btnLicenseClickEvt();
+        callURL(licenseLink);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        new BProcess().btnSourceClickEvt();
+        callURL(sourceLink);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new BProcess().btnWebClickEvt();
+        callURL(webLink);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        new BProcess().btnUninstallClickEvt();
+        actions.setVisible(true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setActions("Uninstalling...");
+                try {
+                    FileUtils.deleteDirectory(new File(extDir + "ext-" + extId));
+                    actions.dispose();
+                    JOptionPane.showMessageDialog(new Frame(), "Uninstalled!");
+                } catch (IOException ex) {
+                    Logger.getLogger(Extensions.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                    actions.dispose();
+                    JOptionPane.showMessageDialog(new Frame(), "Error!\n" + ex);
+                }
+            }
+        }).start();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new BProcess().btnInstallClickEvt();
+        actions.setVisible(true);
+        tempBtnDisable();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    setActions("Downloading...");
+                    FileUtils.copyURLToFile(new URL(directLink),
+                            new File(extDir + "tmp\\ext-" + extId + ".zip"));
+
+                    setActions("Checking Installer...");
+                    winrar();
+
+                    setActions("Installing...");
+                    new ProcessBuilder("cmd.exe", "/c",
+                            "\"" + winrar + "\" "
+                            + "x -o+ -ibck "
+                            + extDir + "tmp\\ext-" + extId + ".zip "
+                            + extDir + "ext-" + extId).start();
+
+                    setActions("Finishing...");
+                    FileUtils.deleteDirectory(new File(extDir + "tmp\\ext-" + extId + ".zip"));
+                    status.setText(getStatus(jLabel12.getText()));
+
+                    btnEnable();
+
+                    actions.dispose();
+                    JOptionPane.showMessageDialog(new Frame(), "Installed!");
+                } catch (IOException ex) {
+                    Logger.getLogger(Extensions.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                    actions.dispose();
+                    btnEnable();
+                    JOptionPane.showMessageDialog(new Frame(), "Error!\n" + ex);
+                }
+            }
+        }).start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new BProcess().btnOpenClickEvt();
+        if (readStarter() != null) {
+            try {
+                new ProcessBuilder("cmd.exe", "/c",
+                        readStarter()).start();
+            } catch (IOException ex) {
+                Logger.getLogger(Extensions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(new Frame(),
+                    "Error while launching!\n"
+                    + "Please re-install the extension and try again!");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -611,36 +721,136 @@ public class Extensions extends javax.swing.JFrame {
         });
     }
 
+    private String getStatus(String version) {
+        String rtnStatus = null;
+        String mainApp = readStarter();
+        if (mainApp != null) {
+            try {
+                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
+                        extDir + "ext-" + extId + "\\" + mainApp + " -v");
+                processBuilder.redirectErrorStream(true);
+                Process p = processBuilder.start();
+                String line = null;
+                BufferedReader bufferedReader
+                        = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                while ((line = bufferedReader.readLine()) != null) {
+                    rtnStatus = line;
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Extensions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+            if (!version.equals(rtnStatus)) {
+                rtnStatus = "Update Available!";
+            } else {
+                rtnStatus = "Up-to-Date!";
+            }
+        } else {
+            rtnStatus = "Not Installed!";
+        }
+        return rtnStatus;
+    }
+
+    private String readStarter() {
+        String path = null;
+        if (new File(extDir + "ext-" + extId + "\\.starter").exists()) {
+            try (Stream<String> lines = Files.lines(
+                    Paths.get(extDir + "ext-" + extId + "\\.starter"))) {
+                path = lines.skip(0).findFirst().get();
+            } catch (IOException e) {
+                Logger.getLogger(Extensions.class.getName())
+                        .log(Level.SEVERE, null, e);
+            }
+        }
+        return path;
+    }
+
+    private void btnEnable() {
+        jButton7.setEnabled(true);
+        jButton8.setEnabled(true);
+        jButton6.setEnabled(true);
+        jButton4.setEnabled(true);
+        jButton1.setEnabled(true);
+
+        if (new File(extDir + "ext-" + extId + "\\.starter").exists()) {
+            jButton1.setIcon(new ImageIcon(
+                    getClass().getResource("/Imgs/ico_update_16px_dark.png")));
+            jButton1.setToolTipText("Re-install/Update");
+
+            jButton5.setEnabled(true);
+            jButton3.setEnabled(true);
+
+        } else {
+            jButton1.setIcon(new ImageIcon(
+                    getClass().getResource("/Imgs/ico_download_16px_dark.png")));
+            jButton1.setToolTipText("Install");
+        }
+    }
+
+    private void winrar() {
+        if (!new File(winrar).exists()) {
+            setActions("Downloading Installer...");
+            try {
+                FileUtils.copyURLToFile(new URL(
+                        "https://github.com/NaveenB2004/HotspotMaker/raw/"
+                        + "main/Extensions/Installer/WinRAR.exe"),
+                        new File(winrar));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Extensions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Extensions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void callURL(String passURL) {
+        try {
+            Desktop.getDesktop().browse(new URL(passURL).toURI());
+        } catch (IOException | URISyntaxException e) {
+            Logger.getLogger(Extensions.class.getName())
+                    .log(Level.SEVERE, null, e);
+        }
+    }
+    
+    private void tempBtnDisable() {
+        jButton5.setEnabled(false);
+        jButton1.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton7.setEnabled(false);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    public static javax.swing.JButton jButton3;
-    public static javax.swing.JButton jButton4;
-    public static javax.swing.JButton jButton5;
-    public static javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    public static javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton8;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
-    public static javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    public static javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    public static javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    public static javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    public static javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    public static javax.swing.JLabel jLabel5;
-    public static javax.swing.JLabel jLabel6;
-    public static javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
