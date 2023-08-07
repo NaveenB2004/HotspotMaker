@@ -218,7 +218,8 @@ public class About extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Desktop.getDesktop().browse(
-                    new URL("https://github.com/NaveenB2004/HotspotMaker/tree/main/Others/3rd%20Party%20License")
+                    new URL("https://github.com/NaveenB2004/HotspotMaker/"
+                            + "blob/main/Credits/README.md")
                             .toURI());
         } catch (IOException | URISyntaxException e) {
             Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, e);

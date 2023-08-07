@@ -468,6 +468,11 @@ public class Extensions extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/ico_about_16px_dark.png"))); // NOI18N
         jButton2.setToolTipText("About");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel18.setText("Extensions Found : ");
 
@@ -684,6 +689,12 @@ public class Extensions extends javax.swing.JFrame {
                     + "Please re-install the extension and try again!");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        callURL("https://github.com/NaveenB2004/HotspotMaker/blob/"
+                + "main/Extensions/README.md");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
