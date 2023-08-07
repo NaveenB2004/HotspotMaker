@@ -1,4 +1,4 @@
-package Advanced.Extensions;
+package Extensions;
 
 import java.io.File;
 import java.io.IOException;

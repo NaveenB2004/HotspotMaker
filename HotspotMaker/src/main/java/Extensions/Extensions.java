@@ -1,4 +1,4 @@
-package Advanced.Extensions;
+package Extensions;
 
 import java.awt.Desktop;
 import java.awt.Frame;
