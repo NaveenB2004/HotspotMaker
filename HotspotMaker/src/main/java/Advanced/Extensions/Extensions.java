@@ -76,7 +76,6 @@ public class Extensions extends javax.swing.JFrame {
         }
         setActions("Downloading Database...");
         if (conn != null) {
-            System.out.println("db not null");
             try {
                 conn.close();
             } catch (SQLException ex) {
@@ -813,7 +812,7 @@ public class Extensions extends javax.swing.JFrame {
                     .log(Level.SEVERE, null, e);
         }
     }
-    
+
     private void tempBtnDisable() {
         jButton5.setEnabled(false);
         jButton1.setEnabled(false);
