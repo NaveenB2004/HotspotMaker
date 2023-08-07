@@ -609,6 +609,7 @@ public class Extensions extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         actions.setVisible(true);
+        tempBtnDisable();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -623,6 +624,7 @@ public class Extensions extends javax.swing.JFrame {
                     actions.dispose();
                     JOptionPane.showMessageDialog(new Frame(), "Error!\n" + ex);
                 }
+                btnEnable();
             }
         }).start();
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -653,17 +655,15 @@ public class Extensions extends javax.swing.JFrame {
                     FileUtils.deleteDirectory(new File(extDir + "tmp\\ext-" + extId + ".zip"));
                     status.setText(getStatus(jLabel12.getText()));
 
-                    btnEnable();
-
                     actions.dispose();
                     JOptionPane.showMessageDialog(new Frame(), "Installed!");
                 } catch (IOException ex) {
                     Logger.getLogger(Extensions.class.getName())
                             .log(Level.SEVERE, null, ex);
                     actions.dispose();
-                    btnEnable();
                     JOptionPane.showMessageDialog(new Frame(), "Error!\n" + ex);
                 }
+                btnEnable();
             }
         }).start();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -765,6 +765,7 @@ public class Extensions extends javax.swing.JFrame {
     }
 
     private void btnEnable() {
+        jTable1.setEnabled(true);
         jButton7.setEnabled(true);
         jButton8.setEnabled(true);
         jButton6.setEnabled(true);
@@ -814,6 +815,7 @@ public class Extensions extends javax.swing.JFrame {
     }
 
     private void tempBtnDisable() {
+        jTable1.setEnabled(false);
         jButton5.setEnabled(false);
         jButton1.setEnabled(false);
         jButton3.setEnabled(false);
