@@ -627,6 +627,7 @@ public class Extensions extends javax.swing.JFrame {
                 setActions("Uninstalling...");
                 try {
                     FileUtils.deleteDirectory(new File(extDir + "ext-" + extId));
+                    jLabel14.setText(getStatus(jLabel12.getText()));
                     actions.dispose();
                     JOptionPane.showMessageDialog(new Frame(), "Uninstalled!");
                 } catch (IOException ex) {
