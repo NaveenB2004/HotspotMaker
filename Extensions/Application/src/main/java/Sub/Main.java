@@ -630,7 +630,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        if (jTextField20.getText() == null) {
+        if (jTextField20.getText().equals("")) {
             jFileChooser1.setDialogTitle("Select Database");
             jFileChooser1.setFileSelectionMode(FILES_AND_DIRECTORIES);
             jFileChooser1.showOpenDialog(this);
@@ -743,7 +743,7 @@ public class Main extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         String starter;
-        if (jTextField19.getText() == null) {
+        if (jTextField19.getText().equals("")) {
             jFileChooser1.setDialogTitle("Select Database");
             jFileChooser1.setFileSelectionMode(FILES_AND_DIRECTORIES);
             jFileChooser1.showOpenDialog(this);
