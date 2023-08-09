@@ -586,7 +586,7 @@ public class Extensions extends javax.swing.JFrame {
                 sourceLink = rs.getString("source");
                 licenseLink = rs.getString("license");
                 webLink = rs.getString("web");
-                directLink = rs.getString("direct");
+                directLink = rs.getString("download");
 
                 btnEnable();
             }
