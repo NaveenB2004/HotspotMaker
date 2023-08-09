@@ -814,8 +814,8 @@ public class Main extends javax.swing.JFrame {
         obj.put("AvailabilityOutcome", jTextField17.getText());
         obj.put("RuntimeDownload", jTextField18.getText());
 
-        try {
-            new FileWriter(jTextField19.getText()).write(obj.toJSONString());
+        try (FileWriter writer = new FileWriter(jTextField19.getText())){
+            writer.write(obj.toJSONString());
             JOptionPane.showMessageDialog(this, "Done!");
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
