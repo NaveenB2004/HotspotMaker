@@ -641,6 +641,7 @@ public class Main extends javax.swing.JFrame {
         if (!DB.dbLocation.endsWith("Extensions.db")) {
             jTextField20.setText(DB.dbLocation + "\\Extensions.db");
         }
+        jTextField20.setText(DB.dbLocation);
         jButton9.setEnabled(true);
         tableData();
     }//GEN-LAST:event_jButton8ActionPerformed
