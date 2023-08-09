@@ -687,8 +687,8 @@ public class Extensions extends javax.swing.JFrame {
         if (readStarter()[6] != null) {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
-                        readStarter()[2],
-                        "\"" + extDir + "ext-" + extId + "\\" + readStarter()[0] + "\"");
+                        readStarter()[2]
+                        + " \"" + extDir + "ext-" + extId + "\\" + readStarter()[0] + "\"");
                 processBuilder.redirectErrorStream(true);
                 Process p = processBuilder.start();
                 String line = null;
@@ -753,16 +753,15 @@ public class Extensions extends javax.swing.JFrame {
         if (readStarter()[6] != null) {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
-                        readStarter()[2],
-                        "\"" + extDir + "ext-" + extId + "\\" + readStarter()[0] + "\" -v");
+                        readStarter()[2]
+                        + " \"" + extDir + "ext-" + extId + "\\" + readStarter()[0] + "\" -v");
                 processBuilder.redirectErrorStream(true);
                 Process p = processBuilder.start();
                 String line = null;
                 BufferedReader bufferedReader
                         = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 while ((line = bufferedReader.readLine()) != null) {
-                    Logger.getLogger(Extensions.class.getName())
-                            .log(Level.SEVERE, "ProcessBuilderLog", line);
+                    System.out.println(line);
                     rtnStatus = line;
                 }
             } catch (IOException ex) {
