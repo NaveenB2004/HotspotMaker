@@ -17,7 +17,7 @@ under [APACHE LICENSE, VERSION 2.0]
 
 ***
 
-##### And all other knowledge sharing platforms, data sources!
+#### And all other knowledge sharing platforms, data sources!
 
 [Java]: https://www.oracle.com/java
 [Oracle]: https://www.oracle.com/
