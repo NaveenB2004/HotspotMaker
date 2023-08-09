@@ -690,7 +690,7 @@ public class Main extends javax.swing.JFrame {
                 String web = (String) jsonObject.get("Web");
                 String download = (String) jsonObject.get("Download");
 
-                if (id.equals("0")) {
+                if (id.equals("")) {
                     try {
                         Statement stmt = conn.createStatement();
                         stmt.executeUpdate("INSERT INTO extensions "
