@@ -684,7 +684,7 @@ public class Extensions extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if (readStarter() != null) {
+        if (readStarter()[6] != null) {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
                         readStarter()[2], extDir + "ext-" + extId + "\\" + readStarter()[0]);
@@ -749,7 +749,7 @@ public class Extensions extends javax.swing.JFrame {
 
     private String getStatus(String version) {
         String rtnStatus = null;
-        if (readStarter() != null) {
+        if (readStarter()[6] != null) {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
                         readStarter()[2],
@@ -778,7 +778,8 @@ public class Extensions extends javax.swing.JFrame {
     }
 
     private String[] readStarter() {
-        String[] starter = null;
+        String[] starter = new String[7];
+        starter[6] = null;
         if (new File(extDir + "ext-" + extId + "\\.starter").exists()) {
             JSONParser parser = new JSONParser();
             try {
@@ -790,6 +791,7 @@ public class Extensions extends javax.swing.JFrame {
                 starter[3] = (String) jsonObject.get("RuntimeAvailability");
                 starter[4] = (String) jsonObject.get("AvailabilityOutcome");
                 starter[5] = (String) jsonObject.get("RuntimeDownload");
+                starter[6] = "valid";
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Extensions.class.getName())
                         .log(Level.SEVERE, null, ex);
