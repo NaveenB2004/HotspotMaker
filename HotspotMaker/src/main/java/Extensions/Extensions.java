@@ -660,7 +660,7 @@ public class Extensions extends javax.swing.JFrame {
                             + extDir + "ext-" + extId);
                     Process install = extract.start();
                     install.waitFor();
-                    
+
                     setActions("Finishing...");
                     FileUtils.delete(new File(extDir + "tmp\\ext-" + extId + ".zip"));
                     status.setText(getStatus(jLabel12.getText()));
@@ -682,10 +682,18 @@ public class Extensions extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        System.out.println(readStarter());
         if (readStarter() != null) {
             try {
-                new ProcessBuilder("cmd.exe", "/c",
-                        readStarter()).start();
+                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
+                        readStarter());
+                processBuilder.redirectErrorStream(true);
+                Process p = processBuilder.start();
+                String line = null;
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                while ((line = bufferedReader.readLine()) != null) {
+                    System.out.println(line);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(Extensions.class.getName())
                         .log(Level.SEVERE, null, ex);
