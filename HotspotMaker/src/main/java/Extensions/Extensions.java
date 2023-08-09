@@ -669,17 +669,13 @@ public class Extensions extends javax.swing.JFrame {
 
                     setActions("Finishing...");
                     FileUtils.delete(new File(extDir + "tmp\\ext-" + extId + ".zip"));
-                    status.setText(getStatus(jLabel12.getText()));
-
+                    jLabel14.setText(getStatus(jLabel12.getText()));
                     actions.dispose();
                     JOptionPane.showMessageDialog(new Frame(), "Installed!");
-                } catch (IOException ex) {
+                } catch (IOException | InterruptedException ex) {
                     Logger.getLogger(Extensions.class.getName())
                             .log(Level.SEVERE, null, ex);
                     actions.dispose();
-                    JOptionPane.showMessageDialog(new Frame(), "Error!\n" + ex);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Extensions.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 btnEnable();
             }
@@ -688,7 +684,6 @@ public class Extensions extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        System.out.println(readStarter());
         if (readStarter() != null) {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
@@ -784,24 +779,25 @@ public class Extensions extends javax.swing.JFrame {
 
     private String[] readStarter() {
         String[] starter = null;
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader(extDir + "ext-" + extId + "\\.starter"));
-            JSONObject jsonObject = (JSONObject) obj;
-            starter[0] = (String) jsonObject.get("ExeName");
-            starter[1] = (String) jsonObject.get("Runtime");
-            starter[2] = (String) jsonObject.get("RuntimeCall");
-            starter[3] = (String) jsonObject.get("RuntimeAvailability");
-            starter[4] = (String) jsonObject.get("AvailabilityOutcome");
-            starter[5] = (String) jsonObject.get("RuntimeDownload");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Extensions.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        } catch (IOException | ParseException ex) {
-            Logger.getLogger(Extensions.class.getName())
-                    .log(Level.SEVERE, null, ex);
+        if (new File(extDir + "ext-" + extId + "\\.starter").exists()) {
+            JSONParser parser = new JSONParser();
+            try {
+                Object obj = parser.parse(new FileReader(extDir + "ext-" + extId + "\\.starter"));
+                JSONObject jsonObject = (JSONObject) obj;
+                starter[0] = (String) jsonObject.get("ExeName");
+                starter[1] = (String) jsonObject.get("Runtime");
+                starter[2] = (String) jsonObject.get("RuntimeCall");
+                starter[3] = (String) jsonObject.get("RuntimeAvailability");
+                starter[4] = (String) jsonObject.get("AvailabilityOutcome");
+                starter[5] = (String) jsonObject.get("RuntimeDownload");
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Extensions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            } catch (IOException | ParseException ex) {
+                Logger.getLogger(Extensions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
         }
-        System.out.println(Arrays.toString(starter));
         return starter;
     }
 
