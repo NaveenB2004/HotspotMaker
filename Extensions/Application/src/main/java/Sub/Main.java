@@ -754,7 +754,7 @@ public class Main extends javax.swing.JFrame {
         if (!starter.endsWith(".starter")) {
             starter += "\\.starter";
         } else {
-            readStarter();
+            readStarter(starter);
         }
         jTextField19.setText(starter);
 
@@ -767,11 +767,11 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void readStarter() {
+    private void readStarter(String location) {
         JSONParser parser = new JSONParser();
         Object obj;
         try {
-            obj = parser.parse(new FileReader(jTextField19.getText()));
+            obj = parser.parse(new FileReader(location));
             JSONObject jsonObject = (JSONObject) obj;
 
             jTextField21.setText((String) jsonObject.get("ID"));
