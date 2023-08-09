@@ -686,16 +686,10 @@ public class Extensions extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (readStarter()[6] != null) {
             try {
-                ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
+                new ProcessBuilder("cmd.exe", "/c",
                         readStarter()[2]
-                        + " \"" + extDir + "ext-" + extId + "\\" + readStarter()[0] + "\"");
-                processBuilder.redirectErrorStream(true);
-                Process p = processBuilder.start();
-                String line = null;
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                while ((line = bufferedReader.readLine()) != null) {
-                    System.out.println(line);
-                }
+                        + " \"" + extDir + "ext-" + extId + "\\" + readStarter()[0] + "\"")
+                        .start();
             } catch (IOException ex) {
                 Logger.getLogger(Extensions.class.getName())
                         .log(Level.SEVERE, null, ex);
@@ -761,7 +755,6 @@ public class Extensions extends javax.swing.JFrame {
                 BufferedReader bufferedReader
                         = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 while ((line = bufferedReader.readLine()) != null) {
-                    System.out.println(line);
                     rtnStatus = line;
                 }
             } catch (IOException ex) {
@@ -795,6 +788,7 @@ public class Extensions extends javax.swing.JFrame {
                 starter[4] = (String) jsonObject.get("AvailabilityOutcome");
                 starter[5] = (String) jsonObject.get("RuntimeDownload");
                 starter[6] = "valid";
+                reader.close();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Extensions.class.getName())
                         .log(Level.SEVERE, null, ex);
