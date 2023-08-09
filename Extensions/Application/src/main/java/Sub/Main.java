@@ -813,11 +813,13 @@ public class Main extends javax.swing.JFrame {
         obj.put("RuntimeAvailability", jTextField16.getText());
         obj.put("AvailabilityOutcome", jTextField17.getText());
         obj.put("RuntimeDownload", jTextField18.getText());
-        
+
         try {
             new FileWriter(jTextField19.getText()).write(obj.toJSONString());
+            JOptionPane.showMessageDialog(this, "Done!");
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error!\n" + ex);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
