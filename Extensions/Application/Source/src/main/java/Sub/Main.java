@@ -462,6 +462,11 @@ public class Main extends javax.swing.JFrame {
         jTextField21.setEnabled(false);
 
         jButton11.setText("About");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -866,6 +871,11 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error!\n" + ex);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        checkURL("https://github.com/NaveenB2004/HotspotMaker/blob/main/Extensions/README.md");
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     private void tableData() {
         new DB().mkdb();
