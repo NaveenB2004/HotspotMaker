@@ -696,7 +696,7 @@ public class Extensions extends javax.swing.JFrame {
                 BufferedReader bufferedReader
                         = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 while ((line = bufferedReader.readLine()) != null) {
-                    if (line.equalsIgnoreCase(readStarter()[4])) {
+                    if (line.contains(readStarter()[4])) {
                         launchStatus = true;
                     }
                 }
