@@ -12,7 +12,9 @@ under [APACHE LICENSE, VERSION 2.0]
 ***
 
 #### Dependancy
-[Dependency Graph]: https://github.com/NaveenB2004/HotspotMaker/network/dependencies
+[Dependency Graph](https://github.com/NaveenB2004/HotspotMaker/network/dependencies)
+
+***
 
 #### Media
 [flaticon] under [License Agreement for Flaticon Content]\
