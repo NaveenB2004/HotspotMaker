@@ -687,7 +687,8 @@ public class Extensions extends javax.swing.JFrame {
         if (readStarter()[6] != null) {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
-                        readStarter()[2], extDir + "ext-" + extId + "\\" + readStarter()[0]);
+                        readStarter()[2],
+                        "\"" + extDir + "ext-" + extId + "\\" + readStarter()[0] + "\"");
                 processBuilder.redirectErrorStream(true);
                 Process p = processBuilder.start();
                 String line = null;
@@ -753,13 +754,15 @@ public class Extensions extends javax.swing.JFrame {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
                         readStarter()[2],
-                        extDir + "ext-" + extId + "\\" + readStarter()[0] + " -v");
+                        "\"" + extDir + "ext-" + extId + "\\" + readStarter()[0] + "\" -v");
                 processBuilder.redirectErrorStream(true);
                 Process p = processBuilder.start();
                 String line = null;
                 BufferedReader bufferedReader
                         = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 while ((line = bufferedReader.readLine()) != null) {
+                    Logger.getLogger(Extensions.class.getName())
+                            .log(Level.SEVERE, "ProcessBuilderLog", line);
                     rtnStatus = line;
                 }
             } catch (IOException ex) {
@@ -783,7 +786,8 @@ public class Extensions extends javax.swing.JFrame {
         if (new File(extDir + "ext-" + extId + "\\.starter").exists()) {
             JSONParser parser = new JSONParser();
             try {
-                Object obj = parser.parse(new FileReader(extDir + "ext-" + extId + "\\.starter"));
+                FileReader reader = new FileReader(extDir + "ext-" + extId + "\\.starter");
+                Object obj = parser.parse(reader);
                 JSONObject jsonObject = (JSONObject) obj;
                 starter[0] = (String) jsonObject.get("ExeName");
                 starter[1] = (String) jsonObject.get("Runtime");
