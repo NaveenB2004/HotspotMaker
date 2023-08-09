@@ -38,14 +38,14 @@ public class DB {
                         + "id INTEGER PRIMARY KEY,"
                         + "name TEXT NOT NULL,"
                         + "author TEXT NOT NULL,"
-                        + "source TEXT NOT NULL,"
                         + "description TEXT NOT NULL,"
                         + "version TEXT NOT NULL,"
                         + "release TEXT NOT NULL,"
                         + "date TEXT NOT NULL,"
+                        + "source TEXT NOT NULL,"
                         + "license TEXT NOT NULL,"
                         + "web TEXT NOT NULL,"
-                        + "direct TEXT NOT NULL)");
+                        + "download TEXT NOT NULL)");
             } catch (SQLException ex) {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }
