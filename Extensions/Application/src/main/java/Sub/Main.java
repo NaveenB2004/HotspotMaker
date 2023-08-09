@@ -1,9 +1,14 @@
 package Sub;
 
+import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,13 +36,21 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        model = (DefaultTableModel) jTable1.getModel();
+        startup();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/ico_extensions_16px_dark.png")));
     }
 
     Connection conn;
     DefaultTableModel model;
+
+    private void startup() {
+        model = (DefaultTableModel) jTable1.getModel();
+        Component[] com = jTabbedPane2.getComponents();
+        for (Component com1 : com) {
+            com1.setEnabled(false);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,6 +133,7 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Extensions Handler");
+        setResizable(false);
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -181,12 +195,32 @@ public class Main extends javax.swing.JFrame {
         jLabel18.setText("(DD-MM-YYYY)");
 
         jButton1.setText("Check");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Check");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Check");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Check");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -229,7 +263,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel18)
-                        .addGap(0, 181, Short.MAX_VALUE))
+                        .addGap(0, 69, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -330,6 +364,11 @@ public class Main extends javax.swing.JFrame {
         jLabel19.setText("Runtime Download : ");
 
         jButton5.setText("Check");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -362,7 +401,7 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField17)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jTextField18, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                                .addComponent(jTextField18, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton5)))))
                 .addContainerGap())
@@ -410,8 +449,16 @@ public class Main extends javax.swing.JFrame {
         });
 
         jButton7.setText("Generate/Update");
+        jButton7.setEnabled(false);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jLabel22.setText("ID : ");
+
+        jTextField21.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -421,7 +468,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane2)
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -522,7 +569,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -566,7 +613,7 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -632,16 +679,16 @@ public class Main extends javax.swing.JFrame {
                 JSONObject jsonObject = (JSONObject) obj;
 
                 String id = (String) jsonObject.get("ID");
-                String name = (String) jsonObject.get("Name");;
-                String author = (String) jsonObject.get("Author");;
-                String description = (String) jsonObject.get("Description");;
-                String version = (String) jsonObject.get("Version");;
-                String release = (String) jsonObject.get("Release");;
-                String date = (String) jsonObject.get("Date");;
-                String source = (String) jsonObject.get("Source");;
-                String license = (String) jsonObject.get("License");;
-                String web = (String) jsonObject.get("Web");;
-                String download = (String) jsonObject.get("Download");;
+                String name = (String) jsonObject.get("Name");
+                String author = (String) jsonObject.get("Author");
+                String description = (String) jsonObject.get("Description");
+                String version = (String) jsonObject.get("Version");
+                String release = (String) jsonObject.get("Release");
+                String date = (String) jsonObject.get("Date");
+                String source = (String) jsonObject.get("Source");
+                String license = (String) jsonObject.get("License");
+                String web = (String) jsonObject.get("Web");
+                String download = (String) jsonObject.get("Download");
 
                 if (id.equals("0")) {
                     try {
@@ -695,8 +742,84 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        
+        String starter;
+        if (jTextField19.getText() == null) {
+            jFileChooser1.setDialogTitle("Select Database");
+            jFileChooser1.setFileSelectionMode(FILES_AND_DIRECTORIES);
+            jFileChooser1.showOpenDialog(this);
+            starter = jFileChooser1.getSelectedFile().getAbsolutePath();
+        } else {
+            starter = jTextField19.getText();
+        }
+        if (!starter.endsWith(".starter")) {
+            starter += "\\.starter";
+        }
+        jTextField19.setText(starter);
+
+        jButton7.setEnabled(true);
+        jTextField21.setEnabled(true);
+
+        Component[] com = jTabbedPane2.getComponents();
+        for (Component com1 : com) {
+            com1.setEnabled(true);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        checkURL(jTextField9.getText());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        checkURL(jTextField10.getText());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        checkURL(jTextField11.getText());
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        checkURL(jTextField12.getText());
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        checkURL(jTextField18.getText());
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        JSONObject obj = new JSONObject();
+
+        obj.put("ID", jTextField21.getText());
+        obj.put("Name", jTextField1.getText());
+        obj.put("Author", jTextField2.getText());
+        obj.put("Description", jTextField3.getText());
+        obj.put("Version", jTextField4.getText());
+        obj.put("Release", jTextField5.getText());
+        obj.put("Date", jTextField6.getText() + "-" + jTextField7.getText()
+                + "-" + jTextField8.getText());
+        obj.put("Source", jTextField9.getText());
+        obj.put("License", jTextField10.getText());
+        obj.put("Web", jTextField11.getText());
+        obj.put("Download", jTextField12.getText());
+
+        obj.put("ExeName", jTextField13.getText());
+        obj.put("Runtime", jTextField14.getText());
+        obj.put("RuntimeCall", jTextField15.getText());
+        obj.put("RuntimeAvailability", jTextField16.getText());
+        obj.put("AvailabilityOutcome", jTextField17.getText());
+        obj.put("RuntimeDownload", jTextField18.getText());
+        
+        try {
+            new FileWriter(jTextField19.getText()).write(obj.toJSONString());
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void tableData() {
         new DB().mkdb();
@@ -734,6 +857,16 @@ public class Main extends javax.swing.JFrame {
                     + "SET date='" + formatter + "' WHERE id='1'");
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void checkURL(String url) {
+        try {
+            Desktop.getDesktop().browse(new URL(url).toURI());
+        } catch (IOException | URISyntaxException e) {
+            Logger.getLogger(Main.class.getName())
+                    .log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, e);
         }
     }
 
