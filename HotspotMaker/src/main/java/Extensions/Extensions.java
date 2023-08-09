@@ -5,6 +5,8 @@ import java.awt.Frame;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -24,6 +26,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -686,7 +691,7 @@ public class Extensions extends javax.swing.JFrame {
         if (readStarter() != null) {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
-                        readStarter());
+                        readStarter()[2], extDir + "ext-" + extId + "\\" + readStarter()[0]);
                 processBuilder.redirectErrorStream(true);
                 Process p = processBuilder.start();
                 String line = null;
@@ -748,7 +753,7 @@ public class Extensions extends javax.swing.JFrame {
 
     private String getStatus(String version) {
         String rtnStatus = null;
-        String mainApp = readStarter();
+        String mainApp = readStarter()[0];
         if (mainApp != null) {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
@@ -776,18 +781,26 @@ public class Extensions extends javax.swing.JFrame {
         return rtnStatus;
     }
 
-    private String readStarter() {
-        String path = null;
-        if (new File(extDir + "ext-" + extId + "\\.starter").exists()) {
-            try (Stream<String> lines = Files.lines(
-                    Paths.get(extDir + "ext-" + extId + "\\.starter"))) {
-                path = lines.skip(0).findFirst().get();
-            } catch (IOException e) {
-                Logger.getLogger(Extensions.class.getName())
-                        .log(Level.SEVERE, null, e);
-            }
+    private String[] readStarter() {
+        String[] starter = null;
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(extDir + "ext-" + extId + "\\.starter"));
+            JSONObject jsonObject = (JSONObject) obj;
+            starter[0] = (String) jsonObject.get("ExeName");
+            starter[1] = (String) jsonObject.get("Runtime");
+            starter[2] = (String) jsonObject.get("RuntimeCall");
+            starter[3] = (String) jsonObject.get("RuntimeAvailability");
+            starter[4] = (String) jsonObject.get("AvailabilityOutcome");
+            starter[5] = (String) jsonObject.get("RuntimeDownload");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Extensions.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        } catch (IOException | ParseException ex) {
+            Logger.getLogger(Extensions.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
-        return path;
+        return starter;
     }
 
     private void btnEnable() {
