@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -753,11 +754,11 @@ public class Extensions extends javax.swing.JFrame {
 
     private String getStatus(String version) {
         String rtnStatus = null;
-        String mainApp = readStarter()[0];
-        if (mainApp != null) {
+        if (readStarter() != null) {
             try {
                 ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c",
-                        extDir + "ext-" + extId + "\\" + mainApp + " -v");
+                        readStarter()[2],
+                        extDir + "ext-" + extId + "\\" + readStarter()[0] + " -v");
                 processBuilder.redirectErrorStream(true);
                 Process p = processBuilder.start();
                 String line = null;
@@ -800,6 +801,7 @@ public class Extensions extends javax.swing.JFrame {
             Logger.getLogger(Extensions.class.getName())
                     .log(Level.SEVERE, null, ex);
         }
+        System.out.println(Arrays.toString(starter));
         return starter;
     }
 

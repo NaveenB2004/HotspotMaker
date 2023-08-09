@@ -753,6 +753,8 @@ public class Main extends javax.swing.JFrame {
         }
         if (!starter.endsWith(".starter")) {
             starter += "\\.starter";
+        } else {
+            readStarter();
         }
         jTextField19.setText(starter);
 
@@ -764,6 +766,41 @@ public class Main extends javax.swing.JFrame {
             com1.setEnabled(true);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void readStarter() {
+        JSONParser parser = new JSONParser();
+        Object obj;
+        try {
+            obj = parser.parse(new FileReader(jTextField19.getText()));
+            JSONObject jsonObject = (JSONObject) obj;
+
+            jTextField21.setText((String) jsonObject.get("ID"));
+            jTextField1.setText((String) jsonObject.get("Name"));
+            jTextField2.setText((String) jsonObject.get("Author"));
+            jTextField3.setText((String) jsonObject.get("Description"));
+            jTextField4.setText((String) jsonObject.get("Version"));
+            jTextField5.setText((String) jsonObject.get("Release"));
+            String date = (String) jsonObject.get("Date");
+            String[] splitDate = date.split("-");
+            jTextField6.setText(splitDate[0]);
+            jTextField7.setText(splitDate[1]);
+            jTextField8.setText(splitDate[2]);
+            jTextField9.setText((String) jsonObject.get("Source"));
+            jTextField10.setText((String) jsonObject.get("License"));
+            jTextField11.setText((String) jsonObject.get("Web"));
+            jTextField12.setText((String) jsonObject.get("Download"));
+            jTextField13.setText((String) jsonObject.get("ExeName"));
+            jTextField14.setText((String) jsonObject.get("Runtime"));
+            jTextField15.setText((String) jsonObject.get("RuntimeCall"));
+            jTextField16.setText((String) jsonObject.get("RuntimeAvailability"));
+            jTextField17.setText((String) jsonObject.get("AvailabilityOutcome"));
+            jTextField18.setText((String) jsonObject.get("RuntimeDownload"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ParseException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -814,7 +851,7 @@ public class Main extends javax.swing.JFrame {
         obj.put("AvailabilityOutcome", jTextField17.getText());
         obj.put("RuntimeDownload", jTextField18.getText());
 
-        try (FileWriter writer = new FileWriter(jTextField19.getText())){
+        try (FileWriter writer = new FileWriter(jTextField19.getText())) {
             writer.write(obj.toJSONString());
             JOptionPane.showMessageDialog(this, "Done!");
         } catch (IOException ex) {
