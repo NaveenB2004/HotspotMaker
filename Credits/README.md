@@ -1,18 +1,21 @@
 # Credits
 #### Language Support
-***
 [Java] JDK `v17.x`: [Oracle]\
 under [Oracle No-Fee Terms and Conditions]
 
-#### IDE Support
 ***
+
+#### IDE Support
 [NetBeans] `v18`: [Apache Foundation]\
 under [APACHE LICENSE, VERSION 2.0]
 
-#### Media
 ***
+
+#### Media
 [flaticon] under [License Agreement for Flaticon Content]\
 [License Information](../Credits/3rd%20Party%20License/)
+
+***
 
 ##### And all other knowledge sharing platforms, data sources!
 
