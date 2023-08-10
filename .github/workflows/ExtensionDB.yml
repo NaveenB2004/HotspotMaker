@@ -13,15 +13,17 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
       
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        
     - name: get location
       run: |
         cd HotspotMaker
         mvn clean package
 
-#    - name: Set up JDK
-#      uses: actions/setup-java@v2
- #     with:
-  #      java-version: '17'
+
 #
  #   - name: Build and Run Java Program
   #    run: |
