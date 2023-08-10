@@ -1,4 +1,4 @@
-name: Update Database
+name: Update Extensions DB
 
 on:
   schedule:
@@ -13,35 +13,19 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
       
-    - name: Set up JDK
+    - name: Set up JDK (v17)
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
         
-    - name: get location
+    - name: Run the Update
+      run: java -jar Extensions/Application/Binary/Extensions.jar -update
+
+    - name: Commit and Push Changes
       run: |
-        cd HotspotMaker
-        mvn clean package
-
-
-#
- #   - name: Build and Run Java Program
-  #    run: |
-   #     cd path/to/java/program  # Update with the actual path
-    #    mvn clean package  # Adjust Maven command as needed
-     #   java -jar target/your-program.jar  # Update with the actual JAR name
-#
- #   - name: Update Database
-  #    run: |
-   #     cd path/to/sqlite/database  # Update with the actual path
-    #    # Execute commands to update the SQLite database
-     #   # For example: sqlite3 your-database.db < update-script.sql
-#
- #   - name: Commit and Push Changes
-  #    run: |
-   #     git config --local user.email "action@github.com"
-    #    git config --local user.name "GitHub Action"
-     #   git commit -am "Update database" || true  # Commit changes if any
-      #  git push origin HEAD:main
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -am "Update database" || true  # Commit changes if any
+        git push origin HEAD:main
