@@ -660,6 +660,9 @@ public class Extensions extends javax.swing.JFrame {
                     if (!new File(extDir + "ext-" + extId).exists()) {
                         new File(extDir + "ext-" + extId).mkdirs();
                     }
+                    if (new File(extDir + "ext-" + extId + "\\.starter").exists()) {
+                        FileUtils.delete(new File(extDir + "ext-" + extId + "\\.starter"));
+                    }
                     FileUtils.moveFile(new File(extDir + "tmp\\ext-" + extId + ".starter"),
                             new File(extDir + "ext-" + extId + "\\.starter"));
                     ProcessBuilder extract = new ProcessBuilder("cmd.exe", "/c",
