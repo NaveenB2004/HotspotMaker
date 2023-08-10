@@ -13,6 +13,16 @@
         <exec.mainClass>Main.Extensions</exec.mainClass>
     </properties>
     
+    <name>HotspotMaker-Extensions</name>
+    <description>Hotspot Maker extensions database and starters manager</description>
+    <licenses>
+        <license>
+            <name>The Unlicense</name>
+            <url>https://github.com/NaveenB2004/HotspotMaker/blob/main/LICENSE</url>
+        </license>
+    </licenses>
+    <url>https://github.com/NaveenB2004/HotspotMaker</url>
+    
     <dependencies>
         <dependency>
             <groupId>com.formdev</groupId>
@@ -30,10 +40,7 @@
             <version>1.1.1</version>
         </dependency>
     </dependencies>
-    
-    <name>HotspotMaker-Extensions</name>
-    <description>Hotspot Maker extensions database manager</description>
-    
+        
     <build>
         <plugins>
             <plugin>

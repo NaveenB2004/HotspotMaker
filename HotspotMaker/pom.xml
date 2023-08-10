@@ -13,6 +13,16 @@
         <exec.mainClass>HotspotMaker.HotspotMaker</exec.mainClass>
     </properties>
     
+    <name>HotspotMaker</name>
+    <description>HHotspot Maker, a program for make hotspots on Windows OS.</description>
+    <licenses>
+        <license>
+            <name>The Unlicense</name>
+            <url>https://github.com/NaveenB2004/HotspotMaker/blob/main/LICENSE</url>
+        </license>
+    </licenses>
+    <url>https://github.com/NaveenB2004/HotspotMaker</url>
+    
     <dependencies>
         <dependency>
             <groupId>com.formdev</groupId>
@@ -40,9 +50,7 @@
             <version>1.1.1</version>
         </dependency>
     </dependencies>
-    
-    <name>HotspotMaker</name>
-    
+        
     <build>
         <plugins>
             <plugin>
@@ -69,7 +77,5 @@
             </plugin>
         </plugins>
     </build>
-    
-    <description>Hotspot Maker - GUI</description>
-    
+        
 </project>
