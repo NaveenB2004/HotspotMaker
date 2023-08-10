@@ -46,8 +46,12 @@ public class Main extends javax.swing.JFrame {
 
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
-        Component[] com = jTabbedPane2.getComponents();
-        for (Component com1 : com) {
+        Component[] comx0 = jPanel4.getComponents();
+        for (Component com1 : comx0) {
+            com1.setEnabled(false);
+        }
+        Component[] comx1 = jPanel5.getComponents();
+        for (Component com1 : comx1) {
             com1.setEnabled(false);
         }
     }
@@ -798,8 +802,12 @@ public class Main extends javax.swing.JFrame {
         jButton7.setEnabled(true);
         jTextField21.setEnabled(true);
 
-        Component[] com = jTabbedPane2.getComponents();
-        for (Component com1 : com) {
+        Component[] comx0 = jPanel4.getComponents();
+        for (Component com1 : comx0) {
+            com1.setEnabled(true);
+        }
+        Component[] comx1 = jPanel5.getComponents();
+        for (Component com1 : comx1) {
             com1.setEnabled(true);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
