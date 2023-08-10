@@ -35,7 +35,8 @@ public class Settings extends javax.swing.JFrame {
     }
 
     private void startup() {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imgs/Icon.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(
+                getClass().getResource("/Imgs/Icon.png")));
 
         Map<Object, Icon> icons = new HashMap<>();
         icons.put("Default", new ImageIcon(
@@ -44,29 +45,34 @@ public class Settings extends javax.swing.JFrame {
                 getClass().getResource("/Imgs/ico_sun_16px_dark.png")));
         icons.put("Dark", new ImageIcon(
                 getClass().getResource("/Imgs/ico_moon_16px_dark.png")));
-        
+
         jComboBox1.setRenderer(new IconListRenderer(icons));
         jComboBox1.addItem("Default");
         jComboBox1.addItem("Light");
         jComboBox1.addItem("Dark");
 
         if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
-            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
+            try (Stream<String> lines
+                    = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defssid = lines.skip(0).findFirst().get();
                 jTextField1.setText(defssid);
             } catch (IOException e) {
-                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, e);
             }
-            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
+            try (Stream<String> lines
+                    = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defpsw = lines.skip(1).findFirst().get();
                 jTextField2.setText(defpsw);
             } catch (IOException e) {
-                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, e);
             }
         }
 
         if (new File(HotspotMaker.Details.space + "Theme.ini").exists()) {
-            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Theme.ini"))) {
+            try (Stream<String> lines
+                    = Files.lines(Paths.get(HotspotMaker.Details.space + "Theme.ini"))) {
                 String theme = lines.skip(0).findFirst().get();
                 if (theme.equals("Light")) {
                     jComboBox1.setSelectedIndex(1);
@@ -78,7 +84,8 @@ public class Settings extends javax.swing.JFrame {
                     jComboBox1.setSelectedIndex(0);
                 }
             } catch (IOException e) {
-                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, e);
             }
         }
     }
@@ -231,10 +238,12 @@ public class Settings extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String theme = jComboBox1.getSelectedItem().toString();
-        try (PrintStream out = new PrintStream(new File(HotspotMaker.Details.space + "Theme.ini"))) {
+        try (PrintStream out = new PrintStream(
+                new File(HotspotMaker.Details.space + "Theme.ini"))) {
             out.println(theme);
         } catch (FileNotFoundException e) {
-            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Settings.class.getName())
+                    .log(Level.SEVERE, null, e);
         }
         HotspotMaker.HotspotMaker.setTheme();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -246,12 +255,14 @@ public class Settings extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "SSID musn't be empty!\n"
                     + "Password must contain 8 to 63 characters!");
         } else {
-            try (PrintStream out = new PrintStream(new File(HotspotMaker.Details.space + "Credentials.ini"))) {
+            try (PrintStream out = new PrintStream(
+                    new File(HotspotMaker.Details.space + "Credentials.ini"))) {
                 out.println(jTextField1.getText());
                 out.println(jTextField2.getText());
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (FileNotFoundException e) {
-                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         }
@@ -319,8 +330,14 @@ class IconListRenderer extends DefaultListCellRenderer {
     }
 
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+    public Component getListCellRendererComponent(
+            JList list,
+            Object value,
+            int index,
+            boolean isSelected,
+            boolean cellHasFocus) {
+        JLabel label = (JLabel) super.getListCellRendererComponent(list, value,
+                index, isSelected, cellHasFocus);
 
         // Get icon to use for the list item value 
         Icon icon = icons.get(value);

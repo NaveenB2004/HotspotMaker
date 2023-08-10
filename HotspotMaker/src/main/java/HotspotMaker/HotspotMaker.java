@@ -4,7 +4,9 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
@@ -40,7 +42,8 @@ public class HotspotMaker extends JWindow {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
-            Logger.getLogger(HotspotMaker.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HotspotMaker.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
 
         Main.MainUI main = new Main.MainUI();
@@ -65,20 +68,22 @@ public class HotspotMaker extends JWindow {
                                 UIManager.getSystemLookAndFeelClassName());
                     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
                             | UnsupportedLookAndFeelException e) {
-                        Logger.getLogger(HotspotMaker.class.getName()).log(Level.SEVERE, null, e);
+                        Logger.getLogger(HotspotMaker.class.getName())
+                                .log(Level.SEVERE, null, e);
                     }
                 }
             } catch (IOException e) {
-                Logger.getLogger(HotspotMaker.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(HotspotMaker.class.getName())
+                        .log(Level.SEVERE, null, e);
             }
         } else {
-            try {
-                UIManager.setLookAndFeel(
-                        UIManager.getSystemLookAndFeelClassName());
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
-                    | UnsupportedLookAndFeelException e) {
-                Logger.getLogger(HotspotMaker.class.getName()).log(Level.SEVERE, null, e);
+            try (PrintStream out = new PrintStream(new File(Details.space + "Theme.ini"))) {
+                out.println("Default");
+            } catch (FileNotFoundException e) {
+                Logger.getLogger(HotspotMaker.class.getName())
+                        .log(Level.SEVERE, null, e);
             }
+            setTheme();
         }
         FlatLaf.updateUI();
     }

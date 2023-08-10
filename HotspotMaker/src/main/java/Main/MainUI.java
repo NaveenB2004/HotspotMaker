@@ -40,17 +40,21 @@ public class MainUI extends javax.swing.JFrame {
         jLabel1.setText("Hotspot Maker (v" + HotspotMaker.Details.version + ")");
 
         if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
-            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
+            try (Stream<String> lines = Files.lines(
+                    Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defssid = lines.skip(0).findFirst().get();
                 jTextField3.setText(defssid);
             } catch (IOException e) {
-                Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(MainUI.class.getName())
+                        .log(Level.SEVERE, null, e);
             }
-            try (Stream<String> lines = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
+            try (Stream<String> lines = Files.lines(
+                    Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
                 String defpsw = lines.skip(1).findFirst().get();
                 jTextField4.setText(defpsw);
             } catch (IOException e) {
-                Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(MainUI.class.getName())
+                        .log(Level.SEVERE, null, e);
             }
         }
 
@@ -101,12 +105,14 @@ public class MainUI extends javax.swing.JFrame {
                     processBuilder.redirectErrorStream(true);
                     Process p = processBuilder.start();
                     String line = null;
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    BufferedReader bufferedReader = 
+                            new BufferedReader(new InputStreamReader(p.getInputStream()));
                     while ((line = bufferedReader.readLine()) != null) {
                         console.append(line + "\n");
                     }
                 } catch (IOException e) {
-                    Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, e);
+                    Logger.getLogger(MainUI.class.getName())
+                            .log(Level.SEVERE, null, e);
                 }
                 console.append("\n=========================================\n");
             }

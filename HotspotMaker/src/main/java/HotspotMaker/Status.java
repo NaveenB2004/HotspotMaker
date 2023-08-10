@@ -29,16 +29,19 @@ public class Status {
             processBuilder.redirectErrorStream(true);
             Process p = processBuilder.start();
             String line = null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
-                if (line.startsWith("Hosted network supported") && line.endsWith("No")) {
+                if (line.startsWith("Hosted network supported") 
+                        && line.endsWith("No")) {
                     JOptionPane.showMessageDialog(new Frame(),
                             "Your network interface doesn't support for make hotspot!");
                     System.exit(0);
                 }
             }
         } catch (IOException e) {
-            Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Status.class.getName())
+                    .log(Level.SEVERE, null, e);
         }
     }
 
@@ -54,7 +57,8 @@ public class Status {
                         processBuilder.redirectErrorStream(true);
                         Process p = processBuilder.start();
                         String line = null;
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                        BufferedReader bufferedReader = new BufferedReader(
+                                new InputStreamReader(p.getInputStream()));
                         while ((line = bufferedReader.readLine()) != null) {
                             if (line.endsWith("Not started")) {
                                 Details.status = false;
@@ -84,12 +88,14 @@ public class Status {
                             }
                         }
                     } catch (IOException e) {
-                        Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
+                        Logger.getLogger(Status.class.getName())
+                                .log(Level.SEVERE, null, e);
                     }
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Status.class.getName())
+                                .log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -123,14 +129,17 @@ public class Status {
                                 Desktop.getDesktop().browse(new URL(
                                         "https://github.com/naveenb2004/HotspotMaker/releases").toURI());
                             } catch (IOException | URISyntaxException e) {
-                                Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
+                                Logger.getLogger(Status.class.getName())
+                                        .log(Level.SEVERE, null, e);
                             }
                         }
                     }
                 } catch (MalformedURLException e) {
-                    Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
+                    Logger.getLogger(Status.class.getName())
+                            .log(Level.SEVERE, null, e);
                 } catch (IOException e) {
-                    Logger.getLogger(Status.class.getName()).log(Level.SEVERE, null, e);
+                    Logger.getLogger(Status.class.getName())
+                            .log(Level.SEVERE, null, e);
                 }
             }
         }).start();
