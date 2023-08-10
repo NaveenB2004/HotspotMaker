@@ -3,6 +3,7 @@ name: Update Database
 on:
   schedule:
     - cron: '0 0,12 * * *'  # Schedule to run at 12:00 AM and 12:00 PM (UTC)
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
   update-database:
