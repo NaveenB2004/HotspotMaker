@@ -14,7 +14,9 @@ jobs:
       uses: actions/checkout@v2
       
     - name: get location
-      run: ls -LR
+      run: |
+        cd HotspotMaker
+        mvn clean package
 
 #    - name: Set up JDK
 #      uses: actions/setup-java@v2
