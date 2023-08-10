@@ -788,7 +788,6 @@ public class Extensions extends javax.swing.JFrame {
                 BufferedReader bufferedReader
                         = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 while ((line = bufferedReader.readLine()) != null) {
-                    System.out.println(line);
                     rtnStatus = line;
                 }
             } catch (IOException ex) {
