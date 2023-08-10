@@ -1,0 +1,40 @@
+name: Update Database
+
+on:
+  schedule:
+    - cron: '0 0,12 * * *'  # Schedule to run at 12:00 AM and 12:00 PM (UTC)
+
+jobs:
+  update-database:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: get location
+      run: pwd
+
+#    - name: Set up JDK
+#      uses: actions/setup-java@v2
+ #     with:
+  #      java-version: '17'
+#
+ #   - name: Build and Run Java Program
+  #    run: |
+   #     cd path/to/java/program  # Update with the actual path
+    #    mvn clean package  # Adjust Maven command as needed
+     #   java -jar target/your-program.jar  # Update with the actual JAR name
+#
+ #   - name: Update Database
+  #    run: |
+   #     cd path/to/sqlite/database  # Update with the actual path
+    #    # Execute commands to update the SQLite database
+     #   # For example: sqlite3 your-database.db < update-script.sql
+#
+ #   - name: Commit and Push Changes
+  #    run: |
+   #     git config --local user.email "action@github.com"
+    #    git config --local user.name "GitHub Action"
+     #   git commit -am "Update database" || true  # Commit changes if any
+      #  git push origin HEAD:main
