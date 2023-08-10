@@ -55,6 +55,7 @@ public class Extensions extends javax.swing.JFrame {
     String licenseLink;
     String webLink;
     String directLink;
+    String starterLink;
 
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
@@ -589,6 +590,7 @@ public class Extensions extends javax.swing.JFrame {
                 licenseLink = rs.getString("license");
                 webLink = rs.getString("web");
                 directLink = rs.getString("download");
+                starterLink = rs.getString("starter");
 
                 btnEnable();
             }
@@ -648,6 +650,8 @@ public class Extensions extends javax.swing.JFrame {
                     setActions("Downloading...");
                     FileUtils.copyURLToFile(new URL(directLink),
                             new File(extDir + "tmp\\ext-" + extId + ".zip"));
+                    FileUtils.copyURLToFile(new URL(starterLink),
+                            new File(extDir + "tmp\\ext-" + extId + ".starter"));
 
                     setActions("Checking Installer...");
                     winrar();
@@ -656,6 +660,8 @@ public class Extensions extends javax.swing.JFrame {
                     if (!new File(extDir + "ext-" + extId).exists()) {
                         new File(extDir + "ext-" + extId).mkdirs();
                     }
+                    FileUtils.moveFile(new File(extDir + "tmp\\ext-" + extId + ".starter"),
+                            new File(extDir + "ext-" + extId + "\\.starter"));
                     ProcessBuilder extract = new ProcessBuilder("cmd.exe", "/c",
                             "\"" + winrar + "\" "
                             + "x -o+ -ibck "

@@ -45,7 +45,8 @@ public class DB {
                         + "source TEXT NOT NULL,"
                         + "license TEXT NOT NULL,"
                         + "web TEXT NOT NULL,"
-                        + "download TEXT NOT NULL)");
+                        + "download TEXT NOT NULL,"
+                        + "starter TEXT NOT NULL)");
             } catch (SQLException ex) {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }

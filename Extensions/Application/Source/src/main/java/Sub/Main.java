@@ -112,6 +112,9 @@ public class Main extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jTextField18 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
+        jTextField22 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jTextField19 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
@@ -371,6 +374,15 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel25.setText("Starter : ");
+
+        jButton12.setText("Check");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -396,6 +408,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jTextField16))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -404,7 +417,11 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jTextField18, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5)))))
+                                .addComponent(jButton5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addComponent(jTextField22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton12)))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -435,7 +452,13 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel19)
                     .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton12)
+                        .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Starting Details", jPanel5);
@@ -701,19 +724,20 @@ public class Main extends javax.swing.JFrame {
                 String license = (String) jsonObject.get("License");
                 String web = (String) jsonObject.get("Web");
                 String download = (String) jsonObject.get("Download");
+                String starterx = (String) jsonObject.get("Starter");
 
                 if (id.equals("")) {
                     try {
                         Statement stmt = conn.createStatement();
                         stmt.executeUpdate("INSERT INTO extensions "
                                 + "(name, author, description, version, release, "
-                                + "date, source, license, web, download) "
+                                + "date, source, license, web, download, starter) "
                                 + "VALUES "
                                 + "('" + name + "','" + author + "','"
                                 + description + "','" + version + "','"
                                 + release + "','" + date + "','"
                                 + source + "','" + license + "','"
-                                + web + "','" + download + "')");
+                                + web + "','" + download + "','" + starterx + "')");
                         JOptionPane.showMessageDialog(this, "Done!");
                     } catch (SQLException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -732,7 +756,8 @@ public class Main extends javax.swing.JFrame {
                                 + "source='" + source + "', "
                                 + "license='" + license + "', "
                                 + "web='" + web + "', "
-                                + "download='" + download + "' "
+                                + "download='" + download + "', "
+                                + "starter='" + starterx + "' "
                                 + "WHERE id='" + id + "'");
                         JOptionPane.showMessageDialog(this, "Done!");
                     } catch (SQLException ex) {
@@ -780,6 +805,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void readStarter(String location) {
+        // this will catch a error if selected .starter is empty
+        // just ignore it
         JSONParser parser = new JSONParser();
         Object obj;
         try {
@@ -807,10 +834,13 @@ public class Main extends javax.swing.JFrame {
             jTextField16.setText((String) jsonObject.get("RuntimeAvailability"));
             jTextField17.setText((String) jsonObject.get("AvailabilityOutcome"));
             jTextField18.setText((String) jsonObject.get("RuntimeDownload"));
+            jTextField22.setText((String) jsonObject.get("Starter"));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName())
+                    .log(Level.SEVERE, null, ex);
         } catch (IOException | ParseException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
     }
 
@@ -862,6 +892,7 @@ public class Main extends javax.swing.JFrame {
         obj.put("RuntimeAvailability", jTextField16.getText());
         obj.put("AvailabilityOutcome", jTextField17.getText());
         obj.put("RuntimeDownload", jTextField18.getText());
+        obj.put("Starter", jTextField22.getText());
 
         try (FileWriter writer = new FileWriter(jTextField19.getText())) {
             writer.write(obj.toJSONString());
@@ -876,6 +907,11 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         checkURL("https://github.com/NaveenB2004/HotspotMaker/blob/main/Extensions/README.md");
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:.
+        checkURL(jTextField22.getText());
+    }//GEN-LAST:event_jButton12ActionPerformed
 
     private void tableData() {
         new DB().mkdb();
@@ -966,6 +1002,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -992,6 +1029,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1024,6 +1062,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
+    private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
