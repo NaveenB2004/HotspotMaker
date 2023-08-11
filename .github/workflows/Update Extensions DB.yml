@@ -24,7 +24,7 @@ jobs:
 
     - name: Commit and Push Changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git commit -am "Update database" || true  # Commit changes if any
+        git config --local user.email "naveennbalasooriya2004@gmail.com"
+        git config --local user.name "NaveenB2004"
+        git commit -am "Update Extensions Database" || true  # Commit changes if any
         git push origin HEAD:main
