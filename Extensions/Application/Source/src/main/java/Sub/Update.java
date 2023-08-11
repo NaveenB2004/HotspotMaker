@@ -27,6 +27,7 @@ public class Update {
     Connection conn;
 
     public void update() {
+        // github clone path
         DB.dbLocation = "D:\\a\\HotspotMaker\\HotspotMaker\\Extensions\\Database\\Extensions.db";
 
         conn = DB.conn();
@@ -37,13 +38,14 @@ public class Update {
             while (rs.next()) {
                 dbUpdate(rs.getString(1), rs.getString(2));
             }
-
+            String version = new SimpleDateFormat("yyyyMMddHHmmss")
+                    .format(new Date());
             try {
                 Statement stmt0 = conn.createStatement();
                 stmt0.executeUpdate("INSERT INTO version "
                         + "(date) VALUES "
-                        + "('" + new SimpleDateFormat("yyyyMMddHHmmss")
-                                .format(new Date()) + "')");
+                        + "('" + version + "')");
+                System.out.println("Setting db version : " + version);
             } catch (SQLException ex) {
                 Logger.getLogger(DB.class.getName())
                         .log(Level.SEVERE, null, ex);
