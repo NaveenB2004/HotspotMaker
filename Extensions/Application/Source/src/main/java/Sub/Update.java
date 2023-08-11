@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONObject;
@@ -35,6 +37,17 @@ public class Update {
                     + "FROM extensions");
             while (rs.next()) {
                 dbUpdate(rs.getString(1), rs.getString(2));
+            }
+            
+            try {
+                Statement stmt0 = conn.createStatement();
+                stmt0.executeUpdate("INSERT INTO version "
+                        + "(date) VALUES "
+                        + "('" + new SimpleDateFormat("yyyyMMddHHmmss")
+                                .format(new Date()) + "')");
+            } catch (SQLException ex) {
+                Logger.getLogger(DB.class.getName())
+                        .log(Level.SEVERE, null, ex);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Update.class.getName())
