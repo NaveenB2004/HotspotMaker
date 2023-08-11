@@ -45,6 +45,7 @@ public class Update {
                     Statement stmt0 = conn.createStatement();
                     stmt0.executeUpdate("UPDATE version "
                             + "SET date='" + formatter + "' WHERE id='1'");
+                    System.out.println("Database updated!");
                 } catch (SQLException ex) {
                     Logger.getLogger(Main.class.getName())
                             .log(Level.SEVERE, null, ex);

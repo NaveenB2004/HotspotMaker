@@ -123,8 +123,6 @@ public class Main extends javax.swing.JFrame {
         jTextField19 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jLabel22 = new javax.swing.JLabel();
-        jTextField21 = new javax.swing.JTextField();
         jButton11 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -484,10 +482,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel22.setText("ID : ");
-
-        jTextField21.setEnabled(false);
-
         jButton11.setText("About");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -513,10 +507,6 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jButton7)))
                 .addContainerGap())
         );
@@ -532,11 +522,9 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22)
-                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -580,7 +568,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton9.setText("Insert/Update");
+        jButton9.setText("Insert");
         jButton9.setEnabled(false);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -717,7 +705,6 @@ public class Main extends javax.swing.JFrame {
                 obj = parser.parse(new FileReader(starter));
                 JSONObject jsonObject = (JSONObject) obj;
 
-                String id = (String) jsonObject.get("ID");
                 String name = (String) jsonObject.get("Name");
                 String author = (String) jsonObject.get("Author");
                 String description = (String) jsonObject.get("Description");
@@ -730,44 +717,21 @@ public class Main extends javax.swing.JFrame {
                 String download = (String) jsonObject.get("Download");
                 String starterx = (String) jsonObject.get("Starter");
 
-                if (id.equals("")) {
-                    try {
-                        Statement stmt = conn.createStatement();
-                        stmt.executeUpdate("INSERT INTO extensions "
-                                + "(name, author, description, version, release, "
-                                + "date, source, license, web, download, starter) "
-                                + "VALUES "
-                                + "('" + name + "','" + author + "','"
-                                + description + "','" + version + "','"
-                                + release + "','" + date + "','"
-                                + source + "','" + license + "','"
-                                + web + "','" + download + "','" + starterx + "')");
-                        JOptionPane.showMessageDialog(this, "Done!");
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                        JOptionPane.showMessageDialog(this, ex);
-                    }
-                } else {
-                    try {
-                        Statement stmt = conn.createStatement();
-                        stmt.executeUpdate("UPDATE extensions "
-                                + "SET name='" + name + "', "
-                                + "author='" + author + "', "
-                                + "description='" + description + "', "
-                                + "version='" + version + "', "
-                                + "release='" + release + "', "
-                                + "date='" + date + "', "
-                                + "source='" + source + "', "
-                                + "license='" + license + "', "
-                                + "web='" + web + "', "
-                                + "download='" + download + "', "
-                                + "starter='" + starterx + "' "
-                                + "WHERE id='" + id + "'");
-                        JOptionPane.showMessageDialog(this, "Done!");
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                        JOptionPane.showMessageDialog(this, ex);
-                    }
+                try {
+                    Statement stmt = conn.createStatement();
+                    stmt.executeUpdate("INSERT INTO extensions "
+                            + "(name, author, description, version, release, "
+                            + "date, source, license, web, download, starter) "
+                            + "VALUES "
+                            + "('" + name + "','" + author + "','"
+                            + description + "','" + version + "','"
+                            + release + "','" + date + "','"
+                            + source + "','" + license + "','"
+                            + web + "','" + download + "','" + starterx + "')");
+                    JOptionPane.showMessageDialog(this, "Done!");
+                } catch (SQLException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, ex);
                 }
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -800,7 +764,6 @@ public class Main extends javax.swing.JFrame {
         jTextField19.setText(starter);
 
         jButton7.setEnabled(true);
-        jTextField21.setEnabled(true);
 
         Component[] comx0 = jPanel4.getComponents();
         for (Component com1 : comx0) {
@@ -821,7 +784,6 @@ public class Main extends javax.swing.JFrame {
             obj = parser.parse(new FileReader(location));
             JSONObject jsonObject = (JSONObject) obj;
 
-            jTextField21.setText((String) jsonObject.get("ID"));
             jTextField1.setText((String) jsonObject.get("Name"));
             jTextField2.setText((String) jsonObject.get("Author"));
             jTextField3.setText((String) jsonObject.get("Description"));
@@ -881,7 +843,6 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         JSONObject obj = new JSONObject();
 
-        obj.put("ID", jTextField21.getText());
         obj.put("Name", jTextField1.getText());
         obj.put("Author", jTextField2.getText());
         obj.put("Description", jTextField3.getText());
@@ -1034,7 +995,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1069,7 +1029,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
