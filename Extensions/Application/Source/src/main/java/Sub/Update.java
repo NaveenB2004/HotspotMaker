@@ -39,16 +39,14 @@ public class Update {
                 dbUpdate(rs.getString(1), rs.getString(2));
             }
             if (updateVer == true) {
-                String version = new SimpleDateFormat("yyyyMMddHHmmss")
+                String formatter = new SimpleDateFormat("yyyyMMddHHmmss")
                         .format(new Date());
                 try {
                     Statement stmt0 = conn.createStatement();
-                    stmt0.executeUpdate("INSERT INTO version "
-                            + "(date) VALUES "
-                            + "('" + version + "')");
-                    System.out.println("Setting db version : " + version);
+                    stmt0.executeUpdate("UPDATE version "
+                            + "SET date='" + formatter + "' WHERE id='1'");
                 } catch (SQLException ex) {
-                    Logger.getLogger(DB.class.getName())
+                    Logger.getLogger(Main.class.getName())
                             .log(Level.SEVERE, null, ex);
                 }
             } else {
