@@ -9,7 +9,13 @@ import com.formdev.flatlaf.FlatDarkLaf;
 public class Extensions {
 
     public static void main(String[] args) {
-        FlatDarkLaf.setup();
-        new Sub.Main().setVisible(true);
+        try {
+            if (args[0].equals("-update")) {
+                new Sub.Update().update();
+            }
+        } catch (Exception e) {
+            FlatDarkLaf.setup();
+            new Sub.Main().setVisible(true);
+        }
     }
 }
