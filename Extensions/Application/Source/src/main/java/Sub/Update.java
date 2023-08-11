@@ -30,6 +30,7 @@ public class Update {
                         .getParent())
                 .getParent() + "\\Database\\Extensions.db";
 
+        System.out.println(DB.dbLocation);
         conn = DB.conn();
         try {
             Statement stmt = conn.createStatement();
