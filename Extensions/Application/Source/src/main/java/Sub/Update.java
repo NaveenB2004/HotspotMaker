@@ -27,9 +27,10 @@ public class Update {
     public void update() {
         DB.dbLocation
                 = new File(System.getProperty("user.dir"))
-                        .getParent();
+                        .getParent() + "/Extensions/Database/Extensions.db";
 
-        System.out.println(DB.dbLocation);
+         System.out.println(DB.dbLocation);
+         
         conn = DB.conn();
         try {
             Statement stmt = conn.createStatement();
