@@ -25,10 +25,9 @@ public class Update {
     Connection conn;
 
     public void update() {
-        DB.dbLocation = new File(
-                new File(System.getProperty("user.dir"))
-                        .getParent())
-                .getParent() + "\\Database\\Extensions.db";
+        DB.dbLocation
+                = new File(System.getProperty("user.dir"))
+                        .getParent();
 
         System.out.println(DB.dbLocation);
         conn = DB.conn();
@@ -39,7 +38,7 @@ public class Update {
             while (rs.next()) {
                 dbUpdate(rs.getString(1), rs.getString(2));
             }
-            
+
             try {
                 Statement stmt0 = conn.createStatement();
                 stmt0.executeUpdate("INSERT INTO version "
