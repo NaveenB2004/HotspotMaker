@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,10 +26,12 @@ public class Update {
     Connection conn;
 
     public void update() {
-        DB.dbLocation = new File(
-                new File(System.getProperty("user.dir"))
-                        .getParent())
-                .getParent() + "\\Database\\Extensions.db";
+        try {
+            DB.dbLocation = new File(Update.class.getProtectionDomain().getCodeSource().getLocation()
+                    .toURI()).getPath();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Update.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         System.out.println(DB.dbLocation);
         conn = DB.conn();
