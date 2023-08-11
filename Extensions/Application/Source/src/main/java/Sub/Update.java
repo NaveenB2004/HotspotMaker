@@ -25,11 +25,11 @@ import org.json.simple.parser.ParseException;
 public class Update {
 
     Connection conn;
+    boolean updateVer = false;
 
     public void update() {
         // github clone path
         DB.dbLocation = "D:\\a\\HotspotMaker\\HotspotMaker\\Extensions\\Database\\Extensions.db";
-
         conn = DB.conn();
         try {
             Statement stmt = conn.createStatement();
@@ -38,17 +38,21 @@ public class Update {
             while (rs.next()) {
                 dbUpdate(rs.getString(1), rs.getString(2));
             }
-            String version = new SimpleDateFormat("yyyyMMddHHmmss")
-                    .format(new Date());
-            try {
-                Statement stmt0 = conn.createStatement();
-                stmt0.executeUpdate("INSERT INTO version "
-                        + "(date) VALUES "
-                        + "('" + version + "')");
-                System.out.println("Setting db version : " + version);
-            } catch (SQLException ex) {
-                Logger.getLogger(DB.class.getName())
-                        .log(Level.SEVERE, null, ex);
+            if (updateVer == true) {
+                String version = new SimpleDateFormat("yyyyMMddHHmmss")
+                        .format(new Date());
+                try {
+                    Statement stmt0 = conn.createStatement();
+                    stmt0.executeUpdate("INSERT INTO version "
+                            + "(date) VALUES "
+                            + "('" + version + "')");
+                    System.out.println("Setting db version : " + version);
+                } catch (SQLException ex) {
+                    Logger.getLogger(DB.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+            } else {
+                System.out.println("No updates available!");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Update.class.getName())
@@ -58,6 +62,7 @@ public class Update {
 
     private void dbUpdate(String id, String starter) {
         System.out.println("Updating ID : " + id + " @ Starter : " + starter);
+        boolean tempUpdate = false;
         JSONParser parser = new JSONParser();
         Object obj;
         try {
@@ -80,22 +85,49 @@ public class Update {
 
             try {
                 Statement stmt = conn.createStatement();
-                stmt.executeUpdate("UPDATE extensions "
-                        + "SET name='" + name + "', "
-                        + "author='" + author + "', "
-                        + "description='" + description + "', "
-                        + "version='" + version + "', "
-                        + "release='" + release + "', "
-                        + "date='" + date + "', "
-                        + "source='" + source + "', "
-                        + "license='" + license + "', "
-                        + "web='" + web + "', "
-                        + "download='" + download + "', "
-                        + "starter='" + starterx + "' "
+                ResultSet rs = stmt.executeQuery("SELECT * "
+                        + "FROM extensions "
                         + "WHERE id='" + id + "'");
+                while (rs.next()) {
+                    if (rs.getString(2).equals(name)
+                            || rs.getString(3).equals(author)
+                            || rs.getString(4).equals(description)
+                            || rs.getString(5).equals(version)
+                            || rs.getString(6).equals(release)
+                            || rs.getString(7).equals(date)
+                            || rs.getString(8).equals(source)
+                            || rs.getString(9).equals(license)
+                            || rs.getString(10).equals(web)
+                            || rs.getString(11).equals(download)
+                            || rs.getString(12).equals(starterx)) {
+                        tempUpdate = true;
+                    }
+                }
             } catch (SQLException ex) {
-                Logger.getLogger(Main.class.getName())
+                Logger.getLogger(Update.class.getName())
                         .log(Level.SEVERE, null, ex);
+            }
+            if (tempUpdate == true) {
+                updateVer = true;
+                try {
+                    Statement stmt = conn.createStatement();
+                    stmt.executeUpdate("UPDATE extensions "
+                            + "SET name='" + name + "', "
+                            + "author='" + author + "', "
+                            + "description='" + description + "', "
+                            + "version='" + version + "', "
+                            + "release='" + release + "', "
+                            + "date='" + date + "', "
+                            + "source='" + source + "', "
+                            + "license='" + license + "', "
+                            + "web='" + web + "', "
+                            + "download='" + download + "', "
+                            + "starter='" + starterx + "' "
+                            + "WHERE id='" + id + "'");
+                } catch (SQLException ex) {
+                    Logger.getLogger(Main.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Update.class.getName())
