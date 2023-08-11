@@ -26,14 +26,8 @@ public class Update {
     Connection conn;
 
     public void update() {
-        try {
-            DB.dbLocation = new File(Update.class.getProtectionDomain().getCodeSource().getLocation()
-                    .toURI()).getPath();
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(Update.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        DB.dbLocation = "D:\\a\\HotspotMaker\\HotspotMaker\\Extensions\\Database\\Extensions.db";
 
-        System.out.println(DB.dbLocation);
         conn = DB.conn();
         try {
             Statement stmt = conn.createStatement();
@@ -42,7 +36,7 @@ public class Update {
             while (rs.next()) {
                 dbUpdate(rs.getString(1), rs.getString(2));
             }
-            
+
             try {
                 Statement stmt0 = conn.createStatement();
                 stmt0.executeUpdate("INSERT INTO version "
@@ -60,6 +54,7 @@ public class Update {
     }
 
     private void dbUpdate(String id, String starter) {
+        System.out.println("Updating ID : " + id + " @ Starter : " + starter);
         JSONParser parser = new JSONParser();
         Object obj;
         try {
