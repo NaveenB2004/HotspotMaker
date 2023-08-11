@@ -1,10 +1,11 @@
 package Sub;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,7 +59,9 @@ public class Update {
         JSONParser parser = new JSONParser();
         Object obj;
         try {
-            obj = parser.parse(new FileReader(starter));
+            URL url = new URL(starter);
+            URLConnection urlConn = url.openConnection();
+            obj = parser.parse(new BufferedReader(new InputStreamReader(urlConn.getInputStream())));
             JSONObject jsonObject = (JSONObject) obj;
 
             String name = (String) jsonObject.get("Name");
