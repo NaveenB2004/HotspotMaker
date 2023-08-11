@@ -89,17 +89,17 @@ public class Update {
                         + "FROM extensions "
                         + "WHERE id='" + id + "'");
                 while (rs.next()) {
-                    if (rs.getString(2).equals(name)
-                            || rs.getString(3).equals(author)
-                            || rs.getString(4).equals(description)
-                            || rs.getString(5).equals(version)
-                            || rs.getString(6).equals(release)
-                            || rs.getString(7).equals(date)
-                            || rs.getString(8).equals(source)
-                            || rs.getString(9).equals(license)
-                            || rs.getString(10).equals(web)
-                            || rs.getString(11).equals(download)
-                            || rs.getString(12).equals(starterx)) {
+                    if (!rs.getString(2).equals(name)
+                            || !rs.getString(3).equals(author)
+                            || !rs.getString(4).equals(description)
+                            || !rs.getString(5).equals(version)
+                            || !rs.getString(6).equals(release)
+                            || !rs.getString(7).equals(date)
+                            || !rs.getString(8).equals(source)
+                            || !rs.getString(9).equals(license)
+                            || !rs.getString(10).equals(web)
+                            || !rs.getString(11).equals(download)
+                            || !rs.getString(12).equals(starterx)) {
                         tempUpdate = true;
                     }
                 }
