@@ -16,4 +16,7 @@ You can jump to specific content using the links in `Contents` or read step-by-s
 
 ***
 
-###### [Next-Page >](01.%20Extensions%20&%20Basic%20Interface.md "Extensions & Basic Interface")
+[< Previous-Page][back] | [Next-Page >][next]
+
+[back]: ../../README.md "ReadMe"
+[next]: 01.%20Extensions%20&%20Basic%20Interface.md "Extensions & Basic Interface"
