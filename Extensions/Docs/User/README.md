@@ -10,9 +10,7 @@ You can jump to specific content using the links in `Contents` or read step-by-s
 
 - [Extensions & Basic Interface](01.%20Extensions%20&%20Basic%20Interface.md)
 - [Update Extensions Database](02.%20Update%20Extensions%20Database.md)
-- [Install, Uninstall & Re-Install Extensions](03.%20Install,%20Uninstall%20&%20Re-Install%20Extensions.md)
-- [Run Extensions](04.%20Run%20Extensions.md)
-- [Troubelshooting](05.%20Troubleshooting.md)
+- [Troubelshooting](03.%20Troubleshooting.md)
 
 ***
 
