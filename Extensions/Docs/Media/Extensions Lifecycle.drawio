@@ -1,9 +1,21 @@
-<mxfile host="app.diagrams.net" modified="2023-08-12T16:49:29.656Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" version="21.6.8" etag="CTHvsQ9DiSl9EZ46SFTM" type="github">
+<mxfile host="app.diagrams.net" modified="2023-08-12T17:07:51.682Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="6UYdoFAZb5fiQS1sWqfE" version="21.6.8" type="github">
   <diagram name="Page-1" id="IK4CgEFw9YjIWyyxmLn1">
-    <mxGraphModel>
+    <mxGraphModel dx="1035" dy="536" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="Nbu1GZy0OXmOrN2x_37b-2" value="" style="sketch=0;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.databases.application_store;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="70" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Nbu1GZy0OXmOrN2x_37b-3" value="" style="dashed=0;outlineConnect=0;html=1;align=center;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.webicons.github;gradientColor=#DFDEDE" vertex="1" parent="1">
+          <mxGeometry x="50" y="20" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Nbu1GZy0OXmOrN2x_37b-4" value="GitHub&lt;br&gt;NaveenB2004/HotspotMaker" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="110" y="20" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Nbu1GZy0OXmOrN2x_37b-7" value="&lt;ul&gt;&lt;li&gt;Extensions&lt;/li&gt;&lt;ul&gt;&lt;li&gt;Application&lt;/li&gt;&lt;ul&gt;&lt;li&gt;Binary&lt;/li&gt;&lt;ul&gt;&lt;li&gt;Extensions.jar&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;&lt;li&gt;Database&lt;/li&gt;&lt;ul&gt;&lt;li&gt;Extensions.db&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;Installer&lt;/li&gt;&lt;ul&gt;&lt;li&gt;WinRAR.exe&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="1">
+          <mxGeometry x="150" y="40" width="100" height="80" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
