@@ -18,4 +18,4 @@ You can jump to specific content using the links in `Contents` or read step-by-s
 [< Previous-Page][back] | [Next-Page >][next]
 
 [back]: ../../README.md "ReadMe"
-[next]: 01.%20How%20Extensions%20Works.md "How Extensions Work"
+[next]: 01.%20How%20Extensions%20Works.md "How Extensions Work?"
