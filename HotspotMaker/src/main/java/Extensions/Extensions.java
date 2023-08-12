@@ -682,6 +682,8 @@ public class Extensions extends javax.swing.JFrame {
                     Logger.getLogger(Extensions.class.getName())
                             .log(Level.SEVERE, null, ex);
                     actions.dispose();
+                    JOptionPane.showMessageDialog(new Frame(), 
+                            "Somthing went wrong!\nTry again later!");
                 }
                 btnEnable();
             }
