@@ -7,7 +7,7 @@ Hotspot Maker  - Extensions are made to bring users more advanced tools to impro
 You can browse each section to know how things work in extensions.
 
 - [For users, a step-by-step guide to using extensions](Docs/User/README.md)
-- [For contributors, a step-by-step guide to contributing to extensions](ocs/Contributor/README.md)
+- [For contributors, a step-by-step guide to contributing to extensions](Docs/Contributor/README.md)
 
 ## Questions or Suggestions
 
