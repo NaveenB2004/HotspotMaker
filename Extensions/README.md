@@ -6,13 +6,23 @@ Hotspot Maker  - Extensions are made to bring users more advanced tools to impro
 
 You can browse each section to know how things work in extensions.
 
-- [For users, a step-by-step guide to using extensions](../Extensions/Docs/User/README.md)
-- [For contributors, a step-by-step guide to contributing to extensions](../Extensions/Docs/Contributor/README.md)
+- [For users, a step-by-step guide to using extensions](Docs/User/README.md)
+- [For contributors, a step-by-step guide to contributing to extensions](ocs/Contributor/README.md)
 
 ## Questions or Suggestions
 
 Feel free to create a [isuue from here!](https://github.com/NaveenB2004/HotspotMaker/issues)\
 Contact me by [email](mailto:naveennbalasooriya2004@gmail.com) or [telegram](https://t.me/NaveenB2004)
+
+![Suggest me!](Docs/Media/hopeful.gif)
+
+## Contributors
+### Extensions
+- [Naveen Balasooriya](https:/github.com/NaveenB2004)
+  - [Hotspot Maker - Toolkit](https://github.com/NaveenB2004/HotspotMaker-Toolkit)
+
+### Documentation
+- [Naveen Balasooriya](https:/github.com/NaveenB2004)
 
 ## License
 
