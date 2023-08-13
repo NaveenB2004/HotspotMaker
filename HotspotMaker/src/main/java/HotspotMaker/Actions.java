@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author NaveenB2004
  */
-public class Status {
+public class Actions {
 
     public void checkStarterStatus() {
         try {
@@ -40,7 +40,7 @@ public class Status {
                 }
             }
         } catch (IOException e) {
-            Logger.getLogger(Status.class.getName())
+            Logger.getLogger(Actions.class.getName())
                     .log(Level.SEVERE, null, e);
         }
     }
@@ -88,13 +88,13 @@ public class Status {
                             }
                         }
                     } catch (IOException e) {
-                        Logger.getLogger(Status.class.getName())
+                        Logger.getLogger(Actions.class.getName())
                                 .log(Level.SEVERE, null, e);
                     }
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(Status.class.getName())
+                        Logger.getLogger(Actions.class.getName())
                                 .log(Level.SEVERE, null, ex);
                     }
                 }
@@ -129,16 +129,16 @@ public class Status {
                                 Desktop.getDesktop().browse(new URL(
                                         "https://github.com/naveenb2004/HotspotMaker/releases").toURI());
                             } catch (IOException | URISyntaxException e) {
-                                Logger.getLogger(Status.class.getName())
+                                Logger.getLogger(Actions.class.getName())
                                         .log(Level.SEVERE, null, e);
                             }
                         }
                     }
                 } catch (MalformedURLException e) {
-                    Logger.getLogger(Status.class.getName())
+                    Logger.getLogger(Actions.class.getName())
                             .log(Level.SEVERE, null, e);
                 } catch (IOException e) {
-                    Logger.getLogger(Status.class.getName())
+                    Logger.getLogger(Actions.class.getName())
                             .log(Level.SEVERE, null, e);
                 }
             }

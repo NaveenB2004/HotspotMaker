@@ -32,13 +32,14 @@ public class HotspotMaker extends JWindow {
             new File(Details.space).mkdirs();
         }
 
-        new Status().checkStarterStatus();
-        new Status().checkHotspotStatus();
+        new Actions().checkStarterStatus();
+        new Actions().checkHotspotStatus();
 
-        new Status().checkUpdateStatus();
+        new Actions().checkUpdateStatus();
 
         // this delay added cuz checkHotspotStatus()
-        // getting some tome to read the current status
+        // getting some time to read the current status
+        // and arrange the UI
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
