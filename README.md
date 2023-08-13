@@ -31,20 +31,20 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
 
 It's very easy to use `Hotspot Maker`. Let's take a look at each interface.
 
-- Main Interface
-  ![Main Interface](Others/Media/Interface1.PNG "Main Interface")
+- Main Interface\
+  ![Main Interface](Others/Media/Interface1.PNG "Main Interface")\
   In here, you can perform the basic tasks of `Hotspot Maker`. It's easy to understand & well organized. You can start the hotspot using the default & one-time username & password. To set the default profile, go to settings & set it.
 
-- Settings Interface
-  ![Settings Interface](Others/Media/Interface2.PNG "Settings Interface")
+- Settings Interface\
+  ![Settings Interface](Others/Media/Interface2.PNG "Settings Interface")\
   Here, you can save a default profile and set themes.
 
-- About Interface
-  ![About Interface](Others/Media/Interface3.PNG "About Interface")
+- About Interface\
+  ![About Interface](Others/Media/Interface3.PNG "About Interface")\
   Here, you can get the details about the developer and the application.
 
-- Extensions Interface
-  ![Extensions Interface](Others/Media/Interface4.PNG "Extensions Interface")
+- Extensions Interface\
+  ![Extensions Interface](Others/Media/Interface4.PNG "Extensions Interface")\
   In here, you can download & use the advanced extension built for Hotspot Maker.
 
 ### How to use it?
