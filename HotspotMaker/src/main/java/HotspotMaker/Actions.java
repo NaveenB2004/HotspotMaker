@@ -1,18 +1,20 @@
 package HotspotMaker;
 
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Frame;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,7 +34,7 @@ public class Actions {
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
-                if (line.contains("Hosted network supported") 
+                if (line.contains("Hosted network supported")
                         && line.endsWith("No")) {
                     JOptionPane.showMessageDialog(new Frame(),
                             "Your network interface doesn't support for make hotspot!");
@@ -106,7 +108,21 @@ public class Actions {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                if (new File(Details.space + "AutoUpdate.ini").exists()) {
+                    try (Stream<String> lines
+                            = Files.lines(Paths.get(Details.space
+                                    + "AutoUpdate.ini"))) {
+                        Details.autoUpdate = lines.skip(0).findFirst().get()
+                                .equals("Enabled");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Actions.class.getName())
+                                .log(Level.SEVERE, null, ex);
+                    }
+                }
+
                 String tempversion = null;
+                String downloadURLjar = null;
+                String downloadURLexe = null;
                 try {
                     URL url = new URL(
                             "https://raw.githubusercontent.com/"
@@ -114,24 +130,34 @@ public class Actions {
                     URLConnection con = url.openConnection();
                     InputStream is = con.getInputStream();
                     try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-                        String line = null;
+                        String line;
+                        int i = 0;
                         while ((line = br.readLine()) != null) {
-                            tempversion = line;
+                            switch (i) {
+                                case 0 ->
+                                    tempversion = line;
+                                case 1 ->
+                                    downloadURLjar = line;
+                                case 2 ->
+                                    downloadURLexe = line;
+                            }
+                            i++;
                         }
                     }
                     if (!tempversion.equals(Details.version)) {
-                        int download = JOptionPane.showConfirmDialog(null,
-                                "New Version Available!\nDo you want to download the new version?"
-                                + "\nVersion : " + tempversion,
-                                "Warning", JOptionPane.YES_NO_OPTION);
-                        if (download == JOptionPane.YES_OPTION) {
-                            try {
-                                Desktop.getDesktop().browse(new URL(
-                                        "https://github.com/naveenb2004/HotspotMaker/releases").toURI());
-                            } catch (IOException | URISyntaxException e) {
-                                Logger.getLogger(Actions.class.getName())
-                                        .log(Level.SEVERE, null, e);
+                        if (Details.autoUpdate == false) {
+                            int download = JOptionPane.showConfirmDialog(null,
+                                    "New Version Available!\nDo you want to "
+                                    + "download the new version?"
+                                    + "\nVersion : " + tempversion,
+                                    "Warning", JOptionPane.YES_NO_OPTION);
+                            if (download == JOptionPane.YES_OPTION) {
+                                downloadUpdate(downloadURLjar,
+                                        downloadURLexe);
                             }
+                        } else {
+                            downloadUpdate(downloadURLjar,
+                                    downloadURLexe);
                         }
                     }
                 } catch (MalformedURLException e) {
@@ -143,6 +169,14 @@ public class Actions {
                 }
             }
         }).start();
+    }
+
+    private void downloadUpdate(String jarURL, String exeURL) {
+        
+    }
+
+    public void updateOnClose() {
+
     }
 
 }

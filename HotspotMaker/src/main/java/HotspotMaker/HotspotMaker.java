@@ -50,12 +50,19 @@ public class HotspotMaker extends JWindow {
         Main.MainUI main = new Main.MainUI();
         splash.dispose();
         main.setVisible(true);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                new Actions().updateOnClose();
+            }
+        }, "Shutdown-thread"));
     }
 
     public static void setTheme() {
         File themes = new File(Details.space + "Theme.ini");
         if (themes.exists()) {
-            try (Stream<String> lines = Files.lines(Paths.get(Details.space + "Theme.ini"))) {
+            try (Stream<String> lines = Files.lines(Paths.get(Details.space
+                    + "Theme.ini"))) {
                 String theme = lines.skip(0).findFirst().get();
                 if (theme.equals("Light")) {
                     FlatLightLaf.setup();
