@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -217,6 +218,11 @@ public class Settings extends javax.swing.JFrame {
         jToggleButton1.setSelected(true);
         jToggleButton1.setText("Enabled!");
         jToggleButton1.setToolTipText("Automatic Update");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -300,6 +306,26 @@ public class Settings extends javax.swing.JFrame {
         // TODO add your handling code here:
         new MainUI().setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        if (jToggleButton1.isSelected()) {
+            try (PrintStream out = new PrintStream(
+                    new File(HotspotMaker.Details.space + "AutoUpdate.ini"))) {
+                out.println("Enabled");
+            } catch (FileNotFoundException e) {
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, e);
+            }
+        } else {
+            try {
+                FileUtils.delete(new File(HotspotMaker.Details.space + "AutoUpdate.ini"));
+            } catch (IOException ex) {
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments

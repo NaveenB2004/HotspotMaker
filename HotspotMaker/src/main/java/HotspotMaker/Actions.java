@@ -23,7 +23,7 @@ import org.apache.commons.io.FileUtils;
  * @author NaveenB2004
  */
 public class Actions {
-    
+
     Extensions.Actions actions = new Extensions.Actions();
 
     public void checkStarterStatus() {
@@ -189,10 +189,13 @@ public class Actions {
         }
 
         try {
+            if (new File(Details.space + "Hotspot Maker." + name).exists()) {
+                FileUtils.delete(new File(Details.space + "Hotspot Maker." + name));
+            }
             FileUtils.copyURLToFile(new URL(url), new File(Details.space
-                    + "Hotspot Maker." + name));
+                        + "Hotspot Maker." + name));
             JOptionPane.showMessageDialog(new Frame(), "Download completed!\n"
-                    + "New version will install when the app closed.");
+                    + "The new version will install after 5 seconds the app closed.");
         } catch (MalformedURLException ex) {
             Logger.getLogger(Actions.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -223,7 +226,7 @@ public class Actions {
             // delete the base app
             // restore the base app with update
             new ProcessBuilder("cmd.exe", "/c",
-                    "timeout.exe 10 && "
+                    "timeout.exe 5 && "
                     + "del \"Hotspot Maker." + name + "\" && "
                     + "move \"" + Details.space + "\"Hotspot Maker." + name + "\"")
                     .start();

@@ -251,6 +251,9 @@
             <Property name="text" type="java.lang.String" value="Enabled!"/>
             <Property name="toolTipText" type="java.lang.String" value="Automatic Update"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
