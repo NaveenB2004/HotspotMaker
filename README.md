@@ -1,10 +1,10 @@
 # Hotspot Maker
 
-![GitHub repo size](https://img.shields.io/github/repo-size/NaveenB2004/HotspotMaker)
+[![GitHub repo size](https://img.shields.io/github/repo-size/NaveenB2004/HotspotMaker)
 ![GitHub license](https://img.shields.io/github/license/NaveenB2004/HotspotMaker)
 ![GitHub Repo stars](https://img.shields.io/github/stars/NaveenB2004/HotspotMaker)
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/NaveenB2004/HotspotMaker)
-![GitHub release (by tag)](https://img.shields.io/github/downloads/NaveenB2004/HotspotMaker/v3.3/total)
+![GitHub release (by tag)](https://img.shields.io/github/downloads/NaveenB2004/HotspotMaker/v3.3/total)](#)
 
 ![Hotspot Maker](Others/Media/hotspot%20maker.jpg "A tool for make hotspots!")
 
