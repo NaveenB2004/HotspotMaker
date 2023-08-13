@@ -64,6 +64,7 @@ In the settings interface,
 ### Extensions
 
 For the extensions, we have documentation for you! [Read it from here!](Extensions/README.md)
+(Extensions are coming from 3rd party. So, install at your own risk)
 
 ### Build from source
 
