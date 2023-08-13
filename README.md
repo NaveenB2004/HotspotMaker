@@ -96,10 +96,10 @@ Build with command-line
 
 We are happy to announce our `Extensions` feature! We are grateful to invite you to contribute to it! Please read the documentation about the `Extensions` & make a move!
 
-### Bug reporting, Questions & Suggesions
+### Bug reporting, Questions & Suggestions
 
-Feel free to create an issue from [here!](https://github.com/NaveenB2004/HotspotMaker/issues)
-Let's discuss this from [here!](https://github.com/NaveenB2004/HotspotMaker/discussions)
+Feel free to create an issue from [here!](https://github.com/NaveenB2004/HotspotMaker/issues)\
+Let's discuss this from [here!](https://github.com/NaveenB2004/HotspotMaker/discussions)\
 Contact me by [email](mailto:naveennbalasooriya2004@gmail.com "naveennbalasooriya2004@gmail.com") or [telegram](https://t.me/NaveenB2004 "@NaveenB2004")
 
 ### License
