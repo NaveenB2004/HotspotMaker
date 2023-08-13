@@ -1,5 +1,11 @@
 # Hotspot Maker
 
+![GitHub release (by tag)](https://img.shields.io/github/downloads/NaveenB2004/HotspotMaker/v3.3/total)
+![GitHub license](https://img.shields.io/github/license/NaveenB2004/HotspotMaker)
+![GitHub repo size](https://img.shields.io/github/repo-size/NaveenB2004/HotspotMaker)
+![GitHub Repo stars](https://img.shields.io/github/stars/NaveenB2004/HotspotMaker)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/NaveenB2004/HotspotMaker)
+
 ![Hotspot Maker](Others/Media/hotspot%20maker.jpg "A tool for make hotspots!")
 
 Hotspot Maker is a software you can use to basically start & stop hotspots in a Windows environment. There we release `Java-based` GUI applications to make a better experience for users. Our good old CLI application is also [here](https://github.com/NaveenB2004/HotspotMaker/releases/tag/v2.7) for experiments. Try this out! And make sure to send feedback!
