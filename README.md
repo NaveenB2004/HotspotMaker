@@ -28,6 +28,7 @@ You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004
 - Stop hotspot
 - Save a default profile (name & password)
 - Start hotspot with one-time profile (name & password)
+- Start hotspot with one-time generated profile
 - Different themes (default, light & dark)
 - Automatic update check
 - Hotspot status indicator
