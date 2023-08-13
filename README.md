@@ -10,6 +10,7 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
     - [Features](#features)
     - [The Basic Interfaces](#the-basic-interfaces)
     - [How to use it?](#how-to-use-it)
+    - [Extensions](#extensions)
     - [Build from source](#build-from-source)
     - [For developers](#for-developers)
     - [License](#license)
@@ -59,6 +60,8 @@ In the main interface,
 In the settings interface,
 - To save a default profile, fill in the SSID (name) & Password fields & click on the save button.
 - To change the theme, select a theme from the dropdown menu & click on the save button.
+
+### Extensions
 
 For the extensions, we have documentation for you! [Read it from here!](Extensions/README.md)
 
