@@ -14,7 +14,7 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
     - [Extensions](#extensions)
     - [Build from source](#build-from-source)
     - [For developers](#for-developers)
-    - [Bug reporting, Questions \& Suggesions](#bug-reporting-questions--suggesions)
+    - [Bug reporting, Questions \& Suggestions](#bug-reporting-questions--suggestions)
     - [License](#license)
 
 
