@@ -32,7 +32,7 @@ public class Status {
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {
-                if (line.startsWith("Hosted network supported") 
+                if (line.contains("Hosted network supported") 
                         && line.endsWith("No")) {
                     JOptionPane.showMessageDialog(new Frame(),
                             "Your network interface doesn't support for make hotspot!");
@@ -76,12 +76,12 @@ public class Status {
                                     Main.MainUI.realState.setForeground(Color.BLACK);
                                 }
                             }
-                            if (line.startsWith("    Number of clients")
+                            if (line.contains("Number of clients")
                                     && Main.MainUI.clientsConnected != null) {
                                 String[] clients = line.split(": ");
                                 Main.MainUI.clientsConnected.setText(clients[1]);
                             }
-                            if (line.startsWith("    Max number of clients")
+                            if (line.contains("Max number of clients")
                                     && Main.MainUI.clientsCanConnect != null) {
                                 String[] clients = line.split(": ");
                                 Main.MainUI.clientsCanConnect.setText(clients[1]);

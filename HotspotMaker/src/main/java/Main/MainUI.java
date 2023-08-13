@@ -82,6 +82,7 @@ public class MainUI extends javax.swing.JFrame {
         jButton7.setEnabled(false);
         jRadioButton1.setEnabled(true);
         jRadioButton2.setEnabled(true);
+        clientsConnected.setText("---");
         if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
             HotspotMaker.Details.defCred = true;
             jRadioButton1.setSelected(true);
