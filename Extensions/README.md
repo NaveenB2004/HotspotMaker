@@ -11,17 +11,18 @@ You can browse each section to know how things work in extensions.
 
 ## Questions or Suggestions
 
-Feel free to create a [isuue from here!](https://github.com/NaveenB2004/HotspotMaker/issues)\
-Contact me by [email](mailto:naveennbalasooriya2004@gmail.com) or [telegram](https://t.me/NaveenB2004)
+Feel free to create an issue from [here!](https://github.com/NaveenB2004/HotspotMaker/issues)\
+Let's discuss this from [here!](https://github.com/NaveenB2004/HotspotMaker/discussions)\
+Contact me by [email](mailto:naveennbalasooriya2004@gmail.com "naveennbalasooriya2004@gmail.com") or [telegram](https://t.me/NaveenB2004 "@NaveenB2004")
 
 ![Suggest me!](Docs/Media/hopeful.gif)
 
 ## Contributors
-### Extensions
+#### Extensions
 - [Naveen Balasooriya](https:/github.com/NaveenB2004)
   - [Hotspot Maker - Toolkit](https://github.com/NaveenB2004/HotspotMaker-Toolkit)
 
-### Documentation
+#### Documentation
 - [Naveen Balasooriya](https:/github.com/NaveenB2004)
 
 ## License
