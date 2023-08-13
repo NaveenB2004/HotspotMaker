@@ -7,6 +7,7 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
 ![Hotspot Maker Preview](Others/Media/hotspot%20maker%20preview.jpg "Main Interface with Different Themes!")
 
 - [Hotspot Maker](#hotspot-maker)
+    - [Download](#download)
     - [Features](#features)
     - [The Basic Interfaces](#the-basic-interfaces)
     - [How to use it?](#how-to-use-it)
@@ -15,6 +16,10 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
     - [For developers](#for-developers)
     - [License](#license)
 
+
+### Download
+
+You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004/HotspotMaker/releases)
 
 ### Features
 
