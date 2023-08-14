@@ -147,7 +147,6 @@ public class Actions {
                     InputStream is = con.getInputStream();
                     try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
                         String line;
-                        int i = 0;
                         while ((line = br.readLine()) != null) {
                             tempversion = line;
                         }
