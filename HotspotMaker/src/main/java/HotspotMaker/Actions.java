@@ -241,8 +241,9 @@ public class Actions {
                 new ProcessBuilder("cmd.exe", "/c",
                         "timeout.exe 5 && "
                         + "del \"" + workingPath() + "\" && "
-                        + "move \"" + Details.space + "HotspotMaker." + ext + "\" && "
-                        + "start \"" + workingPath() + "\"")
+                        + "move \"" + Details.space + "HotspotMaker." + ext + "\" "
+                        + workingPath() + " && "
+                        + "start \"" + workingPath() + "\" >" + Details.space + "log.log")
                         .start();
                 System.exit(0);
             } catch (IOException ex) {
