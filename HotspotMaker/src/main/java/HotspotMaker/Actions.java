@@ -235,14 +235,6 @@ public class Actions {
         } else {
             ext = "exe";
         }
-        if (new File(Details.space + "Installer.bat").exists()) {
-            try {
-                FileUtils.delete(new File(Details.space + "Installer.bat"));
-            } catch (IOException ex) {
-                Logger.getLogger(Actions.class.getName())
-                        .log(Level.SEVERE, null, ex);
-            }
-        }
         if (new File(Details.space + "HotspotMaker." + ext).exists()) {
             System.out.println("exist");
             try {
@@ -257,8 +249,8 @@ public class Actions {
                     out.println("del \"" + workingPath() + "\"");
                     out.println("move \"" + Details.space + "HotspotMaker."
                             + ext + "\" \"" + workingPath() + "\"");
-                    out.println("start \"" + workingPath() + "\"");
-                    out.println("exit");
+                    out.println("echo Updating completed!");
+                    out.println("pause");
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(Settings.class.getName())
                             .log(Level.SEVERE, null, e);
