@@ -250,7 +250,6 @@ public class Actions {
                     out.println("del \"" + workingPath() + "\"");
                     out.println("move \"" + Details.space + "HotspotMaker."
                             + ext + "\" \"" + workingPath() + "\"");
-                    out.println("echo Updating completed!");
                     out.println(appTrigger());
                     out.println("exit");
                 } catch (FileNotFoundException e) {
@@ -286,7 +285,8 @@ public class Actions {
             }
 
         } catch (URISyntaxException ex) {
-            Logger.getLogger(Actions.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Actions.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
         return appTrigger;
     }
