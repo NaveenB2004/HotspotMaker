@@ -206,9 +206,9 @@ public class Actions {
                     + "HotspotMaker.temp"));
             new File(Details.space + "HotspotMaker.temp")
                     .renameTo(new File(Details.space + "HotspotMaker." + name));
+            actions.dispose();
             JOptionPane.showMessageDialog(new Frame(), "Download completed!\n"
                     + "Next time you start, update will install.");
-            actions.dispose();
         } catch (MalformedURLException ex) {
             Logger.getLogger(Actions.class.getName())
                     .log(Level.SEVERE, null, ex);
