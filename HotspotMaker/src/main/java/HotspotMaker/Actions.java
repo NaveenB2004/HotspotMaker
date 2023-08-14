@@ -233,7 +233,7 @@ public class Actions {
             ext = "exe";
         }
 
-        if (new File(Details.space + "Hotspot Maker." + ext).exists()) {
+        if (new File(Details.space + "HotspotMaker." + ext).exists()) {
             try {
                 // wait 5 seconds to stop the application
                 // delete the base app
