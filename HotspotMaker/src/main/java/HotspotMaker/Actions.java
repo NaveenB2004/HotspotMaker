@@ -138,8 +138,6 @@ public class Actions {
                 }
 
                 String tempversion = null;
-                String downloadURLjar = null;
-                String downloadURLexe = null;
                 try {
                     URL url = new URL(
                             "https://raw.githubusercontent.com/"
@@ -150,18 +148,15 @@ public class Actions {
                         String line;
                         int i = 0;
                         while ((line = br.readLine()) != null) {
-                            System.out.println(line);
-                            switch (i) {
-                                case 0 ->
-                                    downloadURLjar = line;
-                                case 1 ->
-                                    downloadURLexe = line;
-                                case 2 ->
-                                    tempversion = line;
-                            }
-                            i++;
+                            tempversion = line;
                         }
                     }
+                    String downloadURLjar = "https://github.com/NaveenB2004/"
+                            + "HotspotMaker/releases/download/v" + tempversion
+                            + "/Hotspot.Maker.Demo.jar";
+                    String downloadURLexe = "https://github.com/NaveenB2004/"
+                            + "HotspotMaker/releases/download/v" + tempversion
+                            + "/Hotspot.Maker.Portable.exe";
                     if (tempversion != null && !tempversion.equals(Details.version)) {
                         if (Details.autoUpdate == false) {
                             int download = JOptionPane.showConfirmDialog(null,
