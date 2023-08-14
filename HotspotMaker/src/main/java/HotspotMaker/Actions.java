@@ -234,6 +234,7 @@ public class Actions {
         }
 
         if (new File(Details.space + "HotspotMaker." + ext).exists()) {
+            System.out.println("exist");
             try {
                 // wait 5 seconds to stop the application
                 // delete the base app
@@ -242,8 +243,8 @@ public class Actions {
                         "timeout.exe 5 && "
                         + "del \"" + workingPath() + "\" && "
                         + "move \"" + Details.space + "HotspotMaker." + ext + "\" "
-                        + workingPath() + " && "
-                        + "start \"" + workingPath() + "\" >" + Details.space + "log.log")
+                        + "\"" + workingPath() + "\"" + " && "
+                        + "start \"" + workingPath() + "\"")
                         .start();
                 System.exit(0);
             } catch (IOException ex) {
