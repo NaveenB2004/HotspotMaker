@@ -153,12 +153,6 @@ public class Actions {
                         }
                     }
                     if (tempversion != null && !tempversion.equals(Details.version)) {
-                        String downloadURLjar = "https://github.com/NaveenB2004/"
-                                + "HotspotMaker/releases/download/v" + tempversion
-                                + "/Hotspot.Maker.Demo.jar";
-                        String downloadURLexe = "https://github.com/NaveenB2004/"
-                                + "HotspotMaker/releases/download/v" + tempversion
-                                + "/Hotspot.Maker.Portable.exe";
                         if (Details.autoUpdate == false) {
                             int download = JOptionPane.showConfirmDialog(null,
                                     "New Version Available!\nDo you want to "
@@ -166,12 +160,10 @@ public class Actions {
                                     + "\nVersion : " + tempversion,
                                     "Warning", JOptionPane.YES_NO_OPTION);
                             if (download == JOptionPane.YES_OPTION) {
-                                downloadUpdate(downloadURLjar,
-                                        downloadURLexe);
+                                downloadUpdate(tempversion);
                             }
                         } else {
-                            downloadUpdate(downloadURLjar,
-                                    downloadURLexe);
+                            downloadUpdate(tempversion);
                         }
                     }
                 } catch (MalformedURLException e) {
@@ -185,10 +177,17 @@ public class Actions {
         }, "Update Check").start();
     }
 
-    private void downloadUpdate(String jarURL, String exeURL) {
+    private void downloadUpdate(String tempversion) {
         actions.setVisible(true);
         actions.setTitle("Update");
-        setAction("Downloading update...");
+        setAction("Downloading update (v" + tempversion + ") ...");
+
+        String jarURL = "https://github.com/NaveenB2004/"
+                + "HotspotMaker/releases/download/v" + tempversion
+                + "/Hotspot.Maker.Demo.jar";
+        String exeURL = "https://github.com/NaveenB2004/"
+                + "HotspotMaker/releases/download/v" + tempversion
+                + "/Hotspot.Maker.Portable.exe";
 
         String url;
         String name;
@@ -245,14 +244,13 @@ public class Actions {
                 try (PrintStream out = new PrintStream(
                         new File(Details.space + "Installer.bat"))) {
                     out.println("@Echo off");
-                    out.println("Updating Hotspot Maker...");
+                    out.println("echo Updating Hotspot Maker...");
                     out.println("timeout /t 5");
                     out.println("del \"" + workingPath() + "\"");
                     out.println("move \"" + Details.space + "HotspotMaker."
                             + ext + "\" \"" + workingPath() + "\"");
                     out.println("start \"" + workingPath() + "\"");
-                    out.println("del \"" + Details.space + "Installer.bat\"");
-                    out.println("exit");
+                    out.println("del \"" + Details.space + "Installer.bat\" && exit");
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(Settings.class.getName())
                             .log(Level.SEVERE, null, e);
