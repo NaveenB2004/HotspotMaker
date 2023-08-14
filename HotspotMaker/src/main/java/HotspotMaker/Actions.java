@@ -208,16 +208,18 @@ public class Actions {
                     .renameTo(new File(Details.space + "HotspotMaker." + name));
             JOptionPane.showMessageDialog(new Frame(), "Download completed!\n"
                     + "Next time you start, update will install.");
+            actions.dispose();
         } catch (MalformedURLException ex) {
             Logger.getLogger(Actions.class.getName())
                     .log(Level.SEVERE, null, ex);
+            actions.dispose();
             JOptionPane.showMessageDialog(new Frame(), "Error\n" + ex);
         } catch (IOException ex) {
             Logger.getLogger(Actions.class.getName())
                     .log(Level.SEVERE, null, ex);
+            actions.dispose();
             JOptionPane.showMessageDialog(new Frame(), "Error\n" + ex);
         }
-        actions.dispose();
     }
 
     private void setAction(String text) {
@@ -233,7 +235,14 @@ public class Actions {
         } else {
             ext = "exe";
         }
-
+        if (new File(Details.space + "Installer.bat").exists()) {
+            try {
+                FileUtils.delete(new File(Details.space + "Installer.bat"));
+            } catch (IOException ex) {
+                Logger.getLogger(Actions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
         if (new File(Details.space + "HotspotMaker." + ext).exists()) {
             System.out.println("exist");
             try {
@@ -249,7 +258,7 @@ public class Actions {
                     out.println("move \"" + Details.space + "HotspotMaker."
                             + ext + "\" \"" + workingPath() + "\"");
                     out.println("start \"" + workingPath() + "\"");
-                    out.println("del \"" + Details.space + "Installer.bat\" && exit");
+                    out.println("exit");
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(Settings.class.getName())
                             .log(Level.SEVERE, null, e);
