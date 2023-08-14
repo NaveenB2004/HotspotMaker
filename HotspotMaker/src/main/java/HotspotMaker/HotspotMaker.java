@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
+import javax.swing.JLabel;
 import javax.swing.JWindow;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -27,20 +28,27 @@ public class HotspotMaker extends JWindow {
 
         Splash splash = new Splash();
         splash.setVisible(true);
+        JLabel status = Splash.jLabel3;
         
+        status.setText("Checking directories...");
         if (!new File(Details.space).exists()) {
             new File(Details.space).mkdirs();
         }
 
+        status.setText("Checking hotspot support...");
         new Actions().checkStarterStatus();
+        status.setText("Checking hotspot status...");
         new Actions().checkHotspotStatus();
 
+        status.setText("Checking installable updates...");
         new Actions().updateAndRestart();
+        status.setText("Checking for updates...");
         new Actions().checkUpdateStatus();
 
         // this delay added cuz checkHotspotStatus()
         // getting some time to read the current status
         // and arrange the UI
+        status.setText("Setting up UI...");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
