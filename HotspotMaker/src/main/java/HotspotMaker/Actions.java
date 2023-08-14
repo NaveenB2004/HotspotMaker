@@ -239,13 +239,16 @@ public class Actions {
                 // wait 5 seconds to stop the application
                 // delete the base app
                 // restore the base app with update
-                new ProcessBuilder("cmd.exe", "/c",
-                        "timeout.exe 5 && "
-                        + "del \"" + workingPath() + "\" && "
-                        + "move \"" + Details.space + "HotspotMaker." + ext + "\" "
-                        + "\"" + workingPath() + "\"" + " && "
-                        + "start \"" + workingPath() + "\"")
-                        .start();
+                String[] command = {"timeout /t 5 >" + Details.space + "Installer.bat",
+                    "del \"" + workingPath() + "\" >>" + Details.space + "Installer.bat",
+                    "move \"" + Details.space + "HotspotMaker." + ext + "\" \"" + workingPath()
+                    + "\" >>" + Details.space + "Installer.bat",
+                    "start \"" + workingPath() + "\" >>" + Details.space + "Installer.bat"};
+                for (String command1 : command) {
+                    new ProcessBuilder("cmd.exe", "/c", command1).start();
+                }
+                new ProcessBuilder("cmd.exe", "/c", "start "
+                        + Details.space + "Installer.bat").start();
                 System.exit(0);
             } catch (IOException ex) {
                 Logger.getLogger(Actions.class.getName())
