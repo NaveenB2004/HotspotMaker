@@ -243,7 +243,9 @@ public class Actions {
                     "del \"" + workingPath() + "\" >>" + Details.space + "Installer.bat",
                     "move \"" + Details.space + "HotspotMaker." + ext + "\" \"" + workingPath()
                     + "\" >>" + Details.space + "Installer.bat",
-                    "start \"" + workingPath() + "\" >>" + Details.space + "Installer.bat"};
+                    "start \"" + workingPath() + "\" >>" + Details.space + "Installer.bat",
+                    "del " + Details.space + "Installer.bat >>" + Details.space + "Installer.bat",
+                    "exit"};
                 for (String command1 : command) {
                     new ProcessBuilder("cmd.exe", "/c", command1).start();
                 }
