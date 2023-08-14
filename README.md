@@ -4,7 +4,7 @@
 [![GitHub license](https://img.shields.io/github/license/NaveenB2004/HotspotMaker)](LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/NaveenB2004/HotspotMaker)](https://github.com/NaveenB2004/HotspotMaker/stargazers)
 [![GitHub release (with filter)](https://img.shields.io/github/v/release/NaveenB2004/HotspotMaker)](https://github.com/NaveenB2004/HotspotMaker/releases)
-[![GitHub release (by tag)](https://img.shields.io/github/downloads/NaveenB2004/HotspotMaker/v3.3/total)](https://github.com/NaveenB2004/HotspotMaker/releases/tag/v3.3)
+[![GitHub release (by tag)](https://img.shields.io/github/downloads/NaveenB2004/HotspotMaker/v3.4/total)](https://github.com/NaveenB2004/HotspotMaker/releases/tag/v3.3)
 
 ![Hotspot Maker](Others/Media/hotspot%20maker.jpg "A tool for make hotspots!")
 
@@ -37,6 +37,7 @@ You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004
 - Start hotspot with one-time generated profile
 - Different themes (default, light & dark)
 - Automatic update check
+- Automatic update install (you can config.)
 - Hotspot status indicator
 - Connected client count indicator
 - Extensions for advanced tasks
@@ -73,6 +74,7 @@ In the main interface,
 In the settings interface,
 - To save a default profile, fill in the SSID (name) & Password fields & click on the save button.
 - To change the theme, select a theme from the dropdown menu & click on the save button.
+- To change the automatic updates, you can enable or disable it from the button in the `Automatic Update` section. (Defaultly, it came with automatic update enabled)
 
 ### Extensions
 
@@ -96,7 +98,7 @@ Build with command-line
 - Open Command Prompt (`CMD`) or `PowerShell`
 - Run the command,
   ```
-  mvn package --file "projectDir\HotspotMaker\pom.xml"
+  mvn package --file "projectDir\HotspotMaker\HotspotMaker\pom.xml"
   ```
 
 ### For developers
