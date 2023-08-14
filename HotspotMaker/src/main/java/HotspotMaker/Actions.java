@@ -16,6 +16,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.security.CodeSource;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -249,7 +250,7 @@ public class Actions {
                     out.println("move \"" + Details.space + "HotspotMaker."
                             + ext + "\" \"" + workingPath() + "\"");
                     out.println("echo Updating completed!");
-                    out.println("pause");
+                    out.println(appTrigger());
                     out.println("exit");
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(Settings.class.getName())
@@ -263,6 +264,30 @@ public class Actions {
                         .log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    private static String appTrigger() {
+        String appTrigger = null;
+        try {
+            CodeSource codeSource = HotspotMaker.class.getProtectionDomain().getCodeSource();
+            File jarFile = new File(codeSource.getLocation().toURI().getPath());
+            String jarDir = jarFile.getParentFile().getPath();
+
+            if (workingPath().endsWith("jar")) {
+                if (new File(jarDir + "\\JRE\\bin\\java.exe").exists()) {
+                    appTrigger = "start \"" + jarDir + "\\JRE\\bin\\java.exe\" -jar \""
+                            + workingPath() + "\"";
+                } else {
+                    appTrigger = "start java -jar \"" + workingPath() + "\"";
+                }
+            } else {
+                appTrigger = "start \"" + workingPath() + "\"";
+            }
+
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Actions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return appTrigger;
     }
 
 }
