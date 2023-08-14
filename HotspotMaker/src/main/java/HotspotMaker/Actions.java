@@ -244,6 +244,7 @@ public class Actions {
                 try (PrintStream out = new PrintStream(
                         new File(Details.space + "Installer.bat"))) {
                     out.println("@Echo off");
+                    out.println("title Hotspot Maker - Updater");
                     out.println("echo Updating Hotspot Maker...");
                     out.println("timeout /t 5");
                     out.println("del \"" + workingPath() + "\"");
@@ -275,10 +276,10 @@ public class Actions {
 
             if (workingPath().endsWith("jar")) {
                 if (new File(jarDir + "\\JRE\\bin\\java.exe").exists()) {
-                    appTrigger = "start \"" + jarDir + "\\JRE\\bin\\java.exe\" -jar \""
+                    appTrigger = "start \"" + jarDir + "\\JRE\\bin\\javaw.exe\" -jar \""
                             + workingPath() + "\"";
                 } else {
-                    appTrigger = "start java -jar \"" + workingPath() + "\"";
+                    appTrigger = "start javaw -jar \"" + workingPath() + "\"";
                 }
             } else {
                 appTrigger = "start \"" + workingPath() + "\"";
