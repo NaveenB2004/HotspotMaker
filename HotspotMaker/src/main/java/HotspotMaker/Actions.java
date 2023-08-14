@@ -1,12 +1,15 @@
 package HotspotMaker;
 
+import Main.Settings;
 import java.awt.Color;
 import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -239,15 +242,18 @@ public class Actions {
                 // wait 5 seconds to stop the application
                 // delete the base app
                 // restore the base app with update
-                String[] command = {"timeout /t 5 >" + Details.space + "Installer.bat",
-                    "del \"" + workingPath() + "\" >>" + Details.space + "Installer.bat",
-                    "move \"" + Details.space + "HotspotMaker." + ext + "\" \"" + workingPath()
-                    + "\" >>" + Details.space + "Installer.bat",
-                    "start \"" + workingPath() + "\" >>" + Details.space + "Installer.bat",
-                    "del " + Details.space + "Installer.bat >>" + Details.space + "Installer.bat",
-                    "exit"};
-                for (String command1 : command) {
-                    new ProcessBuilder("cmd.exe", "/c", command1).start();
+                try (PrintStream out = new PrintStream(
+                        new File(Details.space + "Installer.bat"))) {
+                    out.println("timeout /t 5");
+                    out.println("del \"" + workingPath() + "\"");
+                    out.println("move \"" + Details.space + "HotspotMaker."
+                            + ext + "\" \"" + workingPath() + "\"");
+                    out.println("start \"" + workingPath() + "\"");
+                    out.println("del \"" + Details.space + "Installer.bat\"");
+                    out.println("exit");
+                } catch (FileNotFoundException e) {
+                    Logger.getLogger(Settings.class.getName())
+                            .log(Level.SEVERE, null, e);
                 }
                 new ProcessBuilder("cmd.exe", "/c", "start "
                         + Details.space + "Installer.bat").start();
