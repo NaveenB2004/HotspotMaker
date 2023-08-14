@@ -27,8 +27,6 @@ public class HotspotMaker extends JWindow {
 
         Splash splash = new Splash();
         splash.setVisible(true);
-
-        new Actions().setJarPath();
         
         if (!new File(Details.space).exists()) {
             new File(Details.space).mkdirs();
