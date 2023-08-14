@@ -250,6 +250,7 @@ public class Actions {
                             + ext + "\" \"" + workingPath() + "\"");
                     out.println("echo Updating completed!");
                     out.println("pause");
+                    out.println("exit");
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(Settings.class.getName())
                             .log(Level.SEVERE, null, e);

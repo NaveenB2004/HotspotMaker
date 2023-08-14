@@ -26,7 +26,10 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
 
 ### Download
 
-You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004/HotspotMaker/releases)
+You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004/HotspotMaker/releases) We release **3 types** of `Hotspot Maker` applications.
+1. Hotspot Maker Full Installer: This is a release of `Hotspot Maker` that pack with all additional packages like `Java Runtime` to install offline with the application. Recommended for users that don't like to bother about `Java Runtime`.
+2. Hotspot Maker Portable: This is a release of `Hotspot Maker` that only contains a wrapped `.exe` file. It's lightweight but to run, you need to install [Java Runtime][jdk] (**v17.x** or above) on your PC. Some anti-virus software will detect this as a `malicious application` because of the `.exe` wrapper. If you face any problem like that, try to run this by **disabling** anti-virus.
+3. Hotspot Maker Demo: This is a release of `Hotspot Maker` that have only the `.jar` package. It's also lightweight & made for development purposes. To run, you need to install [Java Runtime][jdk] (**v17.x** or above) on your PC. Open `CMD` or `PowerShell` with `enabled UAC` & use `java -jar Hotspot.Maker.Demo.jar` to execute (`Hotspot.Maker.Demo.jar` is the name of the `.jar` file).
 
 ### Features
 
@@ -84,9 +87,9 @@ For the extensions, we have documentation for you! [Read it from here!](Extensio
 ### Build from source
 
 The basic needs,
-- `Java` ([JDK](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)) version `17.x`
-- Maven (for build purpose)(latest is recommended)(if you install  NetBeans IDE this will be installed with it)
-- [NetBeans IDE](https://netbeans.apache.org/download/index.html) (latest is recommended)(this is for load UI if you edit the source)
+- [Java Development Kit][jdk] version `17.x` (recommended) or above.
+- [Maven](https://maven.apache.org/download.cgi "Download Maven") (for build purpose)(latest is recommended)(if you install  NetBeans IDE this will be installed with it)
+- [NetBeans IDE](https://netbeans.apache.org/download/index.html "Download NetBeans IDE") (latest is recommended)(this is for load UI if you edit the source)
 
 Build with NetBeans IDE
 - Clone the repository
@@ -139,3 +142,5 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
+
+[jdk]: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html "Download Java Development Kit v17.x"
