@@ -28,6 +28,8 @@ public class HotspotMaker extends JWindow {
         Splash splash = new Splash();
         splash.setVisible(true);
 
+        new Actions().setJarPath();
+        
         if (!new File(Details.space).exists()) {
             new File(Details.space).mkdirs();
         }
@@ -35,6 +37,7 @@ public class HotspotMaker extends JWindow {
         new Actions().checkStarterStatus();
         new Actions().checkHotspotStatus();
 
+        new Actions().updateAndRestart();
         new Actions().checkUpdateStatus();
 
         // this delay added cuz checkHotspotStatus()
@@ -50,15 +53,6 @@ public class HotspotMaker extends JWindow {
         Main.MainUI main = new Main.MainUI();
         splash.dispose();
         main.setVisible(true);
-
-        new Actions().threadList();
-        
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            public void run() {
-                System.out.println("shoutdown");
-                new Actions().updateOnClose();
-            }
-        }, "Shutdown-thread"));
     }
 
     public static void setTheme() {
