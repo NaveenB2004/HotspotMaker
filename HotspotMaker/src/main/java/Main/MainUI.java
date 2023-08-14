@@ -106,8 +106,8 @@ public class MainUI extends javax.swing.JFrame {
                     processBuilder.redirectErrorStream(true);
                     Process p = processBuilder.start();
                     String line = null;
-                    BufferedReader bufferedReader = 
-                            new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    BufferedReader bufferedReader
+                            = new BufferedReader(new InputStreamReader(p.getInputStream()));
                     while ((line = bufferedReader.readLine()) != null) {
                         console.append(line + "\n");
                     }
@@ -117,7 +117,7 @@ public class MainUI extends javax.swing.JFrame {
                 }
                 console.append("\n=========================================\n");
             }
-        }).start();
+        }, "MainUI Process Builder").start();
     }
 
     /**
@@ -529,6 +529,7 @@ public class MainUI extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         new About().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

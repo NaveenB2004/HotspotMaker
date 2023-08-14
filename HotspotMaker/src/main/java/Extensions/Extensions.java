@@ -70,7 +70,7 @@ public class Extensions extends javax.swing.JFrame {
                     readDB();
                 }
             }
-        }).start();
+        }, "Extensions Startup DB Check").start();
     }
 
     private void updateDB() {
@@ -563,7 +563,7 @@ public class Extensions extends javax.swing.JFrame {
                 updateDB();
                 jButton7.setEnabled(true);
             }
-        }).start();
+        }, "Extensions DB Update").start();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -636,7 +636,7 @@ public class Extensions extends javax.swing.JFrame {
                 }
                 btnEnable();
             }
-        }).start();
+        }, "Extensions Uninstall").start();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -687,7 +687,7 @@ public class Extensions extends javax.swing.JFrame {
                 }
                 btnEnable();
             }
-        }).start();
+        }, "Extensions Install").start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

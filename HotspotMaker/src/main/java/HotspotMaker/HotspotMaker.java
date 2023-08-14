@@ -51,8 +51,11 @@ public class HotspotMaker extends JWindow {
         splash.dispose();
         main.setVisible(true);
 
+        new Actions().threadList();
+        
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
+                System.out.println("shoutdown");
                 new Actions().updateOnClose();
             }
         }, "Shutdown-thread"));

@@ -57,6 +57,11 @@ public class About extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("About");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -207,6 +212,12 @@ public class About extends javax.swing.JFrame {
         // TODO add your handling code here:
         callURL("https://github.com/NaveenB2004/HotspotMaker/blob/main/Credits/README.md");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        new MainUI().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosed
 
     private void callURL(String url) {
         try {

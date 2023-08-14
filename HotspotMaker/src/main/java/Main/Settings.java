@@ -19,7 +19,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -318,11 +317,12 @@ public class Settings extends javax.swing.JFrame {
                         .log(Level.SEVERE, null, e);
             }
         } else {
-            try {
-                FileUtils.delete(new File(HotspotMaker.Details.space + "AutoUpdate.ini"));
-            } catch (IOException ex) {
+            try (PrintStream out = new PrintStream(
+                    new File(HotspotMaker.Details.space + "AutoUpdate.ini"))) {
+                out.println("Desabled");
+            } catch (FileNotFoundException e) {
                 Logger.getLogger(Settings.class.getName())
-                        .log(Level.SEVERE, null, ex);
+                        .log(Level.SEVERE, null, e);
             }
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed

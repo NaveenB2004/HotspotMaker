@@ -25,6 +25,8 @@ import org.apache.commons.io.FileUtils;
 public class Actions {
 
     Extensions.Actions actions = new Extensions.Actions();
+    boolean updateAvailable = false;
+    boolean updating = false;
 
     public void checkStarterStatus() {
         try {
@@ -104,7 +106,7 @@ public class Actions {
                     }
                 }
             }
-        }).start();
+        }, "Hotspot Status").start();
     }
 
     public void checkUpdateStatus() {
@@ -136,6 +138,7 @@ public class Actions {
                         String line;
                         int i = 0;
                         while ((line = br.readLine()) != null) {
+                            System.out.println(line);
                             switch (i) {
                                 case 0 ->
                                     downloadURLjar = line;
@@ -147,7 +150,7 @@ public class Actions {
                             i++;
                         }
                     }
-                    if (!tempversion.equals(Details.version)) {
+                    if (tempversion != null && !tempversion.equals(Details.version)) {
                         if (Details.autoUpdate == false) {
                             int download = JOptionPane.showConfirmDialog(null,
                                     "New Version Available!\nDo you want to "
@@ -155,10 +158,12 @@ public class Actions {
                                     + "\nVersion : " + tempversion,
                                     "Warning", JOptionPane.YES_NO_OPTION);
                             if (download == JOptionPane.YES_OPTION) {
+                                System.out.println("Update? Yes");
                                 downloadUpdate(downloadURLjar,
                                         downloadURLexe);
                             }
                         } else {
+                            System.out.println("Update! Yes");
                             downloadUpdate(downloadURLjar,
                                     downloadURLexe);
                         }
@@ -171,41 +176,46 @@ public class Actions {
                             .log(Level.SEVERE, null, e);
                 }
             }
-        }).start();
+        }, "Update Check").start();
     }
 
     private void downloadUpdate(String jarURL, String exeURL) {
-        actions.setVisible(true);
-        setAction("Downloading update...");
+        if (jarURL != null && exeURL != null) {
+            updating = true;
+            actions.setVisible(true);
+            setAction("Downloading update...");
 
-        String url;
-        String name;
-        if (new File("Hotspot Maker.jar").exists()) {
-            url = jarURL;
-            name = "jar";
-        } else {
-            url = exeURL;
-            name = "exe";
-        }
-
-        try {
-            if (new File(Details.space + "Hotspot Maker." + name).exists()) {
-                FileUtils.delete(new File(Details.space + "Hotspot Maker." + name));
+            String url;
+            String name;
+            if (new File("Hotspot Maker.jar").exists()) {
+                url = jarURL;
+                name = "jar";
+            } else {
+                url = exeURL;
+                name = "exe";
             }
-            FileUtils.copyURLToFile(new URL(url), new File(Details.space
+
+            try {
+                if (new File(Details.space + "Hotspot Maker." + name).exists()) {
+                    FileUtils.delete(new File(Details.space + "Hotspot Maker." + name));
+                }
+                FileUtils.copyURLToFile(new URL(url), new File(Details.space
                         + "Hotspot Maker." + name));
-            JOptionPane.showMessageDialog(new Frame(), "Download completed!\n"
-                    + "The new version will install after 5 seconds the app closed.");
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Actions.class.getName())
-                    .log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(new Frame(), "Error\n" + ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Actions.class.getName())
-                    .log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(new Frame(), "Error\n" + ex);
+                updateAvailable = true;
+                JOptionPane.showMessageDialog(new Frame(), "Download completed!\n"
+                        + "The new version will install after 5 seconds the app closed.");
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Actions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(new Frame(), "Error\n" + ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Actions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(new Frame(), "Error\n" + ex);
+            }
+            actions.dispose();
+            updating = false;
         }
-        actions.dispose();
     }
 
     private void setAction(String text) {
@@ -214,26 +224,61 @@ public class Actions {
         }
     }
 
+    public void threadList() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    Object[] threadSet = Thread.getAllStackTraces().keySet().toArray();
+                    for (int i = 0; i < threadSet.length; i++) {
+                        System.out.println(threadSet[i]);
+                    }
+                    System.out.println("\n");
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Actions.class.getName())
+                                .log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }, "Thread List").start();
+    }
+
     public void updateOnClose() {
-        String name;
-        if (new File("Hotspot Maker.jar").exists()) {
-            name = "jar";
-        } else {
-            name = "exe";
+        System.out.println("Shoutdown triggered!");
+        while (updating == true) {
+            System.out.println("running!");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Actions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
         }
-        try {
-            // wait 10 seconds to stop the application
-            // delete the base app
-            // restore the base app with update
-            new ProcessBuilder("cmd.exe", "/c",
-                    "timeout.exe 5 && "
-                    + "del \"Hotspot Maker." + name + "\" && "
-                    + "move \"" + Details.space + "\"Hotspot Maker." + name + "\"")
-                    .start();
-        } catch (IOException ex) {
-            Logger.getLogger(Actions.class.getName())
-                    .log(Level.SEVERE, null, ex);
+        if (updateAvailable == true) {
+            String name;
+            if (new File("Hotspot Maker.jar").exists()) {
+                name = "jar";
+            } else {
+                name = "exe";
+            }
+            try {
+                // wait 5 seconds to stop the application
+                // delete the base app
+                // restore the base app with update
+                new ProcessBuilder("cmd.exe", "/c",
+                        "timeout.exe 5 && "
+                        + "del \"Hotspot Maker." + name + "\" && "
+                        + "move \"" + Details.space + "\"Hotspot Maker." + name + "\"")
+                        .start();
+            } catch (IOException ex) {
+                Logger.getLogger(Actions.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
         }
+        System.out.println("Shoutdown completed!");
+        System.exit(0);
     }
 
 }
