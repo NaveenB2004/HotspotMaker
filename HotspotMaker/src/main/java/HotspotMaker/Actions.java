@@ -244,6 +244,8 @@ public class Actions {
                 // restore the base app with update
                 try (PrintStream out = new PrintStream(
                         new File(Details.space + "Installer.bat"))) {
+                    out.println("@Echo off");
+                    out.println("Updating Hotspot Maker...");
                     out.println("timeout /t 5");
                     out.println("del \"" + workingPath() + "\"");
                     out.println("move \"" + Details.space + "HotspotMaker."
