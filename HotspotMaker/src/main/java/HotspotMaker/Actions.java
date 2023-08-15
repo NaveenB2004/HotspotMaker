@@ -36,9 +36,9 @@ import org.apache.commons.io.FileUtils;
 public class Actions {
 
     Extensions.Actions actions = new Extensions.Actions();
-    SystemTray tray;
-    PopupMenu menu;
-    TrayIcon icon;
+    private static SystemTray tray;
+    private static PopupMenu menu;
+    private static TrayIcon icon = null;
 
     public void setTrayIcon() {
         if (SystemTray.isSupported() == true) {
@@ -97,23 +97,22 @@ public class Actions {
                 Logger.getLogger(MainUI.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
+            System.out.println(icon);
         }
     }
 
     public void updateTrayIcon(boolean status) {
-        String updatedIcon;
-        if (status == true) {
-            updatedIcon = "active";
-        } else {
-            updatedIcon = "deactive";
-        }
-        icon.setImage(Toolkit.getDefaultToolkit().getImage(
-                getClass().getResource("/Imgs/Icon_" + updatedIcon + ".png")));
-        try {
-            tray.add(icon);
-        } catch (AWTException ex) {
-            Logger.getLogger(MainUI.class.getName())
-                    .log(Level.SEVERE, null, ex);
+        System.out.println(icon);
+        if (icon != null) {
+            System.out.println("not null");
+            String updatedIcon;
+            if (status == true) {
+                updatedIcon = "active";
+            } else {
+                updatedIcon = "deactive";
+            }
+            icon.setImage(Toolkit.getDefaultToolkit().getImage(
+                    getClass().getResource("/Imgs/Icon_" + updatedIcon + ".png")));
         }
     }
 
