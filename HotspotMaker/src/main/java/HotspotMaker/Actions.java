@@ -91,6 +91,7 @@ public class Actions {
             });
             
             menu.add(open);
+            menu.add(extensions);
             menu.add(settings);
             menu.add(about);
             menu.add(exit);
