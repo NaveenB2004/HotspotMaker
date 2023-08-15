@@ -22,22 +22,6 @@ public class Details {
     public static String oneTimePassword = "";
     public static boolean fromTrayMenu = false;
 
-    public static boolean onCloseMinimize() {
-        if (new File(space + "OnClose.ini").exists()) {
-            try (Stream<String> lines
-                    = Files.lines(Paths.get(space + "OnClose.ini"))) {
-                String theme = lines.skip(0).findFirst().get();
-                if (theme.equals("exit")) {
-                    return false;
-                }
-            } catch (IOException e) {
-                Logger.getLogger(Details.class.getName())
-                        .log(Level.SEVERE, null, e);
-            }
-        }
-        return true;
-    }
-
     public static boolean autoUpdate() {
         if (new File(space + "AutoUpdate.ini").exists()) {
             try (Stream<String> lines

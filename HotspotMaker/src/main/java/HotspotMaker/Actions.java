@@ -97,7 +97,6 @@ public class Actions {
                 Logger.getLogger(MainUI.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
-            System.out.println(icon);
         }
     }
 
