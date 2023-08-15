@@ -50,26 +50,31 @@ public class Actions {
             MenuItem exit = new MenuItem("Exit");
 
             icon.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     trayOpenListner(e);
                 }
             });
             open.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     trayOpenListner(e);
                 }
             });
             settings.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     traySettingsListner(e);
                 }
             });
             about.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     trayAboutListner(e);
                 }
             });
             exit.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     trayExitListner(e);
                 }
