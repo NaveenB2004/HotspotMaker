@@ -102,9 +102,7 @@ public class Actions {
     }
 
     public void updateTrayIcon(boolean status) {
-        System.out.println(icon);
         if (icon != null) {
-            System.out.println("not null");
             String updatedIcon;
             if (status == true) {
                 updatedIcon = "active";
