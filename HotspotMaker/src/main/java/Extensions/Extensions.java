@@ -551,7 +551,13 @@ public class Extensions extends javax.swing.JFrame {
                         .log(Level.SEVERE, null, ex);
             }
         }
-        new Main.MainUI().setVisible(true);
+        HotspotMaker.Details.extensions = null;
+        if (HotspotMaker.Details.main == null) {
+            HotspotMaker.Details.main = new Main.MainUI();
+        }
+        if (HotspotMaker.Details.fromTrayMenu == false) {
+            new Main.MainUI().setVisible(true);
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -682,7 +688,7 @@ public class Extensions extends javax.swing.JFrame {
                     Logger.getLogger(Extensions.class.getName())
                             .log(Level.SEVERE, null, ex);
                     actions.dispose();
-                    JOptionPane.showMessageDialog(new Frame(), 
+                    JOptionPane.showMessageDialog(new Frame(),
                             "Somthing went wrong!\nTry again later!");
                 }
                 btnEnable();

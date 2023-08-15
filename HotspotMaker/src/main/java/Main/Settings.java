@@ -87,12 +87,12 @@ public class Settings extends javax.swing.JFrame {
                         .log(Level.SEVERE, null, e);
             }
         }
-        
+
         if (HotspotMaker.Details.autoUpdate() == false) {
             jToggleButton1.setText("Disabled!");
             jToggleButton1.setSelected(false);
         }
-        
+
         if (HotspotMaker.Details.onCloseMinimize() == false) {
             jToggleButton2.setText("Exit");
             jToggleButton2.setSelected(false);
@@ -350,8 +350,9 @@ public class Settings extends javax.swing.JFrame {
         if (HotspotMaker.Details.main == null) {
             HotspotMaker.Details.main = new MainUI();
         }
-        HotspotMaker.Details.main.setVisible(true);
-        this.dispose();
+        if (HotspotMaker.Details.fromTrayMenu == false) {
+            HotspotMaker.Details.main.setVisible(true);
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed

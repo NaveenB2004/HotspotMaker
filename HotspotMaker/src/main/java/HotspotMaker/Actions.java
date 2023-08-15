@@ -115,6 +115,7 @@ public class Actions {
     }
 
     private void trayOpenListner(ActionEvent e) {
+        Details.fromTrayMenu = true;
         if (Details.main == null) {
             Details.main = new Main.MainUI();
         }
@@ -122,6 +123,7 @@ public class Actions {
     }
 
     private void traySettingsListner(ActionEvent e) {
+        Details.fromTrayMenu = true;
         if (Details.settings == null) {
             Details.settings = new Main.Settings();
         }
@@ -129,6 +131,7 @@ public class Actions {
     }
 
     private void trayAboutListner(ActionEvent e) {
+        Details.fromTrayMenu = true;
         if (Details.about == null) {
             Details.about = new Main.About();
         }

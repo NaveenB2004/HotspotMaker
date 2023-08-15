@@ -29,16 +29,16 @@ public class MainUI extends javax.swing.JFrame {
         initComponents();
         startup();
     }
-
+    
     String command;
     ActionEvent evt = null;
-
+    
     private void startup() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
-
+        
         jLabel1.setText("Hotspot Maker (v" + HotspotMaker.Details.version + ")");
-
+        
         if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
             try (Stream<String> lines = Files.lines(
                     Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
@@ -57,10 +57,10 @@ public class MainUI extends javax.swing.JFrame {
                         .log(Level.SEVERE, null, e);
             }
         }
-
+        
         jTextField1.setText(HotspotMaker.Details.oneTimeSSID);
         jTextField2.setText(HotspotMaker.Details.oneTimePassword);
-
+        
         if (HotspotMaker.Details.status == true) {
             jButton7.setEnabled(true);
             jRadioButton1.setEnabled(false);
@@ -77,7 +77,7 @@ public class MainUI extends javax.swing.JFrame {
             stopOperations();
         }
     }
-
+    
     private void stopOperations() {
         jButton7.setEnabled(false);
         jRadioButton1.setEnabled(true);
@@ -93,7 +93,7 @@ public class MainUI extends javax.swing.JFrame {
             jRadioButton2ActionPerformed(evt);
         }
     }
-
+    
     private void operations() {
         new Thread(new Runnable() {
             @Override
@@ -534,6 +534,8 @@ public class MainUI extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         HotspotMaker.Details.main = null;
+        HotspotMaker.Details.fromTrayMenu = false;
+        HotspotMaker.Details.fromTrayMenu = false;
         if (HotspotMaker.Details.about == null) {
             HotspotMaker.Details.about = new About();
         }
@@ -642,6 +644,7 @@ public class MainUI extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         HotspotMaker.Details.main = null;
+        HotspotMaker.Details.fromTrayMenu = false;
         if (HotspotMaker.Details.extensions == null) {
             HotspotMaker.Details.extensions = new Extensions.Extensions();
         }
@@ -651,8 +654,12 @@ public class MainUI extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        HotspotMaker.Details.main = null;
-        this.dispose();
+        if (HotspotMaker.Details.onCloseMinimize() == true) {
+            HotspotMaker.Details.main = null;
+            this.dispose();
+        } else {
+            System.exit(0);
+        }
     }//GEN-LAST:event_formWindowClosed
 
     /**

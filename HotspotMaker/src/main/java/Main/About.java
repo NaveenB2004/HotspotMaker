@@ -219,8 +219,9 @@ public class About extends javax.swing.JFrame {
         if (HotspotMaker.Details.main == null) {
             HotspotMaker.Details.main = new MainUI();
         }
-        HotspotMaker.Details.main.setVisible(true);
-        this.dispose();
+        if (HotspotMaker.Details.fromTrayMenu == false) {
+            HotspotMaker.Details.main.setVisible(true);
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void callURL(String url) {

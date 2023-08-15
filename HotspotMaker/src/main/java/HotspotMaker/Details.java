@@ -20,6 +20,7 @@ public class Details {
     public static boolean defCred;
     public static String oneTimeSSID = "";
     public static String oneTimePassword = "";
+    public static boolean fromTrayMenu = false;
 
     public static boolean onCloseMinimize() {
         if (new File(space + "OnClose.ini").exists()) {
@@ -53,7 +54,7 @@ public class Details {
     }
 
     
-    //
+    // form availability
     public static Main.About about = null;
     public static Main.MainUI main = null;
     public static Main.Settings settings = null;
