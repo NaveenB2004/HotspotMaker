@@ -5,6 +5,7 @@ import Main.Settings;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
@@ -39,6 +40,8 @@ public class Actions {
     private static SystemTray tray;
     private static PopupMenu menu;
     private static TrayIcon icon = null;
+    private static MenuItem start;
+    private static MenuItem stop;
 
     public void setTrayIcon() {
         if (SystemTray.isSupported() == true) {
@@ -47,7 +50,9 @@ public class Actions {
             icon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(
                     getClass().getResource("/Imgs/Icon.png")), "Hotspot Maker");
 
-            MenuItem open = new MenuItem("Hotspot Maker");
+            Menu open = new Menu("Hotspot Maker");
+            start = new MenuItem("Start");
+            stop = new MenuItem("Stop");
             MenuItem extensions = new MenuItem("Extensions");
             MenuItem settings = new MenuItem("Settings");
             MenuItem about = new MenuItem("About");
@@ -59,10 +64,16 @@ public class Actions {
                     trayOpenListner(e);
                 }
             });
-            open.addActionListener(new ActionListener() {
+            start.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    trayOpenListner(e);
+                    trayStartListner(e);
+                }
+            });
+            stop.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    trayStopListner(e);
                 }
             });
             extensions.addActionListener(new ActionListener() {
@@ -90,6 +101,9 @@ public class Actions {
                 }
             });
 
+            open.add(start);
+            open.add(stop);
+
             menu.add(open);
             menu.add(extensions);
             menu.add(settings);
@@ -112,8 +126,12 @@ public class Actions {
         if (icon != null) {
             String updatedIcon;
             if (status == true) {
+                start.setEnabled(false);
+                stop.setEnabled(true);
                 updatedIcon = "active";
             } else {
+                start.setEnabled(true);
+                stop.setEnabled(false);
                 updatedIcon = "deactive";
             }
             icon.setImage(Toolkit.getDefaultToolkit().getImage(
@@ -127,6 +145,28 @@ public class Actions {
             Details.main = new Main.MainUI();
         }
         Details.main.setVisible(true);
+    }
+
+    private void trayStartListner(ActionEvent e) {
+        if (Details.defCred()[0].equals("true")) {
+            start.setEnabled(false);
+            String command = "netsh wlan set hostednetwork mode=allow ssid=\""
+                    + Details.defCred()[1] + "\" key=\"" + Details.defCred()[2]
+                    + "\" && netsh wlan start hostednetwork";
+            new Main.MainUI().silentProcess(command);
+        } else {
+            int download = JOptionPane.showConfirmDialog(null,
+                    "Set default SSID & Password first!\nDo you want to do it now?",
+                    "Warning", JOptionPane.YES_NO_OPTION);
+            if (download == JOptionPane.YES_OPTION) {
+                traySettingsListner(e);
+            }
+        }
+    }
+
+    private void trayStopListner(ActionEvent e) {
+        String command = "netsh wlan stop hostednetwork";
+        new Main.MainUI().silentProcess(command);
     }
 
     private void trayExtensionsListner(ActionEvent e) {

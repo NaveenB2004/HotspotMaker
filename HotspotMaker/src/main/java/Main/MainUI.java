@@ -26,7 +26,7 @@ public class MainUI extends javax.swing.JFrame {
         startup();
     }
 
-    String command;
+//    String command;
     ActionEvent evt = null;
 
     private void startup() {
@@ -42,7 +42,7 @@ public class MainUI extends javax.swing.JFrame {
 
         jTextField1.setText(HotspotMaker.Details.oneTimeSSID);
         jTextField2.setText(HotspotMaker.Details.oneTimePassword);
-        
+
         if (HotspotMaker.Details.status == true) {
             jButton7.setEnabled(true);
             jRadioButton1.setEnabled(false);
@@ -74,30 +74,36 @@ public class MainUI extends javax.swing.JFrame {
         }
     }
 
-    private void operations() {
+    private void operations(String command) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 console.setText("");
                 console.append("========== Hotspot Maker (v" + Details.version + ") ==========\n\n");
-                try {
-                    ProcessBuilder processBuilder
-                            = new ProcessBuilder("cmd.exe", "/c", command);
-                    processBuilder.redirectErrorStream(true);
-                    Process p = processBuilder.start();
-                    String line = null;
-                    BufferedReader bufferedReader
-                            = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                    while ((line = bufferedReader.readLine()) != null) {
-                        console.append(line + "\n");
-                    }
-                } catch (IOException e) {
-                    Logger.getLogger(MainUI.class.getName())
-                            .log(Level.SEVERE, null, e);
-                }
+                silentProcess(command);
                 console.append("\n=========================================\n");
             }
         }, "MainUI Process Builder").start();
+    }
+
+    public void silentProcess(String command) {
+        try {
+            ProcessBuilder processBuilder
+                    = new ProcessBuilder("cmd.exe", "/c", command);
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            String line = null;
+            BufferedReader bufferedReader
+                    = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                if (console != null) {
+                    console.append(line + "\n");
+                }
+            }
+        } catch (IOException e) {
+            Logger.getLogger(MainUI.class.getName())
+                    .log(Level.SEVERE, null, e);
+        }
     }
 
     /**
@@ -580,10 +586,10 @@ public class MainUI extends javax.swing.JFrame {
         for (Component com11 : com1) {
             com11.setEnabled(false);
         }
-        command = "netsh wlan set hostednetwork mode=allow ssid=\""
+        String command = "netsh wlan set hostednetwork mode=allow ssid=\""
                 + jTextField3.getText() + "\" key=\"" + jTextField4.getText() + "\" && "
                 + "netsh wlan start hostednetwork";
-        operations();
+        operations(command);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -603,10 +609,10 @@ public class MainUI extends javax.swing.JFrame {
             for (Component com11 : com1) {
                 com11.setEnabled(false);
             }
-            command = "netsh wlan set hostednetwork mode=allow ssid=\""
+            String command = "netsh wlan set hostednetwork mode=allow ssid=\""
                     + jTextField1.getText() + "\" key=\"" + jTextField2.getText() + "\" && "
                     + "netsh wlan start hostednetwork";
-            operations();
+            operations(command);
             HotspotMaker.Details.oneTimeSSID = jTextField1.getText();
             HotspotMaker.Details.oneTimePassword = jTextField2.getText();
         }
@@ -614,8 +620,8 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         jButton7.setEnabled(false);
-        command = "netsh wlan stop hostednetwork";
-        operations();
+        String command = "netsh wlan stop hostednetwork";
+        operations(command);
         stopOperations();
     }//GEN-LAST:event_jButton7ActionPerformed
 
