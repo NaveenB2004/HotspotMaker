@@ -57,4 +57,5 @@ public class Details {
     public static Main.About about = null;
     public static Main.MainUI main = null;
     public static Main.Settings settings = null;
+    public static Extensions.Extensions extensions = null;
 }

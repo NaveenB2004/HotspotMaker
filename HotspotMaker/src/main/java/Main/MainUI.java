@@ -2,14 +2,8 @@ package Main;
 
 import HotspotMaker.Details;
 import com.github.javafaker.Faker;
-import java.awt.AWTException;
 import java.awt.Component;
-import java.awt.Menu;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
-import java.awt.SystemTray;
 import java.awt.Toolkit;
-import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -647,7 +641,11 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        new Extensions.Extensions().setVisible(true);
+        HotspotMaker.Details.main = null;
+        if (HotspotMaker.Details.extensions == null) {
+            HotspotMaker.Details.extensions = new Extensions.Extensions();
+        }
+        HotspotMaker.Details.extensions.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
