@@ -88,6 +88,20 @@ public class Settings extends javax.swing.JFrame {
                         .log(Level.SEVERE, null, e);
             }
         }
+        
+        if (new File(HotspotMaker.Details.space + "AutoUpdate.ini").exists()) {
+            try (Stream<String> lines
+                    = Files.lines(Paths.get(HotspotMaker.Details.space + "AutoUpdate.ini"))) {
+                String theme = lines.skip(0).findFirst().get();
+                if (theme.equals("Disabled")) {
+                    jToggleButton1.setSelected(false);
+                    jToggleButton1.setText("Disabled!");
+                }
+            } catch (IOException e) {
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, e);
+            }
+        }
     }
 
     /**
@@ -309,6 +323,7 @@ public class Settings extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
         if (jToggleButton1.isSelected()) {
+            jToggleButton1.setText("Enabled!");
             try (PrintStream out = new PrintStream(
                     new File(HotspotMaker.Details.space + "AutoUpdate.ini"))) {
                 out.println("Enabled");
@@ -317,6 +332,7 @@ public class Settings extends javax.swing.JFrame {
                         .log(Level.SEVERE, null, e);
             }
         } else {
+            jToggleButton1.setText("Disabled!");
             try (PrintStream out = new PrintStream(
                     new File(HotspotMaker.Details.space + "AutoUpdate.ini"))) {
                 out.println("Desabled");
