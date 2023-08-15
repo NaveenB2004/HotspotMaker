@@ -1,8 +1,18 @@
 package HotspotMaker;
 
+import Main.MainUI;
 import Main.Settings;
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.Menu;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.Toolkit;
+import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,11 +24,9 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.security.CodeSource;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 
@@ -29,6 +37,165 @@ import org.apache.commons.io.FileUtils;
 public class Actions {
 
     Extensions.Actions actions = new Extensions.Actions();
+    private static SystemTray tray;
+    private static PopupMenu menu;
+    private static TrayIcon icon = null;
+    private static MenuItem start;
+    private static MenuItem stop;
+
+    public void setTrayIcon() {
+        if (SystemTray.isSupported() == true) {
+            tray = SystemTray.getSystemTray();
+            menu = new PopupMenu();
+            icon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(
+                    getClass().getResource("/Imgs/Icon.png")), "Hotspot Maker");
+
+            Menu open = new Menu("Hotspot Maker");
+            start = new MenuItem("Start");
+            stop = new MenuItem("Stop");
+            MenuItem extensions = new MenuItem("Extensions");
+            MenuItem settings = new MenuItem("Settings");
+            MenuItem about = new MenuItem("About");
+            MenuItem exit = new MenuItem("Exit");
+
+            icon.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    trayOpenListner(e);
+                }
+            });
+            start.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    trayStartListner(e);
+                }
+            });
+            stop.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    trayStopListner(e);
+                }
+            });
+            extensions.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    trayExtensionsListner(e);
+                }
+            });
+            settings.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    traySettingsListner(e);
+                }
+            });
+            about.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    trayAboutListner(e);
+                }
+            });
+            exit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    trayExitListner(e);
+                }
+            });
+
+            open.add(start);
+            open.add(stop);
+
+            menu.add(open);
+            menu.add(extensions);
+            menu.add(settings);
+            menu.add(about);
+            menu.add(exit);
+
+            icon.setPopupMenu(menu);
+            icon.setImageAutoSize(true);
+
+            try {
+                tray.add(icon);
+            } catch (AWTException ex) {
+                Logger.getLogger(MainUI.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void updateTrayIcon(boolean status) {
+        if (icon != null) {
+            String updatedIcon;
+            if (status == true) {
+                start.setEnabled(false);
+                stop.setEnabled(true);
+                updatedIcon = "active";
+            } else {
+                start.setEnabled(true);
+                stop.setEnabled(false);
+                updatedIcon = "deactive";
+            }
+            icon.setImage(Toolkit.getDefaultToolkit().getImage(
+                    getClass().getResource("/Imgs/Icon_" + updatedIcon + ".png")));
+        }
+    }
+
+    private void trayOpenListner(ActionEvent e) {
+        Details.fromTrayMenu = true;
+        if (Details.main == null) {
+            Details.main = new Main.MainUI();
+        }
+        Details.main.setVisible(true);
+    }
+
+    private void trayStartListner(ActionEvent e) {
+        if (Details.defCred()[0].equals("true")) {
+            start.setEnabled(false);
+            String command = "netsh wlan set hostednetwork mode=allow ssid=\""
+                    + Details.defCred()[1] + "\" key=\"" + Details.defCred()[2]
+                    + "\" && netsh wlan start hostednetwork";
+            new Main.MainUI().silentProcess(command);
+        } else {
+            int download = JOptionPane.showConfirmDialog(null,
+                    "Set default SSID & Password first!\nDo you want to do it now?",
+                    "Warning", JOptionPane.YES_NO_OPTION);
+            if (download == JOptionPane.YES_OPTION) {
+                traySettingsListner(e);
+            }
+        }
+    }
+
+    private void trayStopListner(ActionEvent e) {
+        String command = "netsh wlan stop hostednetwork";
+        new Main.MainUI().silentProcess(command);
+    }
+
+    private void trayExtensionsListner(ActionEvent e) {
+        Details.fromTrayMenu = true;
+        if (Details.extensions == null) {
+            Details.extensions = new Extensions.Extensions();
+        }
+        Details.extensions.setVisible(true);
+    }
+
+    private void traySettingsListner(ActionEvent e) {
+        Details.fromTrayMenu = true;
+        if (Details.settings == null) {
+            Details.settings = new Main.Settings();
+        }
+        Details.settings.setVisible(true);
+    }
+
+    private void trayAboutListner(ActionEvent e) {
+        Details.fromTrayMenu = true;
+        if (Details.about == null) {
+            Details.about = new Main.About();
+        }
+        Details.about.setVisible(true);
+    }
+
+    private void trayExitListner(ActionEvent e) {
+        System.exit(0);
+    }
 
     public static String workingPath() {
         String workingPath = null;
@@ -81,6 +248,7 @@ public class Actions {
                                 new InputStreamReader(p.getInputStream()));
                         while ((line = bufferedReader.readLine()) != null) {
                             if (line.endsWith("Not started")) {
+                                updateTrayIcon(false);
                                 Details.status = false;
                                 if (Main.MainUI.realState != null) {
                                     Main.MainUI.realState.setText("Not Started!");
@@ -89,6 +257,7 @@ public class Actions {
                                 }
                             }
                             if (line.endsWith("Started")) {
+                                updateTrayIcon(true);
                                 Details.status = true;
                                 if (Main.MainUI.realState != null) {
                                     Main.MainUI.realState.setText("Started!");
@@ -126,18 +295,6 @@ public class Actions {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (new File(Details.space + "AutoUpdate.ini").exists()) {
-                    try (Stream<String> lines
-                            = Files.lines(Paths.get(Details.space
-                                    + "AutoUpdate.ini"))) {
-                        Details.autoUpdate = lines.skip(0).findFirst().get()
-                                .equals("Enabled");
-                    } catch (IOException ex) {
-                        Logger.getLogger(Actions.class.getName())
-                                .log(Level.SEVERE, null, ex);
-                    }
-                }
-
                 String tempversion = null;
                 try {
                     URL url = new URL(
@@ -152,7 +309,7 @@ public class Actions {
                         }
                     }
                     if (tempversion != null && !tempversion.equals(Details.version)) {
-                        if (Details.autoUpdate == false) {
+                        if (Details.autoUpdate() == false) {
                             int download = JOptionPane.showConfirmDialog(null,
                                     "New Version Available!\nDo you want to "
                                     + "download the new version?"
@@ -243,13 +400,14 @@ public class Actions {
                 try (PrintStream out = new PrintStream(
                         new File(Details.space + "Installer.bat"))) {
                     out.println("@Echo off");
+                    out.println("title Hotspot Maker - Updater");
                     out.println("echo Updating Hotspot Maker...");
                     out.println("timeout /t 5");
                     out.println("del \"" + workingPath() + "\"");
                     out.println("move \"" + Details.space + "HotspotMaker."
                             + ext + "\" \"" + workingPath() + "\"");
-                    out.println("echo Updating completed!");
-                    out.println("pause");
+                    out.println(appTrigger());
+                    out.println("exit");
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(Settings.class.getName())
                             .log(Level.SEVERE, null, e);
@@ -262,6 +420,31 @@ public class Actions {
                         .log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    private static String appTrigger() {
+        String appTrigger = null;
+        try {
+            CodeSource codeSource = HotspotMaker.class.getProtectionDomain().getCodeSource();
+            File jarFile = new File(codeSource.getLocation().toURI().getPath());
+            String jarDir = jarFile.getParentFile().getPath();
+
+            if (workingPath().endsWith("jar")) {
+                if (new File(jarDir + "\\JRE\\bin\\java.exe").exists()) {
+                    appTrigger = "start \"" + jarDir + "\\JRE\\bin\\javaw.exe\" \""
+                            + workingPath() + "\"";
+                } else {
+                    appTrigger = "start javaw -jar \"" + workingPath() + "\"";
+                }
+            } else {
+                appTrigger = "\"" + workingPath() + "\"";
+            }
+
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Actions.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        return appTrigger;
     }
 
 }

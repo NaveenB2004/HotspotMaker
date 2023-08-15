@@ -542,7 +542,6 @@ public class Extensions extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
         if (conn != null) {
             try {
                 conn.close();
@@ -551,11 +550,16 @@ public class Extensions extends javax.swing.JFrame {
                         .log(Level.SEVERE, null, ex);
             }
         }
-        new Main.MainUI().setVisible(true);
+        HotspotMaker.Details.extensions = null;
+        if (HotspotMaker.Details.main == null) {
+            HotspotMaker.Details.main = new Main.MainUI();
+        }
+        if (HotspotMaker.Details.fromTrayMenu == false) {
+            new Main.MainUI().setVisible(true);
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -567,7 +571,6 @@ public class Extensions extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
         clearFields();
         extId = model.getValueAt(jTable1.getSelectedRow(), 0).toString();
         try {
@@ -601,22 +604,18 @@ public class Extensions extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
         callURL(licenseLink);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
         callURL(sourceLink);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
         callURL(webLink);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
         actions.setVisible(true);
         tempBtnDisable();
         new Thread(new Runnable() {
@@ -640,7 +639,6 @@ public class Extensions extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         actions.setVisible(true);
         tempBtnDisable();
         new Thread(new Runnable() {
@@ -682,7 +680,7 @@ public class Extensions extends javax.swing.JFrame {
                     Logger.getLogger(Extensions.class.getName())
                             .log(Level.SEVERE, null, ex);
                     actions.dispose();
-                    JOptionPane.showMessageDialog(new Frame(), 
+                    JOptionPane.showMessageDialog(new Frame(),
                             "Somthing went wrong!\nTry again later!");
                 }
                 btnEnable();
@@ -691,7 +689,6 @@ public class Extensions extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
         if (readStarter()[6] != null) {
             boolean launchStatus = false;
             try {
@@ -737,7 +734,6 @@ public class Extensions extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         callURL("https://github.com/NaveenB2004/HotspotMaker/blob/"
                 + "main/Extensions/README.md");
     }//GEN-LAST:event_jButton2ActionPerformed

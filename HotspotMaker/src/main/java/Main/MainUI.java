@@ -6,14 +6,10 @@ import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,7 +26,7 @@ public class MainUI extends javax.swing.JFrame {
         startup();
     }
 
-    String command;
+//    String command;
     ActionEvent evt = null;
 
     private void startup() {
@@ -39,23 +35,9 @@ public class MainUI extends javax.swing.JFrame {
 
         jLabel1.setText("Hotspot Maker (v" + HotspotMaker.Details.version + ")");
 
-        if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
-            try (Stream<String> lines = Files.lines(
-                    Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
-                String defssid = lines.skip(0).findFirst().get();
-                jTextField3.setText(defssid);
-            } catch (IOException e) {
-                Logger.getLogger(MainUI.class.getName())
-                        .log(Level.SEVERE, null, e);
-            }
-            try (Stream<String> lines = Files.lines(
-                    Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
-                String defpsw = lines.skip(1).findFirst().get();
-                jTextField4.setText(defpsw);
-            } catch (IOException e) {
-                Logger.getLogger(MainUI.class.getName())
-                        .log(Level.SEVERE, null, e);
-            }
+        if (HotspotMaker.Details.defCred()[0].equals("true")) {
+            jTextField3.setText(HotspotMaker.Details.defCred()[1]);
+            jTextField4.setText(HotspotMaker.Details.defCred()[2]);
         }
 
         jTextField1.setText(HotspotMaker.Details.oneTimeSSID);
@@ -83,41 +65,45 @@ public class MainUI extends javax.swing.JFrame {
         jRadioButton1.setEnabled(true);
         jRadioButton2.setEnabled(true);
         clientsConnected.setText("---");
-        if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
-            HotspotMaker.Details.defCred = true;
+        if (HotspotMaker.Details.defCred()[0].equals("true")) {
             jRadioButton1.setSelected(true);
             jRadioButton1ActionPerformed(evt);
         } else {
-            HotspotMaker.Details.defCred = false;
             jRadioButton2.setSelected(true);
             jRadioButton2ActionPerformed(evt);
         }
     }
 
-    private void operations() {
+    private void operations(String command) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 console.setText("");
                 console.append("========== Hotspot Maker (v" + Details.version + ") ==========\n\n");
-                try {
-                    ProcessBuilder processBuilder
-                            = new ProcessBuilder("cmd.exe", "/c", command);
-                    processBuilder.redirectErrorStream(true);
-                    Process p = processBuilder.start();
-                    String line = null;
-                    BufferedReader bufferedReader
-                            = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                    while ((line = bufferedReader.readLine()) != null) {
-                        console.append(line + "\n");
-                    }
-                } catch (IOException e) {
-                    Logger.getLogger(MainUI.class.getName())
-                            .log(Level.SEVERE, null, e);
-                }
+                silentProcess(command);
                 console.append("\n=========================================\n");
             }
         }, "MainUI Process Builder").start();
+    }
+
+    public void silentProcess(String command) {
+        try {
+            ProcessBuilder processBuilder
+                    = new ProcessBuilder("cmd.exe", "/c", command);
+            processBuilder.redirectErrorStream(true);
+            Process p = processBuilder.start();
+            String line = null;
+            BufferedReader bufferedReader
+                    = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {
+                if (console != null) {
+                    console.append(line + "\n");
+                }
+            }
+        } catch (IOException e) {
+            Logger.getLogger(MainUI.class.getName())
+                    .log(Level.SEVERE, null, e);
+        }
     }
 
     /**
@@ -172,8 +158,13 @@ public class MainUI extends javax.swing.JFrame {
 
         f3r.setText("jLabel8");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hotspot Maker");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -527,19 +518,26 @@ public class MainUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        new About().setVisible(true);
+        HotspotMaker.Details.main = null;
+        HotspotMaker.Details.fromTrayMenu = false;
+        HotspotMaker.Details.fromTrayMenu = false;
+        if (HotspotMaker.Details.about == null) {
+            HotspotMaker.Details.about = new About();
+        }
+        HotspotMaker.Details.about.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        new Settings().setVisible(true);
+        HotspotMaker.Details.main = null;
+        if (HotspotMaker.Details.settings == null) {
+            HotspotMaker.Details.settings = new Settings();
+        }
+        HotspotMaker.Details.settings.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
         Component[] com1 = onetimepanel.getComponents();
         for (Component com11 : com1) {
             com11.setEnabled(true);
@@ -551,8 +549,7 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-        if (HotspotMaker.Details.defCred == true) {
+        if (HotspotMaker.Details.defCred()[0].equals("true")) {
             Component[] com1 = defsettings.getComponents();
             for (Component com11 : com1) {
                 com11.setEnabled(true);
@@ -563,13 +560,16 @@ public class MainUI extends javax.swing.JFrame {
             }
         } else {
             jRadioButton2.setSelected(true);
-            JOptionPane.showMessageDialog(this, "Set default SSID & Password first!"
-                    + "\n(go to Settings)");
+            int download = JOptionPane.showConfirmDialog(null,
+                    "Set default SSID & Password first!\nDo you want to do it now?",
+                    "Warning", JOptionPane.YES_NO_OPTION);
+            if (download == JOptionPane.YES_OPTION) {
+                jButton5ActionPerformed(evt);
+            }
         }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         jTextField1.setText(new Faker().harryPotter().character());
         jTextField2.setText(new Faker().number().digits(10));
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -586,10 +586,10 @@ public class MainUI extends javax.swing.JFrame {
         for (Component com11 : com1) {
             com11.setEnabled(false);
         }
-        command = "netsh wlan set hostednetwork mode=allow ssid=\""
+        String command = "netsh wlan set hostednetwork mode=allow ssid=\""
                 + jTextField3.getText() + "\" key=\"" + jTextField4.getText() + "\" && "
                 + "netsh wlan start hostednetwork";
-        operations();
+        operations(command);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -609,28 +609,36 @@ public class MainUI extends javax.swing.JFrame {
             for (Component com11 : com1) {
                 com11.setEnabled(false);
             }
-            command = "netsh wlan set hostednetwork mode=allow ssid=\""
+            String command = "netsh wlan set hostednetwork mode=allow ssid=\""
                     + jTextField1.getText() + "\" key=\"" + jTextField2.getText() + "\" && "
                     + "netsh wlan start hostednetwork";
-            operations();
+            operations(command);
             HotspotMaker.Details.oneTimeSSID = jTextField1.getText();
             HotspotMaker.Details.oneTimePassword = jTextField2.getText();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
         jButton7.setEnabled(false);
-        command = "netsh wlan stop hostednetwork";
-        operations();
+        String command = "netsh wlan stop hostednetwork";
+        operations(command);
         stopOperations();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        new Extensions.Extensions().setVisible(true);
+        HotspotMaker.Details.main = null;
+        HotspotMaker.Details.fromTrayMenu = false;
+        if (HotspotMaker.Details.extensions == null) {
+            HotspotMaker.Details.extensions = new Extensions.Extensions();
+        }
+        HotspotMaker.Details.extensions.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        HotspotMaker.Details.main = null;
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -677,7 +685,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    public static javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

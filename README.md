@@ -4,7 +4,7 @@
 [![GitHub license](https://img.shields.io/github/license/NaveenB2004/HotspotMaker)](LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/NaveenB2004/HotspotMaker)](https://github.com/NaveenB2004/HotspotMaker/stargazers)
 [![GitHub release (with filter)](https://img.shields.io/github/v/release/NaveenB2004/HotspotMaker)](https://github.com/NaveenB2004/HotspotMaker/releases)
-[![GitHub release (by tag)](https://img.shields.io/github/downloads/NaveenB2004/HotspotMaker/v3.3/total)](https://github.com/NaveenB2004/HotspotMaker/releases/tag/v3.3)
+[![GitHub release (by tag)](https://img.shields.io/github/downloads/NaveenB2004/HotspotMaker/v3.4/total)](https://github.com/NaveenB2004/HotspotMaker/releases/tag/v3.3)
 
 ![Hotspot Maker](Others/Media/hotspot%20maker.jpg "A tool for make hotspots!")
 
@@ -26,7 +26,10 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
 
 ### Download
 
-You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004/HotspotMaker/releases)
+You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004/HotspotMaker/releases) We release **3 types** of `Hotspot Maker` applications.
+1. Hotspot Maker Full Installer: This is a release of `Hotspot Maker` that pack with all additional packages like `Java Runtime` to install offline with the application. Recommended for users that don't like to bother about `Java Runtime`.
+2. Hotspot Maker Portable: This is a release of `Hotspot Maker` that only contains a wrapped `.exe` file. It's lightweight but to run, you need to install [Java Runtime][jdk] (**v17.x** or above) on your PC. Some anti-virus software will detect this as a `malicious application` because of the `.exe` wrapper. If you face any problem like that, try to run this by **disabling** anti-virus.
+3. Hotspot Maker Demo: This is a release of `Hotspot Maker` that have only the `.jar` package. It's also lightweight & made for development purposes. To run, you need to install [Java Runtime][jdk] (**v17.x** or above) on your PC. Open `CMD` or `PowerShell` with `enabled UAC` & use `java -jar Hotspot.Maker.Demo.jar` to execute (`Hotspot.Maker.Demo.jar` is the name of the `.jar` file).
 
 ### Features
 
@@ -35,8 +38,10 @@ You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004
 - Save a default profile (name & password)
 - Start hotspot with one-time profile (name & password)
 - Start hotspot with one-time generated profile
+- Minimize to tray after closing
 - Different themes (default, light & dark)
 - Automatic update check
+- Automatic update install (you can config.)
 - Hotspot status indicator
 - Connected client count indicator
 - Extensions for advanced tasks
@@ -51,7 +56,7 @@ It's very easy to use `Hotspot Maker`. Let's take a look at each interface.
 
 - Settings Interface\
   ![Settings Interface](Others/Media/Interface2.PNG "Settings Interface")\
-  Here, you can save a default profile and set themes.
+  Here, you can save a default profile, set themes & change the automatic update settings.
 
 - About Interface\
   ![About Interface](Others/Media/Interface3.PNG "About Interface")\
@@ -60,6 +65,10 @@ It's very easy to use `Hotspot Maker`. Let's take a look at each interface.
 - Extensions Interface\
   ![Extensions Interface](Others/Media/Interface4.PNG "Extensions Interface")\
   Here, you can download & use the advanced extension built for Hotspot Maker.
+
+- System Tray Icon\
+  ![System Tray](Others/Media/Interface5.PNG "System Tray Menu")\
+  After you close the application, it will minimize the `system tray`. You can find the `Hotspot Maker` icon from there. If you double-click the icon, you can open up the `main interface`. If you right-click the icon, you can see a menu for quick access. You can quickly start & stop `hotspot` if you already created a default profile. Also, the `system tray` icon will change with your `hotspot status` (running status will indicate with `green` color & ready to start will indicate with `yellow` color).
 
 ### How to use it?
 
@@ -73,6 +82,7 @@ In the main interface,
 In the settings interface,
 - To save a default profile, fill in the SSID (name) & Password fields & click on the save button.
 - To change the theme, select a theme from the dropdown menu & click on the save button.
+- To change the automatic updates, you can enable or disable it from the button in the `Automatic Update` section. (Defaultly, it came with automatic update enabled)
 
 ### Extensions
 
@@ -82,9 +92,9 @@ For the extensions, we have documentation for you! [Read it from here!](Extensio
 ### Build from source
 
 The basic needs,
-- `Java` ([JDK](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)) version `17.x`
-- Maven (for build purpose)(latest is recommended)(if you install  NetBeans IDE this will be installed with it)
-- [NetBeans IDE](https://netbeans.apache.org/download/index.html) (latest is recommended)(this is for load UI if you edit the source)
+- [Java Development Kit][jdk] version `17.x` (recommended) or above.
+- [Maven](https://maven.apache.org/download.cgi "Download Maven") (for build purpose)(latest is recommended)(if you install  NetBeans IDE this will be installed with it)
+- [NetBeans IDE](https://netbeans.apache.org/download/index.html "Download NetBeans IDE") (latest is recommended)(this is for load UI if you edit the source)
 
 Build with NetBeans IDE
 - Clone the repository
@@ -96,7 +106,7 @@ Build with command-line
 - Open Command Prompt (`CMD`) or `PowerShell`
 - Run the command,
   ```
-  mvn package --file "projectDir\HotspotMaker\pom.xml"
+  mvn package --file "projectDir\HotspotMaker\HotspotMaker\pom.xml"
   ```
 
 ### For developers
@@ -137,3 +147,5 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
+
+[jdk]: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html "Download Java Development Kit v17.x"

@@ -194,29 +194,29 @@ public class About extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
         callURL("mailto:naveennbalasooriya2004@gmail.com");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
         callURL("https://sites.google.com/view/naveenb2004");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
         callURL("http://github.com/naveenb2004/HotspotMaker");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         callURL("https://github.com/NaveenB2004/HotspotMaker/blob/main/Credits/README.md");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-        new MainUI().setVisible(true);
-        this.dispose();
+        HotspotMaker.Details.about = null;
+        if (HotspotMaker.Details.main == null) {
+            HotspotMaker.Details.main = new MainUI();
+        }
+        if (HotspotMaker.Details.fromTrayMenu == false) {
+            HotspotMaker.Details.main.setVisible(true);
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void callURL(String url) {
