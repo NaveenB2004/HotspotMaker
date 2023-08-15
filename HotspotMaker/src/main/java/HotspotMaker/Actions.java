@@ -36,12 +36,15 @@ import org.apache.commons.io.FileUtils;
 public class Actions {
 
     Extensions.Actions actions = new Extensions.Actions();
+    SystemTray tray;
+    PopupMenu menu;
+    TrayIcon icon;
 
     public void setTrayIcon() {
         if (SystemTray.isSupported() == true) {
-            SystemTray tray = SystemTray.getSystemTray();
-            PopupMenu menu = new PopupMenu();
-            TrayIcon icon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(
+            tray = SystemTray.getSystemTray();
+            menu = new PopupMenu();
+            icon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(
                     getClass().getResource("/Imgs/Icon.png")), "Hotspot Maker");
 
             MenuItem open = new MenuItem("Hotspot Maker");
@@ -94,6 +97,23 @@ public class Actions {
                 Logger.getLogger(MainUI.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
+        }
+    }
+
+    public void updateTrayIcon(boolean status) {
+        String updatedIcon;
+        if (status == true) {
+            updatedIcon = "active";
+        } else {
+            updatedIcon = "deactive";
+        }
+        icon.setImage(Toolkit.getDefaultToolkit().getImage(
+                getClass().getResource("/Imgs/Icon_" + updatedIcon + ".png")));
+        try {
+            tray.add(icon);
+        } catch (AWTException ex) {
+            Logger.getLogger(MainUI.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
     }
 
@@ -173,6 +193,7 @@ public class Actions {
                                 new InputStreamReader(p.getInputStream()));
                         while ((line = bufferedReader.readLine()) != null) {
                             if (line.endsWith("Not started")) {
+                                updateTrayIcon(false);
                                 Details.status = false;
                                 if (Main.MainUI.realState != null) {
                                     Main.MainUI.realState.setText("Not Started!");
@@ -181,6 +202,7 @@ public class Actions {
                                 }
                             }
                             if (line.endsWith("Started")) {
+                                updateTrayIcon(true);
                                 Details.status = true;
                                 if (Main.MainUI.realState != null) {
                                     Main.MainUI.realState.setText("Started!");
