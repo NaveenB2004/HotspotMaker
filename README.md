@@ -68,7 +68,7 @@ It's very easy to use `Hotspot Maker`. Let's take a look at each interface.
 
 - System Tray Icon\
   ![System Tray](Others/Media/Interface5.PNG "System Tray Menu")\
-  After you close the application, it will minimize the `system tray`. You can find the `Hotspot Maker` icon from there. If you double-click the icon, you can open up the `main interface`. If you right-click the icon, you can see a menu for quick access. Also, the `system tray` icon will change with your `hotspot status` (running status will indicate with `green` color & ready to start will indicate with `yellow` color).
+  After you close the application, it will minimize the `system tray`. You can find the `Hotspot Maker` icon from there. If you double-click the icon, you can open up the `main interface`. If you right-click the icon, you can see a menu for quick access. You can quickly start & stop `hotspot` if you already created a default profile. Also, the `system tray` icon will change with your `hotspot status` (running status will indicate with `green` color & ready to start will indicate with `yellow` color).
 
 ### How to use it?
 
