@@ -180,6 +180,11 @@ public class MainUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hotspot Maker");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -534,13 +539,21 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        new About().setVisible(true);
+        HotspotMaker.Details.main = null;
+        if (HotspotMaker.Details.about == null) {
+            HotspotMaker.Details.about = new About();
+        }
+        HotspotMaker.Details.about.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        new Settings().setVisible(true);
+        HotspotMaker.Details.main = null;
+        if (HotspotMaker.Details.settings == null) {
+            HotspotMaker.Details.settings = new Settings();
+        }
+        HotspotMaker.Details.settings.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -637,6 +650,12 @@ public class MainUI extends javax.swing.JFrame {
         new Extensions.Extensions().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        HotspotMaker.Details.main = null;
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

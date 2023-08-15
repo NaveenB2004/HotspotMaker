@@ -52,4 +52,9 @@ public class Details {
         return true;
     }
 
+    
+    //
+    public static Main.About about = null;
+    public static Main.MainUI main = null;
+    public static Main.Settings settings = null;
 }

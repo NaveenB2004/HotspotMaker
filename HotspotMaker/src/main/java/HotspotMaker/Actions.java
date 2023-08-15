@@ -98,15 +98,24 @@ public class Actions {
     }
 
     private void trayOpenListner(ActionEvent e) {
-        new Main.MainUI().setVisible(true);
+        if (Details.main == null) {
+            Details.main = new Main.MainUI();
+        }
+        Details.main.setVisible(true);
     }
 
     private void traySettingsListner(ActionEvent e) {
-        new Main.Settings().setVisible(true);
+        if (Details.settings == null) {
+            Details.settings = new Main.Settings();
+        }
+        Details.settings.setVisible(true);
     }
 
     private void trayAboutListner(ActionEvent e) {
-        new Main.About().setVisible(true);
+        if (Details.about == null) {
+            Details.about = new Main.About();
+        }
+        Details.about.setVisible(true);
     }
 
     private void trayExitListner(ActionEvent e) {

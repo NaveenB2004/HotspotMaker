@@ -59,9 +59,9 @@ public class HotspotMaker extends JWindow {
                     .log(Level.SEVERE, null, ex);
         }
 
-        Main.MainUI main = new Main.MainUI();
+        Details.main = new Main.MainUI();
         splash.dispose();
-        main.setVisible(true);
+        Details.main.setVisible(true);
     }
 
     public static void setTheme() {

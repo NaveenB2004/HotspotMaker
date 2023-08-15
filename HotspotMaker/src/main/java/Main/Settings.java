@@ -346,7 +346,12 @@ public class Settings extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        new MainUI().setVisible(true);
+        HotspotMaker.Details.settings = null;
+        if (HotspotMaker.Details.main == null) {
+            HotspotMaker.Details.main = new MainUI();
+        }
+        HotspotMaker.Details.main.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_formWindowClosed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
