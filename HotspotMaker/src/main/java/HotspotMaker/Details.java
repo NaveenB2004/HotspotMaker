@@ -38,6 +38,7 @@ public class Details {
 
     public static String[] defCred() {
         String[] cred = new String[3];
+        cred[0] = "false";
         if (new File(space + "Credentials.ini").exists()) {
             cred[0] = "true";
             try (Stream<String> lines = Files.lines(
