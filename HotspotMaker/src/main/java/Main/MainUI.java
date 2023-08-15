@@ -532,7 +532,6 @@ public class MainUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
         HotspotMaker.Details.main = null;
         HotspotMaker.Details.fromTrayMenu = false;
         HotspotMaker.Details.fromTrayMenu = false;
@@ -544,7 +543,6 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
         HotspotMaker.Details.main = null;
         if (HotspotMaker.Details.settings == null) {
             HotspotMaker.Details.settings = new Settings();
@@ -554,7 +552,6 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
         Component[] com1 = onetimepanel.getComponents();
         for (Component com11 : com1) {
             com11.setEnabled(true);
@@ -566,7 +563,6 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
         if (HotspotMaker.Details.defCred == true) {
             Component[] com1 = defsettings.getComponents();
             for (Component com11 : com1) {
@@ -584,7 +580,6 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         jTextField1.setText(new Faker().harryPotter().character());
         jTextField2.setText(new Faker().number().digits(10));
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -634,7 +629,6 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
         jButton7.setEnabled(false);
         command = "netsh wlan stop hostednetwork";
         operations();
@@ -642,7 +636,6 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
         HotspotMaker.Details.main = null;
         HotspotMaker.Details.fromTrayMenu = false;
         if (HotspotMaker.Details.extensions == null) {
@@ -653,7 +646,6 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
         HotspotMaker.Details.main = null;
         this.dispose();
     }//GEN-LAST:event_formWindowClosed
