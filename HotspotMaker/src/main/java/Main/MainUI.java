@@ -42,7 +42,7 @@ public class MainUI extends javax.swing.JFrame {
 
         jTextField1.setText(HotspotMaker.Details.oneTimeSSID);
         jTextField2.setText(HotspotMaker.Details.oneTimePassword);
-
+        
         if (HotspotMaker.Details.status == true) {
             jButton7.setEnabled(true);
             jRadioButton1.setEnabled(false);
@@ -60,7 +60,7 @@ public class MainUI extends javax.swing.JFrame {
         }
     }
 
-    public void stopOperations() {
+    private void stopOperations() {
         jButton7.setEnabled(false);
         jRadioButton1.setEnabled(true);
         jRadioButton2.setEnabled(true);

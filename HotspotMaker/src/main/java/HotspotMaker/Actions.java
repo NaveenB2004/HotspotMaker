@@ -34,25 +34,25 @@ import org.apache.commons.io.FileUtils;
  * @author NaveenB2004
  */
 public class Actions {
-    
+
     Extensions.Actions actions = new Extensions.Actions();
     private static SystemTray tray;
     private static PopupMenu menu;
     private static TrayIcon icon = null;
-    
+
     public void setTrayIcon() {
         if (SystemTray.isSupported() == true) {
             tray = SystemTray.getSystemTray();
             menu = new PopupMenu();
             icon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(
                     getClass().getResource("/Imgs/Icon.png")), "Hotspot Maker");
-            
+
             MenuItem open = new MenuItem("Hotspot Maker");
             MenuItem extensions = new MenuItem("Extensions");
             MenuItem settings = new MenuItem("Settings");
             MenuItem about = new MenuItem("About");
             MenuItem exit = new MenuItem("Exit");
-            
+
             icon.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -89,16 +89,16 @@ public class Actions {
                     trayExitListner(e);
                 }
             });
-            
+
             menu.add(open);
             menu.add(extensions);
             menu.add(settings);
             menu.add(about);
             menu.add(exit);
-            
+
             icon.setPopupMenu(menu);
             icon.setImageAutoSize(true);
-            
+
             try {
                 tray.add(icon);
             } catch (AWTException ex) {
@@ -107,7 +107,7 @@ public class Actions {
             }
         }
     }
-    
+
     public void updateTrayIcon(boolean status) {
         if (icon != null) {
             String updatedIcon;
@@ -120,7 +120,7 @@ public class Actions {
                     getClass().getResource("/Imgs/Icon_" + updatedIcon + ".png")));
         }
     }
-    
+
     private void trayOpenListner(ActionEvent e) {
         Details.fromTrayMenu = true;
         if (Details.main == null) {
@@ -128,7 +128,7 @@ public class Actions {
         }
         Details.main.setVisible(true);
     }
-    
+
     private void trayExtensionsListner(ActionEvent e) {
         Details.fromTrayMenu = true;
         if (Details.extensions == null) {
@@ -136,7 +136,7 @@ public class Actions {
         }
         Details.extensions.setVisible(true);
     }
-    
+
     private void traySettingsListner(ActionEvent e) {
         Details.fromTrayMenu = true;
         if (Details.settings == null) {
@@ -144,7 +144,7 @@ public class Actions {
         }
         Details.settings.setVisible(true);
     }
-    
+
     private void trayAboutListner(ActionEvent e) {
         Details.fromTrayMenu = true;
         if (Details.about == null) {
@@ -152,11 +152,11 @@ public class Actions {
         }
         Details.about.setVisible(true);
     }
-    
+
     private void trayExitListner(ActionEvent e) {
         System.exit(0);
     }
-    
+
     public static String workingPath() {
         String workingPath = null;
         try {
@@ -167,7 +167,7 @@ public class Actions {
         }
         return workingPath;
     }
-    
+
     public void checkStarterStatus() {
         try {
             ProcessBuilder processBuilder
@@ -191,7 +191,7 @@ public class Actions {
                     .log(Level.SEVERE, null, e);
         }
     }
-    
+
     public void checkHotspotStatus() {
         new Thread(new Runnable() {
             @Override
@@ -223,8 +223,6 @@ public class Actions {
                                     Main.MainUI.realState.setText("Started!");
                                     Main.MainUI.realState.setBackground(Color.GREEN);
                                     Main.MainUI.realState.setForeground(Color.BLACK);
-                                    
-//                                    if (Main.MainUI.)
                                 }
                             }
                             if (line.contains("Number of clients")
@@ -252,7 +250,7 @@ public class Actions {
             }
         }, "Hotspot Status").start();
     }
-    
+
     public void checkUpdateStatus() {
         new Thread(new Runnable() {
             @Override
@@ -294,19 +292,19 @@ public class Actions {
             }
         }, "Update Check").start();
     }
-    
+
     private void downloadUpdate(String tempversion) {
         actions.setVisible(true);
         actions.setTitle("Update");
         setAction("Downloading update (v" + tempversion + ") ...");
-        
+
         String jarURL = "https://github.com/NaveenB2004/"
                 + "HotspotMaker/releases/download/v" + tempversion
                 + "/Hotspot.Maker.Demo.jar";
         String exeURL = "https://github.com/NaveenB2004/"
                 + "HotspotMaker/releases/download/v" + tempversion
                 + "/Hotspot.Maker.Portable.exe";
-        
+
         String url;
         String name;
         if (workingPath().endsWith("jar")) {
@@ -316,7 +314,7 @@ public class Actions {
             url = exeURL;
             name = "exe";
         }
-        
+
         try {
             if (new File(Details.space + "HotspotMaker.temp").exists()) {
                 FileUtils.delete(new File(Details.space + "HotspotMaker.temp"));
@@ -340,13 +338,13 @@ public class Actions {
             JOptionPane.showMessageDialog(new Frame(), "Error\n" + ex);
         }
     }
-    
+
     private void setAction(String text) {
         if (Extensions.Actions.status != null) {
             Extensions.Actions.status.setText(text);
         }
     }
-    
+
     public void updateAndRestart() {
         String ext;
         if (workingPath().endsWith("jar")) {
@@ -383,14 +381,14 @@ public class Actions {
             }
         }
     }
-    
+
     private static String appTrigger() {
         String appTrigger = null;
         try {
             CodeSource codeSource = HotspotMaker.class.getProtectionDomain().getCodeSource();
             File jarFile = new File(codeSource.getLocation().toURI().getPath());
             String jarDir = jarFile.getParentFile().getPath();
-            
+
             if (workingPath().endsWith("jar")) {
                 if (new File(jarDir + "\\JRE\\bin\\java.exe").exists()) {
                     appTrigger = "start \"" + jarDir + "\\JRE\\bin\\javaw.exe\" -jar \""
@@ -401,12 +399,12 @@ public class Actions {
             } else {
                 appTrigger = "start \"" + workingPath() + "\"";
             }
-            
+
         } catch (URISyntaxException ex) {
             Logger.getLogger(Actions.class.getName())
                     .log(Level.SEVERE, null, ex);
         }
         return appTrigger;
     }
-    
+
 }
