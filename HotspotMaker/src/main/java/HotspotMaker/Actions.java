@@ -1,8 +1,17 @@
 package HotspotMaker;
 
+import Main.MainUI;
 import Main.Settings;
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.Toolkit;
+import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,12 +23,9 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.CodeSource;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 
@@ -30,6 +36,77 @@ import org.apache.commons.io.FileUtils;
 public class Actions {
 
     Extensions.Actions actions = new Extensions.Actions();
+
+    public void setTrayIcon() {
+        if (SystemTray.isSupported() == true) {
+            SystemTray tray = SystemTray.getSystemTray();
+            PopupMenu menu = new PopupMenu();
+            TrayIcon icon = new TrayIcon(Toolkit.getDefaultToolkit().getImage(
+                    getClass().getResource("/Imgs/Icon.png")), "Hotspot Maker");
+
+            MenuItem open = new MenuItem("Hotspot Maker");
+            MenuItem settings = new MenuItem("Settings");
+            MenuItem about = new MenuItem("About");
+            MenuItem exit = new MenuItem("Exit");
+
+            icon.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    trayOpenListner(e);
+                }
+            });
+            open.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    trayOpenListner(e);
+                }
+            });
+            settings.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    traySettingsListner(e);
+                }
+            });
+            about.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    trayAboutListner(e);
+                }
+            });
+            exit.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    trayExitListner(e);
+                }
+            });
+
+            menu.add(open);
+            menu.add(settings);
+            menu.add(about);
+            menu.add(exit);
+
+            icon.setPopupMenu(menu);
+            icon.setImageAutoSize(true);
+
+            try {
+                tray.add(icon);
+            } catch (AWTException ex) {
+                Logger.getLogger(MainUI.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void trayOpenListner(ActionEvent e) {
+        new Main.MainUI().setVisible(true);
+    }
+
+    private void traySettingsListner(ActionEvent e) {
+        new Main.Settings().setVisible(true);
+    }
+
+    private void trayAboutListner(ActionEvent e) {
+        new Main.About().setVisible(true);
+    }
+
+    private void trayExitListner(ActionEvent e) {
+        System.exit(0);
+    }
 
     public static String workingPath() {
         String workingPath = null;

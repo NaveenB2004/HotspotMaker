@@ -2,8 +2,14 @@ package Main;
 
 import HotspotMaker.Details;
 import com.github.javafaker.Faker;
+import java.awt.AWTException;
 import java.awt.Component;
+import java.awt.Menu;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
 import java.awt.Toolkit;
+import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;

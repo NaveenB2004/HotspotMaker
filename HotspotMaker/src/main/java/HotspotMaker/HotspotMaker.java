@@ -35,6 +35,9 @@ public class HotspotMaker extends JWindow {
             new File(Details.space).mkdirs();
         }
 
+        status.setText("Adding tray icon...");
+        new Actions().setTrayIcon();
+        
         status.setText("Checking hotspot support...");
         new Actions().checkStarterStatus();
         status.setText("Checking hotspot status...");
