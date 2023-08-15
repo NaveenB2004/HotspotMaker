@@ -366,7 +366,7 @@ public class Settings extends javax.swing.JFrame {
             jToggleButton1.setText("Disabled!");
             try (PrintStream out = new PrintStream(
                     new File(HotspotMaker.Details.space + "AutoUpdate.ini"))) {
-                out.println("Desabled");
+                out.println("Disabled");
                 JOptionPane.showMessageDialog(this, "Settings Updated!");
             } catch (FileNotFoundException e) {
                 Logger.getLogger(Settings.class.getName())
