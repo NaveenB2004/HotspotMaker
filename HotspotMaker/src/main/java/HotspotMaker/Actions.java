@@ -431,8 +431,8 @@ public class Actions {
 
             if (workingPath().endsWith("jar")) {
                 if (new File(jarDir + "\\JRE\\bin\\java.exe").exists()) {
-                    appTrigger = "start \"" + jarDir + "\\JRE\\bin\\javaw.exe\" -jar \""
-                            + workingPath() + "\"";
+                    appTrigger = "start \"\"" + jarDir + "\\JRE\\bin\\javaw.exe\" -jar \""
+                            + workingPath() + "\"\"";
                 } else {
                     appTrigger = "start javaw -jar \"" + workingPath() + "\"";
                 }
