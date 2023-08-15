@@ -1,7 +1,5 @@
 package HotspotMaker;
 
-import Main.MainUI;
-import Main.Settings;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Frame;
@@ -21,12 +19,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
+import java.net.ServerSocket;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.CodeSource;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 
@@ -42,6 +44,32 @@ public class Actions {
     private static TrayIcon icon = null;
     private static MenuItem start;
     private static MenuItem stop;
+
+    public void duplicateStatus() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String port = "2004";
+                if (new File(Details.space + "defPort.ini").exists()) {
+                    try (Stream<String> lines = Files.lines(Paths.get(Details.space
+                            + "defPort.ini"))) {
+                        port = lines.skip(0).findFirst().get();
+                    } catch (IOException e) {
+                        Logger.getLogger(Actions.class.getName())
+                                .log(Level.SEVERE, null, e);
+                    }
+                }
+                try {
+                    new ServerSocket(Integer.parseInt(port)).accept();
+                } catch (IOException ex) {
+                    Logger.getLogger(Actions.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Application already running!");
+                    System.exit(0);
+                }
+            }
+        }).start();
+    }
 
     public void setTrayIcon() {
         if (SystemTray.isSupported() == true) {
@@ -116,7 +144,7 @@ public class Actions {
             try {
                 tray.add(icon);
             } catch (AWTException ex) {
-                Logger.getLogger(MainUI.class.getName())
+                Logger.getLogger(Actions.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
         }
@@ -409,7 +437,7 @@ public class Actions {
                     out.println(appTrigger());
                     out.println("exit");
                 } catch (FileNotFoundException e) {
-                    Logger.getLogger(Settings.class.getName())
+                    Logger.getLogger(Actions.class.getName())
                             .log(Level.SEVERE, null, e);
                 }
                 new ProcessBuilder("cmd.exe", "/c", "start "

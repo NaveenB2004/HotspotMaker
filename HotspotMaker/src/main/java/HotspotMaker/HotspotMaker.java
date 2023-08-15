@@ -30,6 +30,9 @@ public class HotspotMaker extends JWindow {
         splash.setVisible(true);
         JLabel status = Splash.jLabel3;
 
+        status.setText("Checking application status...");
+        new Actions().duplicateStatus();
+        
         status.setText("Checking directories...");
         if (!new File(Details.space).exists()) {
             new File(Details.space).mkdirs();
