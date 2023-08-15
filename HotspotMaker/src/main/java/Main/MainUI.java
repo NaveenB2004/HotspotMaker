@@ -6,14 +6,10 @@ import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,23 +35,9 @@ public class MainUI extends javax.swing.JFrame {
 
         jLabel1.setText("Hotspot Maker (v" + HotspotMaker.Details.version + ")");
 
-        if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
-            try (Stream<String> lines = Files.lines(
-                    Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
-                String defssid = lines.skip(0).findFirst().get();
-                jTextField3.setText(defssid);
-            } catch (IOException e) {
-                Logger.getLogger(MainUI.class.getName())
-                        .log(Level.SEVERE, null, e);
-            }
-            try (Stream<String> lines = Files.lines(
-                    Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
-                String defpsw = lines.skip(1).findFirst().get();
-                jTextField4.setText(defpsw);
-            } catch (IOException e) {
-                Logger.getLogger(MainUI.class.getName())
-                        .log(Level.SEVERE, null, e);
-            }
+        if (HotspotMaker.Details.defCred()[0].equals("true")) {
+            jTextField3.setText(HotspotMaker.Details.defCred()[1]);
+            jTextField4.setText(HotspotMaker.Details.defCred()[2]);
         }
 
         jTextField1.setText(HotspotMaker.Details.oneTimeSSID);
@@ -78,17 +60,15 @@ public class MainUI extends javax.swing.JFrame {
         }
     }
 
-    private void stopOperations() {
+    public void stopOperations() {
         jButton7.setEnabled(false);
         jRadioButton1.setEnabled(true);
         jRadioButton2.setEnabled(true);
         clientsConnected.setText("---");
-        if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
-            HotspotMaker.Details.defCred = true;
+        if (HotspotMaker.Details.defCred()[0].equals("true")) {
             jRadioButton1.setSelected(true);
             jRadioButton1ActionPerformed(evt);
         } else {
-            HotspotMaker.Details.defCred = false;
             jRadioButton2.setSelected(true);
             jRadioButton2ActionPerformed(evt);
         }
@@ -563,7 +543,7 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        if (HotspotMaker.Details.defCred == true) {
+        if (HotspotMaker.Details.defCred()[0].equals("true")) {
             Component[] com1 = defsettings.getComponents();
             for (Component com11 : com1) {
                 com11.setEnabled(true);
@@ -574,8 +554,12 @@ public class MainUI extends javax.swing.JFrame {
             }
         } else {
             jRadioButton2.setSelected(true);
-            JOptionPane.showMessageDialog(this, "Set default SSID & Password first!"
-                    + "\n(go to Settings)");
+            int download = JOptionPane.showConfirmDialog(null,
+                    "Set default SSID & Password first!\nDo you want to do it now?",
+                    "Warning", JOptionPane.YES_NO_OPTION);
+            if (download == JOptionPane.YES_OPTION) {
+                jButton5ActionPerformed(evt);
+            }
         }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
@@ -695,7 +679,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    public static javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

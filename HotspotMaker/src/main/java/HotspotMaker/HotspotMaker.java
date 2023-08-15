@@ -29,7 +29,7 @@ public class HotspotMaker extends JWindow {
         Splash splash = new Splash();
         splash.setVisible(true);
         JLabel status = Splash.jLabel3;
-        
+
         status.setText("Checking directories...");
         if (!new File(Details.space).exists()) {
             new File(Details.space).mkdirs();
@@ -37,7 +37,7 @@ public class HotspotMaker extends JWindow {
 
         status.setText("Adding tray icon...");
         new Actions().setTrayIcon();
-        
+
         status.setText("Checking hotspot support...");
         new Actions().checkStarterStatus();
         status.setText("Checking hotspot status...");
@@ -59,9 +59,11 @@ public class HotspotMaker extends JWindow {
                     .log(Level.SEVERE, null, ex);
         }
 
-        Details.main = new Main.MainUI();
-        splash.dispose();
+        if (Details.main == null) {
+            Details.main = new Main.MainUI();
+        }
         Details.main.setVisible(true);
+        splash.dispose();
     }
 
     public static void setTheme() {

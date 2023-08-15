@@ -223,6 +223,8 @@ public class Actions {
                                     Main.MainUI.realState.setText("Started!");
                                     Main.MainUI.realState.setBackground(Color.GREEN);
                                     Main.MainUI.realState.setForeground(Color.BLACK);
+                                    
+//                                    if (Main.MainUI.)
                                 }
                             }
                             if (line.contains("Number of clients")
