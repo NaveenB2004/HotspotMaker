@@ -127,18 +127,6 @@ public class Actions {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (new File(Details.space + "AutoUpdate.ini").exists()) {
-                    try (Stream<String> lines
-                            = Files.lines(Paths.get(Details.space
-                                    + "AutoUpdate.ini"))) {
-                        Details.autoUpdate = lines.skip(0).findFirst().get()
-                                .equals("Enabled");
-                    } catch (IOException ex) {
-                        Logger.getLogger(Actions.class.getName())
-                                .log(Level.SEVERE, null, ex);
-                    }
-                }
-
                 String tempversion = null;
                 try {
                     URL url = new URL(
@@ -153,7 +141,7 @@ public class Actions {
                         }
                     }
                     if (tempversion != null && !tempversion.equals(Details.version)) {
-                        if (Details.autoUpdate == false) {
+                        if (Details.autoUpdate() == false) {
                             int download = JOptionPane.showConfirmDialog(null,
                                     "New Version Available!\nDo you want to "
                                     + "download the new version?"

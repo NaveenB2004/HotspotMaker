@@ -53,17 +53,17 @@ public class Settings extends javax.swing.JFrame {
 
         if (new File(HotspotMaker.Details.space + "Credentials.ini").exists()) {
             try (Stream<String> lines
-                    = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
-                String defssid = lines.skip(0).findFirst().get();
-                jTextField1.setText(defssid);
+                    = Files.lines(Paths.get(HotspotMaker.Details.space
+                            + "Credentials.ini"))) {
+                jTextField1.setText(lines.skip(0).findFirst().get());
             } catch (IOException e) {
                 Logger.getLogger(Settings.class.getName())
                         .log(Level.SEVERE, null, e);
             }
             try (Stream<String> lines
-                    = Files.lines(Paths.get(HotspotMaker.Details.space + "Credentials.ini"))) {
-                String defpsw = lines.skip(1).findFirst().get();
-                jTextField2.setText(defpsw);
+                    = Files.lines(Paths.get(HotspotMaker.Details.space
+                            + "Credentials.ini"))) {
+                jTextField2.setText(lines.skip(1).findFirst().get());
             } catch (IOException e) {
                 Logger.getLogger(Settings.class.getName())
                         .log(Level.SEVERE, null, e);
@@ -72,16 +72,15 @@ public class Settings extends javax.swing.JFrame {
 
         if (new File(HotspotMaker.Details.space + "Theme.ini").exists()) {
             try (Stream<String> lines
-                    = Files.lines(Paths.get(HotspotMaker.Details.space + "Theme.ini"))) {
-                String theme = lines.skip(0).findFirst().get();
-                if (theme.equals("Light")) {
-                    jComboBox1.setSelectedIndex(1);
-                }
-                if (theme.equals("Dark")) {
-                    jComboBox1.setSelectedIndex(2);
-                }
-                if (theme.equals("Default")) {
-                    jComboBox1.setSelectedIndex(0);
+                    = Files.lines(Paths.get(HotspotMaker.Details.space
+                            + "Theme.ini"))) {
+                switch (lines.skip(0).findFirst().get()) {
+                    case "Light" ->
+                        jComboBox1.setSelectedIndex(1);
+                    case "Dark" ->
+                        jComboBox1.setSelectedIndex(2);
+                    case "Default" ->
+                        jComboBox1.setSelectedIndex(0);
                 }
             } catch (IOException e) {
                 Logger.getLogger(Settings.class.getName())
@@ -89,18 +88,14 @@ public class Settings extends javax.swing.JFrame {
             }
         }
         
-        if (new File(HotspotMaker.Details.space + "AutoUpdate.ini").exists()) {
-            try (Stream<String> lines
-                    = Files.lines(Paths.get(HotspotMaker.Details.space + "AutoUpdate.ini"))) {
-                String theme = lines.skip(0).findFirst().get();
-                if (theme.equals("Disabled")) {
-                    jToggleButton1.setSelected(false);
-                    jToggleButton1.setText("Disabled!");
-                }
-            } catch (IOException e) {
-                Logger.getLogger(Settings.class.getName())
-                        .log(Level.SEVERE, null, e);
-            }
+        if (HotspotMaker.Details.autoUpdate() == false) {
+            jToggleButton1.setText("Disabled!");
+            jToggleButton1.setSelected(false);
+        }
+        
+        if (HotspotMaker.Details.onCloseMinimize() == false) {
+            jToggleButton2.setText("Exit");
+            jToggleButton2.setSelected(false);
         }
     }
 
@@ -127,6 +122,8 @@ public class Settings extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
+        jPanel4 = new javax.swing.JPanel();
+        jToggleButton2 = new javax.swing.JToggleButton();
 
         f1r.setText("jLabel4");
 
@@ -254,6 +251,33 @@ public class Settings extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("On Close :"));
+
+        jToggleButton2.setSelected(true);
+        jToggleButton2.setText("Minimize to System Tray");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -263,7 +287,8 @@ public class Settings extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -275,6 +300,8 @@ public class Settings extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -288,9 +315,11 @@ public class Settings extends javax.swing.JFrame {
         try (PrintStream out = new PrintStream(
                 new File(HotspotMaker.Details.space + "Theme.ini"))) {
             out.println(theme);
+            JOptionPane.showMessageDialog(this, "Settings Updated!");
         } catch (FileNotFoundException e) {
             Logger.getLogger(Settings.class.getName())
                     .log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(this, "Error!\n" + e);
         }
         HotspotMaker.HotspotMaker.setTheme();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -306,7 +335,7 @@ public class Settings extends javax.swing.JFrame {
                     new File(HotspotMaker.Details.space + "Credentials.ini"))) {
                 out.println(jTextField1.getText());
                 out.println(jTextField2.getText());
-                JOptionPane.showMessageDialog(this, "Success!");
+                JOptionPane.showMessageDialog(this, "Settings Updated!");
             } catch (FileNotFoundException e) {
                 Logger.getLogger(Settings.class.getName())
                         .log(Level.SEVERE, null, e);
@@ -327,21 +356,52 @@ public class Settings extends javax.swing.JFrame {
             try (PrintStream out = new PrintStream(
                     new File(HotspotMaker.Details.space + "AutoUpdate.ini"))) {
                 out.println("Enabled");
+                JOptionPane.showMessageDialog(this, "Settings Updated!");
             } catch (FileNotFoundException e) {
                 Logger.getLogger(Settings.class.getName())
                         .log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         } else {
             jToggleButton1.setText("Disabled!");
             try (PrintStream out = new PrintStream(
                     new File(HotspotMaker.Details.space + "AutoUpdate.ini"))) {
                 out.println("Desabled");
+                JOptionPane.showMessageDialog(this, "Settings Updated!");
             } catch (FileNotFoundException e) {
                 Logger.getLogger(Settings.class.getName())
                         .log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        // TODO add your handling code here:
+        if (jToggleButton2.isSelected()) {
+            jToggleButton2.setText("Minimize to System Tray");
+            try (PrintStream out = new PrintStream(
+                    new File(HotspotMaker.Details.space + "OnClose.ini"))) {
+                out.println("minimize");
+                JOptionPane.showMessageDialog(this, "Settings Updated!");
+            } catch (FileNotFoundException e) {
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
+        } else {
+            jToggleButton2.setText("Exit");
+            try (PrintStream out = new PrintStream(
+                    new File(HotspotMaker.Details.space + "OnClose.ini"))) {
+                out.println("exit");
+                JOptionPane.showMessageDialog(this, "Settings Updated!");
+            } catch (FileNotFoundException e) {
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
+        }
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,9 +446,11 @@ public class Settings extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }
 
