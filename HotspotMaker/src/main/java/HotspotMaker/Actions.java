@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -60,11 +61,19 @@ public class Actions {
                     }
                 }
                 try {
-                    new ServerSocket(Integer.parseInt(port)).accept();
+                    ServerSocket server = new ServerSocket(Integer.parseInt(port));
+                    while (true) {
+                        server.accept();
+                        ActionEvent e = null;
+                        trayOpenListner(e);
+                    }
                 } catch (IOException ex) {
-                    Logger.getLogger(Actions.class.getName())
-                            .log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(null, "Application already running!");
+                    try {
+                        new Socket("localhost", Integer.parseInt(port));
+                    } catch (IOException ex1) {
+                        Logger.getLogger(Actions.class.getName())
+                                .log(Level.SEVERE, null, ex1);
+                    }
                     System.exit(0);
                 }
             }
