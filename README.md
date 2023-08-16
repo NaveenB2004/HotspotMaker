@@ -4,7 +4,7 @@
 [![GitHub license](https://img.shields.io/github/license/NaveenB2004/HotspotMaker)](LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/NaveenB2004/HotspotMaker)](https://github.com/NaveenB2004/HotspotMaker/stargazers)
 [![GitHub release (with filter)](https://img.shields.io/github/v/release/NaveenB2004/HotspotMaker)](https://github.com/NaveenB2004/HotspotMaker/releases)
-[![GitHub release (by tag)](https://img.shields.io/github/downloads/NaveenB2004/HotspotMaker/v3.4/total)](https://github.com/NaveenB2004/HotspotMaker/releases/tag/v3.4)
+[![GitHub release (by tag)](https://img.shields.io/github/downloads/NaveenB2004/HotspotMaker/v3.5/total)](https://github.com/NaveenB2004/HotspotMaker/releases/tag/v3.5)
 
 ![Hotspot Maker](Others/Media/hotspot%20maker.jpg "A tool for make hotspots!")
 
@@ -18,6 +18,7 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
     - [The Basic Interfaces](#the-basic-interfaces)
     - [How to use it?](#how-to-use-it)
     - [Extensions](#extensions)
+    - [Troubleshooting](#troubleshooting)
     - [Build from source](#build-from-source)
     - [For developers](#for-developers)
     - [Bug reporting, Questions \& Suggestions](#bug-reporting-questions--suggestions)
@@ -88,6 +89,13 @@ In the settings interface,
 
 For the extensions, we have documentation for you! [Read it from here!](Extensions/README.md)\
 (Extensions are coming from 3rd party. So, install at your own risk)
+
+### Troubleshooting
+
+- Get the message "Your network interface doesn't support make hotspot!"\
+  Unfortunately, your wireless network adapter doesn't support making hotspots. Sometimes, that may be the case because the driver is out-of-date. Try to update the driver (by updating `Windows` or by 3rd party app).
+- Can't connect to the hotspot by using other devices.\
+  Try to run the `Windows` troubleshooter. If the case is still on, open `CMD` or `PowerShell` (search for `CMD` or `PowerShell` -> right-click on the icon -> select `Run as administrator`) & run `netcfg -d` to perform a cleanup on all networking devices. This will erase all your network settings such as saved credentials, VPNs, etc. After that reboot your pc.
 
 ### Build from source
 

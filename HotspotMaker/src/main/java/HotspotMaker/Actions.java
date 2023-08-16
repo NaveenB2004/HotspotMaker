@@ -259,7 +259,7 @@ public class Actions {
                 if (line.contains("Hosted network supported")
                         && line.endsWith("No")) {
                     JOptionPane.showMessageDialog(new Frame(),
-                            "Your network interface doesn't support for make hotspot!");
+                            "Your network interface doesn't support make hotspot!");
                     System.exit(0);
                 }
             }
