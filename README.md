@@ -57,7 +57,7 @@ It's very easy to use `Hotspot Maker`. Let's take a look at each interface.
 
 - Settings Interface\
   ![Settings Interface](Others/Media/Interface2.PNG "Settings Interface")\
-  Here, you can save a default profile, set themes & change the automatic update settings.
+  Here, you can save a default profile, set themes, change the automatic app update settings & change automatic extensions update settigs.
 
 - About Interface\
   ![About Interface](Others/Media/Interface3.PNG "About Interface")\
