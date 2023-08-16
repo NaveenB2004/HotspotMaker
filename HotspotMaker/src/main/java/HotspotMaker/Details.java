@@ -21,7 +21,7 @@ public class Details {
     public static String oneTimePassword = "";
     public static boolean fromTrayMenu = false;
 
-    public static boolean autoUpdate() {
+    public static boolean autoAppUpdate() {
         if (new File(space + "AutoUpdate.ini").exists()) {
             try (Stream<String> lines
                     = Files.lines(Paths.get(space + "AutoUpdate.ini"))) {
@@ -36,6 +36,21 @@ public class Details {
         return true;
     }
 
+    public static boolean autoExtUpdate() {
+        if (new File(space + "AutoUpdateExt.ini").exists()) {
+            try (Stream<String> lines
+                    = Files.lines(Paths.get(space + "AutoUpdateExt.ini"))) {
+                if (lines.skip(0).findFirst().get().equals("Disabled")) {
+                    return false;
+                }
+            } catch (IOException e) {
+                Logger.getLogger(Details.class.getName())
+                        .log(Level.SEVERE, null, e);
+            }
+        }
+        return true;
+    }
+    
     public static String[] defCred() {
         String[] cred = new String[3];
         cred[0] = "false";

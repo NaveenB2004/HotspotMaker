@@ -33,7 +33,7 @@ public class Database {
         return conn;
     }
 
-    public static void updateDB() {
+    public void updateDB() {
         String dbSource
                 = "https://github.com/NaveenB2004/HotspotMaker/raw"
                 + "/main/Extensions/Database/Extensions.db";

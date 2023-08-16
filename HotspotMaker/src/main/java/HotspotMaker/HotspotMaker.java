@@ -50,6 +50,8 @@ public class HotspotMaker extends JWindow {
         new Actions().updateAndRestart();
         status.setText("Checking for updates...");
         new Actions().checkUpdateStatus();
+        status.setText("Checking for extensions updates...");
+        new Actions().extAutoUpdate();
 
         // this delay added cuz checkHotspotStatus()
         // getting some time to read the current status

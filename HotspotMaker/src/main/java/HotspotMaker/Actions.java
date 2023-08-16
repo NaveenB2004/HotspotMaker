@@ -77,7 +77,7 @@ public class Actions {
                     System.exit(0);
                 }
             }
-        }).start();
+        }, "App Running Indicate").start();
     }
 
     public void setTrayIcon() {
@@ -346,7 +346,7 @@ public class Actions {
                         }
                     }
                     if (tempversion != null && !tempversion.equals(Details.version)) {
-                        if (Details.autoUpdate() == false) {
+                        if (Details.autoAppUpdate() == false) {
                             int download = JOptionPane.showConfirmDialog(null,
                                     "New Version Available!\nDo you want to "
                                     + "download the new version?"
@@ -414,6 +414,17 @@ public class Actions {
             actions.dispose();
             JOptionPane.showMessageDialog(new Frame(), "Error\n" + ex);
         }
+    }
+    
+    public void extAutoUpdate() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (Details.autoExtUpdate() == true) {
+                    new Extensions.Database().updateDB();
+                }
+            }
+        }, "Auto Ext Update").start();
     }
 
     private void setAction(String text) {

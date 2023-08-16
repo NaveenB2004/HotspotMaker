@@ -87,7 +87,7 @@ public class Extensions extends javax.swing.JFrame {
             }
         }
         Database.dbUpdate = 0;
-        Database.updateDB();
+        new Database().updateDB();
         while (Database.dbUpdate == 0) {
             try {
                 Thread.sleep(1000);
