@@ -94,6 +94,8 @@ For the extensions, we have documentation for you! [Read it from here!](Extensio
 
 - Get the message "Your network interface doesn't support make hotspot!"\
   Unfortunately, your wireless network adapter doesn't support making hotspots. Sometimes, that may be the case because the driver is out-of-date. Try to update the driver (by updating `Windows` or by 3rd party app).
+- Can't start hotspot.\
+  Make sure the `Wi-Fi` is turned on. If you turn off the `Wi-Fi`, also hotspot will shut-down.
 - Can't connect to the hotspot by using other devices.\
   Try to run the `Windows` troubleshooter. If the case is still on, open `CMD` or `PowerShell` (search for `CMD` or `PowerShell` -> right-click on the icon -> select `Run as administrator`) & run `netcfg -d` to perform a cleanup on all networking devices. This will erase all your network settings such as saved credentials, VPNs, etc. After that reboot your pc.
 
