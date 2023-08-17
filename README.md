@@ -92,12 +92,19 @@ For the extensions, we have documentation for you! [Read it from here!](Extensio
 
 ### Troubleshooting
 
+- Application not opening.\
+  `Hotspot Maker` uses the port `2004` to catch up if the application is triggered more than one time. Sometimes, you have other applications running on port `2004` already. You can change the default port of `Hotspot Maker` by running the command in `CMD` or `PowerShell` (search for `CMD` or `PowerShell` -> right-click on the icon -> select `Run as administrator`). (Change `your_port` to usable port in range 0 to 65536)
+  ```
+  echo your_port >"C:\ProgramData\NaveenB2004\HospotMaker\defPort.ini"
+  ```
 - Get the message "Your network interface doesn't support make hotspot!"\
   Unfortunately, your wireless network adapter doesn't support making hotspots. Sometimes, that may be the case because the driver is out-of-date. Try to update the driver (by updating `Windows` or by 3rd party app).
 - Can't start hotspot.\
   Make sure the `Wi-Fi` is turned on. If you turn off the `Wi-Fi`, also hotspot will shut-down.
 - Can't connect to the hotspot by using other devices.\
-  Try to run the `Windows` troubleshooter. If the case is still on, open `CMD` or `PowerShell` (search for `CMD` or `PowerShell` -> right-click on the icon -> select `Run as administrator`) & run `netcfg -d` to perform a cleanup on all networking devices. This will erase all your network settings such as saved credentials, VPNs, etc. After that reboot your pc.
+  Try to run the `Windows` troubleshooter. If the case is still on, open `CMD` or `PowerShell` (search for `CMD` or `PowerShell` -> right-click on the icon -> select `Run as administrator`) & run `netcfg -d` to perform a cleanup on all networking devices. This will erase all your network settings such as saved credentials, VPNs, etc. After that reboot your pc.\
+
+Not listed your trouble? [Look at this too!](#bug-reporting-questions--suggestions)
 
 ### Build from source
 
