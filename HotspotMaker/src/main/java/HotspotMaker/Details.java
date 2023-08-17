@@ -14,9 +14,9 @@ import java.util.stream.Stream;
  */
 public class Details {
 
-    public static String version = "3.5";
+    public static final String version = "3.5";
     public static boolean status = true;
-    public static String space = "C:\\ProgramData\\NaveenB2004\\HospotMaker\\";
+    public static final String space = "C:\\ProgramData\\NaveenB2004\\HospotMaker\\";
     public static String oneTimeSSID = "";
     public static String oneTimePassword = "";
     public static boolean fromTrayMenu = false;

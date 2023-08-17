@@ -26,7 +26,6 @@ public class MainUI extends javax.swing.JFrame {
         startup();
     }
 
-//    String command;
     ActionEvent evt = null;
 
     private void startup() {

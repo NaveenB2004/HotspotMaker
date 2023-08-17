@@ -47,8 +47,8 @@ public class Extensions extends javax.swing.JFrame {
     Connection conn;
     JLabel status = Actions.status;
     private static DefaultTableModel model;
-    private static String extDir = HotspotMaker.Details.space + "Extnsions\\";
-    private static String winrar = extDir + "winrar\\WinRAR.exe";
+    private static final String extDir = HotspotMaker.Details.space + "Extnsions\\";
+    private static final String winrar = extDir + "winrar\\WinRAR.exe";
     private static String extId;
 
     private static String sourceLink;

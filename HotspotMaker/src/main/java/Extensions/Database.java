@@ -24,8 +24,7 @@ public class Database {
     public static Connection conn() {
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:"
-                    + HotspotMaker.Details.space + "Extnsions\\Extensions.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:" + dbLocation);
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -34,7 +33,7 @@ public class Database {
     }
 
     public void updateDB() {
-        String dbSource
+        final String dbSource
                 = "https://github.com/NaveenB2004/HotspotMaker/raw"
                 + "/main/Extensions/Database/Extensions.db";
         try {
