@@ -17,11 +17,11 @@ import org.apache.commons.io.FileUtils;
  */
 public class Database {
 
-    public static String dbLocation
+    public static final String dbLocation
             = HotspotMaker.Details.space + "Extnsions\\Extensions.db";
     public static int dbUpdate = 0;
 
-    public static Connection conn() {
+    public Connection conn() {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:" + dbLocation);

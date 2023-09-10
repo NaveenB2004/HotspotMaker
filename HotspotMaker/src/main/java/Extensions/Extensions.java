@@ -42,7 +42,7 @@ public class Extensions extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(
                 getClass().getResource("/Imgs/Icon.png")));
     }
-
+    
     Actions actions = new Actions();
     Connection conn;
     JLabel status = Actions.status;
@@ -50,13 +50,13 @@ public class Extensions extends javax.swing.JFrame {
     private static final String extDir = HotspotMaker.Details.space + "Extnsions\\";
     private static final String winrar = extDir + "winrar\\WinRAR.exe";
     private static String extId;
-
+    
     private static String sourceLink;
     private static String licenseLink;
     private static String webLink;
     private static String directLink;
     private static String starterLink;
-
+    
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
         actions.setVisible(true);
@@ -72,12 +72,8 @@ public class Extensions extends javax.swing.JFrame {
             }
         }, "Extensions Startup DB Check").start();
     }
-
-    private void updateDB() {
-        if (!actions.isVisible()) {
-            actions.setVisible(true);
-        }
-        setActions("Downloading Database...");
+    
+    private void closeDB() {
         if (conn != null) {
             try {
                 conn.close();
@@ -86,6 +82,13 @@ public class Extensions extends javax.swing.JFrame {
                         .log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    private void updateDB() {
+        if (!actions.isVisible()) {
+            actions.setVisible(true);
+        }
+        setActions("Downloading Database...");
         Database.dbUpdate = 0;
         new Database().updateDB();
         while (Database.dbUpdate == 0) {
@@ -112,13 +115,13 @@ public class Extensions extends javax.swing.JFrame {
                     "Something went wrong!\nTry again later!");
         }
     }
-
+    
     private void readDB() {
-        conn = Database.conn();
         model.setRowCount(0);
         clearFields();
         setActions("Fetching Data...");
         try {
+            conn = new Database().conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT date "
                     + "FROM version");
@@ -128,8 +131,11 @@ public class Extensions extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Extensions.class.getName())
                     .log(Level.SEVERE, null, ex);
+        } finally {
+            closeDB();
         }
         try {
+            conn = new Database().conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
                     + "FROM extensions");
@@ -139,8 +145,11 @@ public class Extensions extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Extensions.class.getName())
                     .log(Level.SEVERE, null, ex);
+        } finally {
+            closeDB();
         }
         try {
+            conn = new Database().conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id, name, author "
                     + "FROM extensions");
@@ -152,10 +161,12 @@ public class Extensions extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Extensions.class.getName())
                     .log(Level.SEVERE, null, ex);
+        } finally {
+            closeDB();
         }
         actions.dispose();
     }
-
+    
     private void clearFields() {
         jLabel5.setText("---");
         jLabel6.setText("---");
@@ -175,7 +186,7 @@ public class Extensions extends javax.swing.JFrame {
                 getClass().getResource("/Imgs/ico_download_16px_dark.png")));
         jButton1.setToolTipText("Install");
     }
-
+    
     private void setActions(String text) {
         if (status != null) {
             status.setText(text);
@@ -542,14 +553,6 @@ public class Extensions extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Extensions.class.getName())
-                        .log(Level.SEVERE, null, ex);
-            }
-        }
         HotspotMaker.Details.extensions = null;
         if (HotspotMaker.Details.main == null) {
             HotspotMaker.Details.main = new Main.MainUI();
@@ -574,6 +577,7 @@ public class Extensions extends javax.swing.JFrame {
         clearFields();
         extId = model.getValueAt(jTable1.getSelectedRow(), 0).toString();
         try {
+            conn = new Database().conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM extensions "
@@ -586,20 +590,22 @@ public class Extensions extends javax.swing.JFrame {
                 jLabel12.setText(rs.getString("version"));
                 jLabel16.setText(rs.getString("release"));
                 jLabel19.setText(rs.getString("date"));
-
+                
                 jLabel14.setText(getStatus(jLabel12.getText()));
-
+                
                 sourceLink = rs.getString("source");
                 licenseLink = rs.getString("license");
                 webLink = rs.getString("web");
                 directLink = rs.getString("download");
                 starterLink = rs.getString("starter");
-
+                
                 btnEnable();
             }
         } catch (SQLException ex) {
             Logger.getLogger(Extensions.class.getName())
                     .log(Level.SEVERE, null, ex);
+        } finally {
+            closeDB();
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -650,14 +656,15 @@ public class Extensions extends javax.swing.JFrame {
                             new File(extDir + "tmp\\ext-" + extId + ".zip"));
                     FileUtils.copyURLToFile(new URL(starterLink),
                             new File(extDir + "tmp\\ext-" + extId + ".starter"));
-
+                    
                     setActions("Checking Installer...");
                     winrar();
-
+                    
                     setActions("Installing...");
-                    if (!new File(extDir + "ext-" + extId).exists()) {
-                        new File(extDir + "ext-" + extId).mkdirs();
+                    if (new File(extDir + "ext-" + extId).exists()) {
+                        FileUtils.deleteDirectory(new File(extDir + "ext-" + extId));
                     }
+                    new File(extDir + "ext-" + extId).mkdirs();
                     if (new File(extDir + "ext-" + extId + "\\.starter").exists()) {
                         FileUtils.delete(new File(extDir + "ext-" + extId + "\\.starter"));
                     }
@@ -670,7 +677,7 @@ public class Extensions extends javax.swing.JFrame {
                             + extDir + "ext-" + extId);
                     Process install = extract.start();
                     install.waitFor();
-
+                    
                     setActions("Finishing...");
                     FileUtils.delete(new File(extDir + "tmp\\ext-" + extId + ".zip"));
                     jLabel14.setText(getStatus(jLabel12.getText()));
@@ -708,7 +715,7 @@ public class Extensions extends javax.swing.JFrame {
                 Logger.getLogger(Extensions.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
-
+            
             if (launchStatus == true) {
                 try {
                     new ProcessBuilder("cmd.exe", "/c",
@@ -772,7 +779,7 @@ public class Extensions extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private String getStatus(String version) {
         String rtnStatus = null;
         if (readStarter()[6] != null) {
@@ -802,7 +809,7 @@ public class Extensions extends javax.swing.JFrame {
         }
         return rtnStatus;
     }
-
+    
     private String[] readStarter() {
         String[] starter = new String[7];
         starter[6] = null;
@@ -830,7 +837,7 @@ public class Extensions extends javax.swing.JFrame {
         }
         return starter;
     }
-
+    
     private void btnEnable() {
         jTable1.setEnabled(true);
         jButton7.setEnabled(true);
@@ -838,22 +845,22 @@ public class Extensions extends javax.swing.JFrame {
         jButton6.setEnabled(true);
         jButton4.setEnabled(true);
         jButton1.setEnabled(true);
-
+        
         if (new File(extDir + "ext-" + extId + "\\.starter").exists()) {
             jButton1.setIcon(new ImageIcon(
                     getClass().getResource("/Imgs/ico_update_16px_dark.png")));
             jButton1.setToolTipText("Re-install/Update");
-
+            
             jButton5.setEnabled(true);
             jButton3.setEnabled(true);
-
+            
         } else {
             jButton1.setIcon(new ImageIcon(
                     getClass().getResource("/Imgs/ico_download_16px_dark.png")));
             jButton1.setToolTipText("Install");
         }
     }
-
+    
     private void winrar() {
         if (!new File(winrar).exists()) {
             setActions("Downloading Installer...");
@@ -871,7 +878,7 @@ public class Extensions extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void callURL(String passURL) {
         try {
             Desktop.getDesktop().browse(new URL(passURL).toURI());
@@ -880,7 +887,7 @@ public class Extensions extends javax.swing.JFrame {
                     .log(Level.SEVERE, null, e);
         }
     }
-
+    
     private void tempBtnDisable() {
         jTable1.setEnabled(false);
         jButton5.setEnabled(false);
