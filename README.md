@@ -13,25 +13,26 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
 ![Hotspot Maker Preview](Others/Media/hotspot%20maker%20preview.jpg "Main Interface with Different Themes!")
 
 >![Notice](Others/Media/exclamation-mark.png "Notice")
->- Some network interfaces may not support to the `Hotspot Maker` application. If you're using `Windows 10` or so, you have a native option `Mobile Hotspot` in `settings` to turn on hotspot with that mensioned interfaces. I'm studing on Windows Native Wi-Fi methods for fix this issue. But it will take more time. Hope it will help you!
->- Also, the `Hotspot Maker` supports `English` language only. Some indicators may not work if you're using another language as the OS default language.
+>
+>- Some network interfaces may not support the `Hotspot Maker` application. If you're using `Windows 10` or so, you have a native option `Mobile Hotspot` in `settings` to turn on the hotspot with the mentioned interfaces. I'm studying Windows Native Wi-Fi methods to fix this issue. But it will take more time. I hope it will help you!
+>- Also, the `Hotspot Maker` only supports the `English` language. Some indicators may not work using another language as the OS default language.
 
 - [Hotspot Maker](#hotspot-maker)
-    - [Download](#download)
-    - [Features](#features)
-    - [The Basic Interfaces](#the-basic-interfaces)
-    - [How to use it?](#how-to-use-it)
-    - [Extensions](#extensions)
-    - [Troubleshooting](#troubleshooting)
-    - [Build from source](#build-from-source)
-    - [For developers](#for-developers)
-    - [Bug reporting, Questions \& Suggestions](#bug-reporting-questions--suggestions)
-    - [License](#license)
-
+  - [Download](#download)
+  - [Features](#features)
+  - [The Basic Interfaces](#the-basic-interfaces)
+  - [How to use it?](#how-to-use-it)
+  - [Extensions](#extensions)
+  - [Troubleshooting](#troubleshooting)
+  - [Build from source](#build-from-source)
+  - [For developers](#for-developers)
+  - [Bug reporting, Questions \& Suggestions](#bug-reporting-questions--suggestions)
+  - [License](#license)
 
 ### Download
 
 You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004/HotspotMaker/releases) We release **3 types** of `Hotspot Maker` applications.
+
 1. Hotspot Maker Full Installer: This is a release of `Hotspot Maker` that pack with all additional packages like `Java Runtime` to install offline with the application. Recommended for users that don't like to bother about `Java Runtime`.
 2. Hotspot Maker Portable: This is a release of `Hotspot Maker` that only contains a wrapped `.exe` file. It's lightweight but to run, you need to install [Java Runtime][jdk] (**v17.x** or above) on your PC. Some anti-virus software will detect this as a `malicious application` because of the `.exe` wrapper. If you face any problem like that, try to run this by **disabling** anti-virus.
 3. Hotspot Maker Demo: This is a release of `Hotspot Maker` that have only the `.jar` package. It's also lightweight & made for development purposes. To run, you need to install [Java Runtime][jdk] (**v17.x** or above) on your PC. Open `CMD` or `PowerShell` with `enabled UAC` & use `java -jar Hotspot.Maker.Demo.jar` to execute (`Hotspot.Maker.Demo.jar` is the name of the `.jar` file).
@@ -78,6 +79,7 @@ It's very easy to use `Hotspot Maker`. Let's take a look at each interface.
 ### How to use it?
 
 In the main interface,
+
 - To start a hotspot, you can use the default (if you do not set a default profile, you can do it in settings) or a one-time profile. Select the profile you want & click on the `start` button.
 - To stop the hotspot, just click on the `stop` button.
 - You can see the hotspot start & stop details in the console as well.
@@ -85,6 +87,7 @@ In the main interface,
 - The connected clients count indicator will show the maximum number of clients who can connect & the present connected clients count.
 
 In the settings interface,
+
 - To save a default profile, fill in the SSID (name) & Password fields & click on the save button.
 - To change the theme, select a theme from the dropdown menu & click on the save button.
 - To change the automatic updates, you can enable or disable it from the button in the `Automatic Update` section. (Defaultly, it came with automatic update enabled)
@@ -98,9 +101,11 @@ For the extensions, we have documentation for you! [Read it from here!](Extensio
 
 - Application not opening.\
   `Hotspot Maker` uses the port `2004` to catch up if the application is triggered more than one time. Sometimes, you have other applications running on port `2004` already. You can change the default port of `Hotspot Maker` by running the command in `CMD` or `PowerShell` (search for `CMD` or `PowerShell` -> right-click on the icon -> select `Run as administrator`). (Change `your_port` to usable port in range 0 to 65536)
-  ```
+
+  ```Batch
   echo your_port >"C:\ProgramData\NaveenB2004\HospotMaker\defPort.ini"
   ```
+
 - Get the message "Your network interface doesn't support make hotspot!"\
   Unfortunately, your wireless network adapter doesn't support making hotspots. Sometimes, that may be the case because the driver is out-of-date. Try to update the driver (by updating `Windows` or by 3rd party app).
 - Can't start hotspot.\
@@ -113,20 +118,24 @@ Not listed your trouble? [Look at this too!](#bug-reporting-questions--suggestio
 ### Build from source
 
 The basic needs,
+
 - [Java Development Kit][jdk] version `17.x` (recommended) or above.
 - [Maven](https://maven.apache.org/download.cgi "Download Maven") (for build purpose)(latest is recommended)(if you install  NetBeans IDE this will be installed with it)
 - [NetBeans IDE](https://netbeans.apache.org/download/index.html "Download NetBeans IDE") (latest is recommended)(this is for load UI if you edit the source)
 
 Build with NetBeans IDE
+
 - Clone the repository
 - Open `HotpotMaker` (HotspotMaker\HotspotMaker) as a project.
 - Select `clean and build`
 
 Build with command-line
+
 - Clone the repository
 - Open Command Prompt (`CMD`) or `PowerShell`
 - Run the command,
-  ```
+
+  ```Batch
   mvn package --file "projectDir\HotspotMaker\HotspotMaker\pom.xml"
   ```
 
