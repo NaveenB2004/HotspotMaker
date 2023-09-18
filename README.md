@@ -29,7 +29,7 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
   - [Bug reporting, Questions \& Suggestions](#bug-reporting-questions--suggestions)
   - [License](#license)
 
-### Download
+## Download
 
 You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004/HotspotMaker/releases) We release **3 types** of `Hotspot Maker` applications.
 
@@ -37,7 +37,7 @@ You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004
 2. Hotspot Maker Portable: This is a release of `Hotspot Maker` that only contains a wrapped `.exe` file. It's lightweight but to run, you need to install [Java Runtime][jdk] (**v17.x** or above) on your PC. Some anti-virus software will detect this as a `malicious application` because of the `.exe` wrapper. If you face any problem like that, try to run this by **disabling** anti-virus.
 3. Hotspot Maker Demo: This is a release of `Hotspot Maker` that have only the `.jar` package. It's also lightweight & made for development purposes. To run, you need to install [Java Runtime][jdk] (**v17.x** or above) on your PC. Open `CMD` or `PowerShell` with `enabled UAC` & use `java -jar Hotspot.Maker.Demo.jar` to execute (`Hotspot.Maker.Demo.jar` is the name of the `.jar` file).
 
-### Features
+## Features
 
 - Start hotspot
 - Stop hotspot
@@ -52,7 +52,7 @@ You can download the `Hotspot Maker` from [here!](https://github.com/NaveenB2004
 - Connected client count indicator
 - Extensions for advanced tasks
 
-### The Basic Interfaces
+## The Basic Interfaces
 
 It's very easy to use `Hotspot Maker`. Let's take a look at each interface.
 
@@ -76,7 +76,7 @@ It's very easy to use `Hotspot Maker`. Let's take a look at each interface.
   ![System Tray](Others/Media/Interface5.PNG "System Tray Menu")\
   After you close the application, it will minimize the `system tray`. You can find the `Hotspot Maker` icon from there. If you double-click the icon, you can open up the `main interface`. If you right-click the icon, you can see a menu for quick access. You can quickly start & stop `hotspot` if you already created a default profile. Also, the `system tray` icon will change with your `hotspot status` (running status will indicate with `green` color & ready to start will indicate with `yellow` color).
 
-### How to use it?
+## How to use it?
 
 In the main interface,
 
@@ -92,17 +92,17 @@ In the settings interface,
 - To change the theme, select a theme from the dropdown menu & click on the save button.
 - To change the automatic updates, you can enable or disable it from the button in the `Automatic Update` section. (Defaultly, it came with automatic update enabled)
 
-### Extensions
+## Extensions
 
 For the extensions, we have documentation for you! [Read it from here!](Extensions/README.md)\
 (Extensions are coming from 3rd party. So, install at your own risk)
 
-### Troubleshooting
+## Troubleshooting
 
 - Application not opening.\
   `Hotspot Maker` uses the port `2004` to catch up if the application is triggered more than one time. Sometimes, you have other applications running on port `2004` already. You can change the default port of `Hotspot Maker` by running the command in `CMD` or `PowerShell` (search for `CMD` or `PowerShell` -> right-click on the icon -> select `Run as administrator`). (Change `your_port` to usable port in range 0 to 65536)
 
-  ```Batch
+  ```shell
   echo your_port >"C:\ProgramData\NaveenB2004\HospotMaker\defPort.ini"
   ```
 
@@ -115,7 +115,7 @@ For the extensions, we have documentation for you! [Read it from here!](Extensio
 
 Not listed your trouble? [Look at this too!](#bug-reporting-questions--suggestions)
 
-### Build from source
+## Build from source
 
 The basic needs,
 
@@ -135,11 +135,11 @@ Build with command-line
 - Open Command Prompt (`CMD`) or `PowerShell`
 - Run the command,
 
-  ```Batch
+  ```shell
   mvn package --file "projectDir\HotspotMaker\HotspotMaker\pom.xml"
   ```
 
-### For developers
+## For developers
 
 We are happy to announce our `Extensions` feature! We are grateful to invite you to contribute to it! Please read the [documentation](https://github.com/NaveenB2004/HotspotMaker/blob/main/Extensions/README.md "Extensions Documentation") about the `Extensions` & make a move!
 
@@ -149,7 +149,7 @@ Feel free to create an issue from [here!](https://github.com/NaveenB2004/Hotspot
 Let's discuss this from [here!](https://github.com/NaveenB2004/HotspotMaker/discussions)\
 Contact me by [email](mailto:naveennbalasooriya2004@gmail.com "naveennbalasooriya2004@gmail.com") or [telegram](https://t.me/NaveenB2004 "@NaveenB2004")
 
-### License
+## License
 
 [The Unlicense](LICENSE)
 
