@@ -12,6 +12,10 @@ Hotspot Maker is a software you can use to basically start & stop hotspots in a 
 
 ![Hotspot Maker Preview](Others/Media/hotspot%20maker%20preview.jpg "Main Interface with Different Themes!")
 
+>![Notice](Others/Media/exclamation-mark.png "Notice")
+>- Some network interfaces may not support to the `Hotspot Maker` application. If you're using `Windows 10` or so, you have a native option `Mobile Hotspot` in `settings` to turn on hotspot with that mensioned interfaces. I'm studing on Windows Native Wi-Fi methods for fix this issue. But it will take more time. Hope it will help you!
+>- Also, the `Hotspot Maker` supports `English` language only. Some indicators may not work if you're using another language as the OS default language.
+
 - [Hotspot Maker](#hotspot-maker)
     - [Download](#download)
     - [Features](#features)
