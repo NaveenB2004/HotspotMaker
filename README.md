@@ -1,6 +1,6 @@
 # Hotspot Maker
 
-[![GitHub repo size](https://img.shields.io/github/repo-size/NaveenB2004/HotspotMaker)](#)
+![GitHub repo size](https://img.shields.io/github/repo-size/NaveenB2004/HotspotMaker)
 [![GitHub license](https://img.shields.io/github/license/NaveenB2004/HotspotMaker)](LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/NaveenB2004/HotspotMaker)](https://github.com/NaveenB2004/HotspotMaker/stargazers)
 [![GitHub release (with filter)](https://img.shields.io/github/v/release/NaveenB2004/HotspotMaker)](https://github.com/NaveenB2004/HotspotMaker/releases)
