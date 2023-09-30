@@ -144,7 +144,7 @@ Build with command-line
 
 We are happy to announce our `Extensions` feature! We are grateful to invite you to contribute to it! Please read the [documentation](https://github.com/NaveenB2004/HotspotMaker/blob/main/Extensions/README.md "Extensions Documentation") about the `Extensions` & make a move!
 
-### Bug reporting, Questions & Suggestions
+## Bug reporting, Questions & Suggestions
 
 Feel free to create an issue from [here!](https://github.com/NaveenB2004/HotspotMaker/issues)\
 Let's discuss this from [here!](https://github.com/NaveenB2004/HotspotMaker/discussions)\
