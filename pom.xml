@@ -26,10 +26,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>HotspotMaker-Base</module>
+        <module>HotspotMaker-Services</module>
         <module>HotspotMaker-Connector</module>
         <module>HotspotMaker-Extensions</module>
-        <module>HotspotMaker-Services</module>
+        <module>HotspotMaker-Base</module>
     </modules>
 
     <name>Hotspot Maker</name>
