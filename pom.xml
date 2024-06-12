@@ -106,6 +106,16 @@
                 <artifactId>SocketDataHandler</artifactId>
                 <version>1.2.0</version>
             </dependency>
+            <dependency>
+                <groupId>io.github.naveenb2004</groupId>
+                <artifactId>HotspotMaker-Connector</artifactId>
+                <version>4.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.naveenb2004</groupId>
+                <artifactId>HotspotMakerExtensions</artifactId>
+                <version>4.0.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
