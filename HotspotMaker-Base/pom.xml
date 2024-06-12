@@ -30,23 +30,13 @@
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mainClass>io.github.naveenb2004.Main</mainClass>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -56,37 +46,34 @@
             <groupId>io.github.naveenb2004</groupId>
             <artifactId>SocketDataHandler</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>io.github.naveenb2004</groupId>-->
-        <!--            <artifactId>HotspotMaker-Connector</artifactId>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>io.github.naveenb2004</groupId>
+            <artifactId>HotspotMaker-Connector</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.naveenb2004</groupId>
+            <artifactId>HotspotMaker-Extensions</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>dependency/</classpathPrefix>
+                            <mainClass>${mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jlink-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
