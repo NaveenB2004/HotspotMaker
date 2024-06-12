@@ -1,1 +1,1 @@
-# Hotspot Maker
+# Hotspot Maker :D
