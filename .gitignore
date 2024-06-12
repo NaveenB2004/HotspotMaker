@@ -1,2 +1,4 @@
-/HotspotMaker/target/
-/Extensions/Application/Source/target/
+/HotspotMaker-Base/target/
+/HotspotMaker-Connector/target/
+/HotspotMaker-Extensions/target/
+/HotspotMaker-Services/target/
